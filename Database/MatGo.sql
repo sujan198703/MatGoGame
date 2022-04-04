@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 --
 -- Table structure for table `adw_member`
 --
-
+  
 CREATE TABLE `adw_member` (
   `id` int(11) NOT NULL,
   `userid` varchar(20) DEFAULT NULL,
