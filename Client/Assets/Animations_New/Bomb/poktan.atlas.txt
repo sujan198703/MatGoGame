@@ -1,0 +1,242 @@
+
+poktan.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Bomb
+  rotate: true
+  xy: 0, 0
+  size: 143, 146
+  orig: 143, 146
+  offset: 0, 0
+  index: -1
+Effect_fire1
+  rotate: false
+  xy: 148, 64
+  size: 80, 79
+  orig: 80, 79
+  offset: 0, 0
+  index: -1
+Effect_fire2
+  rotate: false
+  xy: 230, 85
+  size: 76, 58
+  orig: 76, 58
+  offset: 0, 0
+  index: -1
+Line
+  rotate: true
+  xy: 258, 353
+  size: 48, 29
+  orig: 48, 29
+  offset: 0, 0
+  index: -1
+bomb_00000
+  rotate: false
+  xy: 0, 661
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00001
+  rotate: false
+  xy: 0, 661
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00002
+  rotate: false
+  xy: 0, 403
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00003
+  rotate: false
+  xy: 0, 145
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00004
+  rotate: false
+  xy: 258, 661
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00005
+  rotate: false
+  xy: 258, 403
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00006
+  rotate: false
+  xy: 308, 145
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00007
+  rotate: false
+  xy: 516, 661
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00008
+  rotate: false
+  xy: 516, 403
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00009
+  rotate: false
+  xy: 566, 145
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+
+poktan2.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bomb_00010
+  rotate: false
+  xy: 0, 516
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00011
+  rotate: false
+  xy: 0, 258
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00012
+  rotate: false
+  xy: 258, 516
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00013
+  rotate: false
+  xy: 0, 0
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00014
+  rotate: false
+  xy: 258, 258
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00015
+  rotate: false
+  xy: 516, 516
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00016
+  rotate: false
+  xy: 258, 0
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00017
+  rotate: false
+  xy: 516, 258
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00018
+  rotate: false
+  xy: 516, 0
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00019
+  rotate: false
+  xy: 516, 0
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+
+poktan3.png
+size: 1024,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bomb_00020
+  rotate: false
+  xy: 0, 516
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00021
+  rotate: false
+  xy: 0, 258
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00022
+  rotate: false
+  xy: 258, 516
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00023
+  rotate: false
+  xy: 0, 0
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00024
+  rotate: false
+  xy: 258, 258
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00025
+  rotate: false
+  xy: 516, 516
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00026
+  rotate: false
+  xy: 258, 0
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+bomb_00027
+  rotate: false
+  xy: 516, 258
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1

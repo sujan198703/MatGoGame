@@ -1,0 +1,48 @@
+
+mission_success.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bg_s
+  rotate: false
+  xy: 0, 0
+  size: 295, 158
+  orig: 295, 158
+  offset: 0, 0
+  index: -1
+icon_o_L
+  rotate: false
+  xy: 297, 54
+  size: 109, 104
+  orig: 109, 104
+  offset: 0, 0
+  index: -1
+text_s1
+  rotate: true
+  xy: 408, 75
+  size: 37, 46
+  orig: 37, 46
+  offset: 0, 0
+  index: -1
+text_s2
+  rotate: true
+  xy: 457, 118
+  size: 40, 46
+  orig: 40, 46
+  offset: 0, 0
+  index: -1
+text_s3
+  rotate: true
+  xy: 457, 77
+  size: 39, 47
+  orig: 39, 47
+  offset: 0, 0
+  index: -1
+text_s4
+  rotate: true
+  xy: 408, 114
+  size: 44, 47
+  orig: 44, 47
+  offset: 0, 0
+  index: -1
