@@ -39595,7 +39595,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e8ec0b31457dd5438c75b44250441ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverURL: 
+  serverURL: ws://localhost:8080
   packets: []
   response: 0
   rdata: 

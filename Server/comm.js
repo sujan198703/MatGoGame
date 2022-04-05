@@ -18,6 +18,9 @@ var wsserver = websocket.createServer(options, function (conn) {
     conn.on("text", function(data) {
         on_data(conn, data);
     });
+    conn.on("listening", ()=> {
+        console.log("Hello");
+    });
     conn.on("binary", function(inStream) {
         var data = new Buffer(0);
         inStream.on("readable", function () {

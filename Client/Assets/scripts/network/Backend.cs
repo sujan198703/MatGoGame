@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using WebSocketSharp;
 
 public class Backend : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Backend : MonoBehaviour
     public string serverURL;
 
     public UnityWebSocket w;
+    private WebSocket ws;
     public List<Packet> packets = new List<Packet>();
     public PACKET_CODE response;
     public string rdata;
@@ -55,6 +57,16 @@ public class Backend : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ws = new WebSocket(serverURL);
+        ws.OnMessage += (sender, e) =>
+        {
+            Debug.Log("Message received " + ((WebSocket)sender).Url + " Data: " + e.Data);
+        };
+        ws.Connect();
+    }
+
     void Update()
     {
         timer += Time.deltaTime;
@@ -63,6 +75,17 @@ public class Backend : MonoBehaviour
             OnProfile0();
             timer = 0;
         }
+
+        if(ws == null)
+        {
+            Debug.Log("not connected!");
+            return;
+        }
+        if(Input.GetKey(KeyCode.Space))
+        {
+            ws.Send("Hello World");
+        }
+
     }
 
     public string GetPacketString(PACKET_CODE cmd, object data)
@@ -187,7 +210,7 @@ public class Backend : MonoBehaviour
       //  if (mine.id == -1) return;
 
         string packetstr = GetPacketString(PACKET_CODE.PROFILE, "" );
-        StartCoroutine(DoRequest(PACKET_CODE.PROFILE, packetstr));
+        //StartCoroutine(DoRequest(PACKET_CODE.PROFILE, packetstr));
     }
 
     static public void OnUpdate()
