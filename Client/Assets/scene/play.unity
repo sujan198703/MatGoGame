@@ -32731,10 +32731,22 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 1141022064}
+  m_TargetGraphic: {fileID: 1973134437}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1973134439}
+        m_TargetAssemblyTypeName: OnclickHide, Assembly-CSharp
+        m_MethodName: OnPanelclick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1141022064
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49931,6 +49943,7 @@ GameObject:
   - component: {fileID: 1973134438}
   - component: {fileID: 1973134437}
   - component: {fileID: 1973134436}
+  - component: {fileID: 1973134439}
   m_Layer: 5
   m_Name: btn-close-bck
   m_TagString: Untagged
@@ -50002,7 +50015,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1973134437}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1973134439}
+        m_TargetAssemblyTypeName: OnclickHide, Assembly-CSharp
+        m_MethodName: OnPanelclick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1973134437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50041,6 +50066,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973134434}
   m_CullTransparentMesh: 1
+--- !u!114 &1973134439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973134434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff8480ac2bb40740819a355f6f4b544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HintPanel: {fileID: 1634874631}
 --- !u!1 &1974405874
 GameObject:
   m_ObjectHideFlags: 0
@@ -51585,6 +51623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2089885920}
   - component: {fileID: 2089885923}
+  - component: {fileID: 2089885924}
   - component: {fileID: 2089885922}
   - component: {fileID: 2089885921}
   m_Layer: 5
@@ -51656,7 +51695,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2089885922}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2089885924}
+        m_TargetAssemblyTypeName: OnclickHide, Assembly-CSharp
+        m_MethodName: OnPanelclick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2089885922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51695,6 +51746,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2089885919}
   m_CullTransparentMesh: 1
+--- !u!114 &2089885924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2089885919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ff8480ac2bb40740819a355f6f4b544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HintPanel: {fileID: 2089885919}
 --- !u!1 &2094989910
 GameObject:
   m_ObjectHideFlags: 0
