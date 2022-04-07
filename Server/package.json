@@ -5,10 +5,13 @@
   "requires": true,
   "lockfileVersion": 1,
   "dependencies": {
+    "body-parser": "^1.20.0",
     "fs": "^0.0.1-security",
     "mysql": "^2.18.1",
+    "mysqljs": "^0.0.2-security",
     "nodejs-websocket": ">=1.0.0",
     "nodemailer": ">=1.0.0",
+    "nodemon": "^2.0.15",
     "timespan": ">=1.0.0",
     "ws": "^8.5.0"
   }

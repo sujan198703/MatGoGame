@@ -65,7 +65,7 @@ var beserver = websocket.createServer(options, function (conn) {
         });
     });
     conn.on("message", function (data) {
-        reqs.push({conn : conn, data : data});
+       // reqs.push({conn : conn, data : data});
     });
     conn.on("close", function (code, reason) {
         // console.log("CLOSED")

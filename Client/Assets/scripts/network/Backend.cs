@@ -8,7 +8,7 @@ public class Backend : MonoBehaviour
 {
     static public Backend instance;
 
-    public string serverURL;
+    public string serverURL = "ws://localhost:8080";
 
     public UnityWebSocket w;
     private WebSocket ws;
@@ -16,8 +16,8 @@ public class Backend : MonoBehaviour
     public PACKET_CODE response;
     public string rdata;
 
-   // public Player mine;
-   // public Player other;
+    // public Player mine;
+    // public Player other;
 
     public int gameId;
 
@@ -75,17 +75,24 @@ public class Backend : MonoBehaviour
             OnProfile0();
             timer = 0;
         }
+    }
 
-        if(ws == null)
+    public void SendDetails(PlayerDetails playerDetails)
+    {
+        if (ws == null)
         {
             Debug.Log("not connected!");
             return;
         }
-        if(Input.GetKey(KeyCode.Space))
-        {
-            ws.Send("Hello World");
-        }
 
+        ws.Send(JsonUtility.ToJson(playerDetails));
+
+    }
+
+    public bool isConnectedToServer()
+    {
+        bool isConnected = ws != null;
+        return isConnected;
     }
 
     public string GetPacketString(PACKET_CODE cmd, object data)
@@ -206,10 +213,10 @@ public class Backend : MonoBehaviour
 
     public void OnProfile0()
     {
-      //  if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
-      //  if (mine.id == -1) return;
+        //  if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
+        //  if (mine.id == -1) return;
 
-        string packetstr = GetPacketString(PACKET_CODE.PROFILE, "" );
+        string packetstr = GetPacketString(PACKET_CODE.PROFILE, "");
         //StartCoroutine(DoRequest(PACKET_CODE.PROFILE, packetstr));
     }
 
@@ -221,15 +228,15 @@ public class Backend : MonoBehaviour
 
     public void OnUpdate0()
     {
-    //   if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
-    //
-    //   PlayerInfo info = new PlayerInfo();
-    //   info.id = mine.id;
-    //   info.avatar = mine.avatar;
-    //   info.guild = mine.guild;
+        //   if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
+        //
+        //   PlayerInfo info = new PlayerInfo();
+        //   info.id = mine.id;
+        //   info.avatar = mine.avatar;
+        //   info.guild = mine.guild;
 
-      //  string packetstr = GetPacketString(PACKET_CODE.UPDATE, info);
-     //   StartCoroutine(DoRequest(PACKET_CODE.UPDATE, packetstr));
+        //  string packetstr = GetPacketString(PACKET_CODE.UPDATE, info);
+        //   StartCoroutine(DoRequest(PACKET_CODE.UPDATE, packetstr));
     }
 
     static public void OnStartGame()
@@ -240,52 +247,52 @@ public class Backend : MonoBehaviour
 
     public void OnStartGame0()
     {
-     //   if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
-     //   if (other == null) other = Player.Find(CARD_OWNER.OTHER);
-     //
-     //   StartGameInfo info = new StartGameInfo();
-     //   info.user1 = mine.id;
-     //   info.user2 = other.id;
-     //   info.coin1 = mine.coins;
-     //   info.coin2 = other.coins;
-     //
-     //   if (other.type == PLAYER_TYPE.COMPUTER) info.user2 = -1;
+        //   if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
+        //   if (other == null) other = Player.Find(CARD_OWNER.OTHER);
+        //
+        //   StartGameInfo info = new StartGameInfo();
+        //   info.user1 = mine.id;
+        //   info.user2 = other.id;
+        //   info.coin1 = mine.coins;
+        //   info.coin2 = other.coins;
+        //
+        //   if (other.type == PLAYER_TYPE.COMPUTER) info.user2 = -1;
 
-     //   string packetstr = GetPacketString(PACKET_CODE.STARTGAME, info);
-    //    StartCoroutine(DoRequest(PACKET_CODE.STARTGAME, packetstr));
+        //   string packetstr = GetPacketString(PACKET_CODE.STARTGAME, info);
+        //    StartCoroutine(DoRequest(PACKET_CODE.STARTGAME, packetstr));
     }
 
- //  static public void OnEndGame(CARD_OWNER winner, int earned)
- //  {
- //      if (instance == null) return;
- //      instance.OnEndGame0(winner, earned);
- //  }
+    //  static public void OnEndGame(CARD_OWNER winner, int earned)
+    //  {
+    //      if (instance == null) return;
+    //      instance.OnEndGame0(winner, earned);
+    //  }
 
-  // public void OnEndGame0(CARD_OWNER winner, int earned)
-  // {
-  //     if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
-  //     if (other == null) other = Player.Find(CARD_OWNER.OTHER);
-  //
-  //     EndGameInfo info = new EndGameInfo();
-  //     if (winner == CARD_OWNER.MINE)
-  //     {
-  //         info.winner = mine.id;
-  //     }
-  //     if (winner == CARD_OWNER.OTHER)
-  //     {
-  //         info.winner = other.id;
-  //         if (other.type == PLAYER_TYPE.COMPUTER && MultiPlay.goOut == false) info.winner = -1;
-  //     }
-  //     if (earned < 0) earned *= -1;
-  //     info.gameid = gameId;
-  //     info.earned = earned;
-  //     info.user1 = mine.id;
-  //     info.coin3 = mine.coins;
-  //     info.coin4 = other.coins;
-  //
-  //     string packetstr = GetPacketString(PACKET_CODE.ENDGAME, info);
-  //     StartCoroutine(DoRequest(PACKET_CODE.ENDGAME, packetstr));
-  // }
+    // public void OnEndGame0(CARD_OWNER winner, int earned)
+    // {
+    //     if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
+    //     if (other == null) other = Player.Find(CARD_OWNER.OTHER);
+    //
+    //     EndGameInfo info = new EndGameInfo();
+    //     if (winner == CARD_OWNER.MINE)
+    //     {
+    //         info.winner = mine.id;
+    //     }
+    //     if (winner == CARD_OWNER.OTHER)
+    //     {
+    //         info.winner = other.id;
+    //         if (other.type == PLAYER_TYPE.COMPUTER && MultiPlay.goOut == false) info.winner = -1;
+    //     }
+    //     if (earned < 0) earned *= -1;
+    //     info.gameid = gameId;
+    //     info.earned = earned;
+    //     info.user1 = mine.id;
+    //     info.coin3 = mine.coins;
+    //     info.coin4 = other.coins;
+    //
+    //     string packetstr = GetPacketString(PACKET_CODE.ENDGAME, info);
+    //     StartCoroutine(DoRequest(PACKET_CODE.ENDGAME, packetstr));
+    // }
 
     static public void OnGuildRanking()
     {
@@ -307,27 +314,27 @@ public class Backend : MonoBehaviour
 
     public void OnLeaderboard0()
     {
-   //  if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
-   //  if (mine.id == -1) return;
-   //  if (mine.pname == "") return;
-   //
-   //  PlayerInfo info = new PlayerInfo();
-   //  info.id = mine.id;
-   //  info.guild = mine.guild;
+        //  if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
+        //  if (mine.id == -1) return;
+        //  if (mine.pname == "") return;
+        //
+        //  PlayerInfo info = new PlayerInfo();
+        //  info.id = mine.id;
+        //  info.guild = mine.guild;
 
-    //    string packetstr = GetPacketString(PACKET_CODE.LEADERBOARD, info);
-    //    StartCoroutine(DoRequest(PACKET_CODE.LEADERBOARD, packetstr));
+        //    string packetstr = GetPacketString(PACKET_CODE.LEADERBOARD, info);
+        //    StartCoroutine(DoRequest(PACKET_CODE.LEADERBOARD, packetstr));
     }
 
     IEnumerator DoRequest(PACKET_CODE code, string packetstr, bool waitdlg = false)
     {
-    // if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
-    //
-    // while (waiting == true) yield return null;
-    // waiting = true;
-    //
-    // EventPopup popup = null;
-    //    if (waitdlg) popup = PopupWaiting.Show("Please wait...", -1f);
+        // if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
+        //
+        // while (waiting == true) yield return null;
+        // waiting = true;
+        //
+        // EventPopup popup = null;
+        //    if (waitdlg) popup = PopupWaiting.Show("Please wait...", -1f);
 
         if (w == null)
         {
@@ -347,8 +354,8 @@ public class Backend : MonoBehaviour
         }
         if (connected == false)
         {
-       //    PopupMessage.Show("Can't connect to server. Try again later.");
-       //    if (popup != null) popup.Close();
+            //    PopupMessage.Show("Can't connect to server. Try again later.");
+            //    if (popup != null) popup.Close();
             waiting = false;
             yield break;
         }
@@ -359,8 +366,8 @@ public class Backend : MonoBehaviour
         while (received == false && connected == true) yield return null;
         if (connected == false)
         {
-     //      PopupMessage.Show("Connection lost. Try again later.");
-     //      if (popup != null) popup.Close();
+            //      PopupMessage.Show("Connection lost. Try again later.");
+            //      if (popup != null) popup.Close();
             waiting = false;
             yield break;
         }
@@ -369,9 +376,9 @@ public class Backend : MonoBehaviour
         {
             if (response == PACKET_CODE.OK)
             {
-          //     mine.id = int.Parse(rdata);
-          //     GamePage.Show(PAGE_TYPE.HOME);
-          //     OnProfile0();
+                //     mine.id = int.Parse(rdata);
+                //     GamePage.Show(PAGE_TYPE.HOME);
+                //     OnProfile0();
             }
             else
             {
@@ -386,17 +393,17 @@ public class Backend : MonoBehaviour
                 PlayerInfo info = new PlayerInfo();
                 JsonUtility.FromJsonOverwrite(rdata, info);
 
-           //   mine.pname = info.pname;
-           //   mine.avatar = info.avatar;
-           //   mine.guild = info.guild;
-           //   mine.coins = info.coins;
+                //   mine.pname = info.pname;
+                //   mine.avatar = info.avatar;
+                //   mine.guild = info.guild;
+                //   mine.coins = info.coins;
 
                 OnGuildRanking0();
                 OnLeaderboard0();
             }
             else
             {
-           //     PopupMessage.Show(rdata);
+                //     PopupMessage.Show(rdata);
             }
         }
 
@@ -408,7 +415,7 @@ public class Backend : MonoBehaviour
             }
             else
             {
-           //     PopupMessage.Show(rdata);
+                //     PopupMessage.Show(rdata);
             }
         }
 
@@ -420,7 +427,7 @@ public class Backend : MonoBehaviour
             }
             else
             {
-          //      PopupMessage.Show(rdata);
+                //      PopupMessage.Show(rdata);
             }
         }
 
@@ -457,11 +464,11 @@ public class Backend : MonoBehaviour
             }
             else
             {
-        //        PopupMessage.Show(rdata);
+                //        PopupMessage.Show(rdata);
             }
         }
 
-      //  if (popup != null) popup.Close();
+        //  if (popup != null) popup.Close();
 
         waiting = false;
     }
