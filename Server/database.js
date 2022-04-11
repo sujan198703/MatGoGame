@@ -9,8 +9,8 @@ var email;
 
 var dbcon = mysql.createConnection( {
     host: "localhost",
-    user: "root",
-    password: "autoset",
+    user: "pma",
+    password: "",
     database: "matgo",
     charset: 'utf8mb4',
     collate: 'utf8mb4_unicode_ci'

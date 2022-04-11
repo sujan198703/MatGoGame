@@ -7,11 +7,24 @@ using WebSocketSharp;
 public class Backend : MonoBehaviour
 {
     static public Backend instance;
+    private enum Status
+    {
+        Connected,
+        NotConnected,
+    }
+
+    private Status CurrentStatus;
+
+    [SerializeField] GameObject RetryConnectionPopUp;
+    [SerializeField] GameObject LoginFormPopUp;
 
     public string serverURL = "ws://localhost:8080";
 
     public UnityWebSocket w;
     private WebSocket ws;
+
+    private bool CanLogin;
+
     public List<Packet> packets = new List<Packet>();
     public PACKET_CODE response;
     public string rdata;
@@ -59,27 +72,64 @@ public class Backend : MonoBehaviour
 
     private void Start()
     {
-        ws = new WebSocket(serverURL);
-        ws.OnMessage += (sender, e) =>
+        CanLogin = false;
+
+        ConnectionStatus();
+    }
+
+    public void RetryConnection()
+    {
+        if (ws.IsAlive)
+            return;
+        else
         {
-            Debug.Log("Message received " + ((WebSocket)sender).Url + " Data: " + e.Data);
+            ConnectionStatus();
+        }
+    }
+
+    private void ConnectionStatus()
+    {
+        print("Trying Connection......");
+
+        ws = new WebSocket(serverURL);
+
+        ws.OnOpen += (sender, e) =>
+        {
+            Debug.Log("Connected");
+            CanLogin = true;
+            CurrentStatus = Status.Connected;
         };
+
+        ws.OnClose += (sender, e) =>
+        {
+            Debug.Log("Not Connected");
+            CurrentStatus = Status.NotConnected;
+            CanLogin = false;
+        };
+
         ws.Connect();
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
-        if (timer >= timerMax)
+        switch (CurrentStatus)
         {
-            OnProfile0();
-            timer = 0;
+            case Status.Connected:
+                RetryConnectionPopUp.SetActive(false);
+                LoginFormPopUp.SetActive(true);
+                break;
+            case Status.NotConnected:
+                LoginFormPopUp.SetActive(false);
+                RetryConnectionPopUp.SetActive(true);
+                break;
+            default:
+                break;
         }
     }
 
     public void SendDetails(PlayerDetails playerDetails)
     {
-        if (ws == null)
+        if (ws == null || CanLogin == false)
         {
             Debug.Log("not connected!");
             return;
@@ -91,7 +141,7 @@ public class Backend : MonoBehaviour
 
     public bool isConnectedToServer()
     {
-        bool isConnected = ws != null;
+        bool isConnected = CanLogin;
         return isConnected;
     }
 

@@ -103,11 +103,14 @@ async function on_data(conn, data) {
     conn.alive = true;
 
     var jdata = JSON.parse(data);
+
+
     if(jdata.cmd == code.OPEN) {
         var info = JSON.parse(jdata.data);
         conn.id = info.id;
         conn.info = info;
         conn.state = code.OPEN;
+        console.log(conn);
         var opp = find_broken(conn);
         if(opp != null) {
             send(opp, { cmd : code.RECONNECT, data : "" });
