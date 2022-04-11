@@ -25,6 +25,8 @@ public class CStageSelect : MonoBehaviour {
 		this.npc_name = transform.Find("npc_name").GetComponent<Text>();
 		this.grade = transform.Find("grade").GetComponent<Text>();
 		this.point = transform.Find("point").GetComponent<Text>();
+
+		on_challenge();
 	}
 
 

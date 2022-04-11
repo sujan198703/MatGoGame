@@ -1,124 +1,133 @@
 Using pre-set license
-Built from '2020.3/staging' branch; Version is '2020.3.24f1 (79c78de19888) revision 7980941'; Using compiler version '192528614'; Build Type 'Release'
-OS: 'Windows 10  (10.0.19044) 64bit Professional' Language: 'en' Physical Memory: 7856 MB
+Built from '2020.3/staging' branch; Version is '2020.3.22f1 (e1a7f79fd887) revision 14788599'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Pro; OS build 19044.1586; Version 2009; 64bit' Language: 'en' Physical Memory: 32688 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
 
 COMMAND LINE ARGUMENTS:
-E:\Unity Editor\2020.3.24f1\Editor\Unity.exe
+F:\Unity\2020.3.22f1\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
 -name
 AssetImportWorker0
 -projectPath
-E:/Unity Projects/MatGoGame/Client
+C:/Users/ANT-PC/Downloads/MatGoGame/Client
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-62072
-Successfully changed project path to: E:/Unity Projects/MatGoGame/Client
-E:/Unity Projects/MatGoGame/Client
+55477
+Successfully changed project path to: C:/Users/ANT-PC/Downloads/MatGoGame/Client
+C:/Users/ANT-PC/Downloads/MatGoGame/Client
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 105.94 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 35.98 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Initialize engine version: 2020.3.24f1 (79c78de19888)
-[Subsystems] Discovering subsystems at path E:/Unity Editor/2020.3.24f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path E:/Unity Projects/MatGoGame/Client/Assets
+Initialize engine version: 2020.3.22f1 (e1a7f79fd887)
+[Subsystems] Discovering subsystems at path F:/Unity/2020.3.22f1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path C:/Users/ANT-PC/Downloads/MatGoGame/Client/Assets
 GfxDevice: creating device client; threaded=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: Intel(R) HD Graphics 520 (ID=0x1916)
+    Renderer: NVIDIA GeForce RTX 3070 (ID=0x2484)
     Vendor:   
-    VRAM:     3928 MB
-    Driver:   27.20.100.8681
+    VRAM:     8043 MB
+    Driver:   30.0.15.1215
 Initialize mono
-Mono path[0] = 'E:/Unity Editor/2020.3.24f1/Editor/Data/Managed'
-Mono path[1] = 'E:/Unity Editor/2020.3.24f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
-Mono config path = 'E:/Unity Editor/2020.3.24f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56796
+Mono path[0] = 'F:/Unity/2020.3.22f1/Editor/Data/Managed'
+Mono path[1] = 'F:/Unity/2020.3.22f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'F:/Unity/2020.3.22f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56540
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: E:/Unity Editor/2020.3.24f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001409 seconds.
+Register platform support module: F:/Unity/2020.3.22f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
+Register platform support module: F:/Unity/2020.3.22f1/Editor/Data/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll
+Register platform support module: F:/Unity/2020.3.22f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Register platform support module: F:/Unity/2020.3.22f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll
+Registered in 0.001291 seconds.
+Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 123.33 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 33.87 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.518 seconds
+- Completed reload, in  0.678 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1519ms)
-		BeginReloadAssembly (175ms)
+	ReloadAssembly (679ms)
+		BeginReloadAssembly (36ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (2ms)
-		EndReloadAssembly (1179ms)
-			LoadAssemblies (171ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (300ms)
+			LoadAssemblies (36ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (415ms)
+			SetupTypeCache (93ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (73ms)
-			SetupLoadedEditorAssemblies (394ms)
+			RebuildScriptCaches (19ms)
+			SetupLoadedEditorAssemblies (124ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (7ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (123ms)
-				BeforeProcessingInitializeOnLoad (38ms)
-				ProcessInitializeOnLoadAttributes (180ms)
-				ProcessInitializeOnLoadMethodAttributes (44ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (34ms)
+				BeforeProcessingInitializeOnLoad (12ms)
+				ProcessInitializeOnLoadAttributes (55ms)
+				ProcessInitializeOnLoadMethodAttributes (18ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.008676 seconds.
+Registered in 0.004810 seconds.
 Begin MonoManager ReloadAssembly
+Native extension for LinuxStandalone target not found
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 0.68 ms, found 2 plugins.
+Native extension for OSXStandalone target not found
+Native extension for WebGL target not found
+Refreshing native plugins compatible for Editor in 0.62 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 DisplayProgressbar: Restoring NuGet Packages
 Mono: successfully reloaded assembly
-- Completed reload, in  2.085 seconds
+- Completed reload, in  0.765 seconds
 Domain Reload Profiling:
-	ReloadAssembly (2086ms)
-		BeginReloadAssembly (253ms)
+	ReloadAssembly (766ms)
+		BeginReloadAssembly (98ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (7ms)
+			DisableScriptedObjects (4ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (30ms)
-		EndReloadAssembly (1736ms)
-			LoadAssemblies (164ms)
+			CreateAndSetChildDomain (17ms)
+		EndReloadAssembly (629ms)
+			LoadAssemblies (64ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (555ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (94ms)
-			SetupLoadedEditorAssemblies (771ms)
+			SetupTypeCache (181ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (30ms)
+			SetupLoadedEditorAssemblies (296ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (7ms)
-				SetLoadedEditorAssemblies (1ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
 				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (131ms)
-				ProcessInitializeOnLoadAttributes (614ms)
-				ProcessInitializeOnLoadMethodAttributes (14ms)
-				AfterProcessingInitializeOnLoad (3ms)
+				BeforeProcessingInitializeOnLoad (55ms)
+				ProcessInitializeOnLoadAttributes (228ms)
+				ProcessInitializeOnLoadMethodAttributes (6ms)
+				AfterProcessingInitializeOnLoad (2ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (9ms)
+			AwakeInstancesAfterBackupRestoration (4ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.15 seconds
-Refreshing native plugins compatible for Editor in 0.58 ms, found 2 plugins.
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 0.67 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 1900 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 88.8 MB.
-System memory in use after: 87.7 MB.
+Unloading 1919 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 91.0 MB.
+System memory in use after: 89.9 MB.
 
-Unloading 34 unused Assets to reduce memory usage. Loaded Objects now: 2326.
-Total: 5.193600 ms (FindLiveObjects: 0.229600 ms CreateObjectMapping: 0.108200 ms MarkObjects: 3.890600 ms  DeleteObjects: 0.963500 ms)
+Unloading 34 unused Assets to reduce memory usage. Loaded Objects now: 2345.
+Total: 3.569600 ms (FindLiveObjects: 0.272500 ms CreateObjectMapping: 0.049000 ms MarkObjects: 2.430200 ms  DeleteObjects: 0.816600 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
@@ -132,25 +141,49 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  path: Assets/Login.prefab
-  artifactKey: Guid(53c263a62ae71ff47a4fbbd4f534406b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Login.prefab using Guid(53c263a62ae71ff47a4fbbd4f534406b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e2969e75ce607275df49f36f8a4a7612') in 0.210961 seconds 
-  Import took 0.219112 seconds .
+  path: Assets/UIMenu/BankDeposit/Rectangle 1 copy 4.png
+  artifactKey: Guid(4496116e6db9bc94bb1744bd209912c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UIMenu/BankDeposit/Rectangle 1 copy 4.png using Guid(4496116e6db9bc94bb1744bd209912c0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e1a0e339aaea791b3d4daa47cfe13cd') in 0.073350 seconds 
+  Import took 0.076449 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000807 seconds.
-  path: Assets/FR2_Cache.asset
-  artifactKey: Guid(0dc0caf9bfb2f314384e0667bca3d5bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/FR2_Cache.asset using Guid(0dc0caf9bfb2f314384e0667bca3d5bd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4377d82f3dd817397b38bc0c32a289e1') in 0.236584 seconds 
-  Import took 0.242017 seconds .
+  Time since last request: 0.000191 seconds.
+  path: Assets/UIMenu/BankDeposit/bg.png
+  artifactKey: Guid(82bd3fdbf0f93c44fb683827df6ae332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UIMenu/BankDeposit/bg.png using Guid(82bd3fdbf0f93c44fb683827df6ae332) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0fccc08a3620e027043a1b69ab1da766') in 0.029445 seconds 
+  Import took 0.031744 seconds .
 
 ========================================================================
 Received Import Request.
-  Time since last request: 74.921924 seconds.
-  path: Assets/scripts/network/Backend.cs
-  artifactKey: Guid(2e8ec0b31457dd5438c75b44250441ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/scripts/network/Backend.cs using Guid(2e8ec0b31457dd5438c75b44250441ff) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '14b1df389e7f1ab4c127b96bf7c4cd54') in 0.032526 seconds 
-  Import took 0.040578 seconds .
+  Time since last request: 0.000170 seconds.
+  path: Assets/UIMenu/BankDeposit/Group 75.png
+  artifactKey: Guid(bb293e97cf164a844bd54e643ab54935) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UIMenu/BankDeposit/Group 75.png using Guid(bb293e97cf164a844bd54e643ab54935) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '193b8c60caf8c0f6404da01288bade55') in 0.008594 seconds 
+  Import took 0.010886 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000142 seconds.
+  path: Assets/UIMenu/BankDeposit/popup_btn_close.png
+  artifactKey: Guid(a6a5fa976d85cb340b99c421f4fb3ba7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UIMenu/BankDeposit/popup_btn_close.png using Guid(a6a5fa976d85cb340b99c421f4fb3ba7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dc54d10e3d18edbeef0261e822a5ef88') in 0.007147 seconds 
+  Import took 0.009138 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000117 seconds.
+  path: Assets/UIMenu/BankDeposit/Rectangle 1 copy 6.png
+  artifactKey: Guid(06727b4a114551c4bbf554fffc59a220) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UIMenu/BankDeposit/Rectangle 1 copy 6.png using Guid(06727b4a114551c4bbf554fffc59a220) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1db3a1b504c3a8066a6aebaeade3d229') in 0.006676 seconds 
+  Import took 0.008470 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 0.000103 seconds.
+  path: Assets/UIMenu/BankDeposit/Layer 1.png
+  artifactKey: Guid(5b72cd3537418be43a634b0ce03c62a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/UIMenu/BankDeposit/Layer 1.png using Guid(5b72cd3537418be43a634b0ce03c62a7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f9c30d22a7ede87d3c67e7090a7cfcfe') in 0.006374 seconds 
+  Import took 0.008157 seconds .
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
