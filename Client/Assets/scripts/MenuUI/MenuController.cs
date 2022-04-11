@@ -56,6 +56,7 @@ public class MenuController : MonoBehaviour
     public void StartGame()
     {
         loadingPanel.SetActive(true);
+        SceneManager.LoadScene("");
         Invoke("LoadGameplayScene", 2);
     }
 
