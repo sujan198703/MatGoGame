@@ -107,6 +107,13 @@ public class Backend : MonoBehaviour
             CanLogin = false;
         };
 
+        ws.OnMessage += (sender, e) =>
+        {
+            Debug.Log(e.Data);
+            Encryption.instance.SetKey(e.Data);
+            print(Encryption.instance.GetKey());
+        };
+
         ws.Connect();
     }
 

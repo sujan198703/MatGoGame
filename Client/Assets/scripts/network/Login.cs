@@ -38,7 +38,6 @@ public class Login : MonoBehaviour
 
     public void CheckConnection()
     {
-        print(backend.isConnectedToServer());
         if (backend.isConnectedToServer())
         {
             loginState = LoginState.Loggedin;

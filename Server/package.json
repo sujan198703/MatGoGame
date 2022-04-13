@@ -5,6 +5,7 @@
   "requires": true,
   "lockfileVersion": 1,
   "dependencies": {
+    "argon2": "^0.28.5",
     "body-parser": "^1.20.0",
     "crypto": "^1.0.1",
     "fs": "^0.0.1-security",
