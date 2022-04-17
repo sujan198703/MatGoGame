@@ -15,8 +15,6 @@ public class CMainMenu : MonoBehaviour
 		this.ef_intro = GameObject.Find("ef_falling");
 
 		CTableDataManager.Instance.load_all();
-
-		Invoke("on_play", 0.001f);
 	}
 
 

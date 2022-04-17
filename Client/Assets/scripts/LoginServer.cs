@@ -17,8 +17,11 @@ public class LoginServer : MonoBehaviour
 
     public void SendDetails()
     {
-        playerDetails.username = Username.text;
-        playerDetails.password = Password.text;
+        string username = Username.text;
+        string password = Password.text;
+
+        playerDetails.username = Encryption.instance.encrypt(username);
+        playerDetails.password = Encryption.instance.encrypt(password);
 
         backend.SendDetails(playerDetails);
     }

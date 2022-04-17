@@ -8,25 +8,25 @@ public class UnityWebSocket
 {
 
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_ANDROID || UNITY_IOS
-	private WebSocket WebSocket;
+    private WebSocket WebSocket;
 #elif UNITY_WEBGL
 	private static Dictionary<int, UnityWebSocket> webSocketInstances = new Dictionary<int, UnityWebSocket>();
     private NativeWebSocket NativeWebSocket;
 #endif
 
-	public UnityWebSocket(string url)
-	{
+    public UnityWebSocket(string url)
+    {
 
-		//Debug.Log("[UnityWebSocket] Instantiating new websocket: " + url);
+        //Debug.Log("[UnityWebSocket] Instantiating new websocket: " + url);
 
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_ANDROID || UNITY_IOS
-		WebSocket = new WebSocket(url);
-		WebSocket.ConnectAsync();
-		WebSocket.AcceptAsync();
-		WebSocket.OnOpen += WebSocket_OnOpen;
-		WebSocket.OnMessage += WebSocket_OnMessage;
-		WebSocket.OnError += WebSocket_OnError;
-		WebSocket.OnClose += WebSocket_OnClose;
+        WebSocket = new WebSocket(url);
+        WebSocket.ConnectAsync();
+        WebSocket.AcceptAsync();
+        WebSocket.OnOpen += WebSocket_OnOpen;
+        WebSocket.OnMessage += WebSocket_OnMessage;
+        WebSocket.OnError += WebSocket_OnError;
+        WebSocket.OnClose += WebSocket_OnClose;
 #elif UNITY_WEBGL
 		NativeWebSocket = new NativeWebSocket(url);
 		NativeWebSocket.SetOnOpen(NativeSocket_OnOpen);
@@ -35,22 +35,22 @@ public class UnityWebSocket
 		NativeWebSocket.SetOnClose(NativeSocket_OnClose);
 		webSocketInstances.Add(NativeWebSocket.Id, this);
 #endif
-	}
+    }
 
-	public void Close()
-	{
+    public void Close()
+    {
 
-		//Debug.Log("[UnityWebSocket] Closing web socket connection.");
+        //Debug.Log("[UnityWebSocket] Closing web socket connection.");
 
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_ANDROID || UNITY_IOS
-		if (WebSocket == null)
-			return;
-		WebSocket.CloseAsync();
-		WebSocket.OnOpen -= WebSocket_OnOpen;
-		WebSocket.OnMessage -= WebSocket_OnMessage;
-		WebSocket.OnError -= WebSocket_OnError;
-		WebSocket.OnClose -= WebSocket_OnClose;
-		WebSocket = null;
+        if (WebSocket == null)
+            return;
+        WebSocket.CloseAsync();
+        WebSocket.OnOpen -= WebSocket_OnOpen;
+        WebSocket.OnMessage -= WebSocket_OnMessage;
+        WebSocket.OnError -= WebSocket_OnError;
+        WebSocket.OnClose -= WebSocket_OnClose;
+        WebSocket = null;
 #elif UNITY_WEBGL
 		if (NativeWebSocket == null)
 			return;
@@ -61,44 +61,44 @@ public class UnityWebSocket
 		//NativeWebSocket.SetOnClose(null);
 		NativeWebSocket = null;
 #endif
-	}
+    }
 
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_ANDROID || UNITY_IOS
-	private void WebSocket_OnOpen(object sender, EventArgs e)
-	{
+    private void WebSocket_OnOpen(object sender, EventArgs e)
+    {
 
-		//Debug.Log("[UnityWebSocket] Web socket on open.");
+        Debug.Log("[UnityWebSocket] Web socket on open.");
 
-		if (OnOpen != null)
-			OnOpen(this);
-	}
+        if (OnOpen != null)
+            OnOpen(this);
+    }
 
-	private void WebSocket_OnMessage(object sender, MessageEventArgs e)
-	{
+    private void WebSocket_OnMessage(object sender, MessageEventArgs e)
+    {
 
-		//Debug.Log("[UnityWebSocket] Web socket on message.");
+        //Debug.Log("[UnityWebSocket] Web socket on message.");
 
-		if (OnMessage != null)
-			OnMessage(this, e.RawData);
-	}
+        if (OnMessage != null)
+            OnMessage(this, e.RawData);
+    }
 
-	private void WebSocket_OnError(object sender, ErrorEventArgs e)
-	{
+    private void WebSocket_OnError(object sender, ErrorEventArgs e)
+    {
 
-		//Debug.Log("[UnityWebSocket] Web socket on error.");
+        //Debug.Log("[UnityWebSocket] Web socket on error.");
 
-		if (OnError != null)
-			OnError(this, e.Message);
-	}
+        if (OnError != null)
+            OnError(this, e.Message);
+    }
 
-	private void WebSocket_OnClose(object sender, CloseEventArgs e)
-	{
+    private void WebSocket_OnClose(object sender, CloseEventArgs e)
+    {
 
-		//Debug.Log("[UnityWebSocket] Web socket on close.");
+        //Debug.Log("[UnityWebSocket] Web socket on close.");
 
-		if (OnClose != null)
-			OnClose(this, e.Code, e.Reason);
-	}
+        if (OnClose != null)
+            OnClose(this, e.Code, e.Reason);
+    }
 #elif UNITY_WEBGL
 	[MonoPInvokeCallback(typeof(Action<int>))]
 	public static void NativeSocket_OnOpen(int id) {
@@ -139,18 +139,18 @@ public class UnityWebSocket
 	}
 #endif
 
-	public void SendAsync(byte[] packet)
-	{
+    public void SendAsync(byte[] packet)
+    {
 
-		//Debug.Log("[UnityWebSocket] Sending message.");
+        //Debug.Log("[UnityWebSocket] Sending message.");
 
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_ANDROID || UNITY_IOS
-		if (WebSocket == null)
-		{
-			Debug.Log("WEBSOCKET NULL");
-			return;
-		}
-		WebSocket.SendAsync(packet, null);
+        if (WebSocket == null)
+        {
+            Debug.Log("WEBSOCKET NULL");
+            return;
+        }
+        WebSocket.SendAsync(packet, null);
 #elif UNITY_WEBGL
         if(NativeWebSocket == null) {
             Debug.Log("WEBSOCKET NULL");
@@ -158,15 +158,15 @@ public class UnityWebSocket
         }
 		NativeWebSocket.SendAsync(packet);
 #endif
-	}
+    }
 
-	public delegate void OnOpenHandler(UnityWebSocket accepted);
-	public delegate void OnMessageHandler(UnityWebSocket sender, byte[] data);
-	public delegate void OnErrorHandler(UnityWebSocket sender, string message);
-	public delegate void OnCloseHandler(UnityWebSocket sender, int code, string reason);
+    public delegate void OnOpenHandler(UnityWebSocket accepted);
+    public delegate void OnMessageHandler(UnityWebSocket sender, byte[] data);
+    public delegate void OnErrorHandler(UnityWebSocket sender, string message);
+    public delegate void OnCloseHandler(UnityWebSocket sender, int code, string reason);
 
-	public event OnOpenHandler OnOpen;
-	public event OnMessageHandler OnMessage;
-	public event OnErrorHandler OnError;
-	public event OnCloseHandler OnClose;
+    public event OnOpenHandler OnOpen;
+    public event OnMessageHandler OnMessage;
+    public event OnErrorHandler OnError;
+    public event OnCloseHandler OnClose;
 }

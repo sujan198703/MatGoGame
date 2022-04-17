@@ -1,6 +1,8 @@
 var fs = require("fs");
 var websocket = require("nodejs-websocket")
+const wss = require("ws");
 var code = require("./const");
+const crypto = require("crypto");
 
 // var WEBSOCKET_PORT = 8080;
 var datas = [];
@@ -9,6 +11,7 @@ var db;
 var em;
 
 const options = { transports: ['websocket'], pingTimeout: 3000, pingInterval: 5000 };
+
 
 var wsserver = websocket.createServer(options, function (conn) {
     console.log("New connection.");
@@ -34,6 +37,7 @@ var wsserver = websocket.createServer(options, function (conn) {
     });
     conn.on("message", function (data) {
         on_data(conn, data);
+        
     });
     conn.on("close", function (code, reason) {
         on_close(conn, code, reason);
@@ -44,9 +48,15 @@ var wsserver = websocket.createServer(options, function (conn) {
     conn.on("end", function(code, reason) {
         on_end(conn, code, reason);
     });
-    // conn.on('pong', function() {
-    //     conn.alive = true;
-    // });
+      
+});
+
+wsserver.on("connection",(ws)=> {
+    const server_key = crypto.createECDH("secp256k1");
+    server_key.generateKeys();
+    const serverPublicKeyBase64 = server_key.getPublicKey().toString("base64");
+    const serverSharedPublicKey = server_key.computeSecret(serverPublicKeyBase64, "base64", "hex");
+    ws.send(serverSharedPublicKey);
 });
 
 var beserver = websocket.createServer(options, function (conn) {
@@ -103,11 +113,14 @@ async function on_data(conn, data) {
     conn.alive = true;
 
     var jdata = JSON.parse(data);
+
+
     if(jdata.cmd == code.OPEN) {
         var info = JSON.parse(jdata.data);
         conn.id = info.id;
         conn.info = info;
         conn.state = code.OPEN;
+        console.log(conn);
         var opp = find_broken(conn);
         if(opp != null) {
             send(opp, { cmd : code.RECONNECT, data : "" });
