@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class OnclickHide : MonoBehaviour
 {
-
+    bool check = true;
     public GameObject HintPanel;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,18 @@ public class OnclickHide : MonoBehaviour
 
     public void OnPanelclick()
     {
-        Debug.Log("clicked ");
-        HintPanel.SetActive(false);
+
+        if (check)
+        {
+            Debug.Log("clicked ");
+            HintPanel.SetActive(false);
+            check = false;
+        }else if (!check)
+        {
+            Debug.Log("clicked ");
+            HintPanel.SetActive(true);
+            check = true;
+        }
+        
     }
 }
