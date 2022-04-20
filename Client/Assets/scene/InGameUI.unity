@@ -35569,6 +35569,41 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 101
       objectReference: {fileID: 0}
+    - target: {fileID: 2740242977343468271, guid: 2c261a8cff928394e85cef8b0e3ffdc1,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740242977343468271, guid: 2c261a8cff928394e85cef8b0e3ffdc1,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740242977343468271, guid: 2c261a8cff928394e85cef8b0e3ffdc1,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740242977343468271, guid: 2c261a8cff928394e85cef8b0e3ffdc1,
+        type: 3}
+      propertyPath: m_Maskable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740242977343468271, guid: 2c261a8cff928394e85cef8b0e3ffdc1,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740242977343468271, guid: 2c261a8cff928394e85cef8b0e3ffdc1,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2740242977522038474, guid: 2c261a8cff928394e85cef8b0e3ffdc1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2740242978357706433, guid: 2c261a8cff928394e85cef8b0e3ffdc1,
         type: 3}
       propertyPath: m_PresetInfoIsWorld
