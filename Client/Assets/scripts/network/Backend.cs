@@ -117,6 +117,11 @@ public class Backend : MonoBehaviour
         ws.Connect();
     }
 
+    public void SendPlayData(string data)
+    {
+        ws.Send(data);
+    }
+
     void Update()
     {
         switch (CurrentStatus)

@@ -444,6 +444,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 							CCard card = this.card_manager.find_card(number, pae_type, position);
 							Debug.Log(string.Format("{0}, {1}, {2}", number, pae_type, position));
+							Backend.instance.SendPlayData(JsonUtility.ToJson(new GameData(number, pae_type, position)));
 							popup.update_slot_info(slot_index, get_hwatoo_sprite(card));
 
 							if (best_number < number)

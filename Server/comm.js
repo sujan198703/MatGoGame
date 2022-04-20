@@ -37,6 +37,7 @@ var wsserver = websocket.createServer(options, function (conn) {
     });
     conn.on("message", function (data) {
         on_data(conn, data);
+        console.log(data);
         
     });
     conn.on("close", function (code, reason) {
