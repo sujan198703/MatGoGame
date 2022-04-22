@@ -6,19 +6,27 @@ public class CCardPicture : MonoBehaviour {
 
 	public CCard card { get; private set; }
 	public SpriteRenderer sprite_renderer { get; private set; }
-
 	public byte slot { get; private set; }
 	BoxCollider box_collider;
-
+	 AudioSource playonclick;
+	GameObject audio;
 
 	void Awake()
 	{
+
+
 		this.sprite_renderer = gameObject.GetComponentInChildren<SpriteRenderer>();
 		this.box_collider = gameObject.GetComponent<BoxCollider>();
 	}
 
+    private void Start()
+    {
+		audio = GameObject.Find("Audio");
+		playonclick = GetComponent<AudioSource>();
+		audio.GetComponent<AudioSource>();
+	}
 
-	public void set_slot_index(byte slot)
+    public void set_slot_index(byte slot)
 	{
 		this.slot = slot;
 	}
@@ -58,6 +66,14 @@ public class CCardPicture : MonoBehaviour {
 
 	public void on_touch()
 	{
+
+		Debug.Log("clicked now ");
+
+
+		audio.GetComponent<AudioSource>().Play();
+		//playonclick.Play();
+	    
+		//playonclick.Play();
 		//if (this.card != null)
 		//{
 		//	Debug.Log("on touch " + this.slot);
