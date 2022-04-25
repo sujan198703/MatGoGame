@@ -8,7 +8,7 @@ public class CCardPicture : MonoBehaviour {
 	public SpriteRenderer sprite_renderer { get; private set; }
 	public byte slot { get; private set; }
 	BoxCollider box_collider;
-	 AudioSource playonclick;
+	AudioSource playonclick;
 	GameObject audio;
 
 	void Awake()

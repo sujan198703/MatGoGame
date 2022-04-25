@@ -7,7 +7,18 @@ using FreeNet;
 public class CPopupPlayerOrder : MonoBehaviour {
 
 	GameObject root;
+	GameObject audio;
+	 AudioSource playonclick;
 	List<Transform> slots;
+
+
+	void Start()
+	{
+		
+		audio = GameObject.Find("slot02");
+		playonclick = GetComponent<AudioSource>();
+		audio.GetComponent<AudioSource>();
+	}
 
 	void Awake()
 	{
@@ -20,6 +31,8 @@ public class CPopupPlayerOrder : MonoBehaviour {
 		Transform slot02 = root.transform.Find("slot02");
 		this.slots.Add(slot02);
 	}
+
+	
 
 
 	public void reset(Sprite sprite)
@@ -34,6 +47,12 @@ public class CPopupPlayerOrder : MonoBehaviour {
 	public void play()
 	{
 		this.root.GetComponent<Animator>().Play("player_order_01");
+		//Debug.Log("Hoooooo");
+
+		//audio.GetComponent<AudioSource>().Play();
+
+
+
 	}
 
 

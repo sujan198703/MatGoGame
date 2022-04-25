@@ -49,7 +49,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
     CCardManager card_manager;
 
 	Queue<CPacket> waiting_packets;
-
+	GameObject audio;
+	AudioSource playonclick;
 
 	// 효과 관련 객체들.
 	GameObject ef_focus;
@@ -58,6 +59,9 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	// 테스트용 변수들.
 	bool is_test_mode = false;
 	byte test_auto_slot_index;
+
+	
+
 
 	void Awake()
 	{
@@ -195,6 +199,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	void Start()
 	{
 		enter();
+	
 	}
 
 
@@ -226,6 +231,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		mover.begin = begin;
 		mover.to = to;
 		mover.duration = duration;
+
 		mover.run();
 	}
 
