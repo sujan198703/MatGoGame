@@ -27,6 +27,7 @@ public class CDelayedDeactive : MonoBehaviour {
 
 	IEnumerator delayed_deactive()
 	{
+		//Debug.Log("Kiss");
 		yield return new WaitForSeconds(this.delay);
 		gameObject.SetActive(false);
 	}

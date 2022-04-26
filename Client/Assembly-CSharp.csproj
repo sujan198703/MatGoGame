@@ -72,6 +72,7 @@
     <Compile Include="Assets\scripts\client\CEffectManager.cs" />
     <Compile Include="Assets\scripts\CLocalServer.cs" />
     <Compile Include="Assets\scripts\public\CGameObjectPool.cs" />
+    <Compile Include="Assets\scripts\AudioPlay.cs" />
     <Compile Include="Assets\scripts\OnclickHide.cs" />
     <Compile Include="Assets\scripts\ui\CMainMenu.cs" />
     <Compile Include="Assets\scripts\ui\CPlayRoomUI.cs" />
@@ -128,7 +129,6 @@
     <Compile Include="Assets\scripts\ui\CPopupGoStop.cs" />
     <Compile Include="Assets\scripts\engine\CCard.cs" />
     <Compile Include="Assets\scripts\public\CSingleton.cs" />
-    <Compile Include="Assets\scripts\AudioPlay.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

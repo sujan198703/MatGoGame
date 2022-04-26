@@ -20,6 +20,9 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	[SerializeField]
 	CPlayerCardPosition[] player_card_positions;
+	GameObject audio;
+	GameObject ShuffleAudio;
+	AudioSource playonclick;
 
 
 	// 카드 객체.
@@ -49,8 +52,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
     CCardManager card_manager;
 
 	Queue<CPacket> waiting_packets;
-	GameObject audio;
-	AudioSource playonclick;
+
 
 	// 효과 관련 객체들.
 	GameObject ef_focus;
@@ -61,7 +63,14 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	byte test_auto_slot_index;
 
 	
-
+	void Start()
+	{
+		enter();
+		audio = GameObject.Find("Shuffle");
+		ShuffleAudio = GameObject.Find("passcards");
+		playonclick = GetComponent<AudioSource>();
+		audio.GetComponent<AudioSource>();
+	}
 
 	void Awake()
 	{
@@ -196,12 +205,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	}
 
 
-	void Start()
-	{
-		enter();
 	
-	}
-
 
 	void clear_ui()
 	{
@@ -218,6 +222,10 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	void move_card(CCardPicture card_picture, Vector3 begin, Vector3 to, float duration = 0.1f)
 	{
+
+		//Debug.Log("Cards moving");
+		ShuffleAudio.GetComponent<AudioSource>().Play();
+
 		if (card_picture.card != null)
 		{
 			card_picture.update_image(get_hwatoo_sprite(card_picture.card));
@@ -245,8 +253,9 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	IEnumerator distribute_cards(Queue<CCard> floor_cards, Dictionary<byte, Queue<CCard>> player_cards)
 	{
+		
 		yield return new WaitForSeconds(1.0f);
-
+		audio.GetComponent<AudioSource>().Play();
 		List<CCardPicture> begin_cards_picture = new List<CCardPicture>();
 
 		// [바닥 -> 1P -> 2P 나눠주기] 를 두번 반복한다.
@@ -450,6 +459,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 							CCard card = this.card_manager.find_card(number, pae_type, position);
 							Debug.Log(string.Format("{0}, {1}, {2}", number, pae_type, position));
+							
 							//Backend.instance.SendPlayData(JsonUtility.ToJson(new GameData(number, pae_type, position)));
 							popup.update_slot_info(slot_index, get_hwatoo_sprite(card));
 
@@ -1216,6 +1226,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	void move_card_to_floor(CCardPicture card_picture, CARD_EVENT_TYPE event_type)
 	{
+		
 		byte slot_index = 0;
 		Vector3 begin = card_picture.transform.position;
 		Vector3 to = Vector3.zero;

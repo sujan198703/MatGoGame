@@ -8,7 +8,7 @@ public class CPopupPlayerOrder : MonoBehaviour {
 
 	GameObject root;
 	GameObject audio;
-	 AudioSource playonclick;
+	AudioSource playonclick;
 	List<Transform> slots;
 
 
