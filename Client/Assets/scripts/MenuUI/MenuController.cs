@@ -15,11 +15,14 @@ public class MenuController : MonoBehaviour
     [SerializeField] private GameObject pigBankPanel;
     [SerializeField] private GameObject daillyQuestPanel;
 
-
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip button1;
+    [SerializeField] private AudioClip button2;
 
     private void Awake()
     {
         Invoke("DisableSplashScreen", splashScreenTime);
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void DisableSplashScreen()
@@ -56,7 +59,6 @@ public class MenuController : MonoBehaviour
     public void StartGame()
     {
         loadingPanel.SetActive(true);
-        SceneManager.LoadScene("");
         Invoke("LoadGameplayScene", 2);
     }
 
@@ -77,5 +79,15 @@ public class MenuController : MonoBehaviour
     public void OpenURL(string websiteURL)
     {
         Application.OpenURL(websiteURL);
+    }
+
+    public void PlayButton1Sound()
+    {
+        audioSource.PlayOneShot(button1);
+    }
+
+    public void PlayButton2Sound()
+    {
+        audioSource.PlayOneShot(button2);
     }
 }
