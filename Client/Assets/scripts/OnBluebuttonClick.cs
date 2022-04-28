@@ -6,6 +6,7 @@ public class OnBluebuttonClick : MonoBehaviour
 {
 
     public GameObject HintPanel;
+    
     bool check = true;
 
     // Start is called before the first frame update

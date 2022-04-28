@@ -129,6 +129,7 @@
     <Compile Include="Assets\scripts\ui\CPopupGoStop.cs" />
     <Compile Include="Assets\scripts\engine\CCard.cs" />
     <Compile Include="Assets\scripts\public\CSingleton.cs" />
+    <Compile Include="Assets\UIMenu\Prefabs\PlayOnStartVoice.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
