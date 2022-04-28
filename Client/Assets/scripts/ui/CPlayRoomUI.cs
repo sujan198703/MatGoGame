@@ -677,7 +677,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		CUIManager.Instance.show(UI_PAGE.POPUP_GAME_RESULT);
 		CPopupGameResult popup = 
 			CUIManager.Instance.get_uipage(UI_PAGE.POPUP_GAME_RESULT).GetComponent<CPopupGameResult>();
-		popup.refresh(is_win, money, score, double_val, final_score);
+	//	popup.refresh(is_win, money, score, double_val, final_score);
 	}
 
 

@@ -67,7 +67,7 @@ public class CCardPicture : MonoBehaviour {
 	public void on_touch()
 	{
 
-		Debug.Log("clicked now ");
+		//Debug.Log("clicked now ");
 
 
 		audio.GetComponent<AudioSource>().Play();
