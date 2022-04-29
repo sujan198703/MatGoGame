@@ -6,8 +6,9 @@ public class Login : MonoBehaviour
 {
     private bool CanLogin;
     private Backend backend;
-    
+
     [SerializeField] private GameObject LoginPage;
+    [SerializeField] private GameObject LoginPopUp;
 
     public enum LoginState
     {
@@ -43,7 +44,7 @@ public class Login : MonoBehaviour
         if (backend.isConnectedToServer())
         {
             loginState = LoginState.Loggedin;
-           
+
         }
         else
         {
@@ -51,15 +52,8 @@ public class Login : MonoBehaviour
         }
     }
 
-    public void NewSceneLoad()
+    public void CloseLogin()
     {
-
-        SceneManager.LoadScene(1);
-        Debug.Log("New Scene is loading here ");
-
+        LoginPopUp.SetActive(false);
     }
-   
-    
-
-   
 }
