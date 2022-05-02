@@ -10,28 +10,39 @@ public class PlayOnStartVoice : MonoBehaviour
 	GameObject beforeplay;
 	GameObject beforeplay1;
 	GameObject beforeplay2;
+	GameObject beforeSun;
+	float times = 0f;
+	float timer = 2.0f;
 
 	AudioSource playonclick;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		beforeSun = GameObject.Find("BeforeSun");
+
 		beforeplay = GameObject.Find("beforeplay");
 		beforeplay1 = GameObject.Find("beforeplay1");
 		beforeplay2 = GameObject.Find("beforeplay2");
 
-		playonclick = GetComponent<AudioSource>();
+		//sSplayonclick = GetComponent<AudioSource>();
 	}
 
 
 	// Update is called once per frame
 	void Update()
     {
-        
-    }
 
-    public void PlayRandomOnClick()
+		//StartCoroutine(ExampleCoroutine());
+	//	times += Time.deltaTime;
+
+
+	}
+
+	public void PlayRandomOnClick()
     {
+
+		
 
 		int rand = Random.Range(0, 3);
 
@@ -52,5 +63,10 @@ public class PlayOnStartVoice : MonoBehaviour
 		}
 
 
+
 	}
+
+	
+
+
 }
