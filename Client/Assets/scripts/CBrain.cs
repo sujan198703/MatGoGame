@@ -1,21 +1,31 @@
 ﻿using System;
 using System.Collections;
+using UnityEngine;
 using System.Collections.Generic;
 
-public class CBrain
+public class CBrain: MonoBehaviour
 {
+
+	public static int playerscore = 0;
 	public CBrain()
 	{
 	}
 
 
-	/// <summary>
-	/// 낼 카드 선택.
-	/// 먹을 수 있는 카드 중에서 제일 높은 점수를 얻을 수 있는 경우를 선택한다.
-	/// 점수가 같을 경우 피, 광, 띠, 열끗 순으로 선택 한다.
-	/// </summary>
-	/// <returns></returns>
-	public byte choice_card_to_put(
+    /// <summary>
+    /// 낼 카드 선택.
+    /// 먹을 수 있는 카드 중에서 제일 높은 점수를 얻을 수 있는 경우를 선택한다.
+    /// 점수가 같을 경우 피, 광, 띠, 열끗 순으로 선택 한다.
+    /// </summary>
+    /// <returns></returns>
+    /// 
+    private void Update()
+    {
+
+       
+	}
+    
+    public byte choice_card_to_put(
 		List<CCard> hand_cards,
 		List<CCard> bottom_cards,
 		CFloorCardManager floor_card_manager)
@@ -27,6 +37,11 @@ public class CBrain
 			byte same_number = floor_card_manager.get_same_number_card_count(hand_cards[i].number);
 			if (same_number >= 1)
 			{
+
+				playerscore += 3;
+				PlayerPrefs.SetInt("PlayerNewScore", playerscore);
+
+
 				same_card_indexes.Add(i);
 			}
 		}
