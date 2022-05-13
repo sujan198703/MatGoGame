@@ -45,6 +45,7 @@ public class CPopupGameResult : MonoBehaviour {
 
 	void on_touch()
 	{
+		PlayerPrefs.SetInt("PlayerNewScore", 0);
 		CUIManager.Instance.hide(UI_PAGE.POPUP_GAME_RESULT);
 
 		CPacket send = CPacket.create((short)PROTOCOL.READY_TO_START);

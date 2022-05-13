@@ -17,14 +17,24 @@ public class ScoreCard : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        Debug.Log("First start ");
         PlayerOldScore+=PlayerPrefs.GetInt(OldScoreKey, PlayerNewScore);
 
-        OverallScore.text = PlayerOldScore.ToString();
+       OverallScore.text = PlayerOldScore.ToString();
        PlayerPrefs.SetInt(NewScoreKey, 0);
       // PlayerPrefs.SetInt(OldScoreKey, PlayerNewScore);
 
         ScoreText.text = "0";
        // PlayerOldScore = 0;
+    }
+
+
+    public void onGameStart()
+    {
+
+        Debug.Log("The Game has started ");
+        PlayerPrefs.SetInt(NewScoreKey, 0);
     }
 
     // Update is called once per frame
