@@ -15,6 +15,7 @@ public class PlayOnStartVoice : MonoBehaviour
 	float timer = 2.0f;
 
 	AudioSource playonclick;
+	ScoreCard obj;
 
 	// Start is called before the first frame update
 	void Start()
@@ -25,8 +26,14 @@ public class PlayOnStartVoice : MonoBehaviour
 		beforeplay1 = GameObject.Find("beforeplay1");
 		beforeplay2 = GameObject.Find("beforeplay2");
 
+		Debug.Log("First Start from The Main Panel ");
+
+		PlayerPrefs.SetInt("PlayerNewScore", 0);
+
 		//sSplayonclick = GetComponent<AudioSource>();
 	}
+
+
 
 
 	// Update is called once per frame
