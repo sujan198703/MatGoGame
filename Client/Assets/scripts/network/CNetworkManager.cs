@@ -72,7 +72,7 @@ public class CNetworkManager : CSingletonMonobehaviour<CNetworkManager>
     {
         var str = JsonConvert.SerializeObject(msg);
         ws.Send(str);
-        print(str);    
+        NetworkQueue.instance.AddToQueue(msg.ToString());  
         this.gameserver.on_receive_from_client(msg);
         CPacket.destroy(msg);
     }

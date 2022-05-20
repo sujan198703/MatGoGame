@@ -132,6 +132,7 @@
     <Compile Include="Assets\scripts\engine\CCard.cs" />
     <Compile Include="Assets\scripts\network\CustomPacket.cs" />
     <Compile Include="Assets\scripts\public\CSingleton.cs" />
+    <Compile Include="Assets\scripts\network\NetworkQueue.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

@@ -148,6 +148,7 @@ public class Backend : MonoBehaviour
         }
 
         ws.Send(JsonUtility.ToJson(playerDetails));
+        NetworkQueue.instance.AddToQueue(playerDetails.ToString());
 
     }
 
