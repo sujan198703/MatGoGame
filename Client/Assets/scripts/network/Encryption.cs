@@ -1,61 +1,76 @@
 using System.Security.Cryptography;
 using System.Text;
 using System;
-using UnityEngine;
+using System.IO;
 
-public class Encryption : MonoBehaviour
+public class AESCrypto
 {
-    public static Encryption instance;
-    private AesCryptoServiceProvider AES_CRYPTO;
+    private static string Key;
+    private static string IV;
 
-    private void Awake()
+    public static AESCrypto instance;
+
+    public AESCrypto()
     {
         instance = this;
+
+        Key = "Full Stack IT Service 198703Game";
+        IV = "MatGoGameProject";
+
+        UnityEngine.Debug.Log("1. == Key Length : " + Key.Length);
+        UnityEngine.Debug.Log("1. == Key : " + Key);
     }
 
-    void Start()
+    public string Encrypt(string message)
     {
-        AES_CRYPTO = new AesCryptoServiceProvider();
-        AES_CRYPTO.BlockSize = 128;
-        AES_CRYPTO.KeySize = 256;
-        AES_CRYPTO.GenerateIV();
-        AES_CRYPTO.Mode = CipherMode.CBC;
-        AES_CRYPTO.Padding = PaddingMode.PKCS7;
+        AesCryptoServiceProvider aes = new AesCryptoServiceProvider();
+        aes.BlockSize = 128;
+        aes.KeySize = 256;
+
+        UnityEngine.Debug.Log("2. == Key Length : " + Key.Length);
+        UnityEngine.Debug.Log("2. == Key : " + Key);
+
+        aes.IV = UTF8Encoding.UTF8.GetBytes(IV);
+        aes.Key = UTF8Encoding.UTF8.GetBytes(Key);
+        aes.Mode = CipherMode.CBC;
+        aes.Padding = PaddingMode.PKCS7;
+        byte[] data = Encoding.UTF8.GetBytes(message);
+        using (ICryptoTransform encrypt = aes.CreateEncryptor())
+        {
+            byte[] dest = encrypt.TransformFinalBlock(data, 0, data.Length);
+            return Convert.ToBase64String(dest);
+        }
     }
 
-    public string encrypt(string data)
+    public string Decrypt(string encryptedText)
     {
-        ICryptoTransform transform = AES_CRYPTO.CreateEncryptor();
+        string plaintext = null;
+        using (AesManaged aes = new AesManaged())
+        {
+            byte[] cipherText = Convert.FromBase64String(encryptedText);
+            byte[] aesIV = UTF8Encoding.UTF8.GetBytes(IV);
+            byte[] aesKey = UTF8Encoding.UTF8.GetBytes(Key);
+            ICryptoTransform decryptor = aes.CreateDecryptor(aesKey, aesIV);
+            using (MemoryStream ms = new MemoryStream(cipherText))
+            {
+                using (CryptoStream cs = new CryptoStream(ms, decryptor, CryptoStreamMode.Read))
+                {
+                    using (StreamReader reader = new StreamReader(cs))
+                        plaintext = reader.ReadToEnd();
+                }
+            }
+        }
 
-        byte[] encrypted_bytes = transform.TransformFinalBlock(ASCIIEncoding.ASCII.GetBytes(data), 0, data.Length);
-        string str = Convert.ToBase64String(encrypted_bytes);
-        print(str);
-        string key = ASCIIEncoding.ASCII.GetString(AES_CRYPTO.Key);
-       // print("Key used: " + key);
-        return str;
+        return plaintext;
     }
 
-    public string decrypt(string data)
+    public static void SetKey( string strKey )
     {
-        ICryptoTransform transform = AES_CRYPTO.CreateDecryptor();
-
-        byte[] encrypted_bytes = Convert.FromBase64String(data);
-        byte[] decrypted_bytes = transform.TransformFinalBlock(encrypted_bytes, 0, encrypted_bytes.Length);
-
-        string str = ASCIIEncoding.ASCII.GetString(decrypted_bytes);
-
-        return str;
+        Key = strKey;
     }
 
-    public void SetKey(string key)
+    public static string GetKey()
     {
-        print("Key used: " + key);
-        byte[] enc_key = Convert.FromBase64String(key);
-        AES_CRYPTO.Key = enc_key;
-    }
-
-    public string GetKey()
-    {
-        return Convert.ToBase64String(AES_CRYPTO.Key);
+        return Key;
     }
 }
