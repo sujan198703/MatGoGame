@@ -3,6 +3,7 @@ var websocket = require("nodejs-websocket")
 const wss = require("ws");
 var code = require("./const");
 const crypto = require("crypto");
+const AESCrypto = require("./AESCrypto.js");
 
 // var WEBSOCKET_PORT = 8080;
 var datas = [];
@@ -11,7 +12,6 @@ var db;
 var em;
 
 const options = { transports: ['websocket'], pingTimeout: 3000, pingInterval: 5000 };
-
 
 var wsserver = websocket.createServer(options, function (conn) {
     console.log("New connection.");
@@ -109,85 +109,107 @@ exports.doloop = async function process_datas() {
 }
 
 async function on_data(conn, data) {
-    console.log(conn.id+ " -> "+data);
+    console.log(conn.id+ " --> "+data);
     
     conn.alive = true;
 
     var jdata = JSON.parse(data);
 
+    switch( jdata.cmd )
+    {
+        case code.LOGIN:
+        {
+            var crypto = new AESCrypto();
+            var strUserName = crypto.decrypt(jdata.username);
+            var strPassword = crypto.decrypt(jdata.password);
 
-    if(jdata.cmd == code.OPEN) {
-        var info = JSON.parse(jdata.data);
-        conn.id = info.id;
-        conn.info = info;
-        conn.state = code.OPEN;
-        console.log(conn);
-        var opp = find_broken(conn);
-        if(opp != null) {
-            send(opp, { cmd : code.RECONNECT, data : "" });
-            //send(conn, { cmd : code.RECONNECT, data : "" });
-        } else {
-            send(conn, { cmd : code.OK, data : "" });
+            console.log("Decrypted User Name --> " + strUserName);
+            console.log("Decrypted User Pass --> " + strPassword);
+
+            break;
         }
-        return;
-    }
 
-    if(jdata.cmd == code.FIND) {
-        if(conn.opponent == undefined) {
-            conn.state = code.FIND;
-            var op = find_opponent(conn);
-            if(op != null) {
-                send(conn, { cmd : code.FIND_OK, data : JSON.stringify(op) });
+        case code.OPEN:
+        {
+            var info = JSON.parse(jdata.data);
+            conn.id = info.id;
+            conn.info = info;
+            conn.state = code.OPEN;
+            console.log(conn);
+            var opp = find_broken(conn);
+
+            if(opp != null) {
+                send(opp, { cmd : code.RECONNECT, data : "" });
+                //send(conn, { cmd : code.RECONNECT, data : "" });  
             } else {
-                send(conn, { cmd : code.FIND_FAIL, data : "" }); 
+                send(conn, { cmd : code.OK, data : "" });
             }
-        } else {
-            var op = conn.opponent.info;
-            send(conn, { cmd : code.FIND_OK, data : JSON.stringify(op) });
+
+            return;
         }
-        return;
-    }
 
-    if(jdata.cmd == code.PLAY) {
-        conn.state = code.PLAY;
-        //conn.startinfo = jdata.data;
-        if(conn.opponent.state == undefined) {
-            send(conn, { cmd : code.GOOUT, data : "" });
-        } else if(conn.opponent.state == code.PLAY) {
-            send(conn, { cmd : code.START_OK, data : jdata.data });
-            //conn.startinfo = undefined;
-            conn.state = code.WAIT;
-
-            send(conn.opponent, { cmd : code.START_OK, data : jdata.data });
-            //conn.opponent.startinfo = undefined;
-            conn.opponent.state = code.WAIT;
+        case code.FIND:
+        {
+            if(conn.opponent == undefined) 
+            {
+                conn.state = code.FIND;
+                var op = find_opponent(conn);
+                if(op != null) {
+                    send(conn, { cmd : code.FIND_OK, data : JSON.stringify(op) });
+                } else {
+                    send(conn, { cmd : code.FIND_FAIL, data : "" }); 
+                }
+            } else {
+                var op = conn.opponent.info;
+                send(conn, { cmd : code.FIND_OK, data : JSON.stringify(op) });
+            }
+            return;
         }
-        return;
-    }
 
-    if( jdata.cmd == code.CARD ||
-        jdata.cmd == code.GOSTOP ||
-        jdata.cmd == code.SLOT ||
-        jdata.cmd == code.BOX ||
-        jdata.cmd == code.SPIN ||
-        jdata.cmd == code.CHAT ||
-        jdata.cmd == code.CHAT_OK ||
-        jdata.cmd == code.TURN ||
-        jdata.cmd == code.TURN_OK ||
-        jdata.cmd == code.OK ||
-        jdata.cmd == code.ALLDATA ) {
-        send(conn.opponent, jdata);
-        return;
-    }
+        case code.PLAY: 
+        {
+            conn.state = code.PLAY;
+            //conn.startinfo = jdata.data;
+            if(conn.opponent.state == undefined) {
+                send(conn, { cmd : code.GOOUT, data : "" });
+            } else if(conn.opponent.state == code.PLAY) {
+                send(conn, { cmd : code.START_OK, data : jdata.data });
+                //conn.startinfo = undefined;
+                conn.state = code.WAIT;
+    
+                send(conn.opponent, { cmd : code.START_OK, data : jdata.data });
+                //conn.opponent.startinfo = undefined;
+                conn.opponent.state = code.WAIT;
+            }
+            return;
+        }
 
-    if(jdata.cmd == code.CHECK) {
-        conn.alive = true;
-        return;
-    }
+        case code.CARD:
+        case code.GOSTOP:
+        case code.SLOT:
+        case code.BOX:
+        case code.SPIN:
+        case code.CHAT:
+        case code.CHAT_OK:
+        case code.TURN:
+        case code.TURN_OK:
+        case code.OK:
+        case code.ALLDATA: {
+            send(conn.opponent, jdata);
+            return;
+        }
 
-    if(jdata.cmd == code.CLOSE) {
-        conn.state = code.CLOSE;
-        return;
+        case code.CHECK: 
+        {
+            conn.alive = true;
+            return;
+        }
+    
+        case code.CLOSE:
+        {
+            conn.state = code.CLOSE;
+            return;
+        }
     }
 
     send(conn, { cmd : code.INVALID_CMD, data : "" });
