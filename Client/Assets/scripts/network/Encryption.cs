@@ -2,15 +2,21 @@ using System.Security.Cryptography;
 using System.Text;
 using System;
 using System.IO;
+using UnityEngine;
 
-public class AESCrypto
+public class Encryption: MonoBehaviour
 {
     private static string Key;
     private static string IV;
 
-    public static AESCrypto instance;
+    public static Encryption instance;
 
-    public AESCrypto()
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public void AESCrypto()
     {
         instance = this;
 

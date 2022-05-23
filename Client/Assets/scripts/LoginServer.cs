@@ -20,8 +20,8 @@ public class LoginServer : MonoBehaviour
         string username = Username.text;
         string password = Password.text;
 
-        playerDetails.username = Encryption.instance.encrypt(username);
-        playerDetails.password = Encryption.instance.encrypt(password);
+        playerDetails.username = Encryption.instance.Encrypt(username);
+        playerDetails.password = Encryption.instance.Encrypt(password);
 
         backend.SendDetails(playerDetails);
     }
