@@ -6,23 +6,19 @@ public class LoginServer : MonoBehaviour
     public InputField Username;
     public InputField Password;
 
-    private Backend backend;
-    private PlayerDetails playerDetails;
-
     private void Start()
     {
-        backend = Backend.instance;
-        playerDetails = new PlayerDetails();
+
     }
 
-    public void SendDetails()
+    public void Login()
     {
-        string username = Username.text;
-        string password = Password.text;
+        if( AESCrypto.instance == null )
+            new AESCrypto();
 
-        playerDetails.username = Encryption.instance.Encrypt(username);
-        playerDetails.password = Encryption.instance.Encrypt(password);
+        string username = AESCrypto.instance.Encrypt(Username.text);
+        string password = AESCrypto.instance.Encrypt(Password.text);
 
-        backend.SendDetails(playerDetails);
+        Backend.OnLogin(username, password);
     }
 }

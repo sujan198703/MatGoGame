@@ -110,6 +110,8 @@ public class Backend : MonoBehaviour
         ws.OnMessage += (sender, e) =>
         {
             Debug.Log(e.Data);
+            AESCrypto.SetKey(e.Data);
+            print(AESCrypto.GetKey());
         };
 
         ws.Connect();
@@ -146,8 +148,6 @@ public class Backend : MonoBehaviour
         }
 
         ws.Send(JsonUtility.ToJson(playerDetails));
-        NetworkQueue.instance.AddToQueue(playerDetails.ToString());
-
     }
 
     public bool isConnectedToServer()
@@ -250,29 +250,34 @@ public class Backend : MonoBehaviour
         }
     }
 
-    static public void OnLogin(string pname, string pass)
+    static public void OnLogin(string ename, string epass)
     {
         if (instance == null) return;
-        instance.OnLogin0(pname, GetStringSha256Hash(pass));
-    }
 
-    public void OnLogin0(string pname, string pass)
+        instance.Login(ename, epass);
+    }
+        
+    public void Login(string pname, string pass)
     {
         LoginInfo info = new LoginInfo();
-        info.pname = pname;
-        info.pass = pass;
+
+        info.pname  = pname;
+        info.pass   = pass;
 
         string packetstr = GetPacketString(PACKET_CODE.LOGIN, info);
-        StartCoroutine(DoRequest(PACKET_CODE.LOGIN, packetstr, true));
+        ws.Send(packetstr);
+//        Send(packetstr);
+//        StartCoroutine(DoRequest(PACKET_CODE.LOGIN, packetstr, true));
     }
 
     static public void OnProfile()
     {
         if (instance == null) return;
-        instance.OnProfile0();
+
+        instance.Profile();
     }
 
-    public void OnProfile0()
+    public void Profile()
     {
         //  if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
         //  if (mine.id == -1) return;
@@ -284,6 +289,7 @@ public class Backend : MonoBehaviour
     static public void OnUpdate()
     {
         if (instance == null) return;
+
         instance.OnUpdate0();
     }
 
@@ -303,10 +309,10 @@ public class Backend : MonoBehaviour
     static public void OnStartGame()
     {
         if (instance == null) return;
-        instance.OnStartGame0();
+        instance.StartGame();
     }
 
-    public void OnStartGame0()
+    public void StartGame()
     {
         //   if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
         //   if (other == null) other = Player.Find(CARD_OWNER.OTHER);
