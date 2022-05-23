@@ -120,11 +120,24 @@ async function on_data(conn, data) {
         case code.LOGIN:
         {
             var crypto = new AESCrypto();
-            var strUserName = crypto.decrypt(jdata.username);
-            var strPassword = crypto.decrypt(jdata.password);
 
-            console.log("Decrypted User Name --> " + strUserName);
-            console.log("Decrypted User Pass --> " + strPassword);
+            const userinfo = JSON.parse(jdata.data);
+            var username = userinfo.pname;
+            var password = userinfo.pass;
+
+            var strUserName = crypto.decrypt(username);
+            var strPassword = crypto.decrypt(password);
+
+            userinfo.pname = strUserName;
+            userinfo.pass  = strPassword;
+
+            var result = await db.on_login(userinfo);
+
+            if(result.code == 0) {
+                send_response(conn, { cmd : code.OK, data : result.message })
+            } else {
+                send_response(conn, { cmd : code.ERROR, data : result.message });
+            }
 
             break;
         }
@@ -222,6 +235,7 @@ async function on_request(conn, data) {
     if(jdata.cmd == code.LOGIN) {
         var data = JSON.parse(jdata.data);
         var result = await db.on_login(data);
+
         if(result.code == 0) {
             send_response(conn, { cmd : code.OK, data : result.message })
         } else {
@@ -229,6 +243,7 @@ async function on_request(conn, data) {
         }
         return;
     }
+
     if(jdata.cmd == code.PROFILE) {
         var result = await db.on_profile(jdata.data);
         if(result.code == 0) {
@@ -238,6 +253,7 @@ async function on_request(conn, data) {
         }
         return;
     }
+    
     if(jdata.cmd == code.UPDATE) {
         var data = JSON.parse(jdata.data);
         var result = await db.on_update(data);
