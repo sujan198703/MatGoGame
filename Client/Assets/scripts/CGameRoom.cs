@@ -310,6 +310,7 @@ public class CGameRoom
 			if (this.engine.is_finished())
 			{
 				//todo:게임이 끝났는데 나지 못했다면 나가리 처리.
+				//todo: If the game is over and you can't play, deal with Nagari.
 				UnityEngine.Debug.Log("Nagari!!!!!!");
 			}
 			else

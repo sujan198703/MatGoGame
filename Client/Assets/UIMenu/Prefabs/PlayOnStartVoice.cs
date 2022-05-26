@@ -26,7 +26,7 @@ public class PlayOnStartVoice : MonoBehaviour
 		beforeplay1 = GameObject.Find("beforeplay1");
 		beforeplay2 = GameObject.Find("beforeplay2");
 
-		Debug.Log("First Start from The Main Panel ");
+		//Debug.Log("First Start from The Main Panel ");
 
 		PlayerPrefs.SetInt("PlayerNewScore", 0);
 

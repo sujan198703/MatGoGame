@@ -9,7 +9,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	// 원본 이미지들.
 	Sprite back_image;
 
-
+	byte pee_count;
 	// 각 슬롯의 좌표 객체.
 	[SerializeField]
 	Transform floor_slot_root;
@@ -209,14 +209,19 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	void clear_ui()
 	{
-		for (int i = 0; i < this.player_info_slots.Count; ++i)
+		
+		for (int i = 0; i < 2; ++i)
 		{
 			this.player_info_slots[i].update_score(0);
 			this.player_info_slots[i].update_go(0);
 			this.player_info_slots[i].update_shake(0);
 			this.player_info_slots[i].update_ppuk(0);
 			this.player_info_slots[i].update_peecount(0);
+
 		}
+
+	
+
 	}
 
 
@@ -285,6 +290,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 				byte ui_slot_index = (byte)(looping * 5);
 				// 플레이어에게는 한번에 5장씩 분배한다.
+				// Distribute 5 cards to each player at a time.
 				for (int card_index = 0; card_index < 5; ++card_index)
 				{
 					CCardPicture card_picture = this.deck_cards.Pop();
@@ -293,15 +299,19 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 					// 본인 카드는 해당 이미지를 보여주고,
 					// 상대방 카드(is_nullcard)는 back_image로 처리한다.
+					// Your card shows the image,
+					// The opponent's card (is_nullcard) is treated as a back_image.
 					if (player_index == this.player_me_index)
 					{
 						CCard card = cards.Dequeue();
+                       
 						card_picture.update_card(card, get_hwatoo_sprite(card));
 						card_picture.transform.localScale = SCALE_TO_MY_HAND;
-						move_card(card_picture, card_picture.transform.position,
-							this.player_card_positions[player_index].get_hand_position(ui_slot_index));
-					}
-					else
+                        move_card(card_picture, card_picture.transform.position,
+                        this.player_card_positions[player_index].get_hand_position(ui_slot_index));
+					
+                    }
+                    else
 					{
 						card_picture.update_backcard(this.back_image);
 						card_picture.transform.localScale = SCALE_TO_OTHER_HAND;
@@ -481,6 +491,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 						}
 						else
 						{
+							//Debug.Log("Blood Cards Count ");
 							ef.transform.localPosition = new Vector3(100, -100, 0);
 						}
 						CUIManager.Instance.show(UI_PAGE.POPUP_FIRST_PLAYER);
@@ -677,7 +688,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		CUIManager.Instance.show(UI_PAGE.POPUP_GAME_RESULT);
 		CPopupGameResult popup = 
 			CUIManager.Instance.get_uipage(UI_PAGE.POPUP_GAME_RESULT).GetComponent<CPopupGameResult>();
-	//	popup.refresh(is_win, money, score, double_val, final_score);
+		//popup.refresh(is_win, money, score, double_val, final_score);
 	}
 
 
@@ -687,20 +698,24 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 			this.player_card_manager[player_index].get_card(8, PAE_TYPE.YEOL, 0);
 
 		// 카드 자리 움직이기.
+		// Move the card position.
 		move_card(card_picture, card_picture.transform.position, 
 			get_player_card_position(player_index, PAE_TYPE.PEE));
 
 		// 열끗에서 지우고 피로 넣는다.
+		// Erase from ten and put in blood.
 		this.player_card_manager[player_index].remove(card_picture);
 
 		card_picture.card.change_pae_type(PAE_TYPE.PEE);
 		card_picture.card.set_card_status(CARD_STATUS.TWO_PEE);
+		//this.player_info_slots[player_index].update_peecount(pee_count);
 
 		this.player_card_manager[player_index].add(card_picture);
 
 		yield return new WaitForSeconds(1.0f);
 
 		// 바닥 패 정렬.
+		// Sort the bottom tiles.
 		refresh_player_floor_slots(PAE_TYPE.YEOL, player_index);
 		refresh_player_floor_slots(PAE_TYPE.PEE, player_index);
 	}
@@ -713,17 +728,21 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		byte go_count = msg.pop_byte();
 		byte shaking_count = msg.pop_byte();
 		byte ppuk_count = msg.pop_byte();
-		byte pee_count = msg.pop_byte();
+		pee_count = msg.pop_byte();
+
+		Debug.Log("Pee Count    ---------" + pee_count);
 
 		this.player_info_slots[player_index].update_score(score);
 		this.player_info_slots[player_index].update_go(go_count);
 		this.player_info_slots[player_index].update_shake(shaking_count);
 		this.player_info_slots[player_index].update_ppuk(ppuk_count);
-		this.player_info_slots[player_index].update_peecount(pee_count);
+
+        this.player_info_slots[player_index].update_peecount(pee_count);
+		
 	}
 
 
-	List<CCard> parse_cards_to_get(CPacket msg)
+    List<CCard> parse_cards_to_get(CPacket msg)
 	{
 		List<CCard> cards_to_give = new List<CCard>();
 		byte count_to_give = msg.pop_byte();
@@ -886,6 +905,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		}
 
 		// 플레이어가 낸 카드 움직이기.
+		// Move the player's card.
 		yield return StartCoroutine(move_player_cards_to_floor(
 			player_index,
 			card_event,
@@ -898,6 +918,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		if (card_event != CARD_EVENT_TYPE.NONE)
 		{
 			// 흔들기는 위에서 팝업으로 보여줬기 때문에 별도의 이펙트는 필요 없다.
+			// Since the shake was shown as a popup above, no separate effect is needed.
 			if (card_event != CARD_EVENT_TYPE.SHAKING)
 			{
 				CEffectManager.Instance.play(card_event);
@@ -909,6 +930,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		if (player_index == this.player_me_index)
 		{
 			// 바닥에 깔린 카드가 두장일 때 둘중 하나를 선택하는 팝업을 출력한다.
+			// When there are two cards on the floor, a popup is displayed to select one of them
 			if (select_result == PLAYER_SELECT_CARD_RESULT.CHOICE_ONE_CARD_FROM_PLAYER)
 			{
 				CUIManager.Instance.show(UI_PAGE.POPUP_CHOICE_CARD);
@@ -1041,6 +1063,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 
 		// 카드 가져오기.
+		// Get the card.
 		for (int i = 0; i < cards_to_give.Count; ++i)
 		{
 			CVisualFloorSlot slot =
@@ -1066,6 +1089,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 			if (this.player_me_index == player_index)
 			{
 				card_pic.transform.localScale = SCALE_TO_MY_FLOOR;
+				Debug.Log("I am getting a card Yaaaay  ");
 			}
 			else
 			{
@@ -1285,6 +1309,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	/// <summary>
 	/// 플레이어의 패를 번호 순서에 따라 오름차순 정렬 한다.
 	/// </summary>
+	/// 
+	/// /// Sort the player's hand in ascending order by number.
 	/// <param name="player_index"></param>
 	void sort_player_hand_slots(byte player_index)
 	{
@@ -1296,19 +1322,26 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	/// <summary>
 	/// 플레이어의 패의 위치를 갱신한다.
 	/// 패를 내면 중간중간 빠진 자리가 생기는데 그 자리를 처음부터 다시 채워준다.
+	/// /// Update the player's hand position.
+	/// When you play a hand, there is a missing spot in the middle, and it fills in that spot from the beginning.
 	/// </summary>
 	/// <param name="player_index"></param>
 	void refresh_player_hand_slots(byte player_index)
 	{
+
 		CPlayerHandCardManager hand_card_manager = this.player_hand_card_manager[player_index];
 		byte count = (byte)hand_card_manager.get_card_count();
 		for (byte card_index = 0; card_index < count; ++card_index)
 		{
+
+
 			CCardPicture card = hand_card_manager.get_card(card_index);
 			// 슬롯 인덱스를 재설정 한다.
+			// Reset the slot index.
 			card.set_slot_index(card_index);
 
 			// 화면 위치를 재설정 한다.
+			// Reset the screen position.
 			card.transform.position = this.player_card_positions[player_index].get_hand_position(card_index);
 		}
 	}
@@ -1317,11 +1350,15 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	/// <summary>
 	/// 플레이어의 바닥 카드 위치를 갱신한다.
 	/// 피를 뺏기거나 옮기거나 했을 때 생기는 빈자리를 채워준다.
+	/// /// Update the player's floor card position.
+	/// Filling the void that occurs when blood is stolen or moved
 	/// </summary>
 	/// <param name="player_index"></param>
 	void refresh_player_floor_slots(PAE_TYPE pae_type, byte player_index)
 	{
 		int count = this.player_card_manager[player_index].get_card_count(pae_type);
+	
+
 		for (int i = 0; i < count; ++i)
 		{
 			Vector3 pos = this.player_card_positions[player_index].get_floor_position(i, pae_type);
@@ -1334,6 +1371,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	Vector3 get_player_card_position(byte player_index, PAE_TYPE pae_type)
 	{
+
 		int count = this.player_card_manager[player_index].get_card_count(pae_type);
 		return this.player_card_positions[player_index].get_floor_position(count, pae_type);
 	}
@@ -1342,6 +1380,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	void on_card_touch(CCardPicture card_picture)
 	{
 		// 카드 연속 터치등을 막기 위한 처리.
+		// Process to prevent continuous card touch.
 		this.card_collision_manager.enabled = false;
 		this.ef_focus.SetActive(false);
 
@@ -1353,6 +1392,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 
 		// 일반 카드, 폭탄 카드에 따라 다르게 처리한다.
+		// Handles differently depending on normal cards and bomb cards.
 		if (card_picture.is_back_card())
 		{
 			CPacket msg = CPacket.create((short)PROTOCOL.FLIP_BOMB_CARD_REQ);
@@ -1361,6 +1401,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		else
 		{
 			// 손에 같은 카드 3장이 있고 바닥에 같은카드가 없을 때 흔들기 팝업을 출력한다.
+			// Print a shake popup when there are 3 identical cards in the hand and no identical cards on the floor.
 			int same_on_hand = 
 				this.player_hand_card_manager[this.player_me_index].get_same_number_count(card_picture.card.number);
 			int same_on_floor = get_same_number_count_on_floor(card_picture.card.number);
@@ -1381,6 +1422,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	int get_same_number_count_on_floor(byte number)
 	{
+
+		//Debug.Log("Check if same");
 		List<CVisualFloorSlot> slots = 
 			this.floor_ui_slots.FindAll(obj => obj.is_same_card(number));
 		return slots.Count;
@@ -1389,7 +1432,9 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	//------------------------------------------------------------------------------
 	// UI효과 관련 매소드. 다른 클래스로 빠질 가능성이 있는 부분이다.
-	// 힌트 화살표.
+	// 힌트 화살표.UI effect related method. This is the part that is likely to fall into another class.
+	// hint arrow.
+
 	CGameObjectPool<GameObject> hint_arrows;
 	List<GameObject> enabled_hint_arrows;
 	void load_hint_arrows()

@@ -44,7 +44,7 @@ public class CNetworkManager : CSingletonMonobehaviour<CNetworkManager>
 
     private void ConnectionStatus()
     {
-        print("Trying Connection......");
+        //print("Trying Connection......");
 
         ws = new WebSocket(serverURL);
 

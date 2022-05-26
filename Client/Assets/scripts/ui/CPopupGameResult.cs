@@ -13,19 +13,19 @@ public class CPopupGameResult : MonoBehaviour {
 	Text score;
 	Text double_val;
 	Text final_score;
-	GameObject success;
+	GameObject succes;
 	GameObject failure;
 	AudioSource playsound;
 
 
 
-    private void Start()
+    public void Start()
     {
-		success = GameObject.Find("success");
+		succes = GameObject.Find("success");
 		failure = GameObject.Find("failure");
 
 		playsound = GetComponent<AudioSource>();
-		success.GetComponent<AudioSource>();
+		succes.GetComponent<AudioSource>();
 		failure.GetComponent<AudioSource>();
 
 	}
@@ -62,9 +62,9 @@ public class CPopupGameResult : MonoBehaviour {
 		if (is_win == 1)
 		{
 			Debug.Log("Winner");
-			success.GetComponent<AudioSource>().Play();
-
 			this.win_lose.sprite = this.win_sprite;
+			succes.GetComponent<AudioSource>().Play();
+
 		}
 		else
 		{

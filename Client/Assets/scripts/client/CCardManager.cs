@@ -101,14 +101,18 @@ public class CCardManager
 
     void set_allcard_status()
     {
-        // 카드 속성 설정.
-        // 고도리.
-        apply_card_status(1, PAE_TYPE.YEOL, 0, CARD_STATUS.GODORI);
+		// 카드 속성 설정.
+		// 고도리.
+		// Set card properties.
+		// Godori.
+		apply_card_status(1, PAE_TYPE.YEOL, 0, CARD_STATUS.GODORI);
         apply_card_status(3, PAE_TYPE.YEOL, 0, CARD_STATUS.GODORI);
         apply_card_status(7, PAE_TYPE.YEOL, 1, CARD_STATUS.GODORI);
 
-        // 청단, 홍단, 초단
-        apply_card_status(5, PAE_TYPE.TEE, 1, CARD_STATUS.CHEONG_DAN);
+		// 청단, 홍단, 초단
+		// Cheongdan, Hongdan, Chodan
+
+		apply_card_status(5, PAE_TYPE.TEE, 1, CARD_STATUS.CHEONG_DAN);
         apply_card_status(8, PAE_TYPE.TEE, 1, CARD_STATUS.CHEONG_DAN);
         apply_card_status(9, PAE_TYPE.TEE, 1, CARD_STATUS.CHEONG_DAN);
 
@@ -120,12 +124,16 @@ public class CCardManager
         apply_card_status(4, PAE_TYPE.TEE, 1, CARD_STATUS.CHO_DAN);
         apply_card_status(6, PAE_TYPE.TEE, 1, CARD_STATUS.CHO_DAN);
 
-        // 쌍피.
-        apply_card_status(10, PAE_TYPE.PEE, 1, CARD_STATUS.TWO_PEE);
+		// 쌍피.
+		// double skin.
+
+		apply_card_status(10, PAE_TYPE.PEE, 1, CARD_STATUS.TWO_PEE);
         apply_card_status(11, PAE_TYPE.PEE, 3, CARD_STATUS.TWO_PEE);
 
-        // 국진.
-        apply_card_status(8, PAE_TYPE.YEOL, 0, CARD_STATUS.KOOKJIN);
+		// 국진.
+		// Gukjin.
+
+		apply_card_status(8, PAE_TYPE.YEOL, 0, CARD_STATUS.KOOKJIN);
     }
 
 
@@ -163,12 +171,13 @@ public class CCardManager
 
 
 	public CCard find_card(byte number, PAE_TYPE pae_type, byte position)
-	{
-		return this.cards.Find(obj => obj.is_same(number, pae_type, position));
-	}
+    {
+        return this.cards.Find(obj => obj.is_same(number, pae_type, position));
+		UnityEngine.Debug.Log("Finding the same card "+ pae_type);
+    }
 
 
-	void TEST_MAKE_SHAKING_CARDS()
+    void TEST_MAKE_SHAKING_CARDS()
 	{
 		this.cards.Clear();
 

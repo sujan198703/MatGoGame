@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -9,11 +10,18 @@ public class CPlayerCardManager
 
 	public CPlayerCardManager()
 	{
+
+		//KWANG is right
+		//TEE is belt
+		//YEOL is HEAT
+		//PEE is BLOOD
 		this.floor_slots = new Dictionary<PAE_TYPE, List<CCardPicture>>();
 		this.floor_slots.Add(PAE_TYPE.KWANG, new List<CCardPicture>());
 		this.floor_slots.Add(PAE_TYPE.TEE, new List<CCardPicture>());
-		this.floor_slots.Add(PAE_TYPE.YEOL, new List<CCardPicture>());
-		this.floor_slots.Add(PAE_TYPE.PEE, new List<CCardPicture>());
+		this.floor_slots.Add(PAE_TYPE.YEOL, new List<CCardPicture>()); 
+		this.floor_slots.Add(PAE_TYPE.PEE, new List<CCardPicture>());    //this is blood card 
+
+		Debug.Log(PAE_TYPE.TEE);
 	}
 
 
@@ -28,6 +36,8 @@ public class CPlayerCardManager
 
 	public void add(CCardPicture card_pic)
 	{
+
+		//Debug.Log("Blood Test" + card_pic.card.pae_type);
 		PAE_TYPE pae_type = card_pic.card.pae_type;
 		this.floor_slots[pae_type].Add(card_pic);
 	}

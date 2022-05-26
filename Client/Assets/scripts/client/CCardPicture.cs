@@ -60,6 +60,7 @@ public class CCardPicture : MonoBehaviour {
 
 	public bool is_same(byte number, PAE_TYPE pae_type, byte position)
 	{
+		Debug.Log(((byte)pae_type));
 		return this.card.is_same(number, pae_type, position);
 	}
 
