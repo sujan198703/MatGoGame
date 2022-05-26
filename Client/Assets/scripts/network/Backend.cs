@@ -79,47 +79,91 @@ public class Backend : MonoBehaviour
 
     public void RetryConnection()
     {
-        if (ws.IsAlive)
+        //if (ws.IsAlive)
+        //    return;
+        //else
+        //{
+        //    ConnectionStatus();
+        //}
+
+
+        if (w.IsConnectedtoServer())
             return;
         else
         {
             ConnectionStatus();
         }
+
     }
 
     private void ConnectionStatus()
     {
+        //print("Trying Connection......");
+
+        //ws = new WebSocket(serverURL);
+
+        //ws.OnOpen += (sender, e) =>
+        //{
+        //    Debug.Log("Connected");
+        //    CanLogin = true;
+        //    CurrentStatus = Status.Connected;
+        //};
+
+        //ws.OnClose += (sender, e) =>
+        //{
+        //    Debug.Log("Not Connected");
+        //    CurrentStatus = Status.NotConnected;
+        //    CanLogin = false;
+        //};
+
+        //ws.OnMessage += (sender, e) =>
+        //{
+        //    Debug.Log(e.Data);
+        //    AESCrypto.SetKey(e.Data);
+        //    print(AESCrypto.GetKey());
+        //};
+
+        //ws.Connect();
+
+
         print("Trying Connection......");
 
-        ws = new WebSocket(serverURL);
+        w = new UnityWebSocket(serverURL);
 
-        ws.OnOpen += (sender, e) =>
-        {
-            Debug.Log("Connected");
-            CanLogin = true;
-            CurrentStatus = Status.Connected;
-        };
+        w.OnOpen += W_OnOpen;
 
-        ws.OnClose += (sender, e) =>
-        {
-            Debug.Log("Not Connected");
-            CurrentStatus = Status.NotConnected;
-            CanLogin = false;
-        };
+        w.OnClose += W_OnClose;
 
-        ws.OnMessage += (sender, e) =>
-        {
-            Debug.Log(e.Data);
-            AESCrypto.SetKey(e.Data);
-            print(AESCrypto.GetKey());
-        };
+        w.OnMessage += W_OnMessage;
 
-        ws.Connect();
+        w.Connect();
+    }
+
+    private void W_OnMessage(UnityWebSocket sender, byte[] data)
+    {
+        Debug.Log(data);
+        AESCrypto.SetKey(data.ToString());
+        print(AESCrypto.GetKey());
+    }
+
+    private void W_OnClose(UnityWebSocket sender, int code, string reason)
+    {
+        Debug.Log("Not Connected");
+        CurrentStatus = Status.NotConnected;
+        CanLogin = false;
+    }
+
+    private void W_OnOpen(UnityWebSocket accepted)
+    {
+        Debug.Log("Connected");
+        CanLogin = true;
+        CurrentStatus = Status.Connected;
     }
 
     public void SendPlayData(string data)
     {
-        ws.Send(data);
+        // ws.Send(data);
+        w.SendAsync(System.Text.Encoding.ASCII.GetBytes(data));
     }
 
     void Update()
@@ -147,7 +191,9 @@ public class Backend : MonoBehaviour
             return;
         }
 
-        ws.Send(JsonUtility.ToJson(playerDetails));
+       // ws.Send(JsonUtility.ToJson(playerDetails));
+
+        ws.Send(System.Text.Encoding.ASCII.GetBytes(JsonUtility.ToJson(playerDetails)));
     }
 
     public bool isConnectedToServer()
@@ -256,18 +302,18 @@ public class Backend : MonoBehaviour
 
         instance.Login(ename, epass);
     }
-        
+
     public void Login(string pname, string pass)
     {
         LoginInfo info = new LoginInfo();
 
-        info.pname  = pname;
-        info.pass   = pass;
+        info.pname = pname;
+        info.pass = pass;
 
         string packetstr = GetPacketString(PACKET_CODE.LOGIN, info);
-        ws.Send(packetstr);
-//        Send(packetstr);
-//        StartCoroutine(DoRequest(PACKET_CODE.LOGIN, packetstr, true));
+        w.SendAsync(System.Text.Encoding.ASCII.GetBytes(packetstr));
+        //        Send(packetstr);
+        //        StartCoroutine(DoRequest(PACKET_CODE.LOGIN, packetstr, true));
     }
 
     static public void OnProfile()

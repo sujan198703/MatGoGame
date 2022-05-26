@@ -9,6 +9,7 @@ public class UnityWebSocket
 
 #if UNITY_EDITOR || UNITY_STANDALONE || UNITY_ANDROID || UNITY_IOS
     private WebSocket WebSocket;
+    public bool IsConnected { get; private set; }
 #elif UNITY_WEBGL
 	private static Dictionary<int, UnityWebSocket> webSocketInstances = new Dictionary<int, UnityWebSocket>();
     private NativeWebSocket NativeWebSocket;
@@ -71,6 +72,8 @@ public class UnityWebSocket
 
         if (OnOpen != null)
             OnOpen(this);
+
+        IsConnected = true;
     }
 
     private void WebSocket_OnMessage(object sender, MessageEventArgs e)
@@ -89,6 +92,8 @@ public class UnityWebSocket
 
         if (OnError != null)
             OnError(this, e.Message);
+
+        IsConnected = false;
     }
 
     private void WebSocket_OnClose(object sender, CloseEventArgs e)
@@ -98,6 +103,16 @@ public class UnityWebSocket
 
         if (OnClose != null)
             OnClose(this, e.Code, e.Reason);
+    }
+
+    public void NewConnection(string str)
+    {
+        WebSocket = new WebSocket(str);
+    }
+
+    public void Connect()
+    {
+        WebSocket.Connect();
     }
 #elif UNITY_WEBGL
 	[MonoPInvokeCallback(typeof(Action<int>))]
@@ -138,6 +153,11 @@ public class UnityWebSocket
 			webSocketInstances[id].OnClose(webSocketInstances[id], errorInfo.Code, errorInfo.Message);
 	}
 #endif
+
+    public bool IsConnectedtoServer()
+    {
+        return WebSocket.IsAlive;
+    }
 
     public void SendAsync(byte[] packet)
     {
