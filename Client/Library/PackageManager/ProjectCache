@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637890614038402084
-    m_Hash: 866264065
+      ticks: 637891779970174736
+    m_Hash: 2794708207
   m_LockFileStatus:
     m_FilePath: E:/Game Development/MatGo/Client/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637890614425926974
-    m_Hash: 3728459630
+      ticks: 637891779957996195
+    m_Hash: 2765529628
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -2775,6 +2775,7 @@ m_PackageAssets:
         - 1.3.1
         - 1.3.2
         - 1.4.0
+        - 1.4.1
         compatible:
         - 1.0.1
         - 1.1.0-pre.7
@@ -2788,6 +2789,7 @@ m_PackageAssets:
         - 1.3.1
         - 1.3.2
         - 1.4.0
+        - 1.4.1
         verified: 1.3.2
       dependencies:
       - name: com.unity.modules.unitywebrequest

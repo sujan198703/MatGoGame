@@ -6,27 +6,24 @@ using UnityEngine.UI;
 public class ScoreCard : MonoBehaviour
 {
 
-    public Text ScoreText;
-    public Text OverallScore;
-    public  int PlayerNewScore = 0;
-    public  int PlayerOldScore = 0;
-    string OldScoreKey = "PlayerOldScore";
-    string NewScoreKey = "PlayerNewScore";
+    public Text PlayerOne;
+    public Text PlayerTwo;
+    public  int PlayerOneScore = 0;
+    public  int PlayerTwoScore = 0;
+    string FristPlayer = "PlayerFirstScore";
+    string SecondPlayer = "PlayerSecondScore";
     bool firstrun = true;
 
     // Start is called before the first frame update
     void Start()
     {
 
-        Debug.Log("First start ");
-        PlayerOldScore+=PlayerPrefs.GetInt(OldScoreKey, PlayerNewScore);
+        //Debug.Log("First start ");
+       // PlayerTwoScore += PlayerPrefs.GetInt(OldScoreKey, PlayerNewScore);
 
-       OverallScore.text = PlayerOldScore.ToString();
-       PlayerPrefs.SetInt(NewScoreKey, 0);
-      // PlayerPrefs.SetInt(OldScoreKey, PlayerNewScore);
-
-        ScoreText.text = "0";
-       // PlayerOldScore = 0;
+       PlayerTwo.text = PlayerTwoScore.ToString();
+       PlayerOne.text = PlayerOneScore.ToString();
+  
     }
 
 
@@ -34,31 +31,32 @@ public class ScoreCard : MonoBehaviour
     {
 
         Debug.Log("The Game has started ");
-        PlayerPrefs.SetInt(NewScoreKey, 0);
+        PlayerPrefs.SetInt(FristPlayer, 0);
+        PlayerPrefs.SetInt(SecondPlayer, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        // PlayerOldScore += PlayerPrefs.GetInt(OldScoreKey);
-  
-
-        //getting new score on runtime 
-          PlayerNewScore = PlayerPrefs.GetInt(NewScoreKey);
-
-        //new score being added on old score
-        PlayerOldScore += PlayerNewScore;
-
-        //setting new score on oldscore
-        PlayerPrefs.SetInt(OldScoreKey, PlayerOldScore);
 
 
-       //Showing New Score on UI
-        ScoreText.text = PlayerNewScore.ToString();
+        //getting Player One score on runtime 
+        PlayerOneScore = PlayerPrefs.GetInt(FristPlayer);
 
-        //showing addtion of new score on Old Score
-        OverallScore.text = PlayerNewScore.ToString();
+
+        //getting Player Two  score on runtime 
+        PlayerTwoScore = PlayerPrefs.GetInt(SecondPlayer);
+
+      
+
+
+
+        //Showing Player One Text on Screen
+        PlayerOne.text = PlayerOneScore.ToString();
+
+        //Showing Player two Text on Screen
+        PlayerTwo.text = PlayerTwoScore.ToString();
 
         PlayerPrefs.Save();
 

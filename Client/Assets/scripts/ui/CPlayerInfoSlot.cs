@@ -3,12 +3,14 @@ using System.Collections;
 
 public class CPlayerInfoSlot : MonoBehaviour {
 
+	public static int playerscore = 0;
+	bool PlayerTurn;
 	TextMesh score_text;
 	TextMesh go_text;
 	TextMesh shake_text;
 	TextMesh ppuk_text;
 	TextMesh pee_count_text;
-
+    
 
 	void Awake()
 	{
@@ -46,6 +48,17 @@ public class CPlayerInfoSlot : MonoBehaviour {
 
 	public void update_peecount(byte count)
 	{
+
+        if (PlayerTurn)
+        {
+			PlayerPrefs.SetInt("PlayerFirstScore", count);
+			PlayerTurn = false;
+        }
+        else
+        {
+			PlayerPrefs.SetInt("PlayerSecondScore", count);
+			PlayerTurn = true;
+		}
 
 		Debug.Log("Blood Score in"+string.Format("({0})", count));
 		this.pee_count_text.text = string.Format("({0})", count);

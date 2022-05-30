@@ -210,7 +210,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	void clear_ui()
 	{
 		
-		for (int i = 0; i < 2; ++i)
+	   for (int i = 0; i < 2; ++i)
 		{
 			this.player_info_slots[i].update_score(0);
 			this.player_info_slots[i].update_go(0);
@@ -421,6 +421,16 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	/// 여기서는 두번째 방법으로 구현하였다.
 	/// 첫번째 방법의 경우 동기화 패킷을 수시로 교환해야 하기 때문에 구현하기가 번거롭고
 	/// 상대방의 네트워크 상태가 좋지 않을 경우 게임 진행이 매끄럽지 못하게 된다.
+	/// /// Loop to process packets sequentially.
+	/// This is a method implemented to process the card moving scenes in order.
+	/// Since the packet from the server can be received even when the card movement production by the coroutine is in progress
+	/// In the middle of directing, there are cases where another direction is performed.
+	/// There are two ways to avoid this.
+	/// First. Synchronization with other clients is performed at each stage of production.
+	/// Second. By queuing the incoming packet, after one directing scene is finished, the next packet is taken out and processed.
+	/// Here, the second method is implemented.
+	/// In the case of the first method, it is cumbersome to implement and
+	/// If the opponent's network condition is not good, the game will not proceed smoothly.
 	/// </summary>
 	/// <returns></returns>
 	IEnumerator sequential_packet_handler()
@@ -1181,6 +1191,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		else
 		{
 			// 폭탄이 아닌 경우에는 한장의 카드만 낸다.
+
+			// If it is not a bomb, only one card is played.
 			CCardPicture card_picture = this.player_hand_card_manager[player_index].get_card(slot_index);
 			targets.Add(card_picture);
 

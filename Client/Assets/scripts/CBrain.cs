@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class CBrain: MonoBehaviour
 {
 
-	public static int playerscore = 0;
+	//public static int playerscore = 0;
 	public CBrain()
 	{
 	}
@@ -38,8 +38,8 @@ public class CBrain: MonoBehaviour
 			if (same_number >= 1)
 			{
 
-				playerscore += 3;
-				PlayerPrefs.SetInt("PlayerNewScore", playerscore);
+				//playerscore += 3;
+				//PlayerPrefs.SetInt("PlayerNewScore", playerscore);
 
 
 				same_card_indexes.Add(i);
