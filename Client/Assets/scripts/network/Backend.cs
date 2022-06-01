@@ -268,7 +268,7 @@ public class Backend : MonoBehaviour
         //packets.Add(packet);
     }
 
-    void Send(string str)
+    public void Send(string str)
     {
         if (w == null) return;
 

@@ -10,9 +10,6 @@ public interface IMessageReceiver
 
 public class CNetworkManager : CSingletonMonobehaviour<CNetworkManager>
 {
-
-    private WebSocket ws;
-    public string serverURL = "ws://localhost:8080";
     CLocalServer gameserver;
     string received_msg;
 
@@ -25,7 +22,6 @@ public class CNetworkManager : CSingletonMonobehaviour<CNetworkManager>
 
         this.gameserver = new CLocalServer();
         this.gameserver.appcallback_on_message += on_message;
-        ConnectionStatus();
     }
 
 
@@ -42,34 +38,11 @@ public class CNetworkManager : CSingletonMonobehaviour<CNetworkManager>
         CPacket.destroy(msg);
     }
 
-    private void ConnectionStatus()
-    {
-        //print("Trying Connection......");
-
-        ws = new WebSocket(serverURL);
-
-        ws.OnOpen += (sender, e) =>
-        {
-            Debug.Log("Connected");
-        };
-
-        ws.OnClose += (sender, e) =>
-        {
-            Debug.Log("Not Connected");
-        };
-
-        ws.OnMessage += (sender, e) =>
-        {
-            Debug.Log(e.Data);
-        };
-
-        ws.Connect();
-    }
-
+   
     public void send(CPacket msg)
     {
         var str = JsonConvert.SerializeObject(msg);
-        ws.Send(str);
+        Backend.instance.Send(str);
         NetworkQueue.instance.AddToQueue(msg.ToString());  
         this.gameserver.on_receive_from_client(msg);
         CPacket.destroy(msg);
