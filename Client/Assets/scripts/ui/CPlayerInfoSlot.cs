@@ -14,6 +14,7 @@ public class CPlayerInfoSlot : MonoBehaviour {
 
 	void Awake()
 	{
+		PlayerTurn = true;
 		this.score_text = gameObject.transform.Find("score").GetComponent<TextMesh>();
 		this.go_text = gameObject.transform.Find("go").GetComponent<TextMesh>();
 		this.shake_text = gameObject.transform.Find("shake").GetComponent<TextMesh>();

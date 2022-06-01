@@ -15,6 +15,7 @@ public class CNetworkManager : CSingletonMonobehaviour<CNetworkManager>
     public string serverURL = "ws://localhost:8080";
     CLocalServer gameserver;
     string received_msg;
+    bool bAvailableConnection = false;
 
     public IMessageReceiver message_receiver;
 
@@ -51,11 +52,13 @@ public class CNetworkManager : CSingletonMonobehaviour<CNetworkManager>
         ws.OnOpen += (sender, e) =>
         {
             Debug.Log("Connected");
+            bAvailableConnection = true;
         };
 
         ws.OnClose += (sender, e) =>
         {
             Debug.Log("Not Connected");
+            bAvailableConnection = false;
         };
 
         ws.OnMessage += (sender, e) =>
@@ -69,7 +72,10 @@ public class CNetworkManager : CSingletonMonobehaviour<CNetworkManager>
     public void send(CPacket msg)
     {
         var str = JsonConvert.SerializeObject(msg);
-        ws.Send(str);
+
+        if( bAvailableConnection )
+            ws.Send(str);
+
         NetworkQueue.instance.AddToQueue(msg.ToString());  
         this.gameserver.on_receive_from_client(msg);
         CPacket.destroy(msg);

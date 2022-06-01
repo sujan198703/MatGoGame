@@ -58,7 +58,7 @@ public class ScoreCard : MonoBehaviour
         //Showing Player two Text on Screen
         PlayerTwo.text = PlayerTwoScore.ToString();
 
-        PlayerPrefs.Save();
+       // PlayerPrefs.Save();
 
 
 

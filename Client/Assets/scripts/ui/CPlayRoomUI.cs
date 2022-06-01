@@ -22,6 +22,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	CPlayerCardPosition[] player_card_positions;
 	GameObject audio;
 	GameObject ShuffleAudio;
+	GameObject SendBombing;
 	AudioSource playonclick;
 
 
@@ -67,6 +68,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	{
 		enter();
 		audio = GameObject.Find("Shuffle");
+		SendBombing = GameObject.Find("SendBomb");
 		ShuffleAudio = GameObject.Find("passcards");
 		playonclick = GetComponent<AudioSource>();
 		audio.GetComponent<AudioSource>();
@@ -841,6 +843,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		{
 			case CARD_EVENT_TYPE.BOMB:
 				{
+					SendBombing.GetComponent<AudioSource>().Play();
+
 					byte bomb_card_count = (byte)msg.pop_byte();
 					for (byte i = 0; i < bomb_card_count; ++i)
 					{
