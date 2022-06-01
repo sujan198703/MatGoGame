@@ -270,12 +270,17 @@ public class Backend : MonoBehaviour
 
     public void Send(string str)
     {
-        if (w == null) return;
+        if (!w.IsConnectedtoServer()) return;
 
         Debug.Log("-> " + str);
 
         byte[] data = System.Text.Encoding.UTF8.GetBytes(str);
         w.SendAsync(data);
+    }
+
+    public bool ConnectedToServer()
+    {
+        return w.IsConnectedtoServer();
     }
 
     internal static string GetStringSha256Hash(string text)
