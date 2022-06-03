@@ -30,7 +30,7 @@ public class CNetworkManager : CSingletonMonobehaviour<CNetworkManager>
     {
         this.gameserver.start_localserver();
     }
-
+     
 
     void on_message(CPacket msg)
     {
