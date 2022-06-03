@@ -22,6 +22,9 @@ public class ServerQueue : MonoBehaviour
 
     public void Pop()
     {
-        ServerDataQueue.Dequeue();
+        if (ServerDataQueue.Count > 0)
+        {
+            ServerDataQueue.Dequeue();
+        }
     }
 }
