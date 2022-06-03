@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class CPlayerAgent
 {
@@ -159,6 +160,7 @@ public class CPlayerAgent
 
 
 		// 플레이어의 바닥패에서 제거.
+		// Remove from player's deck.
 		for (int i = 0; i < result.Count; ++i)
 		{
 			player_pees.Remove(result[i]);
@@ -296,6 +298,7 @@ public class CPlayerAgent
 				else if (cards.Count == 3)
 				{
 					// 비광이 포함되어 있으면 2점. 아니면 3점.
+					// 2 points if non-light is included. Or 3 points.
 					bool is_exist_beekwang = cards.Exists(obj => obj.is_same_number(CCard.BEE_KWANG));
 					if (is_exist_beekwang)
 					{
@@ -323,6 +326,8 @@ public class CPlayerAgent
 		this.score += get_score_by_type(PAE_TYPE.KWANG);
 
 		// 고도리
+		// Godori
+
 		byte godori_count = get_card_count(PAE_TYPE.YEOL, CARD_STATUS.GODORI);
 		if (godori_count == 3)
 		{
@@ -331,6 +336,8 @@ public class CPlayerAgent
 		}
 
 		// 홍단, 초단, 청단
+
+		// Hongdan, Chodan, Cheongdan
 		byte cheongdan_count = get_card_count(PAE_TYPE.TEE, CARD_STATUS.CHEONG_DAN);
 		byte hongdan_count = get_card_count(PAE_TYPE.TEE, CARD_STATUS.HONG_DAN);
 		byte chodan_count = get_card_count(PAE_TYPE.TEE, CARD_STATUS.CHO_DAN);
@@ -352,12 +359,26 @@ public class CPlayerAgent
 			//UnityEngine.Debug.Log("Chodan 3 score");
 		}
 
-		//UnityEngine.Debug.Log(string.Format("[SCORE] player {0},  score {1}", this.player_index, this.score));
+
+		if (this.player_index==0)
+		{
+			PlayerPrefs.SetInt("PlayerFirstScore", this.score);
+			//PlayerTurn = false;
+		}
+		if (this.player_index == 1)
+		{
+			//PlayerPrefs.SetInt("PlayerSecondScore", this.score);
+			//PlayerTurn = true;
+		}
+
+
+		UnityEngine.Debug.Log(string.Format("[SCORE] player {0},  score {1}", this.player_index, this.score));
 	}
 
 
 	/// <summary>
 	/// 플레이어의 패를 번호 순서에 따라 오름차순 정렬 한다.
+	/// /// Sort the player's hand in ascending order by number.
 	/// </summary>
 	/// <param name="player_index"></param>
 	public void sort_player_hand_slots()
@@ -451,6 +472,8 @@ public class CPlayerAgent
 		if (card == null)
 		{
 			// 국진이 없다!??
+
+			// There is no Gukjin!??
 			UnityEngine.Debug.LogError("Cannot find kookjin!!  player : " + this.player_index);
 			return;
 		}
