@@ -141,9 +141,10 @@ public class Backend : MonoBehaviour
 
     private void W_OnMessage(UnityWebSocket sender, byte[] data)
     {
-        Debug.Log(data);
+        Debug.Log("From server: " + System.Text.Encoding.ASCII.GetString(data));
         AESCrypto.SetKey(data.ToString());
         print(AESCrypto.GetKey());
+        ServerQueue.instance.AddToQueue(System.Text.Encoding.ASCII.GetString(data));
     }
 
     private void W_OnClose(UnityWebSocket sender, int code, string reason)
