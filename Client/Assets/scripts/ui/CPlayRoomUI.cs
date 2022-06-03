@@ -742,7 +742,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		byte ppuk_count = msg.pop_byte();
 		pee_count = msg.pop_byte();
 
-		Debug.Log("Pee Count    ---------" + pee_count);
+		//Debug.Log("Pee Count    ---------" + pee_count);
 
 		this.player_info_slots[player_index].update_score(score);
 		this.player_info_slots[player_index].update_go(go_count);

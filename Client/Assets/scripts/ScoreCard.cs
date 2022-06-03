@@ -23,7 +23,7 @@ public class ScoreCard : MonoBehaviour
 
        PlayerTwo.text = PlayerTwoScore.ToString();
        PlayerOne.text = PlayerOneScore.ToString();
-  
+        onGameStart();
     }
 
 

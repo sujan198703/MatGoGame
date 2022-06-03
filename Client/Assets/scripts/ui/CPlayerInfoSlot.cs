@@ -50,18 +50,18 @@ public class CPlayerInfoSlot : MonoBehaviour {
 	public void update_peecount(byte count)
 	{
 
-        if (PlayerTurn)
-        {
-			PlayerPrefs.SetInt("PlayerFirstScore", count);
-			PlayerTurn = false;
-        }
-        else
-        {
-			PlayerPrefs.SetInt("PlayerSecondScore", count);
-			PlayerTurn = true;
-		}
+       // if (PlayerTurn)
+        //{
+		//	PlayerPrefs.SetInt("PlayerFirstScore", count);
+		//	PlayerTurn = false;
+        //}
+        //else
+        //{
+		//	PlayerPrefs.SetInt("PlayerSecondScore", count);
+		//	PlayerTurn = true;
+		//}
 
-		Debug.Log("Blood Score in"+string.Format("({0})", count));
+		//Debug.Log("Blood Score in"+string.Format("({0})", count));
 		this.pee_count_text.text = string.Format("({0})", count);
 	}
 }
