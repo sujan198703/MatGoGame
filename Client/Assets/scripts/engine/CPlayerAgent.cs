@@ -367,12 +367,12 @@ public class CPlayerAgent
 		}
 		if (this.player_index == 1)
 		{
-			//PlayerPrefs.SetInt("PlayerSecondScore", this.score);
+			PlayerPrefs.SetInt("PlayerSecondScore", this.score);
 			//PlayerTurn = true;
 		}
 
 
-		UnityEngine.Debug.Log(string.Format("[SCORE] player {0},  score {1}", this.player_index, this.score));
+		//UnityEngine.Debug.Log(string.Format("[SCORE] player {0},  score {1}", this.player_index, this.score));
 	}
 
 
