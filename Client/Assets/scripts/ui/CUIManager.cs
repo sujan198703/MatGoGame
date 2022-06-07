@@ -13,6 +13,7 @@ public enum UI_PAGE
 	POPUP_SHAKING_CARDS,
 	POPUP_ASK_KOOKJIN,
 	POPUP_GAME_RESULT,
+	POPUP_GAME_RESULT_LOST,
 	POPUP_GO_COUNT,
 	POPUP_STOP,
 	POPUP_FIRST_PLAYER,
@@ -38,6 +39,7 @@ public class CUIManager : CSingletonMonobehaviour<CUIManager>
 		this.ui_objects.Add(UI_PAGE.POPUP_SHAKING_CARDS, transform.Find("popup_shaking_cards").gameObject);
 		this.ui_objects.Add(UI_PAGE.POPUP_ASK_KOOKJIN, transform.Find("popup_kookjin").gameObject);
 		this.ui_objects.Add(UI_PAGE.POPUP_GAME_RESULT, transform.Find("popup_result").gameObject);
+		this.ui_objects.Add(UI_PAGE.POPUP_GAME_RESULT_LOST, transform.Find("popup_lost").gameObject);
 		this.ui_objects.Add(UI_PAGE.POPUP_GO_COUNT, transform.Find("popup_go").gameObject);
 		this.ui_objects.Add(UI_PAGE.POPUP_STOP, transform.Find("popup_stop").gameObject);
 		this.ui_objects.Add(UI_PAGE.POPUP_FIRST_PLAYER, transform.Find("popup_first_player").gameObject);

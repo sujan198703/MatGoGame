@@ -686,6 +686,28 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	IEnumerator on_game_result(CPacket msg)
 	{
+
+
+		Debug.Log("The Game has ended");
+
+		int Player_One=PlayerPrefs.GetInt("PlayerFirstScore");
+		int Player_Two = PlayerPrefs.GetInt("PlayerSecondScore");
+
+        if (Player_One > Player_Two)
+        {
+			Debug.Log("Player One Wins ");
+			CUIManager.Instance.show(UI_PAGE.POPUP_GAME_RESULT);
+			CPopupGameResult popup =
+				CUIManager.Instance.get_uipage(UI_PAGE.POPUP_GAME_RESULT).GetComponent<CPopupGameResult>();
+		}
+        else
+        {
+			Debug.Log("You Lost the Game");
+			CUIManager.Instance.show(UI_PAGE.POPUP_GAME_RESULT_LOST);
+			CPopupGameResult popup =
+				CUIManager.Instance.get_uipage(UI_PAGE.POPUP_GAME_RESULT_LOST).GetComponent<CPopupGameResult>();
+		}
+
 		byte is_win = msg.pop_byte();
 		short money = msg.pop_int16();
 		short score = msg.pop_int16();
@@ -697,9 +719,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 		CUIManager.Instance.hide(UI_PAGE.POPUP_STOP);
 
-		CUIManager.Instance.show(UI_PAGE.POPUP_GAME_RESULT);
-		CPopupGameResult popup = 
-			CUIManager.Instance.get_uipage(UI_PAGE.POPUP_GAME_RESULT).GetComponent<CPopupGameResult>();
+	
 		//popup.refresh(is_win, money, score, double_val, final_score);
 	}
 

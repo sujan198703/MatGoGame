@@ -12,7 +12,7 @@ public class CDelayedDeactive : MonoBehaviour {
 	{
 		kiss = GameObject.Find("kiss");
 		playonclick = GetComponent<AudioSource>();
-		kiss.GetComponent<AudioSource>();
+	//kiss.GetComponent<AudioSource>();
 
 	}
 
