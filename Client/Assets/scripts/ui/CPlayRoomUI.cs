@@ -705,7 +705,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 			Debug.Log("You Lost the Game");
 			CUIManager.Instance.show(UI_PAGE.POPUP_GAME_RESULT_LOST);
 			CPopupGameResult popup =
-				CUIManager.Instance.get_uipage(UI_PAGE.POPUP_GAME_RESULT_LOST).GetComponent<CPopupGameResult>();
+			CUIManager.Instance.get_uipage(UI_PAGE.POPUP_GAME_RESULT_LOST).GetComponent<CPopupGameResult>();
 		}
 
 		byte is_win = msg.pop_byte();

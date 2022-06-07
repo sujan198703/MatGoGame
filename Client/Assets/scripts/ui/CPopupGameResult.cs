@@ -47,6 +47,10 @@ public class CPopupGameResult : MonoBehaviour {
 	{
 		PlayerPrefs.SetInt("PlayerNewScore", 0);
 		CUIManager.Instance.hide(UI_PAGE.POPUP_GAME_RESULT);
+		CUIManager.Instance.hide(UI_PAGE.POPUP_GAME_RESULT_LOST);
+		PlayerPrefs.SetInt("PlayerFirstScore", 0);
+		PlayerPrefs.SetInt("PlayerSecondScore", 0);
+
 
 		CPacket send = CPacket.create((short)PROTOCOL.READY_TO_START);
 		CNetworkManager.Instance.send(send);
