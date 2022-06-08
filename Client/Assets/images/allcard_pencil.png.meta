@@ -168,6 +168,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1240,6 +1241,55 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      hwatoo03_01: 21300072
+      hwatoo08_01: 21300032
+      hwatoo07_03: 21300044
+      hwatoo08_03: 21300036
+      hwatoo02_01: 21300080
+      hwatoo09_01: 21300024
+      hwatoo02_03: 21300084
+      hwatoo09_03: 21300028
+      hwatoo08_02: 21300034
+      hwatoo04_04: 21300070
+      hwatoo03_02: 21300074
+      hwatoo01_04: 21300094
+      hwatoo10_01: 21300016
+      hwatoo06_01: 21300048
+      hwatoo12_03: 21300004
+      hwatoo12_04: 21300006
+      hwatoo05_02: 21300058
+      hwatoo04_03: 21300068
+      hwatoo11_02: 21300010
+      hwatoo06_02: 21300050
+      hwatoo01_03: 21300092
+      hwatoo08_04: 21300038
+      hwatoo07_04: 21300046
+      hwatoo11_03: 21300012
+      hwatoo10_04: 21300022
+      hwatoo05_01: 21300056
+      hwatoo03_03: 21300076
+      hwatoo01_02: 21300090
+      hwatoo07_02: 21300042
+      hwatoo06_04: 21300054
+      hwatoo12_01: 21300000
+      hwatoo05_03: 21300060
+      hwatoo02_02: 21300082
+      hwatoo04_02: 21300066
+      hwatoo10_02: 21300018
+      hwatoo09_02: 21300026
+      hwatoo01_01: 21300088
+      hwatoo11_04: 21300014
+      hwatoo03_04: 21300078
+      hwatoo12_02: 21300002
+      hwatoo05_04: 21300062
+      hwatoo02_04: 21300086
+      hwatoo09_04: 21300030
+      hwatoo07_01: 21300040
+      hwatoo06_03: 21300052
+      hwatoo10_03: 21300020
+      hwatoo11_01: 21300008
+      hwatoo04_01: 21300064
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

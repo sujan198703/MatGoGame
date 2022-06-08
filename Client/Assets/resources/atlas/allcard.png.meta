@@ -168,6 +168,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1240,6 +1241,55 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      allcard_32: 21300064
+      allcard_26: 21300052
+      allcard_1: 21300002
+      allcard_4: 21300008
+      allcard_36: 21300072
+      allcard_39: 21300078
+      allcard_5: 21300010
+      allcard_13: 21300026
+      allcard_37: 21300074
+      allcard_14: 21300028
+      allcard_10: 21300020
+      allcard_21: 21300042
+      allcard_7: 21300014
+      allcard_3: 21300006
+      allcard_12: 21300024
+      allcard_16: 21300032
+      allcard_6: 21300012
+      allcard_15: 21300030
+      allcard_17: 21300034
+      allcard_19: 21300038
+      allcard_25: 21300050
+      allcard_35: 21300070
+      allcard_34: 21300068
+      allcard_24: 21300048
+      allcard_47: 21300094
+      allcard_0: 21300000
+      allcard_27: 21300054
+      allcard_8: 21300016
+      allcard_29: 21300058
+      allcard_42: 21300084
+      allcard_46: 21300092
+      allcard_2: 21300004
+      allcard_11: 21300022
+      allcard_43: 21300086
+      allcard_20: 21300040
+      allcard_23: 21300046
+      allcard_31: 21300062
+      allcard_44: 21300088
+      allcard_38: 21300076
+      allcard_22: 21300044
+      allcard_40: 21300080
+      allcard_9: 21300018
+      allcard_18: 21300036
+      allcard_33: 21300066
+      allcard_28: 21300056
+      allcard_41: 21300082
+      allcard_30: 21300060
+      allcard_45: 21300090
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

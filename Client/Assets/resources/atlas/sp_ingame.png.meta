@@ -165,6 +165,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -901,6 +902,39 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      point: 21300034
+      heart: 21300054
+      go_02: 21300008
+      go_08: 21300022
+      playerinfo_bg: 21300082
+      go_05: 21300006
+      box: 21300064
+      npc_001: 21300092
+      stop_noti: 21300018
+      title: 21300084
+      bomb: 21300032
+      gray: 21300080
+      lose: 21300040
+      go_06: 21300004
+      focus: 21300078
+      black: 21300060
+      win: 21300038
+      ddadak02: 21300050
+      ddadak01: 21300048
+      bg: 21300062
+      ppuk: 21300026
+      clean: 21300028
+      table: 21300076
+      back: 21300002
+      go_07: 21300020
+      coin_bar: 21300090
+      kiss: 21300030
+      go_04: 21300012
+      go_01: 21300016
+      go_03: 21300010
+      go_09: 21300014
+      man: 21300074
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
