@@ -126,7 +126,9 @@ public class UITexturePacker
 			storage[i].paddingY = (yPadding != 0);
 		}
 		
-		texture.Reinitialize(width, height);
+
+		//sdk commented it 
+		//texture.Reinitialize(width, height);
 		texture.SetPixels(new Color[width * height]);
 		
 		// The returned rects
