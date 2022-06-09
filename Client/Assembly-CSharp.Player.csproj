@@ -53,7 +53,7 @@
     <UnityVersion>2020.3.34f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\scripts\network\GameData.cs" />
@@ -121,6 +121,7 @@
     <Compile Include="Assets\scripts\LobbyUi\Popup.cs" />
     <Compile Include="Assets\scripts\client\CVisualFloorSlot.cs" />
     <Compile Include="Assets\scripts\client\CScrollingEffect.cs" />
+    <Compile Include="Assets\scripts\GUI\Panels\ShopMenuController.cs" />
     <Compile Include="Assets\GoogleSignIn\Impl\SignInHelperObject.cs" />
     <Compile Include="Assets\scripts\client\CSpriteFadeEffect.cs" />
     <Compile Include="Assets\scripts\ui\CUIManager.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Assets\scripts\ui\CMovingObject.cs" />
     <Compile Include="Assets\scripts\engine\CFloorSlot.cs" />
     <Compile Include="Assets\scripts\network\Login.cs" />
+    <Compile Include="Assets\scripts\CheckifGameObject.cs" />
     <Compile Include="Assets\scripts\ui\CPopupGo.cs" />
     <Compile Include="Assets\scripts\MenuUI\MenuPanelController.cs" />
     <Compile Include="Assets\scripts\LoginServer.cs" />
