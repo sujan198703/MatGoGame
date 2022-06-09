@@ -65,7 +65,30 @@
     <Compile Include="Assets\Simple Sprite Packer\Scripts\Editor\SPDropWindow.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\FacebookSDK\SDK\Editor\iOS\FBUnityInterface.h" />
+    <None Include="Assets\Firebase\Editor\FirebaseAuth_version-9.0.0_manifest.txt" />
+    <None Include="Assets\FacebookSDK\Plugins\Editor\Facebook.Unity.Editor.dll" />
+    <None Include="Assets\GoogleSignIn\Editor\GoogleSignInDependencies.xml" />
+    <None Include="Assets\GoogleSignIn\Editor\m2repository\com\google\signin\google-signin-support\maven-metadata.xml" />
+    <None Include="Assets\FacebookSDK\SDK\Editor\iOS\FBUnitySDKDelegate.h" />
+    <None Include="Assets\FacebookSDK\SDK\Editor\iOS\FBUnityUtility.h" />
+    <None Include="Assets\FacebookSDK\Plugins\Editor\Dependencies.xml" />
+    <None Include="Assets\FacebookSDK\SDK\Editor\iOS\FBSDK+Internal.h" />
+    <None Include="Assets\GoogleSignIn\Editor\google-signin-plugin_v1.0.4.txt" />
+    <None Include="Assets\ExternalDependencyManager\Editor\1.2.171\Google.VersionHandlerImpl.dll" />
+    <None Include="Assets\GoogleSignIn\Editor\GoogleSignInSupportDependencies.xml" />
+    <None Include="Assets\Firebase\Editor\AuthDependencies.xml" />
+    <None Include="Assets\Firebase\Editor\AppDependencies.xml" />
+    <None Include="Assets\ExternalDependencyManager\Editor\1.2.171\Google.JarResolver.dll" />
+    <None Include="Assets\FacebookSDK\SDK\Editor\iOS\FBUnitySDKDelegate.m" />
+    <None Include="Assets\FacebookSDK\SDK\Editor\iOS\FBUnityInterface.mm" />
+    <None Include="Assets\FacebookSDK\SDK\Editor\iOS\FBUnityUtility.mm" />
+    <None Include="Assets\ExternalDependencyManager\Editor\Google.VersionHandler.dll" />
+    <None Include="Assets\ExternalDependencyManager\Editor\1.2.171\Google.PackageManagerResolver.dll" />
     <None Include="Assets\NuGet\Editor\NugetForUnity.dll" />
+    <None Include="Assets\ExternalDependencyManager\Editor\external-dependency-manager_version-1.2.171_manifest.txt" />
+    <None Include="Assets\ExternalDependencyManager\Editor\1.2.171\Google.IOSResolver.dll" />
+    <None Include="Assets\Firebase\Editor\Firebase.Editor.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -326,8 +349,17 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>E:\Unity Editor\2021.3.0f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll</HintPath>
+    <Reference Include="Facebook.Unity.Gameroom">
+      <HintPath>Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll</HintPath>
+    </Reference>
+    <Reference Include="log4netPlastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.VersionHandlerImpl">
+      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.VersionHandlerImpl.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
@@ -335,8 +367,20 @@
     <Reference Include="Unity.Plastic.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="log4netPlastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.IOSResolver">
+      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.IOSResolver.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.JarResolver">
+      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.JarResolver.dll</HintPath>
+    </Reference>
+    <Reference Include="unityplastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.Unity.Editor">
+      <HintPath>Assets\FacebookSDK\Plugins\Editor\Facebook.Unity.Editor.dll</HintPath>
     </Reference>
     <Reference Include="FreeNet">
       <HintPath>Assets\FreeNet\FreeNet.dll</HintPath>
@@ -344,11 +388,44 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\Plugins\Newtonsoft.Json Editor\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Google.PackageManagerResolver">
+      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.PackageManagerResolver.dll</HintPath>
+    </Reference>
     <Reference Include="NugetForUnity">
       <HintPath>Assets\NuGet\Editor\NugetForUnity.dll</HintPath>
     </Reference>
-    <Reference Include="unityplastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+    <Reference Include="FacebookNamedPipeClient">
+      <HintPath>Assets\FacebookSDK\Plugins\Gameroom\FacebookNamedPipeClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Editor">
+      <HintPath>Assets\Firebase\Editor\Firebase.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.VersionHandler">
+      <HintPath>Assets\ExternalDependencyManager\Editor\Google.VersionHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.Unity.Settings">
+      <HintPath>Assets\FacebookSDK\Plugins\Settings\Facebook.Unity.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.MiniJson">
+      <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Tasks">
+      <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Platform">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Compat">
+      <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Compat.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.Unity">
+      <HintPath>Assets\FacebookSDK\Plugins\Facebook.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Auth">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>

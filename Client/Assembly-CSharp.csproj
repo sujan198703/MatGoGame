@@ -59,17 +59,23 @@
     <Compile Include="Assets\scripts\network\GameData.cs" />
     <Compile Include="Assets\UIMenu\Prefabs\PlayOnStartVoice.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPSpriteInfo.cs" />
+    <Compile Include="Assets\GoogleSignIn\GoogleSignInStatusCode.cs" />
+    <Compile Include="Assets\GoogleSignIn\Impl\BaseObject.cs" />
     <Compile Include="Assets\scripts\client\CPlayerHandCardManager.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\LogView.cs" />
+    <Compile Include="Assets\scripts\Authentication\FacebookAuthController.cs" />
     <Compile Include="Assets\scripts\ui\CPopupShaking.cs" />
     <Compile Include="Assets\scripts\CPlayer.cs" />
     <Compile Include="Assets\scripts\ui\CButtonCollision.cs" />
     <Compile Include="Assets\scripts\public\MiniJSON.cs" />
     <Compile Include="Assets\scripts\OnBluebuttonClick.cs" />
+    <Compile Include="Assets\scripts\LobbyUi\StartGame.cs" />
     <Compile Include="Assets\scripts\network\Backend.cs" />
     <Compile Include="Assets\scripts\network\NetworkQueue.cs" />
     <Compile Include="Assets\scripts\CPlayerOrderManager.cs" />
     <Compile Include="Assets\scripts\network\UnityWebSocket.cs" />
     <Compile Include="Assets\scripts\engine\CPlayerAgent.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\DialogShare.cs" />
     <Compile Include="Assets\scripts\client\CCardManager.cs" />
     <Compile Include="Assets\scripts\engine\CGostopEngine.cs" />
     <Compile Include="Assets\scripts\ui\CGameOption.cs" />
@@ -77,9 +83,11 @@
     <Compile Include="Assets\scripts\client\CEffectManager.cs" />
     <Compile Include="Assets\scripts\CLocalServer.cs" />
     <Compile Include="Assets\scripts\public\CGameObjectPool.cs" />
+    <Compile Include="Assets\GoogleSignIn\Impl\NativeFuture.cs" />
     <Compile Include="Assets\scripts\AudioPlay.cs" />
     <Compile Include="Assets\scripts\OnclickHide.cs" />
     <Compile Include="Assets\scripts\ui\CMainMenu.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppRequests.cs" />
     <Compile Include="Assets\scripts\ui\CPlayRoomUI.cs" />
     <Compile Include="Assets\scripts\client\CDelayedDeactive.cs" />
     <Compile Include="Assets\scripts\network\Encryption.cs" />
@@ -89,9 +97,11 @@
     <Compile Include="Assets\scripts\CGameRoom.cs" />
     <Compile Include="Assets\scripts\ui\CPopupPlayerOrder.cs" />
     <Compile Include="Assets\FreeNet\CFreeNetEventManager.cs" />
+    <Compile Include="Assets\GoogleSignIn\GoogleSignIn.cs" />
     <Compile Include="Assets\scripts\CBrain.cs" />
     <Compile Include="Assets\scripts\ui\CPopupChoiceCard.cs" />
     <Compile Include="Assets\scripts\ui\CStageSelect.cs" />
+    <Compile Include="Assets\GoogleSignIn\Future.cs" />
     <Compile Include="Assets\scripts\client\CCardPicture.cs" />
     <Compile Include="Assets\scripts\engine\CFloorCardManager.cs" />
     <Compile Include="Assets\scripts\network\CNetworkManager.cs" />
@@ -99,6 +109,8 @@
     <Compile Include="Assets\scripts\client\CPlayerCardManager.cs" />
     <Compile Include="Assets\scripts\ui\CPopupShakingCards.cs" />
     <Compile Include="Assets\scripts\MenuUI\RoundToggle.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\MenuBase.cs" />
+    <Compile Include="Assets\GoogleSignIn\GoogleSignInConfiguration.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\UITexturePacker.cs" />
     <Compile Include="Assets\scripts\public\CHelper.cs" />
     <Compile Include="Assets\scripts\client\CSpriteManager.cs" />
@@ -106,21 +118,29 @@
     <Compile Include="Assets\scripts\table\CTableLevels.cs" />
     <Compile Include="Assets\scripts\ui\CPlayerInfoSlot.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPInstance.cs" />
+    <Compile Include="Assets\scripts\LobbyUi\Popup.cs" />
     <Compile Include="Assets\scripts\client\CVisualFloorSlot.cs" />
     <Compile Include="Assets\scripts\client\CScrollingEffect.cs" />
+    <Compile Include="Assets\GoogleSignIn\Impl\SignInHelperObject.cs" />
     <Compile Include="Assets\scripts\client\CSpriteFadeEffect.cs" />
     <Compile Include="Assets\scripts\ui\CUIManager.cs" />
     <Compile Include="Assets\scripts\table\CTableDataManager.cs" />
+    <Compile Include="Assets\scripts\Authentication\GoogleAuthController.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\ConsoleBase.cs" />
     <Compile Include="Assets\scripts\ui\CPopupKookjin.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\GraphRequest.cs" />
     <Compile Include="Assets\FreeNet\CRemoteServerPeer.cs" />
     <Compile Include="Assets\scripts\network\PacketCode.cs" />
     <Compile Include="Assets\scripts\CAIPlayer.cs" />
     <Compile Include="Assets\scripts\client\CSpriteLayerOrderManager.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AccessTokenMenu.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppLinks.cs" />
     <Compile Include="Assets\scripts\ui\CCardCollision.cs" />
     <Compile Include="Assets\scripts\public\CCameraAspectRatio.cs" />
     <Compile Include="Assets\scripts\engine\CGostopHelper.cs" />
     <Compile Include="Assets\scripts\ScoreCard.cs" />
     <Compile Include="Assets\scripts\network\protocol.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\MainMenu.cs" />
     <Compile Include="Assets\scripts\ui\CMovingObject.cs" />
     <Compile Include="Assets\scripts\engine\CFloorSlot.cs" />
     <Compile Include="Assets\scripts\network\Login.cs" />
@@ -128,17 +148,20 @@
     <Compile Include="Assets\scripts\ui\CPopupGo.cs" />
     <Compile Include="Assets\scripts\MenuUI\MenuPanelController.cs" />
     <Compile Include="Assets\scripts\LoginServer.cs" />
+    <Compile Include="Assets\GoogleSignIn\GoogleSignInUser.cs" />
     <Compile Include="Assets\scripts\network\MultiPlay.cs" />
     <Compile Include="Assets\scripts\ui\CUIButton.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\Pay.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPAction.cs" />
     <Compile Include="Assets\scripts\ui\CPlayerCardPosition.cs" />
     <Compile Include="Assets\scripts\client\CUIImageFadeEffect.cs" />
     <Compile Include="Assets\scripts\ui\CPopupGoStop.cs" />
     <Compile Include="Assets\scripts\engine\CCard.cs" />
+    <Compile Include="Assets\GoogleSignIn\Impl\GoogleSignInImpl.cs" />
     <Compile Include="Assets\scripts\network\CustomPacket.cs" />
     <Compile Include="Assets\scripts\network\ServerQueue.cs" />
+    <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppEvents.cs" />
     <Compile Include="Assets\scripts\public\CSingleton.cs" />
-    <Compile Include="Assets\scripts\LobbyUi\Popup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -148,6 +171,8 @@
     <None Include="Assets\Animations_New\jjok\jjok.atlas.txt" />
     <None Include="Assets\resources\220224_spine\나가리\Nagari.atlas.txt" />
     <None Include="Assets\UIMenu\Animations\mission\mission_success_seperate\mission_success_spark.atlas.txt" />
+    <None Include="Assets\FacebookSDK\link.xml" />
+    <None Include="Assets\FacebookSDK\Plugins\iOS\Facebook.Unity.IOS.dll" />
     <None Include="Assets\Animations_New\mission\mission_success\mission.atlas.txt" />
     <None Include="Assets\UIMenu\Animations\mission\mission_success\mission.atlas.txt" />
     <None Include="Assets\Animations_New\Dan\Dan_seperate\Cheongdan\cheongdan.atlas.txt" />
@@ -163,25 +188,33 @@
     <None Include="Assets\Animations_New\kwang\Kwang_seperate\ogwang\ogwang_spark.atlas.txt" />
     <None Include="Assets\Animations_New\Godori\godori.atlas.txt" />
     <None Include="Assets\UIMenu\Animations\jabbubk\bbuk.atlas.txt" />
+    <None Include="Assets\Firebase\Plugins\Firebase.App.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\Animations_New\Dan\Dan_seperate\Chodan\chodan.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
     <None Include="Assets\resources\font\license.txt" />
     <None Include="Assets\Animations_New\mission\mission.atlas.txt" />
     <None Include="Assets\UIMenu\Animations\Dan\Dan_seperate\Cheongdan\cheongdan.atlas.txt" />
+    <None Include="Assets\FacebookSDK\Plugins\Settings\Facebook.Unity.Settings.dll" />
     <None Include="Assets\UIMenu\Animations\Godori\godori.atlas.txt" />
+    <None Include="Assets\Firebase\Plugins\x86_64\FirebaseCppAuth.dll" />
     <None Include="Assets\Animations_New\kwang\kwang.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
+    <None Include="Assets\FacebookSDK\Plugins\Canvas\Facebook.Unity.Canvas.dll" />
+    <None Include="Assets\Firebase\Plugins\Firebase.TaskExtension.dll" />
     <None Include="Assets\JsonDotNet\link.xml" />
     <None Include="Assets\Animations_New\kwang\Kwang_seperate\ogwang\ogwang.atlas.txt" />
     <None Include="Assets\UIMenu\Animations\mission\mission_success_seperate\mission_success.atlas.txt" />
     <None Include="Assets\JsonDotNet\Assemblies\Windows\Newtonsoft.Json.XML" />
     <None Include="Assets\UIMenu\Animations\Dan\Dan_seperate\Chodan\chodan.atlas.txt" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
     <None Include="Assets\Animations_New\kwang\Kwang_seperate\sagwang\sagwang.atlas.txt" />
+    <None Include="Assets\Firebase\Plugins\Firebase.Auth.dll" />
     <None Include="Assets\Animations_New\ssaksri\ssaksri.atlas.txt" />
     <None Include="Assets\UIMenu\Animations\mission\mission.atlas.txt" />
     <None Include="Assets\Animations_New\kwang\Kwang_seperate\bigwang\bikwang.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\FacebookSDK\Plugins\Facebook.Unity.dll" />
     <None Include="Assets\UIMenu\Animations\Loading\Loading.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -189,10 +222,14 @@
     <None Include="Assets\Animations_New\Dan\Dan_seperate\Hongdan\hongdan.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\Firebase\Plugins\x86_64\FirebaseCppApp-9_0_0.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
     <None Include="Assets\UIMenu\Animations\kwang\Kwang_seperate\ogwang\ogwang_spark.atlas.txt" />
+    <None Include="Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll" />
     <None Include="Assets\Animations_New\jabbubk\bbuk.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\Firebase\Plugins\iOS\Firebase.Auth.dll" />
     <None Include="Assets\UIMenu\Animations\kwang\Kwang_seperate\sagwang\sagwang.atlas.txt" />
     <None Include="Assets\UIMenu\Animations\Dan\chodan.atlas.txt" />
     <None Include="Assets\UIMenu\Animations\kwang\kwang.atlas.txt" />
@@ -204,6 +241,7 @@
     <None Include="Assets\UIMenu\Animations\Bomb\poktan.atlas.txt" />
     <None Include="Assets\JsonDotNet\Assemblies\Windows\Newtonsoft.Json.dll" />
     <None Include="Assets\Animations_New\kwang\Kwang_without5\kwang.atlas.txt" />
+    <None Include="Assets\FacebookSDK\Plugins\Android\Facebook.Unity.Android.dll" />
     <None Include="Assets\UIMenu\Animations\kwang\Kwang_seperate\samgwang\samgwang.atlas.txt" />
     <None Include="Assets\Animations_New\Bomb\poktan.atlas.txt" />
     <None Include="Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.xml" />
@@ -211,14 +249,18 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\resources\220224_spine\결과\패배\Result_Lose.atlas.txt" />
     <None Include="Assets\resources\220224_spine\고청홍초\Txt_dan.atlas.txt" />
+    <None Include="Assets\Parse\Plugins\dotNet45\Unity.Compat.dll" />
     <None Include="Assets\Animations_New\Dan\chodan.atlas.txt" />
+    <None Include="Assets\Firebase\Plugins\Firebase.Platform.dll" />
     <None Include="Assets\Simple Sprite Packer\readme.txt" />
     <None Include="Assets\resources\table\levels.txt" />
     <None Include="Assets\resources\220224_spine\결과\승리\Result_win.atlas.txt" />
+    <None Include="Assets\Parse\Plugins\dotNet45\Unity.Tasks.dll" />
     <None Include="Assets\UIMenu\Animations\Go\go.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\resources\220224_spine\선\First.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\Firebase\Plugins\Google.MiniJson.dll" />
     <None Include="Assets\UIMenu\Animations\Stop\stop.atlas.txt" />
     <None Include="Assets\Animations_New\Go\go.atlas.txt" />
     <None Include="Assets\Animations_New\Stop\stop.atlas.txt" />
@@ -228,9 +270,11 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll" />
     <None Include="Assets\resources\220224_spine\올인\Allin.atlas.txt" />
+    <None Include="Assets\Firebase\Plugins\iOS\Firebase.App.dll" />
     <None Include="Assets\UIMenu\Animations\Dan\Dan_seperate\Hongdan\hongdan.atlas.txt" />
     <None Include="Assets\UIMenu\Animations\kwang\Kwang_without5\kwang.atlas.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
+    <None Include="Assets\FacebookSDK\Plugins\Gameroom\FacebookNamedPipeClient.dll" />
     <None Include="Assets\UIMenu\Animations\mission\mission_fail\mission.atlas.txt" />
   </ItemGroup>
   <ItemGroup>
@@ -468,14 +512,47 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>E:\Unity Editor\2021.3.0f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll</HintPath>
+    <Reference Include="Facebook.Unity.Gameroom">
+      <HintPath>Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
     </Reference>
     <Reference Include="FreeNet">
       <HintPath>Assets\FreeNet\FreeNet.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\Plugins\Newtonsoft.Json Editor\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="FacebookNamedPipeClient">
+      <HintPath>Assets\FacebookSDK\Plugins\Gameroom\FacebookNamedPipeClient.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.Unity.Settings">
+      <HintPath>Assets\FacebookSDK\Plugins\Settings\Facebook.Unity.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.MiniJson">
+      <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Tasks">
+      <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Platform">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Compat">
+      <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Compat.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.Unity">
+      <HintPath>Assets\FacebookSDK\Plugins\Facebook.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Auth">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Android.Types">
       <HintPath>E:\Unity Editor\2021.3.0f1\Editor\Data\PlaybackEngines\AndroidPlayer\Unity.Android.Types.dll</HintPath>
