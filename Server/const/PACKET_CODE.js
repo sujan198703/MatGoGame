@@ -20,11 +20,12 @@ exports.OK = 200;
 exports.ERROR = 201;
 exports.FIND_OK = 202;
 exports.FIND_FAIL = 203;
-exports.START_OK = 204;
-exports.CARD_OK = 205;
-exports.GOSTOP_OK = 206;
-exports.TURN_OK = 207;
-exports.CHAT_OK = 208;
+exports.FIND_MATCHED = 204; 
+exports.START_OK = 205;
+exports.CARD_OK = 206;
+exports.GOSTOP_OK = 207;
+exports.TURN_OK = 208;
+exports.CHAT_OK = 209;
 
 exports.CHECK = 300;
 
@@ -35,3 +36,6 @@ exports.STARTGAME = 503;
 exports.ENDGAME = 504;
 exports.GUILDRANKING = 505;
 exports.LEADERBOARD = 506;
+exports.GAME_SEVER_STARTED = 507;
+
+exports.UNKNOWN = 0;

@@ -14,7 +14,7 @@ var CARD_STATUS = new Enum({
     'CHO_DAN'   : 5,
     'KOOKJIN'   : 6});
 
-class Card
+class CCard
 {
 	// Æ¯Á¤ Ä«µå¿¡ ´ëÇÑ µðÆÄÀÎ.
 	static BEE_KWANG = 11;
@@ -48,7 +48,7 @@ class Card
 		this.pae_type = pae_type_to_change;
 	}
 
-    static is_bonus_card(number)
+    is_bonus_card(number)
     {
         return number == 13;
     }
@@ -70,3 +70,4 @@ class Card
 		return this.status == status;
 	}
 }
+module.exports = CCard;

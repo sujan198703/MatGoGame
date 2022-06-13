@@ -1,15 +1,25 @@
+
 /// <summary>
 /// 맞고의 룰을 구현한 클래스.
 /// </summary>
+const PLAYER_SELECT_CARD_RESULT = require("./const/PLAYER_SELECT_CARD_RESULT");
+const TURN_RESULT_TYPE = require("./const/TURN_RESULT_TYPE");
+const CARD_EVENT_TYPE = require("./const/CARD_EVENT_TYPE");
+const CFloorCardManager = require("./CFloorCardManager.js");
+const CCardManager = require("./CardManager.js");
+const Util = require("./Util.js")
+const PAE_TYPE = require("./const/PAE_TYPE");
+const CARD_STATUS = require("./const/CARD_STATUS")
 class CGostopEngine
 {
 	// 전체 카드를 보관할 컨테이너.
+	
 	card_manager;
-	card_queue = [];
+	card_queue;
 
 	// 플레이어들.
 	first_player_index;
-	player_agents = [];
+	player_agents;
 
 	floor_manager;
 
@@ -24,13 +34,13 @@ class CGostopEngine
 	same_card_count_with_player;
 	same_card_count_with_deck
 	card_event_type;
-	flipped_card_event_type = [];
-	cards_to_give_player = [];
-	cards_to_floor       = [];
+	flipped_card_event_type;
+	cards_to_give_player;
+	cards_to_floor;
 
 
-	other_cards_to_player = [];
-	shaking_cards = [];
+	other_cards_to_player;
+	shaking_cards;
 	// 두개의 카드중 하나를 선택하는 경우는 두가지가 있는데(플레이어가 낸 경우, 덱에서 뒤집은 경우),
 	// 서버에서 해당 상황에 맞는 타입을 들고 있다가
 	// 클라이언트로부터 온 타입과 맞는지 비교하는데 사용한다.
@@ -40,34 +50,8 @@ class CGostopEngine
 	current_player_index;
 
 	// history.
-	distributed_floor_cards = [];
-	distributed_players_cards = [];
-
-
-	constructor()
-	{
-		this.first_player_index = 0;
-		this.current_player_index = 0;
-
-		clear_turn_data();
-	}
-
-
-	/// <summary>
-	/// 게임 한판 시작 전에 초기화 해야할 데이터.
-	/// </summary>
-	reset()
-	{
-		this.player_agents.ForEach(obj => obj.reset());
-		this.first_player_index = 0;
-		this.current_player_index = this.first_player_index;
-		this.card_manager.make_all_cards();
-		this.distributed_floor_cards.Clear();
-		this.distributed_players_cards.Clear();
-		this.floor_manager.reset();
-
-		clear_turn_data();
-	}
+	distributed_floor_cards;
+	distributed_players_cards;
 
 
 	/// <summary>
@@ -76,52 +60,113 @@ class CGostopEngine
 	clear_turn_data()
 	{
 		this.turn_result_type = TURN_RESULT_TYPE.RESULT_OF_NORMAL_CARD;
-		this.card_from_player = null;
-		this.selected_slot_index = byte.MaxValue;
-		this.card_from_deck = null;
-		this.target_cards_to_choice.Clear();
+		this.selected_slot_index = 255;
+		this.card_from_player = {};
+		this.card_from_deck = {};
+		this.target_cards_to_choice = [];
 		this.same_card_count_with_player = 0;
 		this.same_card_count_with_deck = 0;
 		this.card_event_type = CARD_EVENT_TYPE.NONE;
-		this.flipped_card_event_type.Clear();
-		this.cards_to_give_player.Clear();
-		this.cards_to_floor.Clear();
-		this.other_cards_to_player.Clear();
-		this.bomb_cards_from_player.Clear();
+		this.flipped_card_event_type = [];
+		this.cards_to_give_player = [];
+		this.cards_to_floor = [];
+		this.other_cards_to_player = {};
+		this.bomb_cards_from_player = [];
 		this.expected_result_type = PLAYER_SELECT_CARD_RESULT.ERROR_INVALID_CARD;
-		this.shaking_cards.Clear();
+		this.shaking_cards = [];
+	}
+
+	constructor()
+	{
+		this.card_from_player = {};
+		this.first_player_index = 0;
+		this.floor_manager = new CFloorCardManager();
+		this.card_manager = new CCardManager();
+		this.player_agents = [];
+		this.distributed_floor_cards = [];
+		this.distributed_players_cards = [];
+		this.cards_to_give_player = [];
+		this.cards_to_floor = [];
+		this.other_cards_to_player = {};
+		this.current_player_index = 0;
+		this.flipped_card_event_type = [];
+		this.bomb_cards_from_player = [];
+		this.target_cards_to_choice = [];
+		this.shaking_cards = [];
+		this.card_queue = [];
+		this.clear_turn_data();
 	}
 
 
-	// 게임 시작.
-	start(players)
+	/// <summary>
+	/// 게임 한판 시작 전에 초기화 해야할 데이터.
+	/// </summary>
+	reset()
 	{
-		this.player_agents.Clear();
-		for (let i = 0; i < players.Count; ++i)
+		Object.keys(this.player_agents).forEach(key => {
+			this.player_agents[key].reset();
+		});
+		this.first_player_index = 0;
+		this.current_player_index = this.first_player_index;
+		this.card_manager.make_all_cards();
+		this.distributed_floor_cards = [];
+		this.distributed_players_cards = [];
+		this.floor_manager.reset();
+
+		this.clear_turn_data();
+	}
+
+
+	
+
+	// 게임 시작.
+	start(players, order_result)
+	{
+		this.player_agents = [];
+		for (let i = 0; i < players.length; i++)
 		{
             var cardlist = [];
-
 			this.player_agents.push(players[i].agent);
 			this.player_agents[i].reset();
 			this.distributed_players_cards.push(cardlist);
 		}
 
-		shuffle();
-		distribute_cards();
+		this.apply_order(order_result);
+		this.shuffle();
+		this.distribute_cards();
 
-		for (let i = 0; i < this.player_agents.Count; ++i)
+
+		for (let i = 0; i < this.player_agents.length; ++i)
 		{
 			this.player_agents[i].sort_player_hand_slots();
 		}
 	}
+	//order result
+	apply_order(order_result){
+		var best_number = 0;
+		var head = 0;
+		var player_count = order_result.player_count;
+		for (let i = 0; i < player_count; ++i)
+		{
+			if (best_number < order_result.numbers[i])
+			{
+				head = i;
+				best_number = order_result.numbers[i];
+			}
+		}
 
+		if (head != this.current_player_index)
+		{
+			this.move_to_next_player();
+		}
+	}
 
 	// 카드 섞기.
 	shuffle()
 	{
 		this.card_manager.shuffle();
 
-		this.card_queue.Clear();
+		this.card_queue = [];
 		this.card_manager.fill_to(this.card_queue);
 	}
 
@@ -129,15 +174,15 @@ class CGostopEngine
 	// 카드 분배.
 	distribute_cards()
 	{
-		player_index = this.first_player_index;
-		floor_index = 0;
+		var player_index = this.first_player_index;
+		var floor_index = 0;
 		// 2번 반복하여 바닥에는 8장, 플레이어에게는 10장씩 돌아가도록 한다.
 		for (let count = 0; count < 2; ++count)
 		{
 			// 바닥에 4장.
 			for (let i = 0; i < 4; ++i)
 			{
-				var card = pop_front_card();
+				var card = this.pop_front_card();
 				this.distributed_floor_cards.push(card);
 
 				this.floor_manager.put_to_begin_card(card);
@@ -147,32 +192,33 @@ class CGostopEngine
 			// 1p에게 5장.
 			for (let i = 0; i < 5; ++i)
 			{
-				var card = pop_front_card();
+				var card = this.pop_front_card();
 				this.distributed_players_cards[player_index].push(card);
 
 				this.player_agents[player_index].add_card_to_hand(card);
 			}
 
-			player_index = find_next_player_index_of(player_index);
-
+			player_index = this.find_next_player_index_of(player_index);
+			if(this.distributed_players_cards[player_index].length == 0)
+				this.distributed_players_cards[player_index] = [];
 			// 2p에게 5장.
 			for (let i = 0; i < 5; ++i)
 			{
-				var card = pop_front_card();
+				var card = this.pop_front_card();
 				this.distributed_players_cards[player_index].push(card);
 
 				this.player_agents[player_index].add_card_to_hand(card);
 			}
 
-			player_index = find_next_player_index_of(player_index);
+			player_index = this.find_next_player_index_of(player_index);
 		}
 
-		check_bonus_cards();
+		this.check_bonus_cards();
 		this.floor_manager.refresh_floor_cards();
 		if (!this.floor_manager.validate_floor_card_counts())
 		{
 			//todo:fatal!!
-			UnityEngine.Debug.LogError("Invalid floor card count!!");
+			//UnityEngine.Debug.LogError("Invalid floor card count!!");
 			return;
 		}
 	}
@@ -181,9 +227,9 @@ class CGostopEngine
 	MAX_PLAYER_COUNT = 2;
 	get_next_player_index()
 	{
-		if (this.current_player_index < MAX_PLAYER_COUNT - 1)
+		if (this.current_player_index < this.MAX_PLAYER_COUNT - 1)
 		{
-			return (byte)(this.current_player_index + 1);
+			return this.current_player_index + 1;
 		}
 
 		return 0;
@@ -192,15 +238,14 @@ class CGostopEngine
 
 	 move_to_next_player()
 	{
-		this.current_player_index = get_next_player_index();
+		this.current_player_index = this.get_next_player_index();
 	}
-
 
 	find_next_player_index_of(prev_player_index)
 	{
-		if (prev_player_index < MAX_PLAYER_COUNT - 1)
+		if (prev_player_index < this.MAX_PLAYER_COUNT - 1)
 		{
-			return (byte)(prev_player_index + 1);
+			return prev_player_index + 1;
 		}
 
 		return 0;
@@ -209,10 +254,10 @@ class CGostopEngine
 
 	check_bonus_cards()
 	{
-		bonus_cards = this.floor_manager.pop_bonus_cards();
-		while (bonus_cards.Count > 0)
+		var bonus_cards = this.floor_manager.pop_bonus_cards();
+		while (bonus_cards.length > 0)
 		{
-			for (let i = 0; i < bonus_cards.Count; ++i)
+			for (let i = 0; i < bonus_cards.length; ++i)
 			{
 				// 선에게 지급.
 				this.player_agents[0].add_card_to_floor(bonus_cards[i]);
@@ -222,7 +267,7 @@ class CGostopEngine
 				this.floor_manager.put_to_begin_card(card);
 			}
 
-			bonus_cards.Clear();
+			bonus_cards = [];
 			bonus_cards = this.floor_manager.pop_bonus_cards();
 		}
 	}
@@ -230,7 +275,9 @@ class CGostopEngine
 
 	pop_front_card()
 	{
-		return this.card_queue.Dequeue();
+		var front_card = this.card_queue[0];
+		this.card_queue.shift();
+		return front_card;
 	}
 
 
@@ -257,10 +304,9 @@ class CGostopEngine
 		// 클라이언트가 보내온 카드 정보가 실제로 플레이어가 들고 있는 카드인지 확인한다.
 		var card = this.player_agents[player_index].pop_card_from_hand(
 			card_number, pae_type, position);
-		if (card == null)
+		if (card == undefined)
 		{
-			UnityEngine.Debug.LogError(string.Format("invalid card! {0}, {1}, {2}",
-				card_number, pae_type, position));
+			console.log("invalid card! {0}, {1}, {2}" + card_number + pae_type + position);
 			// error! Invalid slot index.
 			return PLAYER_SELECT_CARD_RESULT.ERROR_INVALID_CARD;
 		}
@@ -269,9 +315,9 @@ class CGostopEngine
 
 		// 바닥 카드중에서 플레이어가 낸 카드와 같은 숫자의 카드를 구한다.
 		var same_cards = this.floor_manager.get_cards(card.number);
-		if (same_cards != null)
+		if (same_cards != undefined)
 		{
-			this.same_card_count_with_player = same_cards.Count;
+			this.same_card_count_with_player = same_cards.length;
 		}
 		else
 		{
@@ -305,25 +351,25 @@ class CGostopEngine
 			case 1:
 				{
 					// 폭탄인 경우와 아닌 경우를 구분해서 처리 해 준다.
-					count_from_hand = this.player_agents[player_index].get_same_card_count_from_hand(this.card_from_player.number);
+					var count_from_hand = this.player_agents[player_index].get_same_card_count_from_hand(this.card_from_player.number);
 					if (count_from_hand == 2)
 					{
 						this.card_event_type = CARD_EVENT_TYPE.BOMB;
 
-						get_current_player().plus_shaking_count();
+						this.get_current_player().plus_shaking_count();
 
 						// 플레이어가 선택한 카드와, 바닥 카드, 폭탄 카드를 모두 가져 간다.
 						this.cards_to_give_player.push(this.card_from_player);
 						this.cards_to_give_player.push(same_cards[0]);
 						this.bomb_cards_from_player.push(this.card_from_player);
 						var bomb_cards = this.player_agents[player_index].pop_all_cards_from_hand(this.card_from_player.number);
-						for (let i = 0; i < bomb_cards.Count; ++i)
+						for (let i = 0; i < bomb_cards.length; ++i)
 						{
 							this.cards_to_give_player.push(bomb_cards[i]);
 							this.bomb_cards_from_player.push(bomb_cards[i]);
 						}
 
-						take_cards_from_others(1);
+						this.take_cards_from_others(1);
 						this.player_agents[player_index].add_bomb_count(2);
 					}
 					else
@@ -340,8 +386,8 @@ class CGostopEngine
 					if (same_cards[0].pae_type != same_cards[1].pae_type)
 					{
 						// 카드 종류가 다르다면 플레이어가 한장을 선택할 수 있도록 해준다.
-						this.target_cards_to_choice.Clear();
-						for (let i = 0; i < same_cards.Count; ++i)
+						this.target_cards_to_choice = [];
+						for (let i = 0; i < same_cards.length; ++i)
 						{
 							this.target_cards_to_choice.push(same_cards[i]);
 						}
@@ -363,13 +409,13 @@ class CGostopEngine
 
 					// 쌓여있는 카드를 모두 플레이어에게 준다.
 					this.cards_to_give_player.push(card);
-					for (let i = 0; i < same_cards.Count; ++i)
+					for (let i = 0; i < same_cards.length; ++i)
 					{
 						this.cards_to_give_player.push(same_cards[i]);
 					}
 
 					//todo:상대방 카드 한장 가져오기. 자뻑이었다면 두장 가져오기.
-					take_cards_from_others(1);
+					this.take_cards_from_others(1);
 				}
 				break;
 		}
@@ -387,18 +433,18 @@ class CGostopEngine
 	{
 		this.turn_result_type = turn_result_type;
 
-		card_number_from_player = byte.MaxValue;
+		var card_number_from_player = 255;
 		if (this.turn_result_type == TURN_RESULT_TYPE.RESULT_OF_NORMAL_CARD)
 		{
 			card_number_from_player = this.card_from_player.number;
 		}
-		result = flip_deck_card(card_number_from_player);
+		var result = this.flip_deck_card(card_number_from_player);
 		if (result != PLAYER_SELECT_CARD_RESULT.COMPLETED)
 		{
 			return result;
 		}
 
-		after_flipped_card(player_index);
+		this.after_flipped_card(player_index);
 		return PLAYER_SELECT_CARD_RESULT.COMPLETED;
 	}
 
@@ -410,20 +456,26 @@ class CGostopEngine
 	after_flipped_card(player_index)
 	{
 		// 플레이어가 가져갈 카드와 바닥에 내려놓을 카드를 처리한다.
-		give_floor_cards_to_player(player_index);
-		sort_player_pae();
-		calculate_players_score();
+		this.give_floor_cards_to_player(player_index);
+		this.sort_player_pae();
+		this.calculate_players_score();
 
 
 		// 폭탄으로 뒤집는 경우에는 플레이어가 낸 카드가 없으므로 처리를 건너 뛴다.
-		if (this.card_from_player != null)
+		if (this.card_from_player != undefined)
 		{
 			// 플레이어가 가져갈 카드중에 냈던 카드가 포함되어 있지 않으면 바닥에 내려 놓는다.
-			is_exist_player = this.cards_to_give_player.Exists(obj => obj.is_same(
-				this.card_from_player.number,
-				this.card_from_player.pae_type,
-				this.card_from_player.position));
-			if (!is_exist_player)
+			// is_exist_player = this.cards_to_give_player.Exists(obj => obj.is_same(
+			// 	this.card_from_player.number,
+			// 	this.card_from_player.pae_type,
+			// 	this.card_from_player.position));
+			var buf = this.card_from_player;
+			var result = this.cards_to_give_player.filter(function(value, index, arr){ 
+				return value.is_same(buf.number,
+				buf.pae_type,
+				buf.position)
+			});
+			if ( result.length <= 0)
 			{
 				this.floor_manager.puton_card(this.card_from_player);
 				this.cards_to_floor.push(this.card_from_player);
@@ -432,34 +484,40 @@ class CGostopEngine
 
 
 		// 뒤집은 카드에 대해서도 같은 방식으로 처리한다.
-		is_exist_deck_card = this.cards_to_give_player.Exists(obj => obj.is_same(
-			this.card_from_deck.number,
-			this.card_from_deck.pae_type,
-			this.card_from_deck.position));
-		if (!is_exist_deck_card)
+		// is_exist_deck_card = this.cards_to_give_player.Exists(obj => obj.is_same(
+		// 	this.card_from_deck.number,
+		// 	this.card_from_deck.pae_type,
+		// 	this.card_from_deck.position));
+		var buf = this.card_from_deck;
+		var is_exist_deck_card = this.cards_to_give_player.filter(function(value, index, arr){ 
+			return value.is_same(buf.number,
+				buf.pae_type,
+				buf.position) == true;
+		});
+		if (is_exist_deck_card.length <= undefined)
 		{
 			this.floor_manager.puton_card(this.card_from_deck);
 			this.cards_to_floor.push(this.card_from_deck);
-			calculate_players_score();
+			this.calculate_players_score();
 		}
 
 		// 싹쓸이 체크.
 		if (this.floor_manager.is_empty())
 		{
 			this.flipped_card_event_type.push(CARD_EVENT_TYPE.CLEAN);
-			take_cards_from_others(1);
+			this.take_cards_from_others(1);
 		}
 	}
 
 
 	flip_deck_card(card_number_from_player)
 	{
-		this.card_from_deck = pop_front_card();
+		this.card_from_deck = this.pop_front_card();
 
 		var same_cards = this.floor_manager.get_cards(this.card_from_deck.number);
-		if (same_cards != null)
+		if (same_cards != undefined)
 		{
-			this.same_card_count_with_deck = same_cards.Count;
+			this.same_card_count_with_deck = same_cards.length;
 		}
 		else
 		{
@@ -477,11 +535,11 @@ class CGostopEngine
 					// 쪽.
 					this.flipped_card_event_type.push(CARD_EVENT_TYPE.KISS);
 
-					this.cards_to_give_player.Clear();
+					this.cards_to_give_player = [];
 					this.cards_to_give_player.push(this.card_from_player);
 					this.cards_to_give_player.push(this.card_from_deck);
 
-					take_cards_from_others(1);
+					this.take_cards_from_others(1);
 				}
 				break;
 
@@ -491,10 +549,10 @@ class CGostopEngine
 					{
 						// 뻑.
 						this.flipped_card_event_type.push(CARD_EVENT_TYPE.PPUK);
-						get_current_player().plus_ppuk_count();
+						this.get_current_player().plus_ppuk_count();
 
 						// 플레이어에게 주려던 카드를 모두 취소한다.
-						this.cards_to_give_player.Clear();
+						this.cards_to_give_player = [];
 					}
 					else
 					{
@@ -512,23 +570,23 @@ class CGostopEngine
 						this.flipped_card_event_type.push(CARD_EVENT_TYPE.DDADAK);
 
 						// 플레이어가 4장 모두 가져간다.
-						this.cards_to_give_player.Clear();
-						for (let i = 0; i < same_cards.Count; ++i)
+						this.cards_to_give_player = [];
+						for (let i = 0; i < same_cards.length; ++i)
 						{
 							this.cards_to_give_player.push(same_cards[i]);
 						}
 						this.cards_to_give_player.push(this.card_from_deck);
 						this.cards_to_give_player.push(this.card_from_player);
 
-						take_cards_from_others(2);
+						this.take_cards_from_others(2);
 					}
 					else
 					{
 						if (same_cards[0].pae_type != same_cards[1].pae_type)
 						{
 							// 뒤집었는데 타입이 다른 카드 두장과 같다면 한장을 선택하도록 한다.
-							this.target_cards_to_choice.Clear();
-							for (let i = 0; i < same_cards.Count; ++i)
+							this.target_cards_to_choice = [];
+							for (let i = 0; i < same_cards.length; ++i)
 							{
 								this.target_cards_to_choice.push(same_cards[i]);
 							}
@@ -546,14 +604,14 @@ class CGostopEngine
 
 			case 3:
 				// 플레이어가 4장 모두 가져간다.
-				for (let i = 0; i < same_cards.Count; ++i)
+				for (let i = 0; i < same_cards.length; ++i)
 				{
 					this.cards_to_give_player.push(same_cards[i]);
 				}
 				this.cards_to_give_player.push(this.card_from_deck);
 
 				//todo:자뻑이라면 두장.
-				take_cards_from_others(1);
+				this.take_cards_from_others(1);
 				break;
 		}
 
@@ -566,14 +624,14 @@ class CGostopEngine
 		if (result_type != this.expected_result_type)
 		{
 			//todo:error! 기대했던 타입과 다르다! 오류이거나 어뷰징이거나.
-			UnityEngine.Debug.LogError(string.Format("Invalid result type. client {0}, expected {1}",
-				result_type, this.expected_result_type));
+			console.log("Invalid result type. client {0}, expected {1}",
+				result_type, this.expected_result_type);
 		}
 
 
 		// 클라이언트에서 엉뚱한 값을 보내올 수 있으므로 검증 후 이상이 있으면 첫번째 카드를 선택한다.
-		player_choose_card = null;
-		if (this.target_cards_to_choice.Count <= choice_index)
+		var player_choose_card = {};
+		if (this.target_cards_to_choice.length <= choice_index)
 		{
 			// Error! Invalid list index. Choice first card.
 			player_choose_card = this.target_cards_to_choice[0];
@@ -584,7 +642,7 @@ class CGostopEngine
 		}
 
 
-		ret = PLAYER_SELECT_CARD_RESULT.COMPLETED;
+		var ret = PLAYER_SELECT_CARD_RESULT.COMPLETED;
 		switch (this.expected_result_type)
 		{
 			case PLAYER_SELECT_CARD_RESULT.CHOICE_ONE_CARD_FROM_PLAYER:
@@ -595,7 +653,7 @@ class CGostopEngine
 			case PLAYER_SELECT_CARD_RESULT.CHOICE_ONE_CARD_FROM_DECK:
 				this.cards_to_give_player.push(this.card_from_deck);
 				this.cards_to_give_player.push(player_choose_card);
-				after_flipped_card(player_index);
+				this.after_flipped_card(player_index);
 				break;
 		}
 
@@ -605,7 +663,7 @@ class CGostopEngine
 
 	give_floor_cards_to_player(player_index)
 	{
-		for (let i = 0; i < this.cards_to_give_player.Count; ++i)
+		for (let i = 0; i < this.cards_to_give_player.length; ++i)
 		{
 			//UnityEngine.Debug.Log("give player " + this.cards_to_give_player[i].number);
 			this.player_agents[player_index].add_card_to_floor(this.cards_to_give_player[i]);
@@ -622,7 +680,7 @@ class CGostopEngine
 
 	calculate_players_score()
 	{
-		for (let i = 0; i < this.player_agents.Count; ++i)
+		for (let i = 0; i < this.player_agents.length; ++i)
 		{
 			this.player_agents[i].calculate_score();
 		}
@@ -631,25 +689,25 @@ class CGostopEngine
 
 	take_cards_from_others(pee_count)
 	{
-		attacker = this.player_agents[this.current_player_index];
+		var attacker = this.player_agents[this.current_player_index];
 
-		next_player = get_next_player_index();
-		victim = this.player_agents[next_player];
+		var next_player = this.get_next_player_index();
+		var victim = this.player_agents[next_player];
 
 		//todo:코드를 좀더 명확하게 수정하기.
-		if (!this.other_cards_to_player.ContainsKey(next_player))
+		if (this.other_cards_to_player[next_player] == undefined)
 		{
             var cardlist = [];
-			this.other_cards_to_player.push(next_player, cardlist);
+			this.other_cards_to_player[next_player] = cardlist;
 		}
 
-		cards = victim.pop_card_from_floor(pee_count);
-		if (cards == null)
+		var cards = victim.pop_card_from_floor(pee_count);
+		if (cards.length <= 0)
 		{
 			return;
 		}
 
-		for (let i = 0; i < cards.Count; ++i)
+		for (let i = 0; i < cards.length; ++i)
 		{
 			attacker.add_card_to_floor(cards[i]);
 			this.other_cards_to_player[next_player].push(cards[i]);
@@ -664,12 +722,12 @@ class CGostopEngine
 
 	is_last_turn()
 	{
-		return this.card_queue.Count <= 1;
+		return this.card_queue.length <= 1;
 	}
 
 	is_finished()
 	{
-		return this.card_queue.Count <= 0;
+		return this.card_queue.length <= 0;
 	}
 
 
@@ -680,7 +738,7 @@ class CGostopEngine
 			return false;
 		}
 
-		kookjin = this.player_agents[player_index].get_card_count(PAE_TYPE.YEOL, CARD_STATUS.KOOKJIN);
+		var kookjin = this.player_agents[player_index].get_card_count(PAE_TYPE.YEOL, CARD_STATUS.KOOKJIN);
 		//UnityEngine.Debug.Log(string.Format("player {0},  Kookjin count {1}", player_index, kookjin));
 		if (kookjin <= 0)
 		{
@@ -700,21 +758,24 @@ class CGostopEngine
 	get_random_cards(n)
 	{
 		var clone_cards = [];
-		for (let i = 0; i < this.card_manager.cards.Count; ++i)
+		for (let i = 0; i < this.card_manager.cards.length; ++i)
 		{
 			clone_cards.push(this.card_manager.cards[i]);
 		}
 
-		result = [];
+		var result = [];
 
 		for (let i = 0; i < n; ++i)
 		{
-			index = Math.random() * clone_cards.Count;
+			var index = Math.floor(Math.random() * clone_cards.length);
+			//index = Math.random() * clone_cards.length;
 			result.push(clone_cards[index]);
 
-			clone_cards.RemoveAt(index);
+			//clone_cards.RemoveAt(index);
+			clone_cards = Util.deleteArrK(clone_cards, index);
 		}
 
 		return result;
 	}
 }
+module.exports = CGostopEngine 

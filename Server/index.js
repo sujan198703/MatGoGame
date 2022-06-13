@@ -15,7 +15,7 @@ async function init_server() {
     //await email.init(db);
     //console.log("Mail initialization done.");
    
-    await comm.init(8080, 8099, db);//, email);
+    await comm.init(8080, db);//, email);
     console.log("WebSocket server started.");
 
     console.log("Initialization done.");
