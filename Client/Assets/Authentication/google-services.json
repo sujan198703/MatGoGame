@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "582166968109",
+    "project_id": "matgo-pluco",
+    "storage_bucket": "matgo-pluco.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582166968109:android:52b7e91cfa1b8075a5c5a4",
+        "android_client_info": {
+          "package_name": "com.Pluco.Metgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582166968109-j7vhufrd5vueuqshs75cdg41cbpr0jea.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Pluco.Metgo",
+            "certificate_hash": "6f87d3f9afd72c660ea6abe2da5e226a7f55e73f"
+          }
+        },
+        {
+          "client_id": "582166968109-2uhl4lbanvuvjh8eagebv9f4soc7836p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBAsfXe7JRAA-s2E47A-_plirF-nItiOpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582166968109-2uhl4lbanvuvjh8eagebv9f4soc7836p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

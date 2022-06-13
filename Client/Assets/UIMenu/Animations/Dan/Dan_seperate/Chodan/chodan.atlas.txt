@@ -1,0 +1,41 @@
+
+chodan.png
+size: 256,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Cho_Bg
+  rotate: false
+  xy: 0, 0
+  size: 165, 139
+  orig: 165, 139
+  offset: 0, 0
+  index: -1
+Cho_Flag
+  rotate: true
+  xy: 0, 141
+  size: 126, 205
+  orig: 126, 205
+  offset: 0, 0
+  index: -1
+Cho_grass
+  rotate: true
+  xy: 79, 380
+  size: 50, 93
+  orig: 50, 93
+  offset: 0, 0
+  index: -1
+Chodan_letter
+  rotate: false
+  xy: 0, 269
+  size: 159, 109
+  orig: 159, 109
+  offset: 0, 0
+  index: -1
+Flag_roll
+  rotate: false
+  xy: 0, 400
+  size: 77, 30
+  orig: 77, 30
+  offset: 0, 0
+  index: -1

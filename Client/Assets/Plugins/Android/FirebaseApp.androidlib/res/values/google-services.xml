@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_android_client_id,@string/default_web_client_id">
+  <string name="gcm_defaultSenderId" translatable="false">582166968109</string>
+  <string name="google_storage_bucket" translatable="false">matgo-pluco.appspot.com</string>
+  <string name="project_id" translatable="false">matgo-pluco</string>
+  <string name="google_api_key" translatable="false">AIzaSyBAsfXe7JRAA-s2E47A-_plirF-nItiOpA</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBAsfXe7JRAA-s2E47A-_plirF-nItiOpA</string>
+  <string name="google_app_id" translatable="false">1:582166968109:android:52b7e91cfa1b8075a5c5a4</string>
+  <string name="default_android_client_id" translatable="false">582166968109-j7vhufrd5vueuqshs75cdg41cbpr0jea.apps.googleusercontent.com</string>
+  <string name="default_web_client_id" translatable="false">582166968109-2uhl4lbanvuvjh8eagebv9f4soc7836p.apps.googleusercontent.com</string>
+</resources>
