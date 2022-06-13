@@ -230,7 +230,12 @@ async function on_data(conn, data) {
 
         var arrData = JSON.parse(jdata.data);
         var packet= CPacket.create(jdata.cmd);
-
+        var crypto = new AESCrypto();
+        var i = 0;
+        arrData.forEach(obj=> {
+             arrData[i] =  Number(crypto.decrypt(obj));
+             i++;
+         });
         packet.setAllData(arrData);
         conn.gameRoom.on_receive(conn, packet);
     }
