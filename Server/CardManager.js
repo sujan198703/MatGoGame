@@ -1,3 +1,7 @@
+const PAE_TYPE = require("./const/PAE_TYPE");
+const CARD_STATUS = require("./const/CARD_STATUS");
+const CCard = require("./CCard.js");
+const CHelper = require("./CHelper.js")
 class CCardManager
 {
     cards = [];
@@ -83,7 +87,7 @@ class CCardManager
         total_pae_type.push(PAE_TYPE.TEE);
         total_pae_type.push(PAE_TYPE.PEE);
 
-		this.cards.clear();
+		this.cards = [];
         for (let number = 0; number < 12; ++number)
         {
             for (let pos = 0; pos < 4; ++pos)
@@ -131,12 +135,16 @@ class CCardManager
 
     shuffle()
     {
-        CHelper.Shuffle<CCard>(this.cards);
+        CHelper.Shuffle(this.cards);
     }
 
 	find_card(number, pae_type, position)
 	{
-		return this.cards.Find(obj => obj.is_same(number, pae_type, position));
+		//return this.cards.Find(obj => obj.is_same(number, pae_type, position));
+		var result = this.cards.filter(function(value, index, arr){ 
+			return value.is_same(number, pae_type, position) == true;
+		});
+		return result[0];
 	}
 
 
@@ -516,6 +524,7 @@ class CCardManager
 
     fill_to(target)
     {
-        this.cards.ForEach(obj => target.Enqueue(obj));
+        this.cards.forEach(obj => target.push(obj));
     }
 }
+module.exports = CCardManager;

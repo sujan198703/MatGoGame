@@ -1,3 +1,5 @@
+const CFloorSlot = require("./CFloorSlot.js");
+const Util = require("./Util");
 class CFloorCardManager
 {
 	// 처음 바닥에 놓을 카드를 보관할 컨테이너.
@@ -9,17 +11,18 @@ class CFloorCardManager
 	constructor()
 	{
 		// 바닥 초기화.
-		
+		this.slots = [];
+		this.begin_cards = [];
         for (let position = 0; position < 12; ++position)
         {
-            this.slots.Add(new CFloorSlot(position));
+            this.slots.push(new CFloorSlot(position));
         }
 	}
 
 
     reset()
     {
-        this.begin_cards.Clear();
+        this.begin_cards = [];
         for (let position = 0; position < 12; ++position)
         {
             this.slots[position].reset();
@@ -29,31 +32,39 @@ class CFloorCardManager
 
 	put_to_begin_card(card)
 	{
-		this.begin_cards.Add(card);
+		this.begin_cards.push(card);
 	}
 
 
 	find_empty_slot()
 	{
-		var slot = this.slots.Find(obj => obj.is_empty());
-		return slot;
+		// var slot = this.slots.Find(obj => obj.is_empty());
+		// return slot;
+		var result = this.slots.filter(function(value, index, arr){ 
+			return value.is_empty() == true;
+		});
+		return result[0];
 	}
 
 
 	find_slot(card_number)
 	{
-		var slot = this.slots.Find(obj => obj.is_same(card_number));
-		return slot;
+		var slot = this.slots.filter(function(value, index, arr){ 
+			return value.is_same(card_number);
+		});
+		return slot[0];		
+		// var slot = this.slots.Find(obj => obj.is_same(card_number));
+		// return slot;
 	}
 
 
 	// 해당번호와 동일한 위치에 카드를 놓는다.
 	puton_card(card)
 	{
-		var slot = find_slot(card.number);
-		if (slot == null)
+		var slot = this.find_slot(card.number);
+		if (slot == undefined )
 		{
-			slot = find_empty_slot();
+			slot = this.find_empty_slot();
 			slot.add_card(card);
 			return;
 		}
@@ -64,34 +75,34 @@ class CFloorCardManager
 
 	remove_card(card)
 	{
-		var slot = find_slot(card.number);
-		if (slot != null)
+		var slot = this.find_slot(card.number);
+		if (slot != undefined)
 		{
 			slot.remove_card(card);
 			//UnityEngine.Debug.Log(string.Format("removed card. {0}, {1}, {2}, remain {3}",
 			//	card.number, card.pae_type, card.position,
-			//	slot.cards.Count));
+			//	slot.cards.length));
 		}
 	}
 
 
     get_same_number_card_count(number)
     {
-		var slot = find_slot(number);
-		if (slot == null)
+		var slot = this.find_slot(number);
+		if (slot.length <= 0)
 		{
 			return 0;
 		}
-		return slot.cards.Count;
+		return slot.cards.length;
     }
 
 
     get_first_card(number)
     {
-		var slot = find_slot(number);
-		if (slot == null)
+		var slot = this.find_slot(number);
+		if (slot.length <= 0)
 		{
-			return null;
+			return undefined;
 		}
 		return slot.cards[0];
     }
@@ -99,10 +110,10 @@ class CFloorCardManager
 
     get_cards(number)
     {
-		var slot = find_slot(number);
-		if (slot == null)
+		var slot = this.find_slot(number);
+		if (slot == undefined)
 		{
-			return null;
+			return undefined;
 		}
 		return slot.cards;
     }
@@ -110,18 +121,19 @@ class CFloorCardManager
 
     pop_bonus_cards()
     {
-        bonus_cards = [];
-        for (let i = 0; i < this.begin_cards.Count; ++i)
+        var bonus_cards = [];
+        for (let i = 0; i < this.begin_cards.length; ++i)
         {
-            if (CCard.is_bonus_card(this.begin_cards[i].number))
+            if (this.begin_cards[i].number == 13)
             {
-                bonus_cards.Add(this.begin_cards[i]);
+                bonus_cards.push(this.begin_cards[i]);
             }
         }
 
-        for (let i = 0; i < bonus_cards.Count; ++i)
+        for (let i = 0; i < bonus_cards.length; ++i)
         {
-            this.begin_cards.Remove(bonus_cards[i]);
+            //this.begin_cards.Remove(bonus_cards[i]);
+			this.begin_cards = Util.deleteArrV(this.begin_cards, bonus_cards[i]);
         }
 
         return bonus_cards;
@@ -133,20 +145,20 @@ class CFloorCardManager
 	/// </summary>
 	refresh_floor_cards()
 	{
-		for (let i = 0; i < this.begin_cards.Count; ++i)
+		for (let i = 0; i < this.begin_cards.length; ++i)
 		{
-			puton_card(this.begin_cards[i]);
+			this.puton_card(this.begin_cards[i]);
 		}
-		this.begin_cards.Clear();
+		this.begin_cards = [];
 	}
 
 
     validate_floor_card_counts()
     {
         var floor_card_count = 0;
-        for (let i = 0; i < this.slots.Count; ++i)
+        for (let i = 0; i < this.slots.length; ++i)
         {
-            floor_card_count += this.slots[i].cards.Count;
+            floor_card_count += this.slots[i].cards.length;
         }
 
         if (floor_card_count != 8)
@@ -160,7 +172,7 @@ class CFloorCardManager
 
 	is_empty()
 	{
-		for (let i = 0; i < this.slots.Count; ++i)
+		for (let i = 0; i < this.slots.length; ++i)
 		{
 			if (!this.slots[i].is_empty())
 			{
@@ -171,3 +183,4 @@ class CFloorCardManager
 		return true;
 	}
 }
+module.exports = CFloorCardManager;

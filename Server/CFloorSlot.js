@@ -1,25 +1,26 @@
+const Util = require("./Util.js");
 class CFloorSlot
 {
 	slot_position;
-	cards = [];
+	cards;
 	
 	constructor(position)
 	{
 		this.slot_position = position;
-
-        reset();
+		this.cards = [];
+        this.reset();
 	}
 
 
     reset()
     {
-        this.cards.Clear();
+        this.cards = [];
     }
 
 
 	is_same(number)
 	{
-		if (this.cards.Count <= 0)
+		if (this.cards.length <= 0)
 		{
 			return false;
 		}
@@ -30,18 +31,23 @@ class CFloorSlot
 
 	add_card(card)
 	{
-		this.cards.Add(card);
+		this.cards.push(card);
 	}
 
 
 	remove_card(card)
 	{
-		this.cards.Remove(card);
+		this.cards = Util.deleteArrV(this.cards, card);
+		// this.cards = cards.filter(function(value, index, arr){ 
+		// 	return value = card;
+		// });
+		// this.cards.Remove(card);
 	}
 
 	
 	is_empty()
 	{
-		return this.cards.Count <= 0;
+		return this.cards.length <= 0;
 	}
 }
+module.exports = CFloorSlot;

@@ -1,3 +1,4 @@
+const Util = require("./Util");
 class CPlayerHandCardManager
 {
 	cards = [];
@@ -9,7 +10,7 @@ class CPlayerHandCardManager
 
 	reset()
 	{
-		this.cards.Clear();
+		this.cards = [];
 	}
 
 
@@ -21,7 +22,8 @@ class CPlayerHandCardManager
 
 	remove(card_picture)
 	{
-		let result = this.cards.remove(card_picture);
+		//let result = this.cards.remove(card_picture);
+		this.cards = Util.deleteArrV(this.cards, card_picture);
 		if (!result)
 		{
 			console.log("Cannot remove the card!");
@@ -43,20 +45,27 @@ class CPlayerHandCardManager
 
 	find_card(number, pae_type, position)
 	{
-		return this.cards.find(obj => obj.card.is_same(number, pae_type, position));
+		//return this.cards.find(obj => obj.card.is_same(number, pae_type, position));
+		var result = this.cards.filter(function(value, index, arr){ 
+			return value.is_same(number, pae_type, position) == true;
+		});
+		return result[0];
 	}
 
 
 	get_same_number_count(number)
 	{
-		let same_cards = this.cards.find(obj => obj.is_same(number));
-		return same_cards.Count;
+		//List<CCardPicture> same_cards = this.cards.FindAll(obj => obj.is_same(number));
+		var result = this.cards.filter(function(value, index, arr){ 
+			return value.is_same(number) == true;
+		});
+		return result.length;
 	}
 
 
 	sort_by_number()
 	{
-        this.cards.sort(function(lhs, rhs) {
+        this.cards.sort((lhs, rhs) => {
 			if (lhs.card.number < rhs.card.number)
 			{
 				return -1;
