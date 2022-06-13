@@ -13,6 +13,16 @@ public class StartGame : MonoBehaviour
 
     public void QuitGame()
     {
+
         Lobby.SetActive(true);
+        PlayerPrefs.SetInt("PlayerSecondScore", 0);
+        PlayerPrefs.SetInt("PlayerOneScore", 0);
+
+
+    }
+
+    public void ReloadSceneOnGameQuit()
+    {
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }
