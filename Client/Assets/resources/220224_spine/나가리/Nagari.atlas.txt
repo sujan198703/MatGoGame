@@ -1,0 +1,62 @@
+
+Nagari.png
+size: 256,128
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+2
+  rotate: true
+  xy: 111, 49
+  size: 41, 52
+  orig: 41, 52
+  offset: 0, 0
+  index: -1
+2_glow
+  rotate: true
+  xy: 165, 49
+  size: 41, 52
+  orig: 41, 52
+  offset: 0, 0
+  index: -1
+4
+  rotate: true
+  xy: 108, 0
+  size: 47, 52
+  orig: 47, 52
+  offset: 0, 0
+  index: -1
+4_glow
+  rotate: true
+  xy: 162, 0
+  size: 47, 52
+  orig: 47, 52
+  offset: 0, 0
+  index: -1
+8
+  rotate: true
+  xy: 0, 9
+  size: 43, 52
+  orig: 43, 52
+  offset: 0, 0
+  index: -1
+8_glow
+  rotate: true
+  xy: 54, 9
+  size: 43, 52
+  orig: 43, 52
+  offset: 0, 0
+  index: -1
+Txt
+  rotate: false
+  xy: 35, 54
+  size: 74, 36
+  orig: 74, 36
+  offset: 0, 0
+  index: -1
+multipy
+  rotate: true
+  xy: 0, 61
+  size: 29, 33
+  orig: 29, 33
+  offset: 0, 0
+  index: -1

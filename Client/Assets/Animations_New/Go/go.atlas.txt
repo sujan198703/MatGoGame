@@ -1,0 +1,174 @@
+
+go.png
+size: 2048,1024
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+1
+  rotate: true
+  xy: 862, 518
+  size: 97, 187
+  orig: 97, 187
+  offset: 0, 0
+  index: -1
+2
+  rotate: false
+  xy: 765, 823
+  size: 159, 200
+  orig: 159, 200
+  offset: 0, 0
+  index: -1
+3
+  rotate: false
+  xy: 742, 617
+  size: 150, 202
+  orig: 150, 202
+  offset: 0, 0
+  index: -1
+3_blur
+  rotate: false
+  xy: 235, 2
+  size: 110, 120
+  orig: 110, 120
+  offset: 0, 0
+  index: -1
+4
+  rotate: false
+  xy: 926, 828
+  size: 172, 195
+  orig: 172, 195
+  offset: 0, 0
+  index: -1
+4_blur
+  rotate: false
+  xy: 347, 5
+  size: 124, 130
+  orig: 124, 130
+  offset: 0, 0
+  index: -1
+5
+  rotate: false
+  xy: 894, 623
+  size: 162, 198
+  orig: 162, 198
+  offset: 0, 0
+  index: -1
+5_blur
+  rotate: false
+  xy: 742, 488
+  size: 118, 127
+  orig: 118, 127
+  offset: 0, 0
+  index: -1
+6
+  rotate: false
+  xy: 672, 78
+  size: 155, 202
+  orig: 155, 202
+  offset: 0, 0
+  index: -1
+6_blur
+  rotate: false
+  xy: 127, 0
+  size: 106, 122
+  orig: 106, 122
+  offset: 0, 0
+  index: -1
+7
+  rotate: false
+  xy: 784, 288
+  size: 174, 198
+  orig: 174, 198
+  offset: 0, 0
+  index: -1
+7_blur
+  rotate: false
+  xy: 335, 743
+  size: 270, 280
+  orig: 270, 280
+  offset: 0, 0
+  index: -1
+8
+  rotate: false
+  xy: 616, 282
+  size: 166, 202
+  orig: 166, 202
+  offset: 0, 0
+  index: -1
+8_blur
+  rotate: false
+  xy: 473, 7
+  size: 197, 213
+  orig: 197, 213
+  offset: 0, 0
+  index: -1
+9
+  rotate: false
+  xy: 607, 821
+  size: 156, 202
+  orig: 156, 202
+  offset: 0, 0
+  index: -1
+9_blur
+  rotate: false
+  xy: 335, 479
+  size: 228, 262
+  orig: 228, 262
+  offset: 0, 0
+  index: -1
+BG_Light
+  rotate: true
+  xy: 0, 124
+  size: 305, 245
+  orig: 305, 245
+  offset: 0, 0
+  index: -1
+EffectLine
+  rotate: true
+  xy: 0, 431
+  size: 592, 333
+  orig: 592, 333
+  offset: 0, 0
+  index: -1
+EffectLine_blur
+  rotate: true
+  xy: 247, 137
+  size: 292, 190
+  orig: 292, 190
+  offset: 0, 0
+  index: -1
+Go01_blur
+  rotate: true
+  xy: 439, 222
+  size: 255, 175
+  orig: 255, 175
+  offset: 0, 0
+  index: -1
+Go02_blur
+  rotate: true
+  xy: 565, 486
+  size: 255, 175
+  orig: 255, 175
+  offset: 0, 0
+  index: -1
+Go_High
+  rotate: true
+  xy: 829, 99
+  size: 187, 161
+  orig: 187, 161
+  offset: 0, 0
+  index: -1
+Go_High_blur
+  rotate: false
+  xy: 0, 0
+  size: 125, 122
+  orig: 125, 122
+  offset: 0, 0
+  index: -1
+Go_Low
+  rotate: true
+  xy: 960, 329
+  size: 187, 161
+  orig: 187, 161
+  offset: 0, 0
+  index: -1

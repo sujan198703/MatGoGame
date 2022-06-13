@@ -1,0 +1,251 @@
+
+Txt_dan.png
+size: 256,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bg_chodan1
+  rotate: false
+  xy: 0, 211
+  size: 101, 43
+  orig: 101, 43
+  offset: 0, 0
+  index: -1
+bg_godori1
+  rotate: false
+  xy: 103, 218
+  size: 87, 36
+  orig: 87, 36
+  offset: 0, 0
+  index: -1
+icon_chodan
+  rotate: false
+  xy: 147, 0
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+icon_chodan_glow
+  rotate: false
+  xy: 147, 26
+  size: 37, 37
+  orig: 37, 37
+  offset: 0, 0
+  index: -1
+icon_chungdan
+  rotate: false
+  xy: 173, 0
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+icon_chungdan_glow
+  rotate: false
+  xy: 59, 133
+  size: 38, 37
+  orig: 38, 37
+  offset: 0, 0
+  index: -1
+icon_godori
+  rotate: false
+  xy: 199, 0
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+icon_godori_glow
+  rotate: false
+  xy: 186, 26
+  size: 37, 37
+  orig: 37, 37
+  offset: 0, 0
+  index: -1
+icon_hongdan
+  rotate: false
+  xy: 225, 60
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+icon_hongdan_glow
+  rotate: false
+  xy: 59, 172
+  size: 38, 37
+  orig: 38, 37
+  offset: 0, 0
+  index: -1
+img_cheongdan1
+  rotate: true
+  xy: 56, 105
+  size: 26, 38
+  orig: 26, 38
+  offset: 0, 0
+  index: -1
+img_chodan1
+  rotate: true
+  xy: 54, 78
+  size: 25, 38
+  orig: 25, 38
+  offset: 0, 0
+  index: -1
+img_hongdan1
+  rotate: false
+  xy: 164, 177
+  size: 26, 39
+  orig: 26, 39
+  offset: 0, 0
+  index: -1
+img_meongbak1
+  rotate: true
+  xy: 54, 61
+  size: 15, 14
+  orig: 15, 14
+  offset: 0, 0
+  index: -1
+img_meongbak2
+  rotate: false
+  xy: 0, 163
+  size: 57, 46
+  orig: 57, 46
+  offset: 0, 0
+  index: -1
+text_cheongdan1
+  rotate: false
+  xy: 0, 92
+  size: 52, 33
+  orig: 52, 33
+  offset: 0, 0
+  index: -1
+text_cheongdan1_glow
+  rotate: false
+  xy: 192, 121
+  size: 52, 33
+  orig: 52, 33
+  offset: 0, 0
+  index: -1
+text_cheongdan2
+  rotate: true
+  xy: 60, 15
+  size: 44, 27
+  orig: 44, 27
+  offset: 0, 0
+  index: -1
+text_cheongdan2_glow
+  rotate: false
+  xy: 89, 49
+  size: 44, 27
+  orig: 44, 27
+  offset: 0, 0
+  index: -1
+text_chodan1
+  rotate: false
+  xy: 96, 78
+  size: 52, 31
+  orig: 52, 31
+  offset: 0, 0
+  index: -1
+text_chodan1_glow
+  rotate: false
+  xy: 0, 59
+  size: 52, 31
+  orig: 52, 31
+  offset: 0, 0
+  index: -1
+text_chodan2
+  rotate: true
+  xy: 89, 3
+  size: 44, 27
+  orig: 44, 27
+  offset: 0, 0
+  index: -1
+text_chodan2_1
+  rotate: true
+  xy: 118, 3
+  size: 44, 27
+  orig: 44, 27
+  offset: 0, 0
+  index: -1
+text_godori1
+  rotate: false
+  xy: 192, 224
+  size: 64, 30
+  orig: 64, 30
+  offset: 0, 0
+  index: -1
+text_godori1_glow
+  rotate: false
+  xy: 192, 192
+  size: 64, 30
+  orig: 64, 30
+  offset: 0, 0
+  index: -1
+text_godori2
+  rotate: true
+  xy: 0, 13
+  size: 44, 28
+  orig: 44, 28
+  offset: 0, 0
+  index: -1
+text_godori2_glow
+  rotate: true
+  xy: 30, 13
+  size: 44, 28
+  orig: 44, 28
+  offset: 0, 0
+  index: -1
+text_hongdan1
+  rotate: false
+  xy: 192, 86
+  size: 52, 33
+  orig: 52, 33
+  offset: 0, 0
+  index: -1
+text_hongdan1_glow
+  rotate: true
+  xy: 155, 65
+  size: 52, 33
+  orig: 52, 33
+  offset: 0, 0
+  index: -1
+text_kwangbak1
+  rotate: false
+  xy: 103, 182
+  size: 59, 34
+  orig: 59, 34
+  offset: 0, 0
+  index: -1
+text_kwangbak1_glow
+  rotate: false
+  xy: 192, 156
+  size: 59, 34
+  orig: 59, 34
+  offset: 0, 0
+  index: -1
+text_meongbak1
+  rotate: false
+  xy: 99, 111
+  size: 54, 34
+  orig: 54, 34
+  offset: 0, 0
+  index: -1
+text_meongbak1_glow
+  rotate: false
+  xy: 0, 127
+  size: 54, 34
+  orig: 54, 34
+  offset: 0, 0
+  index: -1
+text_pibak
+  rotate: false
+  xy: 99, 147
+  size: 56, 33
+  orig: 56, 33
+  offset: 0, 0
+  index: -1
+text_pibak1_glow
+  rotate: true
+  xy: 157, 119
+  size: 56, 33
+  orig: 56, 33
+  offset: 0, 0
+  index: -1

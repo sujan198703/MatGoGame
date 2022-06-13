@@ -1,0 +1,160 @@
+
+ogwang_spark.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Pang001
+  rotate: false
+  xy: 52, 2
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+Pang002
+  rotate: true
+  xy: 36, 0
+  size: 16, 14
+  orig: 16, 14
+  offset: 0, 0
+  index: -1
+Pang003
+  rotate: true
+  xy: 62, 24
+  size: 20, 18
+  orig: 20, 18
+  offset: 0, 0
+  index: -1
+Pang004
+  rotate: true
+  xy: 36, 18
+  size: 26, 24
+  orig: 26, 24
+  offset: 0, 0
+  index: -1
+Pang005
+  rotate: true
+  xy: 0, 6
+  size: 38, 34
+  orig: 38, 34
+  offset: 0, 0
+  index: -1
+Pang006
+  rotate: true
+  xy: 422, 6
+  size: 66, 60
+  orig: 66, 60
+  offset: 0, 0
+  index: -1
+Pang007
+  rotate: true
+  xy: 662, 286
+  size: 98, 90
+  orig: 98, 90
+  offset: 0, 0
+  index: -1
+Pang008
+  rotate: true
+  xy: 554, 268
+  size: 116, 106
+  orig: 116, 106
+  offset: 0, 0
+  index: -1
+Pang009
+  rotate: true
+  xy: 554, 386
+  size: 126, 114
+  orig: 126, 114
+  offset: 0, 0
+  index: -1
+Pang010
+  rotate: true
+  xy: 550, 80
+  size: 132, 122
+  orig: 132, 122
+  offset: 0, 0
+  index: -1
+Pang011
+  rotate: true
+  xy: 422, 74
+  size: 138, 126
+  orig: 138, 126
+  offset: 0, 0
+  index: -1
+Pang012
+  rotate: true
+  xy: 422, 370
+  size: 142, 130
+  orig: 142, 130
+  offset: 0, 0
+  index: -1
+Pang013
+  rotate: true
+  xy: 420, 214
+  size: 146, 132
+  orig: 146, 132
+  offset: 0, 0
+  index: -1
+Pang014
+  rotate: true
+  xy: 284, 212
+  size: 148, 134
+  orig: 148, 134
+  offset: 0, 0
+  index: -1
+Pang015
+  rotate: true
+  xy: 284, 362
+  size: 150, 136
+  orig: 150, 136
+  offset: 0, 0
+  index: -1
+Pang016
+  rotate: true
+  xy: 142, 48
+  size: 152, 138
+  orig: 152, 138
+  offset: 0, 0
+  index: -1
+Pang017
+  rotate: true
+  xy: 282, 48
+  size: 152, 138
+  orig: 152, 138
+  offset: 0, 0
+  index: -1
+Pang018
+  rotate: true
+  xy: 0, 358
+  size: 154, 140
+  orig: 154, 140
+  offset: 0, 0
+  index: -1
+Pang019
+  rotate: true
+  xy: 0, 202
+  size: 154, 140
+  orig: 154, 140
+  offset: 0, 0
+  index: -1
+Pang020
+  rotate: true
+  xy: 0, 46
+  size: 154, 140
+  orig: 154, 140
+  offset: 0, 0
+  index: -1
+Pang021
+  rotate: true
+  xy: 142, 358
+  size: 154, 140
+  orig: 154, 140
+  offset: 0, 0
+  index: -1
+Pang022
+  rotate: true
+  xy: 142, 202
+  size: 154, 140
+  orig: 154, 140
+  offset: 0, 0
+  index: -1
