@@ -1,0 +1,48 @@
+
+mission.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+bg_f
+  rotate: false
+  xy: 0, 7
+  size: 295, 158
+  orig: 295, 158
+  offset: 0, 0
+  index: -1
+icon_x_L
+  rotate: true
+  xy: 297, 48
+  size: 117, 110
+  orig: 117, 110
+  offset: 0, 0
+  index: -1
+text_f1
+  rotate: false
+  xy: 409, 119
+  size: 36, 46
+  orig: 36, 46
+  offset: 0, 0
+  index: -1
+text_f2
+  rotate: true
+  xy: 297, 5
+  size: 41, 46
+  orig: 41, 46
+  offset: 0, 0
+  index: -1
+text_f3
+  rotate: false
+  xy: 393, 0
+  size: 40, 46
+  orig: 40, 46
+  offset: 0, 0
+  index: -1
+text_f4
+  rotate: true
+  xy: 345, 5
+  size: 41, 46
+  orig: 41, 46
+  offset: 0, 0
+  index: -1

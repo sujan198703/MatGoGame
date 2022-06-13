@@ -1,0 +1,48 @@
+
+ddadak.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Effect
+  rotate: false
+  xy: 238, 264
+  size: 202, 209
+  orig: 202, 209
+  offset: 0, 0
+  index: -1
+Effect2
+  rotate: false
+  xy: 238, 81
+  size: 181, 181
+  orig: 181, 181
+  offset: 0, 0
+  index: -1
+Text_01
+  rotate: true
+  xy: 0, 7
+  size: 95, 99
+  orig: 95, 99
+  offset: 0, 0
+  index: -1
+Text_02
+  rotate: false
+  xy: 101, 0
+  size: 90, 102
+  orig: 90, 102
+  offset: 0, 0
+  index: -1
+White_01
+  rotate: true
+  xy: 0, 104
+  size: 133, 109
+  orig: 133, 109
+  offset: 0, 0
+  index: -1
+White_02
+  rotate: false
+  xy: 0, 239
+  size: 236, 234
+  orig: 236, 234
+  offset: 0, 0
+  index: -1

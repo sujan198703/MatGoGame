@@ -1,0 +1,234 @@
+
+kwang.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+3
+  rotate: true
+  xy: 192, 378
+  size: 63, 93
+  orig: 63, 93
+  offset: 0, 0
+  index: -1
+4
+  rotate: true
+  xy: 381, 366
+  size: 75, 92
+  orig: 75, 92
+  offset: 0, 0
+  index: -1
+5
+  rotate: true
+  xy: 287, 377
+  size: 64, 92
+  orig: 64, 92
+  offset: 0, 0
+  index: -1
+BG
+  rotate: false
+  xy: 0, 175
+  size: 126, 110
+  orig: 126, 110
+  offset: 0, 0
+  index: -1
+Bi
+  rotate: true
+  xy: 0, 328
+  size: 77, 97
+  orig: 77, 97
+  offset: 0, 0
+  index: -1
+Gwang
+  rotate: true
+  xy: 99, 287
+  size: 89, 96
+  orig: 89, 96
+  offset: 0, 0
+  index: -1
+Pang001
+  rotate: false
+  xy: 0, 427
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1
+Pang002
+  rotate: false
+  xy: 16, 427
+  size: 16, 14
+  orig: 16, 14
+  offset: 0, 0
+  index: -1
+Pang003
+  rotate: false
+  xy: 34, 423
+  size: 20, 18
+  orig: 20, 18
+  offset: 0, 0
+  index: -1
+Pang004
+  rotate: false
+  xy: 56, 417
+  size: 26, 24
+  orig: 26, 24
+  offset: 0, 0
+  index: -1
+Pang005
+  rotate: false
+  xy: 84, 407
+  size: 38, 34
+  orig: 38, 34
+  offset: 0, 0
+  index: -1
+Pang006
+  rotate: false
+  xy: 124, 381
+  size: 66, 60
+  orig: 66, 60
+  offset: 0, 0
+  index: -1
+Pang007
+  rotate: false
+  xy: 197, 285
+  size: 98, 90
+  orig: 98, 90
+  offset: 0, 0
+  index: -1
+Pang008
+  rotate: false
+  xy: 297, 258
+  size: 116, 106
+  orig: 116, 106
+  offset: 0, 0
+  index: -1
+Pang009
+  rotate: false
+  xy: 128, 169
+  size: 126, 114
+  orig: 126, 114
+  offset: 0, 0
+  index: -1
+Pang010
+  rotate: false
+  xy: 256, 134
+  size: 132, 122
+  orig: 132, 122
+  offset: 0, 0
+  index: -1
+Pang011
+  rotate: false
+  xy: 0, 41
+  size: 138, 126
+  orig: 138, 126
+  offset: 0, 0
+  index: -1
+Pang012
+  rotate: false
+  xy: 140, 2
+  size: 142, 130
+  orig: 142, 130
+  offset: 0, 0
+  index: -1
+Pang013
+  rotate: false
+  xy: 284, 0
+  size: 146, 132
+  orig: 146, 132
+  offset: 0, 0
+  index: -1
+
+kwang2.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Pang014
+  rotate: false
+  xy: 0, 288
+  size: 148, 134
+  orig: 148, 134
+  offset: 0, 0
+  index: -1
+Pang015
+  rotate: false
+  xy: 150, 286
+  size: 150, 136
+  orig: 150, 136
+  offset: 0, 0
+  index: -1
+Pang016
+  rotate: false
+  xy: 302, 284
+  size: 152, 138
+  orig: 152, 138
+  offset: 0, 0
+  index: -1
+Pang017
+  rotate: false
+  xy: 0, 146
+  size: 152, 138
+  orig: 152, 138
+  offset: 0, 0
+  index: -1
+Pang018
+  rotate: false
+  xy: 154, 142
+  size: 154, 140
+  orig: 154, 140
+  offset: 0, 0
+  index: -1
+Pang019
+  rotate: false
+  xy: 310, 142
+  size: 154, 140
+  orig: 154, 140
+  offset: 0, 0
+  index: -1
+Pang020
+  rotate: false
+  xy: 0, 0
+  size: 154, 140
+  orig: 154, 140
+  offset: 0, 0
+  index: -1
+Pang021
+  rotate: false
+  xy: 156, 0
+  size: 154, 140
+  orig: 154, 140
+  offset: 0, 0
+  index: -1
+Pang022
+  rotate: false
+  xy: 312, 0
+  size: 154, 140
+  orig: 154, 140
+  offset: 0, 0
+  index: -1
+
+kwang3.png
+size: 256,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Particle
+  rotate: true
+  xy: 0, 0
+  size: 207, 229
+  orig: 207, 229
+  offset: 0, 0
+  index: -1
+
+kwang4.png
+size: 512,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Light
+  rotate: false
+  xy: 0, 0
+  size: 365, 368
+  orig: 365, 368
+  offset: 0, 0
+  index: -1
