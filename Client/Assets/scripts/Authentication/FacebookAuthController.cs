@@ -39,8 +39,14 @@ public class FacebookAuthController : MonoBehaviour
 
     public void SignInWithFacebook()
     {
+#if UNITY_EDITOR
+        LoginManager.instance.GoToLobby();
+#endif
+
+#if !UNITY_EDITOR
         var permission = new List<string>() { "public_profile", "email" };
         FB.LogInWithReadPermissions(permission, AuthCallBack);
+#endif
     }
 
     private void AuthCallBack(ILoginResult result)
@@ -49,7 +55,7 @@ public class FacebookAuthController : MonoBehaviour
         {
             var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
             //debug.text = (aToken.UserId);
-            loginPanel.SetActive(false);
+            LoginManager.instance.GoToLobby();
         }
         else
         {
