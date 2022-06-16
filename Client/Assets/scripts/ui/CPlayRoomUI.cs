@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using FreeNet;
@@ -8,11 +8,11 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	// 원본 이미지들.
 	Sprite back_image;
-
+	byte game_count;
 	byte pee_count;
 	// 각 슬롯의 좌표 객체.
 	[SerializeField]
-	Transform floor_slot_root;
+	Transform[] floor_slot_root;
 	List<Vector3> floor_slot_position;
 
 	[SerializeField]
@@ -66,14 +66,15 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 	
 	void Start()
 	{
-		enter();
+		game_count = 0;
+		reset();
 		audio = GameObject.Find("Shuffle");
 		SendBombing = GameObject.Find("SendBomb");
 		ShuffleAudio = GameObject.Find("passcards");
 		playonclick = GetComponent<AudioSource>();
 		audio.GetComponent<AudioSource>();
 	}
-
+	
 	void Awake()
 	{
 		if (this.is_test_mode)
@@ -113,7 +114,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		this.back_image = CSpriteManager.Instance.get_sprite("back");
 
 		this.floor_slot_position = new List<Vector3>();
-		make_slot_positions(this.floor_slot_root, this.floor_slot_position);
+		
 
 
 		// 카드 만들어 놓기.
@@ -136,9 +137,39 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		this.ef_focus.SetActive(false);
 
 		load_hint_arrows();
+		//enter();
 	}
 
-
+	public void start_game(){
+		clear_ui();
+		CNetworkManager.Instance.message_receiver = this;
+		StartCoroutine(sequential_packet_handler());
+		// if( GameController.instance.IsMulti()){
+		// 	CPacket send = CPacket.create((short)PROTOCOL.READY_TO_START);
+		// }
+		if ( GameController.instance.IsAI()){
+			CNetworkManager.Instance.start_localserver();
+		}
+		
+	}
+	void ReSetSlots(byte player_me_index){
+		//List<CPlayerInfoSlot> player_info_slots
+		//CPlayerCardPosition[] player_card_positions
+		CPlayerInfoSlot buf_info_slots;
+		CPlayerCardPosition buf_card_positions;
+		buf_info_slots = player_info_slots[0];
+		buf_card_positions = player_card_positions[0];
+		make_slot_positions(this.floor_slot_root[player_me_index], this.floor_slot_position);
+		if(player_me_index == 0){
+		 	return;
+		}
+		else if(player_me_index == 1 && game_count == 0){
+		 	player_info_slots[0] = player_info_slots[1];
+			player_info_slots[1] = buf_info_slots;
+			player_card_positions[0] = player_card_positions[1];
+			player_card_positions[1] = buf_card_positions;
+		}
+	}
 	void reset()
 	{
 		this.card_manager.make_all_cards();
@@ -293,7 +324,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 				byte ui_slot_index = (byte)(looping * 5);
 				// 플레이어에게는 한번에 5장씩 분배한다.
 				// Distribute 5 cards to each player at a time.
-				for (int card_index = 0; card_index < 5; ++card_index)
+				for (int card_index = 0; card_index < 5 ; ++card_index)
 				{
 					CCardPicture card_picture = this.deck_cards.Pop();
 					card_picture.set_slot_index(ui_slot_index);
@@ -318,16 +349,16 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 						card_picture.update_backcard(this.back_image);
 						card_picture.transform.localScale = SCALE_TO_OTHER_HAND;
 						move_card(card_picture, card_picture.transform.position,
-							this.player_card_positions[player_index].get_hand_position(ui_slot_index));
+						this.player_card_positions[player_index].get_hand_position(ui_slot_index));
 					}
 
 					++ui_slot_index;
 
-					yield return new WaitForSeconds(0.02f);
+					yield return new WaitForSeconds(0.03f);
 				}
 			}
 		}
-
+		yield return new WaitForSeconds(0.3f);
 		sort_floor_cards_after_distributed(begin_cards_picture);
 		sort_player_hand_slots(this.player_me_index);
 
@@ -393,17 +424,6 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		}
 	}
 
-
-	public void enter()
-	{
-		clear_ui();
-
-		CNetworkManager.Instance.message_receiver = this;
-        CNetworkManager.Instance.start_localserver();
-		StartCoroutine(sequential_packet_handler());
-	}
-
-
 	void IMessageReceiver.on_recv(CPacket msg)
 	{
 		CPacket clone = new CPacket();
@@ -456,11 +476,16 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 						CNetworkManager.Instance.send(send);
 					}
 					break;
-
+				case PROTOCOL.GAME_SERVER_STARTED:
+					{
+						CPacket send = CPacket.create((short)PROTOCOL.READY_TO_START);
+						CNetworkManager.Instance.send(send);
+					}
+					break;
 				case PROTOCOL.PLAYER_ORDER_RESULT:
 					{
 						reset();
-
+						
 						CUIManager.Instance.show(UI_PAGE.POPUP_PLAYER_ORDER);
 						CPopupPlayerOrder popup =
 							CUIManager.Instance.get_uipage(UI_PAGE.POPUP_PLAYER_ORDER).GetComponent<CPopupPlayerOrder>();
@@ -468,7 +493,10 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 						popup.play();
 
 						yield return new WaitForSeconds(2.6f);
-
+						if(GameController.instance.IsMulti()){
+							player_me_index = msg.pop_byte();
+							ReSetSlots(player_me_index);
+						}	
 						byte slot_count = msg.pop_byte();
 						byte best_number = 0;
 						byte head = 0;
@@ -497,14 +525,16 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 						yield return new WaitForSeconds(0.5f);
 
 						GameObject ef = CUIManager.Instance.get_uipage(UI_PAGE.POPUP_FIRST_PLAYER);
-						if (head == 0)
+						if (head != player_me_index)
 						{
 							ef.transform.localPosition = new Vector3(100, 100, 0);
+							this.player_info_slots[(player_me_index + 1)%2].set_order_mark(true);
 						}
 						else
 						{
 							//Debug.Log("Blood Cards Count ");
 							ef.transform.localPosition = new Vector3(100, -100, 0);
+							this.player_info_slots[player_me_index].set_order_mark(true);
 						}
 						CUIManager.Instance.show(UI_PAGE.POPUP_FIRST_PLAYER);
 
@@ -520,10 +550,20 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 						{
 							this.test_auto_slot_index = 0;
 						}
-
+						PlayerInfo mine = Backend.instance.mine;
+						PlayerInfo other = Backend.instance.other;
 						Queue<CCard> floor_cards = new Queue<CCard>();
 						// floor cards.
-						this.player_me_index = msg.pop_byte();
+						if(GameController.instance.IsAI()){
+							this.player_me_index = msg.pop_byte();
+							player_info_slots[0].set_user_info(mine.pname, mine.coins.ToString(), "");
+							player_info_slots[1].set_user_info("bot", "", "");
+						}else if(GameController.instance.IsMulti()){
+							player_info_slots[this.player_me_index].set_user_info(mine.pname, mine.coins.ToString(), "");
+							player_info_slots[(this.player_me_index+1)%2].set_user_info(other.pname, other.coins.ToString(), "");
+							int a = (this.player_me_index+1)%2;
+						}
+						game_count ++;
 						byte floor_count = msg.pop_byte();
 						for (byte i = 0; i < floor_count; ++i)
 						{
@@ -567,7 +607,11 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 						yield return StartCoroutine(distribute_cards(floor_cards, player_cards));
 					}
 					break;
-
+				case PROTOCOL.START_TURN_OTHER:
+					{
+						this.player_info_slots[(player_me_index+1)%2].set_player_turn(true);
+					}
+					break;
 				case PROTOCOL.START_TURN:
 					{
 						byte remain_bomb_card_count = msg.pop_byte();
@@ -575,13 +619,13 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 						if (this.is_test_mode)
 						{
-							if (this.player_hand_card_manager[0].get_card_count() <= 0)
+							if (this.player_hand_card_manager[player_me_index].get_card_count() <= 0)
 							{
 								break;
 							}
 
 							CPacket card_msg = CPacket.create((short)PROTOCOL.SELECT_CARD_REQ);
-							CCardPicture card_pic = this.player_hand_card_manager[0].get_card(0);
+							CCardPicture card_pic = this.player_hand_card_manager[player_me_index].get_card(0);
 
 							card_msg.push(card_pic.card.number);
 							card_msg.push((byte)card_pic.card.pae_type);
@@ -595,8 +639,9 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 						{
 							// 내 차례가 되었을 때 카드 선택 기능을 활성화 시켜준다.
 							this.ef_focus.SetActive(true);
+							player_info_slots[player_me_index].set_player_turn(true);
 							this.card_collision_manager.enabled = true;
-							this.player_hand_card_manager[0].enable_all_colliders(true);
+							this.player_hand_card_manager[player_me_index].enable_all_colliders(true);
 
 							// 이전에 폭탄낸게 남아있다면 가운데 카드를 뒤집을 수 있도록 충돌박스를 켜준다.
 							if (remain_bomb_card_count > 0)
@@ -606,11 +651,14 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 								show_hint_mark(top_card.transform.position);
 							}
+							
 						}
 					}
 					break;
 
 				case PROTOCOL.SELECT_CARD_ACK:
+					player_info_slots[player_me_index].set_player_turn(false);
+					player_info_slots[(player_me_index+1)%2].set_player_turn(false);
 					yield return StartCoroutine(on_select_card_ack(msg));
 					break;
 
@@ -686,28 +734,6 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	IEnumerator on_game_result(CPacket msg)
 	{
-
-
-		Debug.Log("The Game has ended");
-
-		int Player_One=PlayerPrefs.GetInt("PlayerFirstScore");
-		int Player_Two = PlayerPrefs.GetInt("PlayerSecondScore");
-
-        if (Player_One > Player_Two)
-        {
-			Debug.Log("Player One Wins ");
-			CUIManager.Instance.show(UI_PAGE.POPUP_GAME_RESULT);
-			CPopupGameResult popup =
-				CUIManager.Instance.get_uipage(UI_PAGE.POPUP_GAME_RESULT).GetComponent<CPopupGameResult>();
-		}
-        else
-        {
-			Debug.Log("You Lost the Game");
-			CUIManager.Instance.show(UI_PAGE.POPUP_GAME_RESULT_LOST);
-			CPopupGameResult popup =
-			CUIManager.Instance.get_uipage(UI_PAGE.POPUP_GAME_RESULT_LOST).GetComponent<CPopupGameResult>();
-		}
-
 		byte is_win = msg.pop_byte();
 		short money = msg.pop_int16();
 		short score = msg.pop_int16();
@@ -716,10 +742,13 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 		CUIManager.Instance.show(UI_PAGE.POPUP_STOP);
 		yield return new WaitForSeconds(2.0f);
-
+		player_info_slots[0].reset();
+		player_info_slots[1].reset();
 		CUIManager.Instance.hide(UI_PAGE.POPUP_STOP);
 
-	
+		CUIManager.Instance.show(UI_PAGE.POPUP_GAME_RESULT);
+		CPopupGameResult popup = 
+			CUIManager.Instance.get_uipage(UI_PAGE.POPUP_GAME_RESULT).GetComponent<CPopupGameResult>();
 		//popup.refresh(is_win, money, score, double_val, final_score);
 	}
 
@@ -768,9 +797,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		this.player_info_slots[player_index].update_go(go_count);
 		this.player_info_slots[player_index].update_shake(shaking_count);
 		this.player_info_slots[player_index].update_ppuk(ppuk_count);
-
         this.player_info_slots[player_index].update_peecount(pee_count);
-		
+
 	}
 
 
@@ -815,7 +843,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 			}
 		}
 
-		short score = msg.pop_int16();
+		//short score = msg.pop_int16();
+		short score = msg.pop_byte();
 		byte remain_bomb_card_count = msg.pop_byte();
 
 		// UI적용.
@@ -1102,8 +1131,11 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		{
 			CVisualFloorSlot slot =
 				this.floor_ui_slots.Find(obj => obj.is_same_card(cards_to_give[i].number));
+			Debug.Log(string.Format("find floor slot. {0}, {1}, {2}",
+					cards_to_give[i].number, cards_to_give[i].pae_type, cards_to_give[i].position));
 			if (slot == null)
 			{
+				
 				UnityEngine.Debug.LogError(string.Format("Cannot find floor slot. {0}, {1}, {2}",
 					cards_to_give[i].number, cards_to_give[i].pae_type, cards_to_give[i].position));
 			}
@@ -1554,6 +1586,9 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 		msg.push(slot);
 		msg.push(is_shaking);
 		CNetworkManager.Instance.send(msg);
+	}
+	public void GoOut(){
+		GameController.instance.GoOut();
 	}
 	//------------------------------------------------------------------------------
 }

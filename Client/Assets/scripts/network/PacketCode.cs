@@ -27,6 +27,7 @@ public enum PACKET_CODE
     ERROR,
     FIND_OK,
     FIND_FAIL,
+    FIND_MATCHED,
     START_OK,
     CARD_OK,
     GOSTOP_OK,
@@ -43,6 +44,7 @@ public enum PACKET_CODE
     GUILDRANKING,
     LEADERBOARD
 }
+
 
 [System.Serializable]
 public class Packet
