@@ -18,9 +18,6 @@ public class CStageSelect : MonoBehaviour {
 		transform.Find("button_challenge").GetComponent<Button>().onClick.AddListener(this.on_challenge);
 		transform.Find("button_prev").GetComponent<Button>().onClick.AddListener(this.on_prev);
 		transform.Find("button_next").GetComponent<Button>().onClick.AddListener(this.on_next);
-
-		this.room = GameObject.Find("Main").transform.Find("playroom").gameObject;
-
 		this.has_money = transform.Find("money").GetComponent<Text>();
 		this.npc_name = transform.Find("npc_name").GetComponent<Text>();
 		this.grade = transform.Find("grade").GetComponent<Text>();
@@ -37,11 +34,7 @@ public class CStageSelect : MonoBehaviour {
 
 	void on_challenge()
 	{
-		this.room.SetActive(true);
-
-		CUIManager.Instance.hide(UI_PAGE.STAGE_SELECT);
-		CUIManager.Instance.hide(UI_PAGE.CREDIT_BAR);
-		CUIManager.Instance.hide(UI_PAGE.MAIN_MENU);
+		GameController.instance.StartFind();
 	}
 
 

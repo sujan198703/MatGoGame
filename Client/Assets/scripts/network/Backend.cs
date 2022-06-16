@@ -62,7 +62,7 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
 
     void Awake()
     {
-        Debug.Log("sdfsdfsdd==================" + byte.MaxValue);
+
         if (instance == null) instance = this;
 
         waitSync = true;
@@ -81,8 +81,6 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
 
     private void Start()
     {
-        if(this.serverURL != "")
-            ConnectionStatus();
         CanLogin = false;
         Debug.Log("start");
     }
@@ -100,7 +98,7 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
                 LoginFormPopUp.SetActive(true);
                 break;
             case Status.NotConnected:
-                GameController.instance.ShowLoginPage();
+                //GameController.instance.ShowLoginPage();
                 LoginFormPopUp.SetActive(false);
                 RetryConnectionPopUp.SetActive(true);
                 break;
@@ -436,10 +434,7 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
         if(instance == null) return;
         instance.Open();
     }
-
     public void Open(){
-        
-    
         string packetstr = GetPacketString(PACKET_CODE.OPEN, mine);
         //w.SendAsync(System.Text.Encoding.ASCII.GetBytes(packetstr));
         //Send(packetstr);
@@ -505,7 +500,7 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
             }
             else
             {
-                CUIManager.Instance.show(UI_PAGE.POPUP_MESSAGE, rdata);
+                //CUIManager.Instance.show(UI_PAGE.POPUP_MESSAGE, rdata);
             }
         }
 

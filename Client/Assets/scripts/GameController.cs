@@ -35,10 +35,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey("a"))
-        {
-            CUIManager.Instance.show(UI_PAGE.SETTING);
-        }
+       
     }
  
     public void ShowLoginPage(){
