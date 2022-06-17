@@ -81,6 +81,7 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
 
     private void Start()
     {
+        ConnectionStatus();
         CanLogin = false;
         Debug.Log("start");
     }
@@ -91,6 +92,7 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
 	}
     void Update()
     {
+        Debug.Log("connection stat---" + CurrentStatus);
         switch (CurrentStatus)
         {
             case Status.Connected:
@@ -477,7 +479,6 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
 
         received = false;
         Send(packetstr);
-
         while (received == false && connected == true) yield return null;
         if (connected == false)
         {
