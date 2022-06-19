@@ -90,13 +90,16 @@
     <Compile Include="Assets\GoogleSignIn\Impl\NativeFuture.cs" />
     <Compile Include="Assets\scripts\AudioPlay.cs" />
     <Compile Include="Assets\scripts\OnclickHide.cs" />
+    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataManager.cs" />
     <Compile Include="Assets\scripts\ui\CMainMenu.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppRequests.cs" />
     <Compile Include="Assets\scripts\ui\CPlayRoomUI.cs" />
     <Compile Include="Assets\scripts\client\CDelayedDeactive.cs" />
     <Compile Include="Assets\scripts\network\Encryption.cs" />
     <Compile Include="Assets\scripts\Managers\LoginManager.cs" />
+    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataStorageManager.cs" />
     <Compile Include="Assets\scripts\PlayerDetails.cs" />
+    <Compile Include="Assets\scripts\GameController.cs" />
     <Compile Include="Assets\FreeNet\CFreeNetUnityService.cs" />
     <Compile Include="Assets\scripts\ui\CPopupGameResult.cs" />
     <Compile Include="Assets\scripts\Panels\MoneySafePanel.cs" />
@@ -104,6 +107,7 @@
     <Compile Include="Assets\scripts\ui\CPopupPlayerOrder.cs" />
     <Compile Include="Assets\scripts\NetworkTest\Welcome.cs" />
     <Compile Include="Assets\FreeNet\CFreeNetEventManager.cs" />
+    <Compile Include="Assets\scripts\Panels\Login\UpdateAppVersionPanel.cs" />
     <Compile Include="Assets\GoogleSignIn\GoogleSignIn.cs" />
     <Compile Include="Assets\scripts\CBrain.cs" />
     <Compile Include="Assets\scripts\ui\CPopupChoiceCard.cs" />
@@ -122,6 +126,7 @@
     <Compile Include="Assets\GoogleSignIn\GoogleSignInConfiguration.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\UITexturePacker.cs" />
     <Compile Include="Assets\scripts\public\CHelper.cs" />
+    <Compile Include="Assets\scripts\GameSetting.cs" />
     <Compile Include="Assets\scripts\client\CSpriteManager.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPActionType.cs" />
     <Compile Include="Assets\scripts\table\CTableLevels.cs" />
@@ -179,7 +184,8 @@
     <Compile Include="Assets\scripts\network\ServerQueue.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppEvents.cs" />
     <Compile Include="Assets\scripts\public\CSingleton.cs" />
-    <Compile Include="Assets\scripts\Panels\Login\UpdateAppVersionPanel.cs" />
+    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataStorageInterface.cs" />
+    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataFileManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

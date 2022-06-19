@@ -24,7 +24,6 @@ public class DownloadPatchPanel : MonoBehaviour
 
     void DownloadCompleted()
     {
-
     }
 
     public void ShowDownloadPatchPanel()
