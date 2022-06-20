@@ -12,7 +12,7 @@ public class ClientSend : MonoBehaviour
 
     public static void WelcomePacketRecieved()
     {
-        using (DotnetPacket.Packet _packet = new DotnetPacket.Packet())
+        using (DotnetPacket.Packet _packet = new DotnetPacket.Packet((int)DotnetPacket.ClientPackets.welcomeReceived))
         {
             _packet.Write(Client.instance.myId);
             _packet.Write(Client.instance.inputField.text);

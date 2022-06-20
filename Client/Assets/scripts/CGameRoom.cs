@@ -95,7 +95,7 @@ public class CGameRoom
     public void on_receive(CPlayer owner, CPacket msg)
     {
 
-		ServerQueue.instance.Pop();
+		//ServerQueue.instance.Pop();
 		PROTOCOL protocol = (PROTOCOL)msg.pop_protocol_id();
         if (is_received(owner.player_index, protocol))
         {
