@@ -3,14 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using WebSocketSharp;
-
-public class Backend : MonoBehaviour
+using FreeNet;
+using Newtonsoft.Json;
+public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
 {
     static public Backend instance;
+    public delegate void MessageHandler(CPacket msg);
+    private Queue<Packet> packet_queue = new Queue<Packet>();
+    private Queue<WPacket> wpacket_queue = new Queue<WPacket>();
     private enum Status
     {
         Connected,
         NotConnected,
+        LoginedIn,
+        NotLoginedIn,
+        Finding,
+        Matched,
     }
 
     private Status CurrentStatus;
@@ -18,7 +26,7 @@ public class Backend : MonoBehaviour
     [SerializeField] GameObject RetryConnectionPopUp;
     [SerializeField] GameObject LoginFormPopUp;
 
-    public string serverURL = "ws://localhost:8080";
+    public string serverURL;
 
     public UnityWebSocket w;
     private WebSocket ws;
@@ -29,8 +37,8 @@ public class Backend : MonoBehaviour
     public PACKET_CODE response;
     public string rdata;
 
-    // public Player mine;
-    // public Player other;
+    public PlayerInfo mine = new PlayerInfo();
+    public PlayerInfo other = new PlayerInfo();
 
     public int gameId;
 
@@ -54,6 +62,7 @@ public class Backend : MonoBehaviour
 
     void Awake()
     {
+
         if (instance == null) instance = this;
 
         waitSync = true;
@@ -72,103 +81,18 @@ public class Backend : MonoBehaviour
 
     private void Start()
     {
-        CanLogin = false;
-
         ConnectionStatus();
-    }
-
-    public void RetryConnection()
-    {
-        //if (ws.IsAlive)
-        //    return;
-        //else
-        //{
-        //    ConnectionStatus();
-        //}
-
-
-        if (w.IsConnectedtoServer())
-            return;
-        else
-        {
-            ConnectionStatus();
-        }
-
-    }
-
-    private void ConnectionStatus()
-    {
-        //print("Trying Connection......");
-
-        //ws = new WebSocket(serverURL);
-
-        //ws.OnOpen += (sender, e) =>
-        //{
-        //    Debug.Log("Connected");
-        //    CanLogin = true;
-        //    CurrentStatus = Status.Connected;
-        //};
-
-        //ws.OnClose += (sender, e) =>
-        //{
-        //    Debug.Log("Not Connected");
-        //    CurrentStatus = Status.NotConnected;
-        //    CanLogin = false;
-        //};
-
-        //ws.OnMessage += (sender, e) =>
-        //{
-        //    Debug.Log(e.Data);
-        //    AESCrypto.SetKey(e.Data);
-        //    print(AESCrypto.GetKey());
-        //};
-
-        //ws.Connect();
-
-
-        print("Trying Connection......");
-
-        w = new UnityWebSocket(serverURL);
-
-        w.OnOpen += W_OnOpen;
-
-        w.OnClose += W_OnClose;
-
-        w.OnMessage += W_OnMessage;
-
-        w.Connect();
-    }
-
-    private void W_OnMessage(UnityWebSocket sender, byte[] data)
-    {
-        Debug.Log("From server: " + System.Text.Encoding.ASCII.GetString(data));
-        AESCrypto.SetKey(data.ToString());
-        print(AESCrypto.GetKey());
-        ServerQueue.instance.AddToQueue(System.Text.Encoding.ASCII.GetString(data));
-    }
-
-    private void W_OnClose(UnityWebSocket sender, int code, string reason)
-    {
-        Debug.Log("Not Connected");
-        CurrentStatus = Status.NotConnected;
         CanLogin = false;
+        Debug.Log("start");
     }
-
-    private void W_OnOpen(UnityWebSocket accepted)
-    {
-        Debug.Log("Connected");
-        CanLogin = true;
-        CurrentStatus = Status.Connected;
-    }
-
-    public void SendPlayData(string data)
-    {
-        // ws.Send(data);
-        w.SendAsync(System.Text.Encoding.ASCII.GetBytes(data));
-    }
-
+    void OnDisable()
+	{
+        if(w != null)
+            w.Close();
+	}
     void Update()
     {
+        Debug.Log("connection stat---" + CurrentStatus);
         switch (CurrentStatus)
         {
             case Status.Connected:
@@ -176,31 +100,152 @@ public class Backend : MonoBehaviour
                 LoginFormPopUp.SetActive(true);
                 break;
             case Status.NotConnected:
+                //GameController.instance.ShowLoginPage();
                 LoginFormPopUp.SetActive(false);
                 RetryConnectionPopUp.SetActive(true);
                 break;
             default:
+                LoginFormPopUp.transform.parent.gameObject.SetActive(false);
+                
                 break;
         }
+
+        if(packet_queue.Count > 0)
+            PacketQueue(packet_queue.Dequeue());
+        if(wpacket_queue.Count > 0)
+            RecivedProtocol(wpacket_queue.Dequeue());
     }
 
-    public void SendDetails(PlayerDetails playerDetails)
+    void PacketQueue(Packet packet){
+        if(packet.cmd == PACKET_CODE.FIND_MATCHED){
+            CurrentStatus = Status.Matched;
+            PlayerInfo info = new PlayerInfo();
+            JsonUtility.FromJsonOverwrite(packet.data, info);
+            other = info;
+            GameController.instance.StartMultiGame();
+        }
+        if(packet.cmd == PACKET_CODE.GOOUT){
+            GameController.instance.GoOut();
+        }
+    }
+
+    public void RetryConnection()
     {
-        if (ws == null || CanLogin == false)
+
+        if (w.IsConnectedtoServer())
+            return;
+        else
         {
-            Debug.Log("not connected!");
+            ConnectionStatus();
+        }
+    }
+
+    private void ConnectionStatus()
+    {
+        print("Trying Connection......");
+        w = new UnityWebSocket(serverURL);
+        w.OnOpen += W_OnOpen;
+        w.OnClose += W_OnClose;
+        w.OnMessage += W_OnMessage;
+        w.Connect();
+    }
+    #region MessageHandler
+    private void W_OnMessage(UnityWebSocket sender, byte[] data)
+    {
+        AESCrypto.SetKey(data.ToString());
+        ServerQueue.instance.AddToQueue(System.Text.Encoding.ASCII.GetString(data));
+        if(connected)
+            WebSocket_OnMessage(sender, data);
+        if(CanLogin)
+            connected = true;
+    }
+
+    private void WebSocket_OnMessage(UnityWebSocket sender, byte[] data)
+    {
+        string str = System.Text.Encoding.UTF8.GetString(data);
+        if( ParsePacket(str) ){
+            received = true;
+            Debug.Log("codeReceive<-" + str);
+        }
+        
+
+    }
+
+    public bool ParsePacket(string data)
+    {
+        response = PACKET_CODE.UNKNOWN;
+        if (data == null) return false;
+
+        Packet packet = new Packet();
+        WPacket protocol_data = new WPacket();
+        JsonUtility.FromJsonOverwrite(data, protocol_data);
+        JsonConvert.DeserializeObject(data);
+        JsonUtility.FromJsonOverwrite(data, packet);
+        if(protocol_data.isProtocol != null && protocol_data.isProtocol == 0){
+            response = packet.cmd;
+            rdata = packet.data;
+            if(!InspecterResponse(packet)){
+                response = PACKET_CODE.UNKNOWN;
+                rdata = null;
+            }
+            return true;
+        }else{
+            wpacket_queue.Enqueue(protocol_data);
+            //RecivedProtocol((PROTOCOL)packet.cmd, protocol_data);
+            response = PACKET_CODE.UNKNOWN;
+        }
+        return false;
+        //packets.Add(packet);
+    }
+
+    public bool InspecterResponse(Packet packet){
+        if(packet.cmd == PACKET_CODE.FIND_MATCHED){
+            packet_queue.Enqueue(packet);
+            Debug.Log("i matched other opponent!");
+            return false;
+        }
+        if(packet.cmd == PACKET_CODE.GOOUT){
+            packet_queue.Enqueue(packet);
+            Debug.Log("go out!");
+            return false;
+        }
+        return true;
+    }
+    
+    public void RecivedProtocol(WPacket packet){
+        
+        CPacket msg = CPacket.create((short)packet.cmd);
+        Debug.Log("ReceiveProtocol-->" + packet.cmd + "--data--");
+		//msg.push(current_turn_player_index);
+        if(packet.listData == null){
+            CNetworkManager.Instance.on_message(pre_send(msg));
             return;
         }
-
-       // ws.Send(JsonUtility.ToJson(playerDetails));
-
-        ws.Send(System.Text.Encoding.ASCII.GetBytes(JsonUtility.ToJson(playerDetails)));
-    }
-
-    public bool isConnectedToServer()
-    {
-        bool isConnected = CanLogin;
-        return isConnected;
+        //AESCrypto crypto = new AESCrypto();
+        for(int i = 0; i < packet.listData.Length; i++){
+            //int data = int.Parse(crypto.Decrypt(packet.listData[i]));
+            int data = packet.listData[i];
+            if((PROTOCOL)packet.cmd == PROTOCOL.UPDATE_PLAYER_STATISTICS){
+                if(i == 2)
+                    msg.push((short)data);
+                else
+                    msg.push((byte)data);
+            }else if((PROTOCOL)packet.cmd == PROTOCOL.GAME_RESULT){
+                if(i == 1)
+                    msg.push((byte)data);
+                else
+                    msg.push((short)data);
+            }else if((PROTOCOL)packet.cmd == PROTOCOL.FLIP_DECK_CARD_ACK){
+                // if(i == packet.listData.Length - 3)
+                //     msg.push((short)packet.listData[i]);
+                // else    
+                    msg.push((byte)data);
+            }
+            else{
+                msg.push((byte)data);
+            }
+        }
+        CNetworkManager.Instance.on_message(pre_send(msg));
     }
 
     public string GetPacketString(PACKET_CODE cmd, object data)
@@ -217,66 +262,50 @@ public class Backend : MonoBehaviour
         return JsonUtility.ToJson(packet);
     }
 
-    private void WebSocket_OnClose(UnityWebSocket sender, int code, string reason)
+    public CPacket pre_send(CPacket msg)
     {
-        Debug.Log("Connection closed: " + code + " " + reason);
-        connected = false;
-        w = null;
-    }
-
-    private void Websocket_OnOpen(UnityWebSocket accepted)
-    {
-        connected = true;
-    }
-
-    private void WebSocket_OnMessage(UnityWebSocket sender, byte[] data)
-    {
-        string str = System.Text.Encoding.UTF8.GetString(data);
-        ParsePacket(str);
-        received = true;
-
-        Debug.Log("<= " + str);
-    }
-
-    private void WebSocket_OnError(UnityWebSocket sender, string message)
-    {
-        Debug.Log("Error: " + message);
-        w.Close();
-        w = null;
-        connected = false;
-    }
-
-    private void Close()
-    {
-        if (w != null)
-        {
-            w.Close();
-            w = null;
-        }
-        connected = false;
-    }
-
-    public void ParsePacket(string data)
-    {
-        response = PACKET_CODE.UNKNOWN;
-        if (data == null) return;
-
-        Packet packet = new Packet();
-        JsonUtility.FromJsonOverwrite(data, packet);
-        response = packet.cmd;
-        rdata = packet.data;
-
-        //packets.Add(packet);
+        msg.record_size();
+        CPacket clone = CPacket.create(msg.protocol_id);
+        clone.overwrite(msg.buffer, 0);
+        clone.pop_int16();
+        return clone;
     }
 
     public void Send(string str)
     {
         if (!w.IsConnectedtoServer()) return;
 
-        Debug.Log("-> " + str);
+        Debug.Log("Send-> " + str);
 
         byte[] data = System.Text.Encoding.UTF8.GetBytes(str);
         w.SendAsync(data);
+    }
+    #endregion
+
+
+    private void W_OnClose(UnityWebSocket sender, int code, string reason)
+    {
+        Debug.Log("Not Connected");
+        CurrentStatus = Status.NotConnected;
+        CanLogin = false;
+    }
+
+    private void W_OnOpen(UnityWebSocket accepted)
+    {
+        Debug.Log("Connected");
+        CanLogin = true;
+        CurrentStatus = Status.Connected;
+    }
+
+    private void W_OnError(UnityWebSocket sender, string message)
+    {
+        Debug.Log("Connected");
+    }
+
+    public bool isConnectedToServer()
+    {
+        bool isConnected = CanLogin;
+        return isConnected;
     }
 
     public bool ConnectedToServer()
@@ -311,31 +340,34 @@ public class Backend : MonoBehaviour
 
     public void Login(string pname, string pass)
     {
+        
         LoginInfo info = new LoginInfo();
 
         info.pname = pname;
         info.pass = pass;
-
         string packetstr = GetPacketString(PACKET_CODE.LOGIN, info);
-        w.SendAsync(System.Text.Encoding.ASCII.GetBytes(packetstr));
-        //        Send(packetstr);
-        //        StartCoroutine(DoRequest(PACKET_CODE.LOGIN, packetstr, true));
+        //w.SendAsync(System.Text.Encoding.ASCII.GetBytes(packetstr));
+        //Send(packetstr);
+        StartCoroutine(DoRequest(PACKET_CODE.LOGIN, packetstr, true));
+        
+
+
     }
 
-    static public void OnProfile()
+    static public void OnProfile(int id)
     {
         if (instance == null) return;
 
-        instance.Profile();
+        instance.Profile(id);
     }
 
-    public void Profile()
+    public void Profile(int id)
     {
         //  if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
         //  if (mine.id == -1) return;
 
-        string packetstr = GetPacketString(PACKET_CODE.PROFILE, "");
-        //StartCoroutine(DoRequest(PACKET_CODE.PROFILE, packetstr));
+        string packetstr = GetPacketString(PACKET_CODE.PROFILE, id.ToString());
+        StartCoroutine(DoRequest(PACKET_CODE.PROFILE, packetstr));
     }
 
     static public void OnUpdate()
@@ -358,60 +390,15 @@ public class Backend : MonoBehaviour
         //   StartCoroutine(DoRequest(PACKET_CODE.UPDATE, packetstr));
     }
 
-    static public void OnStartGame()
+    private void Close()
     {
-        if (instance == null) return;
-        instance.StartGame();
+        if (w != null)
+        {
+            w.Close();
+            w = null;
+        }
+        connected = false;
     }
-
-    public void StartGame()
-    {
-        //   if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
-        //   if (other == null) other = Player.Find(CARD_OWNER.OTHER);
-        //
-        //   StartGameInfo info = new StartGameInfo();
-        //   info.user1 = mine.id;
-        //   info.user2 = other.id;
-        //   info.coin1 = mine.coins;
-        //   info.coin2 = other.coins;
-        //
-        //   if (other.type == PLAYER_TYPE.COMPUTER) info.user2 = -1;
-
-        //   string packetstr = GetPacketString(PACKET_CODE.STARTGAME, info);
-        //    StartCoroutine(DoRequest(PACKET_CODE.STARTGAME, packetstr));
-    }
-
-    //  static public void OnEndGame(CARD_OWNER winner, int earned)
-    //  {
-    //      if (instance == null) return;
-    //      instance.OnEndGame0(winner, earned);
-    //  }
-
-    // public void OnEndGame0(CARD_OWNER winner, int earned)
-    // {
-    //     if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
-    //     if (other == null) other = Player.Find(CARD_OWNER.OTHER);
-    //
-    //     EndGameInfo info = new EndGameInfo();
-    //     if (winner == CARD_OWNER.MINE)
-    //     {
-    //         info.winner = mine.id;
-    //     }
-    //     if (winner == CARD_OWNER.OTHER)
-    //     {
-    //         info.winner = other.id;
-    //         if (other.type == PLAYER_TYPE.COMPUTER && MultiPlay.goOut == false) info.winner = -1;
-    //     }
-    //     if (earned < 0) earned *= -1;
-    //     info.gameid = gameId;
-    //     info.earned = earned;
-    //     info.user1 = mine.id;
-    //     info.coin3 = mine.coins;
-    //     info.coin4 = other.coins;
-    //
-    //     string packetstr = GetPacketString(PACKET_CODE.ENDGAME, info);
-    //     StartCoroutine(DoRequest(PACKET_CODE.ENDGAME, packetstr));
-    // }
 
     static public void OnGuildRanking()
     {
@@ -445,6 +432,17 @@ public class Backend : MonoBehaviour
         //    StartCoroutine(DoRequest(PACKET_CODE.LEADERBOARD, packetstr));
     }
 
+    static public void OnOpen(){
+        if(instance == null) return;
+        instance.Open();
+    }
+    public void Open(){
+        string packetstr = GetPacketString(PACKET_CODE.OPEN, mine);
+        //w.SendAsync(System.Text.Encoding.ASCII.GetBytes(packetstr));
+        //Send(packetstr);
+        StartCoroutine(DoRequest(PACKET_CODE.OPEN, packetstr, true));
+    }
+
     IEnumerator DoRequest(PACKET_CODE code, string packetstr, bool waitdlg = false)
     {
         // if (mine == null) mine = Player.Find(CARD_OWNER.MINE);
@@ -459,10 +457,10 @@ public class Backend : MonoBehaviour
         {
             connected = false;
             w = new UnityWebSocket(serverURL);
-            w.OnClose += WebSocket_OnClose;
-            w.OnOpen += Websocket_OnOpen;
-            w.OnMessage += WebSocket_OnMessage;
-            w.OnError += WebSocket_OnError;
+            w.OnClose += W_OnClose;
+            w.OnOpen += W_OnOpen;
+            w.OnMessage += W_OnMessage;
+            w.OnError += W_OnError;
         }
 
         int count = 0;
@@ -481,7 +479,6 @@ public class Backend : MonoBehaviour
 
         received = false;
         Send(packetstr);
-
         while (received == false && connected == true) yield return null;
         if (connected == false)
         {
@@ -495,13 +492,16 @@ public class Backend : MonoBehaviour
         {
             if (response == PACKET_CODE.OK)
             {
-                //     mine.id = int.Parse(rdata);
+                mine.id = int.Parse(rdata);
                 //     GamePage.Show(PAGE_TYPE.HOME);
                 //     OnProfile0();
+                OnProfile(mine.id);
+                CurrentStatus = Status.LoginedIn;
+                GameController.instance.ShowStagePage();
             }
             else
             {
-                //PopupMessage.Show(rdata);
+                //CUIManager.Instance.show(UI_PAGE.POPUP_MESSAGE, rdata);
             }
         }
 
@@ -511,21 +511,110 @@ public class Backend : MonoBehaviour
             {
                 PlayerInfo info = new PlayerInfo();
                 JsonUtility.FromJsonOverwrite(rdata, info);
-
-                //   mine.pname = info.pname;
-                //   mine.avatar = info.avatar;
-                //   mine.guild = info.guild;
-                //   mine.coins = info.coins;
-
-                OnGuildRanking0();
-                OnLeaderboard0();
+                mine.pname = info.pname;
+                mine.avatar = info.avatar;
+                mine.guild = info.guild;
+                mine.coins = info.coins;
+                //OnGuildRanking0();
+                //OnLeaderboard0();
             }
             else
             {
                 //     PopupMessage.Show(rdata);
             }
         }
+        if (code == PACKET_CODE.OPEN){
+            if (response != PACKET_CODE.OK && response != PACKET_CODE.ALLDATA)
+            {
+                Debug.Log("Can't register data.");
+            //   ep.Close();
+                w.Close();
+                yield break;
+            }
 
+            if (response == PACKET_CODE.OK)
+            {
+                Debug.Log("OPEN_OK");
+                count = 0;
+                while (count < 3)
+                {
+                    if(CurrentStatus == Status.Matched)
+                        yield break;
+                    Send(GetPacketString(PACKET_CODE.FIND, null));
+                    received = false; while (received == false && connected == true) yield return null;
+                    if (connected == false)
+                    {
+                    //  PopupMessage.Show("Connection lost. Try again later.");
+                    //    ep.Close();
+                        yield break;
+                    }
+                    PlayerInfo info = new PlayerInfo();
+                    JsonUtility.FromJsonOverwrite(rdata, info);
+                    if (response == PACKET_CODE.FIND_OK)
+                    {
+                        //other = info;
+                        //GameController.instance.StartMultiGame();
+                        // other.id = info.id;
+                        // other.avatar = info.avatar;
+                        // other.guild = info.guild;
+                        // other.coins = info.coins;
+                        // other.pname = info.pname;
+
+                    //  ep.ShowInfo();
+                        break;
+                    }
+                    if(response == PACKET_CODE.FIND_FAIL){
+                        Debug.Log("FIND_FAILD");
+                    }
+                    if (response == PACKET_CODE.GOOUT)
+                    {
+                        goOut = true;
+                        received = true;
+                        waitSync = false;
+                        waitStart = false;
+                        waitGoStop = false;
+                    //   ep.Close();
+                        w.Close();
+                        yield break;
+                    }
+                    count++;
+                    yield return new WaitForSecondsRealtime(1f);
+                }
+
+                if (count == 3)
+                {
+                //   PopupMessage.Show("Can't find opponent. Try again later.");
+                //   ep.Close();
+                //   w.Close();
+                    yield break;
+                }
+
+                /*breaked = false;
+                closed = false;
+
+                yield return new WaitForSecondsRealtime(1f);
+                yield return StartCoroutine(DoStart());
+
+            //  ep.Close();
+                if (response == PACKET_CODE.START_OK)
+                {
+                //   GamePage.Show(PAGE_TYPE.ROOM);
+                //   other.type = PLAYER_TYPE.NETWORK;
+                //
+                //   if (startInfo.first == mine.id) firstOwner = CARD_OWNER.MINE;
+                //   else firstOwner = CARD_OWNER.OTHER;
+                //
+                //   GameLogic.instance.gameMode = GAME_MODE.MULTI;
+                //   GameLogic.instance.StartGame();
+                }
+                else
+                {
+                //   PopupMessage.Show("Sorry, some issue maybe occurred. Can't start game.");
+                    w.Close();
+                    yield break;
+                }*/
+            }
+        }
         if (code == PACKET_CODE.STARTGAME)
         {
             if (response == PACKET_CODE.OK)

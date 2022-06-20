@@ -11,6 +11,7 @@ public enum PROTOCOL : short
 
 	// 시스템 프로토콜.
     LOCAL_SERVER_STARTED = 1,	// S -> C
+	GAME_SERVER_STARTED = 2,	// S -> C
 
 	// 게임 프로토콜.
 	READY_TO_START = 10,		// C -> S
@@ -47,6 +48,7 @@ public enum PROTOCOL : short
 	PLAYER_ORDER_RESULT = 29,		// S -> C
 
 	START_TURN = 98,
+	START_TURN_OTHER = 99,
 	TURN_END = 100,
 
 	END

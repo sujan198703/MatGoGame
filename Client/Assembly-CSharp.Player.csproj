@@ -60,6 +60,7 @@
     <Compile Include="Assets\UIMenu\Prefabs\PlayOnStartVoice.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPSpriteInfo.cs" />
     <Compile Include="Assets\GoogleSignIn\GoogleSignInStatusCode.cs" />
+    <Compile Include="Assets\scripts\NetworkTest\DotnetPacket.cs" />
     <Compile Include="Assets\GoogleSignIn\Impl\BaseObject.cs" />
     <Compile Include="Assets\scripts\client\CPlayerHandCardManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\LogView.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Assets\scripts\CPlayer.cs" />
     <Compile Include="Assets\scripts\ui\CButtonCollision.cs" />
     <Compile Include="Assets\scripts\public\MiniJSON.cs" />
+    <Compile Include="Assets\scripts\Panels\Login\LoginScreenPanel.cs" />
     <Compile Include="Assets\scripts\OnBluebuttonClick.cs" />
     <Compile Include="Assets\scripts\LobbyUi\StartGame.cs" />
     <Compile Include="Assets\scripts\network\Backend.cs" />
@@ -77,7 +79,9 @@
     <Compile Include="Assets\scripts\engine\CPlayerAgent.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\DialogShare.cs" />
     <Compile Include="Assets\scripts\client\CCardManager.cs" />
+    <Compile Include="Assets\scripts\NetworkTest\Client.cs" />
     <Compile Include="Assets\scripts\engine\CGostopEngine.cs" />
+    <Compile Include="Assets\scripts\Managers\LobbyManager.cs" />
     <Compile Include="Assets\scripts\ui\CGameOption.cs" />
     <Compile Include="Assets\scripts\MenuUI\MenuController.cs" />
     <Compile Include="Assets\scripts\client\CEffectManager.cs" />
@@ -86,17 +90,24 @@
     <Compile Include="Assets\GoogleSignIn\Impl\NativeFuture.cs" />
     <Compile Include="Assets\scripts\AudioPlay.cs" />
     <Compile Include="Assets\scripts\OnclickHide.cs" />
+    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataManager.cs" />
     <Compile Include="Assets\scripts\ui\CMainMenu.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppRequests.cs" />
     <Compile Include="Assets\scripts\ui\CPlayRoomUI.cs" />
     <Compile Include="Assets\scripts\client\CDelayedDeactive.cs" />
     <Compile Include="Assets\scripts\network\Encryption.cs" />
+    <Compile Include="Assets\scripts\Managers\LoginManager.cs" />
+    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataStorageManager.cs" />
     <Compile Include="Assets\scripts\PlayerDetails.cs" />
+    <Compile Include="Assets\scripts\GameController.cs" />
     <Compile Include="Assets\FreeNet\CFreeNetUnityService.cs" />
     <Compile Include="Assets\scripts\ui\CPopupGameResult.cs" />
+    <Compile Include="Assets\scripts\Panels\MoneySafePanel.cs" />
     <Compile Include="Assets\scripts\CGameRoom.cs" />
     <Compile Include="Assets\scripts\ui\CPopupPlayerOrder.cs" />
+    <Compile Include="Assets\scripts\NetworkTest\Welcome.cs" />
     <Compile Include="Assets\FreeNet\CFreeNetEventManager.cs" />
+    <Compile Include="Assets\scripts\Panels\Login\UpdateAppVersionPanel.cs" />
     <Compile Include="Assets\GoogleSignIn\GoogleSignIn.cs" />
     <Compile Include="Assets\scripts\CBrain.cs" />
     <Compile Include="Assets\scripts\ui\CPopupChoiceCard.cs" />
@@ -106,6 +117,8 @@
     <Compile Include="Assets\scripts\engine\CFloorCardManager.cs" />
     <Compile Include="Assets\scripts\network\CNetworkManager.cs" />
     <Compile Include="Assets\scripts\public\EasingUtil.cs" />
+    <Compile Include="Assets\scripts\Helper\AnchorSetter.cs" />
+    <Compile Include="Assets\scripts\NetworkTest\ThreadManager.cs" />
     <Compile Include="Assets\scripts\client\CPlayerCardManager.cs" />
     <Compile Include="Assets\scripts\ui\CPopupShakingCards.cs" />
     <Compile Include="Assets\scripts\MenuUI\RoundToggle.cs" />
@@ -113,14 +126,19 @@
     <Compile Include="Assets\GoogleSignIn\GoogleSignInConfiguration.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\UITexturePacker.cs" />
     <Compile Include="Assets\scripts\public\CHelper.cs" />
+    <Compile Include="Assets\scripts\GameSetting.cs" />
     <Compile Include="Assets\scripts\client\CSpriteManager.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPActionType.cs" />
     <Compile Include="Assets\scripts\table\CTableLevels.cs" />
     <Compile Include="Assets\scripts\ui\CPlayerInfoSlot.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPInstance.cs" />
+    <Compile Include="Assets\scripts\NetworkTest\Connect.cs" />
     <Compile Include="Assets\scripts\LobbyUi\Popup.cs" />
     <Compile Include="Assets\scripts\client\CVisualFloorSlot.cs" />
     <Compile Include="Assets\scripts\client\CScrollingEffect.cs" />
+    <Compile Include="Assets\scripts\Panels\ProfilePanel.cs" />
+    <Compile Include="Assets\scripts\NetworkTest\ClientSend.cs" />
+    <Compile Include="Assets\scripts\Panels\Login\UnderMaintenancePanel.cs" />
     <Compile Include="Assets\scripts\GUI\Panels\ShopMenuController.cs" />
     <Compile Include="Assets\GoogleSignIn\Impl\SignInHelperObject.cs" />
     <Compile Include="Assets\scripts\client\CSpriteFadeEffect.cs" />
@@ -133,6 +151,8 @@
     <Compile Include="Assets\FreeNet\CRemoteServerPeer.cs" />
     <Compile Include="Assets\scripts\network\PacketCode.cs" />
     <Compile Include="Assets\scripts\CAIPlayer.cs" />
+    <Compile Include="Assets\scripts\Managers\SplashManager.cs" />
+    <Compile Include="Assets\scripts\Panels\Login\DownloadPatchPanel.cs" />
     <Compile Include="Assets\scripts\client\CSpriteLayerOrderManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AccessTokenMenu.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppLinks.cs" />
@@ -145,6 +165,7 @@
     <Compile Include="Assets\scripts\ui\CMovingObject.cs" />
     <Compile Include="Assets\scripts\engine\CFloorSlot.cs" />
     <Compile Include="Assets\scripts\network\Login.cs" />
+    <Compile Include="Assets\scripts\NetworkTest\ClientHandle.cs" />
     <Compile Include="Assets\scripts\CheckifGameObject.cs" />
     <Compile Include="Assets\scripts\ui\CPopupGo.cs" />
     <Compile Include="Assets\scripts\MenuUI\MenuPanelController.cs" />
@@ -163,6 +184,8 @@
     <Compile Include="Assets\scripts\network\ServerQueue.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppEvents.cs" />
     <Compile Include="Assets\scripts\public\CSingleton.cs" />
+    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataStorageInterface.cs" />
+    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataFileManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -488,9 +511,6 @@
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="spine-unity-editor">
       <HintPath>Library\ScriptAssemblies\spine-unity-editor.dll</HintPath>

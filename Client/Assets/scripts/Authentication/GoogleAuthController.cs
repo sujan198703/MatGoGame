@@ -39,7 +39,17 @@ public class GoogleAuthController : MonoBehaviour
         });
     }
 
-    public void SignInWithGoogle() { OnSignIn(); }
+    public void SignInWithGoogle()
+    {
+#if UNITY_EDITOR
+        LoginManager.instance.GoToLobby();
+#endif
+
+#if !UNITY_EDITOR
+        OnSignIn();
+#endif
+    }
+
     public void SignOutFromGoogle() { OnSignOut(); }
 
     private void OnSignIn()
@@ -102,7 +112,7 @@ public class GoogleAuthController : MonoBehaviour
         auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
         {
             //AddToInformation("Sign In Successful.");
-            loginPanel.SetActive(false);
+            LoginManager.instance.GoToLobby();
         });
     }
 

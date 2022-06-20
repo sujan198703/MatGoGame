@@ -21,6 +21,8 @@ public enum UI_PAGE
 	MAIN_MENU,
 	CREDIT_BAR,
 	STAGE_SELECT,
+	LOGIN,
+	POPUP_STATE
 }
 
 public class CUIManager : CSingletonMonobehaviour<CUIManager>
@@ -45,6 +47,8 @@ public class CUIManager : CSingletonMonobehaviour<CUIManager>
 		this.ui_objects.Add(UI_PAGE.POPUP_FIRST_PLAYER, transform.Find("popup_first_player").gameObject);
 		this.ui_objects.Add(UI_PAGE.GAME_OPTION, transform.Find("option_cardhint").gameObject);
 		this.ui_objects.Add(UI_PAGE.STAGE_SELECT, transform.Find("stage").gameObject);
+		this.ui_objects.Add(UI_PAGE.LOGIN, transform.Find("Login").gameObject);
+		this.ui_objects.Add(UI_PAGE.POPUP_STATE, transform.Find("popup_state").gameObject);
 	}
 
 
@@ -59,9 +63,31 @@ public class CUIManager : CSingletonMonobehaviour<CUIManager>
 		this.ui_objects[page].SetActive(true);
 	}
 
+	public void show(UI_PAGE page, string msg){
+		this.ui_objects[page].SetActive(true);
+		this.ui_objects[page].transform.Find("msg_txt").GetComponent<UnityEngine.UI.Text>().text = msg;
+	}
+
+	public void show(UI_PAGE page, string msg, float delay){
+		this.ui_objects[page].SetActive(true);
+		this.ui_objects[page].transform.Find("msg_txt").GetComponent<UnityEngine.UI.Text>().text = msg;
+		StartCoroutine(delayHide(page, delay));
+	}
 
 	public void hide(UI_PAGE page)
 	{
+		this.ui_objects[page].SetActive(false);
+	}
+
+	public void clear(){
+		foreach(KeyValuePair<UI_PAGE, GameObject> ui in ui_objects){
+			hide(ui.Key);
+		}
+	}
+
+	IEnumerator delayHide(UI_PAGE page, float delay)
+	{
+		yield return new WaitForSeconds(delay);
 		this.ui_objects[page].SetActive(false);
 	}
 }

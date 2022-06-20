@@ -10,7 +10,7 @@ var email;
 var dbcon = mysql.createConnection( {
     host: "localhost",
     user: "root",
-    password: "",
+    password: "autoset",
     database: "matgo",
 });
 
@@ -18,7 +18,8 @@ var connected = false;
 // var max_nr_groupchat;
 
 function query(q, v) {
-    //console.log(q);
+    console.log(q);
+    console.log(v);
     return new Promise(r => {
         dbcon.query(q, v, function(err, result, fields) {
             if(err) throw err;
@@ -71,6 +72,8 @@ function handleDisconnect(conn, em) {
 }
 
 exports.on_login = async function(data) {
+    if(data.pname == "")
+    return { code : -1, message : "Please input UserName or Email."};
     var q, r, vc, v;
     q = "SELECT * FROM `adw_member` WHERE `name`='"+ data.pname +"' OR `email`='"+ data.pname +"';";
     r = await query(q);
