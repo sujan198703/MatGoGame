@@ -57,11 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Simple Sprite Packer\Scripts\Editor\SPSettings.cs" />
+    <Compile Include="Assets\Assets\DailyRewards\Editor\DailyRewardsEditor.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\Editor\SPSpriteImportData.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\Editor\SPInstanceEditor.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\Editor\SPAtlasBuilder.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\Editor\SPReferenceReplacerWindow.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\Editor\SPTools.cs" />
+    <Compile Include="Assets\Assets\DailyRewards\Editor\EditorTools.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\Editor\SPDropWindow.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -405,6 +407,18 @@
     </Reference>
     <Reference Include="websocket-sharp">
       <HintPath>Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Core">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Unity">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Common">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
@@ -826,6 +840,10 @@
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{C8DA974E-1B47-BC8E-E6A8-7BF55A8B1A61}</Project>
       <Name>UnityEngine.UI</Name>
+    </ProjectReference>
+    <ProjectReference Include="GoogleMobileAds.Editor.csproj">
+      <Project>{3D45007E-E207-85CF-0FE7-60952118F595}</Project>
+      <Name>GoogleMobileAds.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
