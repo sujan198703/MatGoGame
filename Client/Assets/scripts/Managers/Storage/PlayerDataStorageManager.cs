@@ -50,7 +50,7 @@ public class PlayerDataStorageManager : MonoBehaviour
             dataStorageObj.LoadData(playerDataManager);
         }
 
-        Debug.Log("Total Nyans " + playerDataManager.nyangs);
+        Debug.Log("Total Nyans " + playerDataManager.nyangsTotal);
     }
 
     public void SaveGame()

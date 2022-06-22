@@ -38,7 +38,7 @@ public class LobbyManager : MonoBehaviour
     void UpdatePlayerDataValues()
     {
         // Player Data
-        currentNyangs.text = PlayerDataStorageManager.instance.playerDataManager.nyangs.ToString() + " 냥";
+        currentNyangs.text = PlayerDataStorageManager.instance.playerDataManager.nyangsTotal.ToString() + " 냥";
         currentMatgoChips.text = PlayerDataStorageManager.instance.playerDataManager.matgoChips.ToString() + " 칩";
         currentRubies.text = PlayerDataStorageManager.instance.playerDataManager.rubies.ToString() + " 루비";
 
