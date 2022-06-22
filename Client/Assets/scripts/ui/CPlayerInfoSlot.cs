@@ -65,6 +65,9 @@ public class CPlayerInfoSlot : MonoBehaviour {
 			this.clock.GetComponentsInChildren<UnityEngine.UI.Text>()[0].text = i.ToString();
 			yield return new WaitForSeconds(1f);
 		}
+
+
+		this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("timer-clock");
 		this.clock.GetComponent<Animator>().SetBool("alarm", true);
 	}
 	public void set_user_info(string name, string money, string profile_image){
