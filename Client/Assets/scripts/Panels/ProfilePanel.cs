@@ -31,6 +31,7 @@ public class ProfilePanel : MonoBehaviour
     public Text freeMoneyRefills;
 
     public Image experienceProgressBar;
+    public Image profilePicture;
 
     [Header("Avatar Panel")]
     public GameObject avatarPanel;
@@ -49,15 +50,19 @@ public class ProfilePanel : MonoBehaviour
     public Text totalHighestWinScore;
     public Text totalBestWinningStreak;
 
-    // Start is called before the first frame update
-    void Start()
+    [Header("Pop-ups")]
+    public GameObject changeNicknamePopup;
+    public GameObject imageSelectedPopup;
+    public GameObject myAccountInformationPopup;
+    public GameObject membershipCodePopup;
+
+    private void Start()
     {
-        
+        UpdateValues();
     }
 
-    // Update is called once per frame
-    void Update()
+    void UpdateValues()
     {
-        
+
     }
 }

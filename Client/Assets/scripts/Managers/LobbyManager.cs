@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class LobbyManager : MonoBehaviour
 {
+    // Private Variables
     [Header("Lobby Screen")]
     [SerializeField] TextMeshProUGUI announcementText;
     [SerializeField] TextMeshProUGUI currentNyangs;
@@ -16,19 +17,34 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] Button luckyTicketTimerButton;
     [SerializeField] Text luckyTicketTimerText;
 
+    // Public Variables
     [Header("Panels")]
-    [SerializeField] EventsPanel eventsPanel;
-    [SerializeField] DailyQuestPanel dailyQuestPanel;
-    [SerializeField] MoneySafePanel moneySafePanel;
-    [SerializeField] MovieRewardPanel movieRewardPanel;
-    [SerializeField] PigBankPanel pigBankPanel;
-    [SerializeField] ProfilePanel profilePanel;
-    [SerializeField] SettingsPanel settingsPanel;
-    [SerializeField] ShopPanel shopPanel;
+    public EventsPanel eventsPanel;
+    public DailyQuestPanel dailyQuestPanel;
+    public ChipSafePanel chipSafePanel;
+    public NyangSafePanel nyangSafePanel;
+    public MovieRewardPanel movieRewardPanel;
+    public LuckyTicketPanel luckyTicketPanel;
+    public PigBankPanel pigBankPanel;
+    public ProfilePanel profilePanel;
+    public SettingsPanel settingsPanel;
+    public ShopPanel shopPanel;
 
-    // Private Variables
-   
-    
+    // Static Variables
+    private static LobbyManager _instance;
+
+    public static LobbyManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<LobbyManager>();
+                DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
 
     void Start()
     {
@@ -38,7 +54,7 @@ public class LobbyManager : MonoBehaviour
     void UpdatePlayerDataValues()
     {
         // Player Data
-        currentNyangs.text = PlayerDataStorageManager.instance.playerDataManager.nyangsTotal.ToString() + " 냥";
+        currentNyangs.text = PlayerDataStorageManager.instance.playerDataManager.nyangsPocket.ToString() + " 냥";
         currentMatgoChips.text = PlayerDataStorageManager.instance.playerDataManager.matgoChips.ToString() + " 칩";
         currentRubies.text = PlayerDataStorageManager.instance.playerDataManager.rubies.ToString() + " 루비";
 

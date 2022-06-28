@@ -26,6 +26,8 @@ public class AdManager : MonoBehaviour
     public bool showFpsMeter = true;
     public Text fpsMeter;
     public Text statusText;
+    public bool debugAds;
+    public Text adDebuggerText;
     private static AdManager _instance;
    
     public static AdManager instance
@@ -53,7 +55,7 @@ public class AdManager : MonoBehaviour
 #if UNITY_IPHONE
         deviceIds.Add("96e23e80653bb28980d3f40beb58915c");
 #elif UNITY_ANDROID
-        deviceIds.Add("75EF8D155528C04DACBBA6F36F433035");
+        deviceIds.Add("5aa31076-92f6-43a0-aa2f-00c941357618");
 #endif
 
         // Configure TagForChildDirectedTreatment and test device IDs.
@@ -74,7 +76,7 @@ public class AdManager : MonoBehaviour
 
     private void HandleInitCompleteAction(InitializationStatus initstatus)
     {
-        Debug.Log("Initialization complete.");
+        Debugger("Initialization complete.");
 
         // Callbacks from GoogleMobileAds are not guaranteed to be called on
         // the main thread.
@@ -124,7 +126,7 @@ public class AdManager : MonoBehaviour
         }
 
         // Create a 320x50 banner at top of the screen
-        bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Top);
+        bannerView = new BannerView(adUnitId, AdSize.Banner, AdPosition.Bottom);
 
         // Add Event Handlers
         bannerView.OnAdLoaded += (sender, args) =>
@@ -260,11 +262,11 @@ public class AdManager : MonoBehaviour
 
     #region REWARDED ADS
 
-    public void RequestAndLoadRewardedAd()
+    public void RequestAndLoadRewardedAd(int rewardedVideoIndex)
     {
-        PrintStatus("Requesting Rewarded ad.");
+        Debugger("Requesting Rewarded ad.");
 #if UNITY_EDITOR
-        string adUnitId = "unused";
+        string adUnitId = "ca-app-pub-3940256099942544/5224354917";
 #elif UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/5224354917";
 #elif UNITY_IPHONE
@@ -274,42 +276,43 @@ public class AdManager : MonoBehaviour
 #endif
 
         // create new rewarded ad instance
-        rewardedAd = new RewardedAd(adUnitId);
+        rewardedAd = new RewardedAd("ca-app-pub-3940256099942544/5224354917");
 
         // Add Event Handlers
         rewardedAd.OnAdLoaded += (sender, args) =>
         {
-            PrintStatus("Reward ad loaded.");
+            Debugger("Reward ad loaded.");
             OnAdLoadedEvent.Invoke();
         };
         rewardedAd.OnAdFailedToLoad += (sender, args) =>
         {
-            PrintStatus("Reward ad failed to load.");
+            Debugger("Reward ad failed to load.");
             OnAdFailedToLoadEvent.Invoke();
         };
         rewardedAd.OnAdOpening += (sender, args) =>
         {
-            PrintStatus("Reward ad opening.");
+            Debugger("Reward ad opening.");
             OnAdOpeningEvent.Invoke();
         };
         rewardedAd.OnAdFailedToShow += (sender, args) =>
         {
-            PrintStatus("Reward ad failed to show with error: " + args.AdError.GetMessage());
+            Debugger("Reward ad failed to show with error: " + args.AdError.GetMessage());
             OnAdFailedToShowEvent.Invoke();
         };
         rewardedAd.OnAdClosed += (sender, args) =>
         {
-            PrintStatus("Reward ad closed.");
+            Debugger("Reward ad closed.");
             OnAdClosedEvent.Invoke();
         };
         rewardedAd.OnUserEarnedReward += (sender, args) =>
         {
-            PrintStatus("User earned Reward ad reward: " + args.Amount);
+            Debugger("User earned Reward ad reward: " + args.Amount);
             OnUserEarnedRewardEvent.Invoke();
+            GetReward(rewardedVideoIndex);
         };
         rewardedAd.OnAdDidRecordImpression += (sender, args) =>
         {
-            PrintStatus("Reward ad recorded an impression.");
+            Debugger("Reward ad recorded an impression.");
         };
         rewardedAd.OnPaidEvent += (sender, args) =>
         {
@@ -324,16 +327,40 @@ public class AdManager : MonoBehaviour
         rewardedAd.LoadAd(CreateAdRequest());
     }
 
-    public void ShowRewardedAd()
+    public void ShowRewardedAd(int rewardedVideoIndex)
     {
         if (rewardedAd != null)
         {
             rewardedAd.Show();
+            Debugger("Showing Rewarded Ad");
         }
         else
         {
-            PrintStatus("Rewarded ad is not ready yet.");
+            Debugger("Rewarded ad is not ready yet.");
         }
+    }
+
+    void GetReward(int rewardedVideoIndex)
+    {
+        Debugger("Getting reward" + rewardedVideoIndex);
+        // Nyang rewarded video
+        switch (rewardedVideoIndex)
+        {
+            // Nyangs
+            case 0:
+                LobbyManager.instance.movieRewardPanel.AddNyang();
+                break;
+            // Chips
+            case 1:
+                LobbyManager.instance.movieRewardPanel.AddChip();
+                break;
+        }
+    }
+
+    void Debugger(string text)
+    {
+        if (debugAds)
+        adDebuggerText.text += text + '\n';
     }
 
     public void RequestAndLoadRewardedInterstitialAd()
