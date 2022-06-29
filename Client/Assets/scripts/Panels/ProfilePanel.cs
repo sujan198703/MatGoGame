@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProfilePanel : MonoBehaviour
+public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
 {
     //public Texture2D buttonEnabled;
     //public Texture2D buttonDisabled;
@@ -55,6 +55,15 @@ public class ProfilePanel : MonoBehaviour
     public GameObject imageSelectedPopup;
     public GameObject myAccountInformationPopup;
     public GameObject membershipCodePopup;
+
+    public void LoadData(PlayerDataManager data)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void SaveData(ref PlayerDataManager data)
+    {
+    }
 
     private void Start()
     {

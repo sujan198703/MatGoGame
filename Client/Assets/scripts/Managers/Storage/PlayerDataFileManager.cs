@@ -8,11 +8,14 @@ public class PlayerDataFileManager
 {
     private string dataDirPath = "";
     private string dataFileName = "";
+    private bool useEncryption = false;
+    private readonly string encryptionCodeWord = "USE_APPID_OR_SOMETHING";
 
-    public PlayerDataFileManager(string dataDirPath, string dataFileName)
+    public PlayerDataFileManager(string dataDirPath, string dataFileName, bool useEncryption)
     {
         this.dataDirPath = dataDirPath;
         this.dataFileName = dataFileName;
+        this.useEncryption = useEncryption;
     }
 
     public PlayerDataManager Load()
@@ -36,6 +39,12 @@ public class PlayerDataFileManager
                     }
                 }
 
+                // Decrypt
+                if (useEncryption)
+                {
+                    playerDataToLoad = EncryptDecrypt(playerDataToLoad);
+                }
+
                 // Deserialize read data
                 loadedPlayerData = JsonUtility.FromJson<PlayerDataManager>(playerDataToLoad);
             }
@@ -55,6 +64,12 @@ public class PlayerDataFileManager
             // Serialize player data obj to Json
             string playerDataJson = JsonUtility.ToJson(playerData, true);
 
+            // Encrypt
+            if (useEncryption)
+            {
+                playerDataJson = EncryptDecrypt(playerDataJson); 
+            }
+
             // Write the serialized player data to the file
             using (FileStream stream = new FileStream(fullPath, FileMode.Create))
             {
@@ -65,5 +80,16 @@ public class PlayerDataFileManager
             }
         }
         catch (Exception) {}
+    }
+
+    private string EncryptDecrypt(string data)
+    {
+        string modifiedData = "";
+        for (int i = 0; i < data.Length; i++)
+        {
+            modifiedData += (char)(data[i] ^ encryptionCodeWord[i % encryptionCodeWord.Length]);
+        }
+
+        return modifiedData;
     }
 }

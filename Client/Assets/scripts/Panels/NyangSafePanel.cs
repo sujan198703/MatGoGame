@@ -2,8 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NyangSafePanel : MonoBehaviour
+public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
 {
+    // Public Variables
     [SerializeField] private Text totalNyang;
     [SerializeField] private Text userInputDepositNyang;
     [SerializeField] private Text userInputWithdrawNyang;
@@ -12,6 +13,12 @@ public class NyangSafePanel : MonoBehaviour
     [SerializeField] public Text withdrawSuccessfulBannerText;
     [SerializeField] public GameObject depositSuccessfulBanner;
     [SerializeField] public GameObject withdrawSuccessfulBanner;
+
+    // Private Variables
+    private int nyangsPocket;
+    private int nyangsSafe;
+    private int nyangsTotal;
+    private int safeTier;
 
     private void Start() => UpdateStats();
 
@@ -23,7 +30,7 @@ public class NyangSafePanel : MonoBehaviour
         }
         else if (buttonName.Equals("MaxAmount"))
         {
-            userInputDepositNyang.text = PlayerDataStorageManager.instance.playerDataManager.nyangsPocket.ToString() + "만냥";
+            userInputDepositNyang.text = nyangsPocket.ToString() + "만냥";
         }
         else if (buttonName.Equals("Delete"))
         {
@@ -59,7 +66,7 @@ public class NyangSafePanel : MonoBehaviour
         }
         else if (buttonName.Equals("MaxAmount"))
         {
-            userInputWithdrawNyang.text = PlayerDataStorageManager.instance.playerDataManager.nyangsPocket.ToString() + "만냥";
+            userInputWithdrawNyang.text = nyangsPocket.ToString() + "만냥";
         }
         else if (buttonName.Equals("Delete"))
         {
@@ -90,7 +97,7 @@ public class NyangSafePanel : MonoBehaviour
     public void Deposit()
     {
         // If has enough money to deposit
-        if (int.Parse(userInputDepositNyang.text) <= PlayerDataStorageManager.instance.playerDataManager.nyangsPocket)
+        if (int.Parse(userInputDepositNyang.text) <= nyangsPocket)
         {
             // Show banner
             depositSuccessfulBanner.SetActive(true);
@@ -114,7 +121,7 @@ public class NyangSafePanel : MonoBehaviour
 
     public void Withdraw()
     {
-        if (int.Parse(userInputWithdrawNyang.text) <= PlayerDataStorageManager.instance.playerDataManager.nyangsSafe)
+        if (int.Parse(userInputWithdrawNyang.text) <= nyangsSafe)
         {
             // Show banner
             withdrawSuccessfulBanner.SetActive(true);
@@ -138,17 +145,32 @@ public class NyangSafePanel : MonoBehaviour
 
     void UpdateStats()
     {
-        totalNyang.text = PlayerDataStorageManager.instance.playerDataManager.nyangsTotal.ToString();
+        totalNyang.text = nyangsTotal.ToString();
         userInputDepositNyang.text = "0";
         userInputWithdrawNyang.text = "0";
-        safeNyang.text = PlayerDataStorageManager.instance.playerDataManager.nyangsSafe.ToString();
+        safeNyang.text = nyangsSafe.ToString();
     }
 
     public void SafeLimitExtensionButton()
     {
 
         // Update safe tier (basic -> silver -> gold)
-        if (PlayerDataStorageManager.instance.playerDataManager.safeTier < 2)
-        PlayerDataStorageManager.instance.playerDataManager.safeTier++;
+        if (safeTier < 2) safeTier++;
+    }
+
+    public void LoadData(PlayerDataManager data)
+    {
+        nyangsPocket = data.nyangsPocket;
+        nyangsSafe = data.nyangsSafe;
+        nyangsTotal = data.nyangsTotal;
+        safeTier = data.safeTier;
+    }
+
+    public void SaveData(ref PlayerDataManager data)
+    {
+        data.nyangsPocket = nyangsPocket;
+        data.nyangsSafe = nyangsSafe;
+        data.nyangsTotal = nyangsTotal;
+        safeTier = data.safeTier;
     }
 }

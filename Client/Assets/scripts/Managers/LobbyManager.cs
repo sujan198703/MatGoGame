@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LobbyManager : MonoBehaviour
+public class LobbyManager : MonoBehaviour, PlayerDataStorageInterface
 {
     // Private Variables
     [Header("Lobby Screen")]
@@ -39,7 +39,7 @@ public class LobbyManager : MonoBehaviour
         {
             if (_instance == null)
             {
-                _instance = GameObject.FindObjectOfType<LobbyManager>();
+                _instance = FindObjectOfType<LobbyManager>();
                 DontDestroyOnLoad(_instance.gameObject);
             }
             return _instance;
@@ -48,23 +48,28 @@ public class LobbyManager : MonoBehaviour
 
     void Start()
     {
-        UpdatePlayerDataValues();
-    }
-
-    void UpdatePlayerDataValues()
-    {
-        // Player Data
-        currentNyangs.text = PlayerDataStorageManager.instance.playerDataManager.nyangsPocket.ToString() + " 냥";
-        currentMatgoChips.text = PlayerDataStorageManager.instance.playerDataManager.matgoChips.ToString() + " 칩";
-        currentRubies.text = PlayerDataStorageManager.instance.playerDataManager.rubies.ToString() + " 루비";
-
-        // Misc
         UpdateAnnouncements();
     }
+
 
     void UpdateAnnouncements()
     {
         announcementText.text = "알림";
     }
 
+    public void LoadData(PlayerDataManager data)
+    {
+        // Player Data 
+        currentNyangs.text = data.nyangsPocket.ToString() + " 냥";
+        currentMatgoChips.text = data.chipsPocket.ToString() + " 칩";
+        currentRubies.text = data.rubies.ToString() + " 루비";
+
+        // Misc
+        UpdateAnnouncements();
+    }
+
+    public void SaveData(ref PlayerDataManager data)
+    {
+
+    }
 }

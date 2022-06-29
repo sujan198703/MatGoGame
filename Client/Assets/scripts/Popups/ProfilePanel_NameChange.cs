@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProfilePanel_NameChange : MonoBehaviour
+public class ProfilePanel_NameChange : MonoBehaviour, PlayerDataStorageInterface
 {
     [SerializeField] private GameObject nameNotValid;
     [SerializeField] private TextMeshProUGUI nameNotValidText;
@@ -13,6 +13,10 @@ public class ProfilePanel_NameChange : MonoBehaviour
 
 
     string[] forbiddenWords = { "badword", "나쁜 말" };
+
+    // Private Variables
+    private string playerName;
+    private DateTime profileNameChangeTime;
 
     public void UpdateName(TMP_Text nameField)
     {
@@ -63,7 +67,7 @@ public class ProfilePanel_NameChange : MonoBehaviour
 
     public void ChangeName(TMP_Text nameField)
     {
-        PlayerDataStorageManager.instance.playerDataManager.playerName = nameField.text;
+        playerName = nameField.text;
     }
 
     // CHECK FUNCTIONS
@@ -95,7 +99,7 @@ public class ProfilePanel_NameChange : MonoBehaviour
     {
         TimeSpan oneDay = new TimeSpan(24, 0, 0);
         TimeSpan currentTime;
-        currentTime = DateTime.UtcNow - PlayerDataStorageManager.instance.playerDataManager.profileNameChangeTime;
+        currentTime = DateTime.UtcNow - profileNameChangeTime;
 
         if (currentTime >= oneDay) return false;
         
@@ -126,5 +130,17 @@ public class ProfilePanel_NameChange : MonoBehaviour
     void HideNameNotValid()
     {
         nameNotValid.SetActive(false);
+    }
+
+    public void LoadData(PlayerDataManager data)
+    {
+        playerName = data.playerName;
+        profileNameChangeTime = data.profileNameChangeTime;
+    }
+
+    public void SaveData(ref PlayerDataManager data)
+    {
+        data.playerName = playerName;
+        data.profileNameChangeTime = profileNameChangeTime;
     }
 }
