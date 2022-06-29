@@ -7,70 +7,50 @@ public class PlayerDataStorageManager : MonoBehaviour
 {
     [Header("File Storage Configuration")]
     [SerializeField] private string fileName;
-    [SerializeField] private bool useEncryption;
 
-    private PlayerDataManager playerDataManager = new PlayerDataManager();
+    [HideInInspector] public PlayerDataManager playerDataManager;
     private List<PlayerDataStorageInterface> playerDataStorageObjects;
     private PlayerDataFileManager playerDataHandler;
     public static PlayerDataStorageManager instance { get; private set; }
 
-    private float initialDuration = 3.0f; // 3 second buffer before game loads
-    private bool initialDurationOver;
-
-    void Awake()
+    private void Awake()
     {
-        // Instantiate
         if (instance == null)
-            instance = this;
+        instance = this;
+    }
 
+    private void Start()
+    {
         // Replace persistentdatapath with local or server location
-        this.playerDataHandler = new PlayerDataFileManager(Application.persistentDataPath + "/Matgo/", fileName, useEncryption);
+        this.playerDataHandler = new PlayerDataFileManager(Application.persistentDataPath, fileName);
         this.playerDataStorageObjects = FindAllStorageObjects();
         LoadGame();
     }
 
-    void Update()
+    public void NewGame()
     {
-        if (initialDuration > 0f) initialDuration -= Time.deltaTime;
-        else
-        if (!initialDurationOver) { initialDurationOver = true; LoadGame(); }
+        this.playerDataManager = new PlayerDataManager();
     }
-
-    //public void NewGame()
-    //{
-    //    this.playerDataManager = new PlayerDataManager();
-    //}
 
     public void LoadGame()
     {
         // Load any saved data from a file
-        if (this.playerDataManager != null)
-        {
-            this.playerDataManager = playerDataHandler.Load();
-            Debug.Log("Data was found. Loading.");
-        }
+        this.playerDataManager = playerDataHandler.Load();
 
         // Load any saved game from a file using the data handler
-        //if (this.playerDataManager == null)
-        //{
-        //    Debug.Log("No data was found. Initializing to default values.");
-        //    NewGame();
-        //}
-
-        // Push the loaded data to all other scripts that need it
-        if (playerDataStorageObjects != null)
+        if (this.playerDataManager == null)
         {
-            foreach (PlayerDataStorageInterface dataStorageObj in playerDataStorageObjects)
-            {
-                dataStorageObj.LoadData(playerDataManager);
-            }
+            Debug.Log("No data was found. Initializing to default values.");
+            NewGame();
         }
 
-        // Update Lobby Manager if available
-        //if (LobbyManager.instance != null)
-        //    LobbyManager.instance.UpdateValues(playerDataManager);
+        // Push the loaded data to all other scripts that need it
+        foreach (PlayerDataStorageInterface dataStorageObj in playerDataStorageObjects)
+        {
+            dataStorageObj.LoadData(playerDataManager);
+        }
 
-        Debug.Log("Total Nyans " + playerDataManager.nyangsTotal);
+        Debug.Log("Total Nyans " + playerDataManager.nyangs);
     }
 
     public void SaveGame()
@@ -90,15 +70,6 @@ public class PlayerDataStorageManager : MonoBehaviour
         IEnumerable<PlayerDataStorageInterface> dataStorageObjects = FindObjectsOfType<MonoBehaviour>().OfType<PlayerDataStorageInterface>();
 
         return new List<PlayerDataStorageInterface>(dataStorageObjects);
-    }
-
-    void OnApplicationFocus(bool focus)
-    {
-        if (initialDurationOver)
-        {
-            if (focus) LoadGame();
-            else SaveGame();
-        }
     }
 
     void OnApplicationQuit()

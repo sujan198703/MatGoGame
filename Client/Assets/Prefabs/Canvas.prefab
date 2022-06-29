@@ -4527,7 +4527,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &5129808097725255302
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4575,18 +4575,6 @@ MonoBehaviour:
   packets: []
   response: 0
   rdata: 
-  mine:
-    id: 0
-    avatar: 0
-    guild: 0
-    pname: 
-    coins: 0
-  other:
-    id: 0
-    avatar: 0
-    guild: 0
-    pname: 
-    coins: 0
   gameId: 0
   waiting: 0
   connected: 0
@@ -4619,7 +4607,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LoginPage: {fileID: 5129808097184943850}
-  LoginPopUp: {fileID: 0}
   loginState: 0
 --- !u!1 &5129808097733539732
 GameObject:
