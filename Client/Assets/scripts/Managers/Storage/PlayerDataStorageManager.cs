@@ -5,9 +5,6 @@ using System.Linq;
 
 public class PlayerDataStorageManager : MonoBehaviour
 {
-    [Header("File Storage Configuration")]
-    [SerializeField] private string fileName;
-
     [HideInInspector] public PlayerDataManager playerDataManager;
     private List<PlayerDataStorageInterface> playerDataStorageObjects;
     private PlayerDataFileManager playerDataHandler;
@@ -22,7 +19,7 @@ public class PlayerDataStorageManager : MonoBehaviour
     private void Start()
     {
         // Replace persistentdatapath with local or server location
-        this.playerDataHandler = new PlayerDataFileManager(Application.persistentDataPath, fileName);
+        //this.playerDataHandler = new PlayerDataFileManager(Application.persistentDataPath, fileName);
         this.playerDataStorageObjects = FindAllStorageObjects();
         LoadGame();
     }
