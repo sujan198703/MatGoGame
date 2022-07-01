@@ -26,7 +26,7 @@ public class PlayerDataStorageManager : MonoBehaviour
         // Replace persistentdatapath with local or server location
         this.playerDataHandler = new PlayerDataFileManager(Application.persistentDataPath + "/Matgo/", fileName, useEncryption);
         this.playerDataStorageObjects = FindAllStorageObjects();
-        LoadGame();
+        //LoadGame();
     }
 
     void Update()

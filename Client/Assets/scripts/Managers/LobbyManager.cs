@@ -59,14 +59,18 @@ public class LobbyManager : MonoBehaviour, PlayerDataStorageInterface
 
     public void LoadData(PlayerDataManager data)
     {
-        // Player Data 
-        currentNyangs.text = data.nyangsPocket.ToString() + " 냥";
-        currentMatgoChips.text = data.chipsPocket.ToString() + " 칩";
-        currentRubies.text = data.rubies.ToString() + " 루비";
+        if (data != null)
+        {
+            // Player Data 
+            currentNyangs.text = data.nyangsPocket.ToString() + " 냥";
+            currentMatgoChips.text = data.chipsPocket.ToString() + " 칩";
+            currentRubies.text = data.rubies.ToString() + " 루비";
 
-        // Misc
-        UpdateAnnouncements();
+            // Misc
+            UpdateAnnouncements();
+        }
     }
+       
 
     public void SaveData(ref PlayerDataManager data)
     {

@@ -30,7 +30,7 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
         }
         else if (buttonName.Equals("MaxAmount"))
         {
-            userInputDepositNyang.text = nyangsPocket.ToString() + "만냥";
+            userInputDepositNyang.text = nyangsPocket.ToString();
         }
         else if (buttonName.Equals("Delete"))
         {
@@ -66,7 +66,7 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
         }
         else if (buttonName.Equals("MaxAmount"))
         {
-            userInputWithdrawNyang.text = nyangsPocket.ToString() + "만냥";
+            userInputWithdrawNyang.text = nyangsPocket.ToString();
         }
         else if (buttonName.Equals("Delete"))
         {
@@ -103,7 +103,7 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
             depositSuccessfulBanner.SetActive(true);
 
             // Update banner text
-            depositSuccessfulBannerText.text = "<b> <size=24> <color=#FFF77EFF>" + userInputDepositNyang.text + "만냥</color> </size> </b> <color=white > 금고에서</color> \n <color=#FFF77EFF>예금</color> <color=white>되었습니다</color>";
+            depositSuccessfulBannerText.text = "<b> <size=24> <color=#FFF77EFF>" + userInputDepositNyang.text + "칩</color> </size> </b> <color=white > 금고에서</color> \n <color=#FFF77EFF>예금</color> <color=white>되었습니다</color>";
 
             // Hide banner
             StartCoroutine(HideDepositSuccessfulBanner());
@@ -127,7 +127,7 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
             withdrawSuccessfulBanner.SetActive(true);
 
             // Update banner text
-            withdrawSuccessfulBannerText.text = "<b> <size=24> <color=#FFF77EFF>" + userInputWithdrawNyang.text + "만냥</color> </size> </b> <color=white > 금고에서</color> \n <color=#FFF77EFF>출금</color> <color=white>되었습니다</color>";
+            withdrawSuccessfulBannerText.text = "<b> <size=24> <color=#FFF77EFF>" + userInputWithdrawNyang.text + "칩</color> </size> </b> <color=white > 금고에서</color> \n <color=#FFF77EFF>출금</color> <color=white>되었습니다</color>";
 
             // Hide banner
             StartCoroutine(HideWithdrawSuccessfulBanner());

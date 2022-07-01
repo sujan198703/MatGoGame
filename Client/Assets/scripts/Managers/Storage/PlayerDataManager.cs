@@ -17,6 +17,7 @@ public class PlayerDataManager
     public int chipAdsWatched;
     public string playerName;
     public string playerEmail;
+    public string playerMembershipCode;
     public Image playerProfilePicture;
     public DateTime profileNameChangeTime;
     

@@ -58,7 +58,8 @@ public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
 
     public void LoadData(PlayerDataManager data)
     {
-        throw new System.NotImplementedException();
+        profileName.text = data.playerName;
+        profileEmail.text = data.playerEmail;
     }
 
     public void SaveData(ref PlayerDataManager data)

@@ -6,7 +6,7 @@ using Firebase.Auth;
 using Google;
 using UnityEngine;
 
-public class GoogleAuthController : MonoBehaviour
+public class GoogleAuthController : MonoBehaviour, PlayerDataStorageInterface
 {
     //public Text infoText;
     public GameObject loginPanel;
@@ -14,6 +14,10 @@ public class GoogleAuthController : MonoBehaviour
     private string webClientId = "582166968109-2uhl4lbanvuvjh8eagebv9f4soc7836p.apps.googleusercontent.com";
     private FirebaseAuth auth;
     private GoogleSignInConfiguration configuration;
+
+    private string playerName;
+    private string playerEmail;
+    private string playerMembershipCode;
 
     private void Awake()
     {
@@ -111,6 +115,13 @@ public class GoogleAuthController : MonoBehaviour
 
         auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
         {
+            // Update credentals
+
+            playerName = auth.CurrentUser.DisplayName;
+            playerEmail = auth.CurrentUser.Email;
+            playerMembershipCode = auth.CurrentUser.GetHashCode().ToString();
+
+            //PlayerDataStorageManager.instance.SaveGame();
             //AddToInformation("Sign In Successful.");
             LoginManager.instance.GoToLobby();
         });
@@ -135,6 +146,18 @@ public class GoogleAuthController : MonoBehaviour
         //AddToInformation("Calling Games SignIn");
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
+    }
+
+    public void LoadData(PlayerDataManager data)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void SaveData(ref PlayerDataManager data)
+    {
+        data.playerName = auth.CurrentUser.DisplayName;
+        data.playerEmail = auth.CurrentUser.Email;
+        data.playerMembershipCode = auth.CurrentUser.GetHashCode().ToString();
     }
 
     //private void AddToInformation(string str) { infoText.text += "\n" + str; }
