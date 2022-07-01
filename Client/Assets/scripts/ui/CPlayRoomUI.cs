@@ -1447,6 +1447,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
 	void on_card_touch(CCardPicture card_picture)
 	{
+
+		Debug.Log("Cards has been touce" + card_picture.name);
 		// 카드 연속 터치등을 막기 위한 처리.
 		// Process to prevent continuous card touch.
 		this.card_collision_manager.enabled = false;

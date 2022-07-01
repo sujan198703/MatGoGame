@@ -70,14 +70,16 @@ public class CPlayerInfoSlot : MonoBehaviour {
 	}
 
 	IEnumerator time_counting(){
-		for(int i = GameSetting.instance.turn_time; i > -1 ; i--){
+		this.clock.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("timer-clock");
+
+		for (int i = GameSetting.instance.turn_time; i > -1 ; i--){
 			this.clock.GetComponentsInChildren<UnityEngine.UI.Text>()[0].text = i.ToString();
+			this.clock.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("timer-clock");
 
 			yield return new WaitForSeconds(1f);
 		}
 
 		Alarm.GetComponent<AudioSource>().Play();
-		this.clock.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("timer-clock");
 		this.clock.GetComponent<Animator>().SetBool("alarm", true);
 	}
 	public void set_user_info(string name, string money, string profile_image){
