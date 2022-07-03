@@ -65,6 +65,8 @@
     <Compile Include="Assets\Simple Sprite Packer\Scripts\Editor\SPTools.cs" />
     <Compile Include="Assets\Assets\DailyRewards\Editor\EditorTools.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\Editor\SPDropWindow.cs" />
+    <Compile Include="Assets\Assets\ScratchCard\Scripts\Editor\ScratchCardManagerInspector.cs" />
+    <Compile Include="Assets\Assets\ScratchCard\Scripts\Editor\ScratchCardMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\FacebookSDK\SDK\Editor\iOS\FBUnityInterface.h" />

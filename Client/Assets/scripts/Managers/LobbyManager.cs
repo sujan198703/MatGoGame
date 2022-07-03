@@ -1,22 +1,9 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
-public class LobbyManager : MonoBehaviour, PlayerDataStorageInterface
+public class LobbyManager : MonoBehaviour
 {
-    // Private Variables
-    [Header("Lobby Screen")]
-    [SerializeField] TextMeshProUGUI announcementText;
-    [SerializeField] TextMeshProUGUI currentNyangs;
-    [SerializeField] TextMeshProUGUI currentMatgoChips;
-    [SerializeField] TextMeshProUGUI currentRubies;
-    [SerializeField] TextMeshProUGUI profileLevelText;
-    [SerializeField] TextMeshProUGUI profileName;
-    [SerializeField] Image profilePicture;
-    [SerializeField] Image profileProgressBar;
-    [SerializeField] Button luckyTicketTimerButton;
-    [SerializeField] Text luckyTicketTimerText;
-
+   
     // Public Variables
     [Header("Panels")]
     public EventsPanel eventsPanel;
@@ -24,11 +11,17 @@ public class LobbyManager : MonoBehaviour, PlayerDataStorageInterface
     public ChipSafePanel chipSafePanel;
     public NyangSafePanel nyangSafePanel;
     public MovieRewardPanel movieRewardPanel;
+    public LobbyPanel lobbyPanel;
     public LuckyTicketPanel luckyTicketPanel;
     public PigBankPanel pigBankPanel;
     public ProfilePanel profilePanel;
     public SettingsPanel settingsPanel;
     public ShopPanel shopPanel;
+
+    [Header("GUI")]
+    [SerializeField] TextMeshProUGUI currentNyangs;
+    [SerializeField] TextMeshProUGUI currentMatgoChips;
+    [SerializeField] TextMeshProUGUI currentRubies;
 
     // Static Variables
     private static LobbyManager _instance;
@@ -44,36 +37,5 @@ public class LobbyManager : MonoBehaviour, PlayerDataStorageInterface
             }
             return _instance;
         }
-    }
-
-    void Start()
-    {
-        UpdateAnnouncements();
-    }
-
-
-    void UpdateAnnouncements()
-    {
-        announcementText.text = "알림";
-    }
-
-    public void LoadData(PlayerDataManager data)
-    {
-        if (data != null)
-        {
-            // Player Data 
-            currentNyangs.text = data.nyangsPocket.ToString() + " 냥";
-            currentMatgoChips.text = data.chipsPocket.ToString() + " 칩";
-            currentRubies.text = data.rubies.ToString() + " 루비";
-
-            // Misc
-            UpdateAnnouncements();
-        }
-    }
-       
-
-    public void SaveData(ref PlayerDataManager data)
-    {
-
     }
 }

@@ -27,6 +27,8 @@ public class PlayerDataStorageManager : MonoBehaviour
         this.playerDataHandler = new PlayerDataFileManager(Application.persistentDataPath + "/Matgo/", fileName, useEncryption);
         this.playerDataStorageObjects = FindAllStorageObjects();
         //LoadGame();
+
+        DontDestroyOnLoad(this);
     }
 
     void Update()
@@ -69,8 +71,6 @@ public class PlayerDataStorageManager : MonoBehaviour
         // Update Lobby Manager if available
         //if (LobbyManager.instance != null)
         //    LobbyManager.instance.UpdateValues(playerDataManager);
-
-        Debug.Log("Total Nyans " + playerDataManager.nyangsTotal);
     }
 
     public void SaveGame()

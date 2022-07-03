@@ -5,6 +5,22 @@ public class SplashManager : MonoBehaviour
 {
     public GameObject logo, contentRating;
 
+    // Static Variables
+    private static SplashManager _instance;
+
+    public static SplashManager instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<SplashManager>();
+                DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
+
     void Start() => StartCoroutine(NextScreen());
 
     IEnumerator NextScreen()

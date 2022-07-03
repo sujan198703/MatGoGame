@@ -5,7 +5,6 @@ using Facebook.Unity;
 public class FacebookAuthController : MonoBehaviour
 {
     private string appID = "722713005598752";
-    public GameObject loginPanel;
 
     private void Awake()
     {
@@ -18,13 +17,17 @@ public class FacebookAuthController : MonoBehaviour
             FB.ActivateApp();
         }
     }
+
     private void InitCallBack()
     {
         if (!FB.IsInitialized)
         {
             FB.ActivateApp();
+
+            if (PlayerPrefs.GetInt("SingedInWithFacebook") == 1) SignInWithFacebook();
         }
     }
+
     private void OnHideUnity(bool isgameshown)
     {
         if (!isgameshown)
@@ -53,13 +56,21 @@ public class FacebookAuthController : MonoBehaviour
     {
         if (FB.IsLoggedIn)
         {
-            var aToken = Facebook.Unity.AccessToken.CurrentAccessToken;
-            //debug.text = (aToken.UserId);
+            var aToken = AccessToken.CurrentAccessToken;
+            
+            // Get user data
+            FB.API("/me?fields=id,name,email", HttpMethod.GET, GetFacebookData, new Dictionary<string, string>() { });
+
             LoginManager.instance.GoToLobby();
         }
-        else
-        {
-            //debug.text = ("User Cancelled login");
-        }
+    }
+
+    void GetFacebookData(IGraphResult result)
+    {
+        PlayerPrefs.SetString("ProfileName", result.ResultDictionary["name"].ToString());
+        PlayerPrefs.SetString("ProfileEmail", result.ResultDictionary["email"].ToString());
+        PlayerPrefs.SetString("ProfileMembershipCode", result.ResultDictionary["id"].ToString());
+
+        PlayerPrefs.SetInt("SingedInWithFacebook", 1);
     }
 }

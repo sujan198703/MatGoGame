@@ -153,7 +153,6 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
 
     public void SafeLimitExtensionButton()
     {
-
         // Update safe tier (basic -> silver -> gold)
         if (safeTier < 2) safeTier++;
     }

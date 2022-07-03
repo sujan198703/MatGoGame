@@ -6,18 +6,13 @@ using Firebase.Auth;
 using Google;
 using UnityEngine;
 
-public class GoogleAuthController : MonoBehaviour, PlayerDataStorageInterface
+public class GoogleAuthController : MonoBehaviour
 {
-    //public Text infoText;
-    public GameObject loginPanel;
-    
     private string webClientId = "582166968109-2uhl4lbanvuvjh8eagebv9f4soc7836p.apps.googleusercontent.com";
     private FirebaseAuth auth;
     private GoogleSignInConfiguration configuration;
-
-    private string playerName;
-    private string playerEmail;
-    private string playerMembershipCode;
+    [SerializeField] private bool debug;
+    [SerializeField] private UnityEngine.UI.Text debuggerText;
 
     private void Awake()
     {
@@ -33,13 +28,15 @@ public class GoogleAuthController : MonoBehaviour, PlayerDataStorageInterface
             {
                 if (task.Result == DependencyStatus.Available)
                     auth = FirebaseAuth.DefaultInstance;
-                //else
-                    //AddToInformation("Could not resolve all Firebase dependencies: " + task.Result.ToString());
+                else
+                    Debug("Could not resolve all Firebase dependencies: " + task.Result.ToString());
+
+                if (PlayerPrefs.GetInt("SignedInWithGoogle") == 1) SignInWithGoogle();
             }
-            //else
-            //{
-            //    AddToInformation("Dependency check was not completed. Error : " + task.Exception.Message);
-            //}
+            else
+            {
+                Debug("Dependency check was not completed. Error : " + task.Exception.Message);
+            }
         });
     }
 
@@ -61,20 +58,20 @@ public class GoogleAuthController : MonoBehaviour, PlayerDataStorageInterface
         GoogleSignIn.Configuration = configuration;
         GoogleSignIn.Configuration.UseGameSignIn = false;
         GoogleSignIn.Configuration.RequestIdToken = true;
-        //AddToInformation("Calling SignIn");
+        Debug("Calling SignIn");
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
     }
 
     private void OnSignOut()
     {
-        //AddToInformation("Calling SignOut");
+        Debug("Calling SignOut");
         GoogleSignIn.DefaultInstance.SignOut();
     }
 
     public void OnDisconnect()
     {
-        //AddToInformation("Calling Disconnect");
+        Debug("Calling Disconnect");
         GoogleSignIn.DefaultInstance.Disconnect();
     }
 
@@ -87,24 +84,25 @@ public class GoogleAuthController : MonoBehaviour, PlayerDataStorageInterface
                 if (enumerator.MoveNext())
                 {
                     GoogleSignIn.SignInException error = (GoogleSignIn.SignInException)enumerator.Current;
-                    //AddToInformation("Got Error: " + error.Status + " " + error.Message);
+                    Debug("Got Error: " + error.Status + " " + error.Message);
                 }
                 else
                 {
-                    //AddToInformation("Got Unexpected Exception?!?" + task.Exception);
+                    Debug("Got Unexpected Exception?!?" + task.Exception);
                 }
             }
         }
         else if (task.IsCanceled)
         {
-            //AddToInformation("Canceled");
+            Debug("Login Canceled");
         }
         else
         {
-            //AddToInformation("Welcome: " + task.Result.DisplayName + "!");
-            //AddToInformation("Email = " + task.Result.Email);
-            //AddToInformation("Google ID Token = " + task.Result.IdToken);
-            //AddToInformation("Email = " + task.Result.Email);
+            PlayerPrefs.SetString("ProfileName", task.Result.DisplayName);
+            PlayerPrefs.SetString("ProfileEmail", task.Result.Email);
+            PlayerPrefs.SetString("ProfileMembershipCode", task.Result.IdToken.GetHashCode().ToString());
+            PlayerPrefs.SetInt("SignedInWithGoogle", 1);
+
             SignInWithGoogleOnFirebase(task.Result.IdToken);
         }
     }
@@ -115,14 +113,7 @@ public class GoogleAuthController : MonoBehaviour, PlayerDataStorageInterface
 
         auth.SignInWithCredentialAsync(credential).ContinueWith(task =>
         {
-            // Update credentals
-
-            playerName = auth.CurrentUser.DisplayName;
-            playerEmail = auth.CurrentUser.Email;
-            playerMembershipCode = auth.CurrentUser.GetHashCode().ToString();
-
-            //PlayerDataStorageManager.instance.SaveGame();
-            //AddToInformation("Sign In Successful.");
+            Debug("Sign In Successful.");
             LoginManager.instance.GoToLobby();
         });
     }
@@ -132,7 +123,7 @@ public class GoogleAuthController : MonoBehaviour, PlayerDataStorageInterface
         GoogleSignIn.Configuration = configuration;
         GoogleSignIn.Configuration.UseGameSignIn = false;
         GoogleSignIn.Configuration.RequestIdToken = true;
-        //AddToInformation("Calling SignIn Silently");
+        Debug("Calling SignIn Silently");
 
         GoogleSignIn.DefaultInstance.SignInSilently().ContinueWith(OnAuthenticationFinished);
     }
@@ -143,22 +134,13 @@ public class GoogleAuthController : MonoBehaviour, PlayerDataStorageInterface
         GoogleSignIn.Configuration.UseGameSignIn = true;
         GoogleSignIn.Configuration.RequestIdToken = false;
 
-        //AddToInformation("Calling Games SignIn");
+        Debug("Calling Games SignIn");
 
         GoogleSignIn.DefaultInstance.SignIn().ContinueWith(OnAuthenticationFinished);
     }
 
-    public void LoadData(PlayerDataManager data)
-    {
-        throw new NotImplementedException();
+    private void Debug(string str) 
+    { 
+        if (debug) debuggerText.text += "\n" + str;
     }
-
-    public void SaveData(ref PlayerDataManager data)
-    {
-        data.playerName = auth.CurrentUser.DisplayName;
-        data.playerEmail = auth.CurrentUser.Email;
-        data.playerMembershipCode = auth.CurrentUser.GetHashCode().ToString();
-    }
-
-    //private void AddToInformation(string str) { infoText.text += "\n" + str; }
 }

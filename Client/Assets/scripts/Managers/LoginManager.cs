@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class LoginManager : MonoBehaviour
 {
+    public GameObject loginScreen;
     public LoginScreenPanel loginScreenPanel;
     public UnderMaintenancePanel underMaintenancePanel;
     public DownloadPatchPanel downloadPatchPanel;
@@ -29,6 +30,8 @@ public class LoginManager : MonoBehaviour
     void ShowLoginScreenPanel()
     {
         loginScreenPanel.gameObject.SetActive(true);
+        underMaintenancePanel.gameObject.SetActive(false);
+        downloadPatchPanel.gameObject.SetActive(false);
     }
 
     void ShowDownloadPatchPanel()
@@ -40,7 +43,9 @@ public class LoginManager : MonoBehaviour
 
     void ShowUnderMaintenancePanel()
     {
-
+        underMaintenancePanel.gameObject.SetActive(true);
+        loginScreen.gameObject.SetActive(false);
+        downloadPatchPanel.gameObject.SetActive(false);
     }
 
     public void GoToLobby()

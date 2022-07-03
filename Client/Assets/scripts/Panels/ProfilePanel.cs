@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
+public class ProfilePanel : MonoBehaviour
 {
     //public Texture2D buttonEnabled;
     //public Texture2D buttonDisabled;
@@ -56,23 +56,33 @@ public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
     public GameObject myAccountInformationPopup;
     public GameObject membershipCodePopup;
 
-    public void LoadData(PlayerDataManager data)
-    {
-        profileName.text = data.playerName;
-        profileEmail.text = data.playerEmail;
-    }
-
-    public void SaveData(ref PlayerDataManager data)
-    {
-    }
 
     private void Start()
     {
-        UpdateValues();
+        LoadGame();
     }
 
-    void UpdateValues()
+    void LoadGame()
     {
+        //PlayerDataStorageManager.instance.LoadGame();
+        profileName.text = PlayerPrefs.GetString("ProfileName");
+        profileEmail.text = PlayerPrefs.GetString("ProfileEmail");
+        profileMembershipCode.text = PlayerPrefs.GetString("ProfileMembershipCode");
+    }
 
+    public void CopyEmail()
+    {
+        TextEditor clipboard = new TextEditor();
+        clipboard.text = profileEmail.text;
+        clipboard.SelectAll();
+        clipboard.Copy();
+    }
+
+    public void CopyMembershipCode()
+    {
+        TextEditor clipboard = new TextEditor();
+        clipboard.text = profileMembershipCode.text;
+        clipboard.SelectAll();
+        clipboard.Copy();
     }
 }

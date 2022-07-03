@@ -1,21 +1,55 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using ScratchCardAsset;
 
-public class LuckyTicketPanel : MonoBehaviour
+public class LuckyTicketPanel : MonoBehaviour, PlayerDataStorageInterface
 {
-    [SerializeField] private Text luckyPanelText;
+    [SerializeField] private Text luckyTicketText;
+    [SerializeField] private ScratchCardManager scratchCardManager;
+    [SerializeField] private GameObject scratchCardImage;
 
-    void Start() => UpdateText();
+    private string[] bigNumbers = { "심만", "백만", "천만", "억"}; // 10,000, 100,000, 1,000,000, 10,000,000
+    private int nyangsPocket;
+    private int currencyIndex;
+    private int bigNumberIndex;
 
-    void UpdateText()
+    void Start() => GetReward();
+
+    void Update()
     {
-        // Timer condition for lucky timer
-        if (false)
+        // If greater than 70%, hide scratch card image
+        if (scratchCardManager.Progress.GetProgress() >= 0.7f)
         {
-            this.gameObject.SetActive(true);
-            luckyPanelText.text = "당첨을 축하합니다.\n<size=28>20</size>만냥";
+            scratchCardImage.SetActive(false);
         }
-        else
-            gameObject.SetActive(false);
+    }
+
+    void GetReward()
+    {
+        // Load nyangs in pocket
+        PlayerDataStorageManager.instance.LoadGame();
+
+        // Get currency index
+        currencyIndex = Random.Range(10, 100);
+
+        // Get big number index
+        bigNumberIndex = Random.Range(0, bigNumbers.Length);
+
+        // Update lucky ticket text
+        luckyTicketText.text = "당첨을 축하합니다.\n<size=28>" + 
+            currencyIndex + "</size>" + bigNumbers[bigNumberIndex] + "냥";
+
+        // Add to pocket
+        PlayerDataStorageManager.instance.SaveGame();
+    }
+
+    public void LoadData(PlayerDataManager data)
+    {
+        nyangsPocket = data.nyangsPocket;
+    }
+
+    public void SaveData(ref PlayerDataManager data)
+    {
+        data.nyangsPocket = nyangsPocket;
     }
 }

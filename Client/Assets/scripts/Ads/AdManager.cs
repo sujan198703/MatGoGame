@@ -25,7 +25,6 @@ public class AdManager : MonoBehaviour
     public UnityEvent OnAdClosedEvent;
     public bool showFpsMeter = true;
     public Text fpsMeter;
-    public Text statusText;
     public bool debugAds;
     public Text adDebuggerText;
     private static AdManager _instance;
@@ -58,6 +57,7 @@ public class AdManager : MonoBehaviour
         deviceIds.Add("5aa31076-92f6-43a0-aa2f-00c941357618");
 #endif
 
+#if !UNITY_EDITOR
         // Configure TagForChildDirectedTreatment and test device IDs.
         RequestConfiguration requestConfiguration =
             new RequestConfiguration.Builder()
@@ -72,6 +72,7 @@ public class AdManager : MonoBehaviour
         AppStateEventNotifier.AppStateChanged += OnAppStateChanged;
 
         DontDestroyOnLoad(this);
+#endif
     }
 
     private void HandleInitCompleteAction(InitializationStatus initstatus)
@@ -84,14 +85,14 @@ public class AdManager : MonoBehaviour
         // the next Update() loop.
         MobileAdsEventExecutor.ExecuteInUpdate(() =>
         {
-            statusText.text = "Initialization complete.";
-            RequestBannerAd();
+            Debugger("Initialization complete.");
+            //RequestBannerAd();
         });
     }
 
-    #endregion
+#endregion
 
-    #region HELPER METHODS
+#region HELPER METHODS
 
     private AdRequest CreateAdRequest()
     {
@@ -100,9 +101,9 @@ public class AdManager : MonoBehaviour
             .Build();
     }
 
-    #endregion
+#endregion
 
-    #region BANNER ADS
+#region BANNER ADS
 
     public void RequestBannerAd()
     {
@@ -170,9 +171,9 @@ public class AdManager : MonoBehaviour
         }
     }
 
-    #endregion
+#endregion
 
-    #region INTERSTITIAL ADS
+#region INTERSTITIAL ADS
 
     public void RequestAndLoadInterstitialAd()
     {
@@ -258,9 +259,9 @@ public class AdManager : MonoBehaviour
         }
     }
 
-    #endregion
+#endregion
 
-    #region REWARDED ADS
+#region REWARDED ADS
 
     public void RequestAndLoadRewardedAd(int rewardedVideoIndex)
     {
@@ -436,9 +437,9 @@ public class AdManager : MonoBehaviour
         }
     }
 
-    #endregion
+#endregion
 
-    #region APPOPEN ADS
+#region APPOPEN ADS
 
     public bool IsAppOpenAdAvailable
     {
@@ -547,10 +548,10 @@ public class AdManager : MonoBehaviour
         appOpenAd.Show();
     }
 
-    #endregion
+#endregion
 
 
-    #region AD INSPECTOR
+#region AD INSPECTOR
 
     public void OpenAdInspector()
     {
@@ -569,9 +570,9 @@ public class AdManager : MonoBehaviour
         });
     }
 
-    #endregion
+#endregion
 
-    #region Utility
+#region Utility
 
     ///<summary>
     /// Log the message and update the status text on the main thread.
@@ -581,9 +582,8 @@ public class AdManager : MonoBehaviour
         Debug.Log(message);
         MobileAdsEventExecutor.ExecuteInUpdate(() =>
         {
-            statusText.text = message;
+            Debugger(message);
         });
     }
-
-    #endregion
+#endregion
 }
