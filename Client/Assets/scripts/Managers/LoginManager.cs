@@ -7,17 +7,11 @@ public class LoginManager : MonoBehaviour
     public UnderMaintenancePanel underMaintenancePanel;
     public DownloadPatchPanel downloadPatchPanel;
 
-    private static LoginManager _instance;
-    public static LoginManager instance
+    public static LoginManager instance { get; private set; }
+
+    void Awake()
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = new LoginManager();
-            }
-            return _instance;
-        }
+        if (instance == null) instance = this;
     }
 
     void Start()

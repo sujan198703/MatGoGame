@@ -14,6 +14,22 @@ public class GoogleAuthController : MonoBehaviour
     [SerializeField] private bool debug;
     [SerializeField] private UnityEngine.UI.Text debuggerText;
 
+    // Static Variables
+    private static GoogleAuthController _instance;
+
+    public static GoogleAuthController instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GoogleAuthController>();
+                DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
+
     private void Awake()
     {
         configuration = new GoogleSignInConfiguration { WebClientId = webClientId, RequestEmail = true, RequestIdToken = true };

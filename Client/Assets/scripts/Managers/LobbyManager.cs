@@ -1,41 +1,38 @@
-﻿using TMPro;
+﻿using Facebook.Unity;
+using Google;
+using TMPro;
 using UnityEngine;
 
-public class LobbyManager : MonoBehaviour
+public class LobbyManager : MonoBehaviour, PlayerDataStorageInterface
 {
-   
-    // Public Variables
-    [Header("Panels")]
-    public EventsPanel eventsPanel;
-    public DailyQuestPanel dailyQuestPanel;
-    public ChipSafePanel chipSafePanel;
-    public NyangSafePanel nyangSafePanel;
-    public MovieRewardPanel movieRewardPanel;
-    public LobbyPanel lobbyPanel;
-    public LuckyTicketPanel luckyTicketPanel;
-    public PigBankPanel pigBankPanel;
-    public ProfilePanel profilePanel;
-    public SettingsPanel settingsPanel;
-    public ShopPanel shopPanel;
-
     [Header("GUI")]
     [SerializeField] TextMeshProUGUI currentNyangs;
     [SerializeField] TextMeshProUGUI currentMatgoChips;
     [SerializeField] TextMeshProUGUI currentRubies;
 
     // Static Variables
-    private static LobbyManager _instance;
+    public static LobbyManager instance { get; private set; }
 
-    public static LobbyManager instance
+    void Awake()
     {
-        get
-        {
-            if (_instance == null)
-            {
-                _instance = FindObjectOfType<LobbyManager>();
-                DontDestroyOnLoad(_instance.gameObject);
-            }
-            return _instance;
-        }
+        if (instance == null) instance = this;
+
+        PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
+    }
+
+    void Start() => PlayerDataStorageManager.instance.LoadGame();
+    
+    public void LoadData(PlayerDataManager data)
+    {
+        currentNyangs.text = data.nyangsPocket.ToString();
+        currentMatgoChips.text = data.chipsPocket.ToString();
+        currentRubies.text = data.rubies.ToString();
+    }
+
+    public void SaveData(ref PlayerDataManager data)
+    {
+        data.nyangsPocket = int.Parse(currentNyangs.text);
+        data.chipsPocket = int.Parse(currentMatgoChips.text);
+        data.rubies = int.Parse(currentRubies.text);
     }
 }

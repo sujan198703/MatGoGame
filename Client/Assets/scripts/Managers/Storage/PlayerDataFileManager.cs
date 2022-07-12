@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
@@ -23,7 +21,7 @@ public class PlayerDataFileManager
         string fullPath = Path.Combine(dataDirPath, dataFileName);
 
         PlayerDataManager loadedPlayerData = null;
-
+        
         if (File.Exists(fullPath))
         {
             try
@@ -48,7 +46,10 @@ public class PlayerDataFileManager
                 // Deserialize read data
                 loadedPlayerData = JsonUtility.FromJson<PlayerDataManager>(playerDataToLoad);
             }
-            catch (Exception) { }
+            catch (Exception e)
+            {
+                Debug.LogError("Error occured while trying to load data from file: " + fullPath + "\n" + e);
+            }
         }
         return loadedPlayerData;
     }
@@ -79,12 +80,16 @@ public class PlayerDataFileManager
                 }            
             }
         }
-        catch (Exception) {}
+        catch (Exception e)
+        {
+            Debug.LogError("Error occured while trying to save data to file: " + fullPath + "\n" + e);
+        }
     }
 
     private string EncryptDecrypt(string data)
     {
         string modifiedData = "";
+
         for (int i = 0; i < data.Length; i++)
         {
             modifiedData += (char)(data[i] ^ encryptionCodeWord[i % encryptionCodeWord.Length]);

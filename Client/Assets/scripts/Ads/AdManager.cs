@@ -27,18 +27,14 @@ public class AdManager : MonoBehaviour
     public Text fpsMeter;
     public bool debugAds;
     public Text adDebuggerText;
-    private static AdManager _instance;
-   
-    public static AdManager instance
+    public static AdManager instance { get; private set; }
+
+    void Awake()
     {
-        get
+        if (instance == null)
         {
-            if (_instance == null)
-            {
-                _instance = GameObject.FindObjectOfType<AdManager>();
-                DontDestroyOnLoad(_instance.gameObject);
-            }
-            return _instance;
+            instance = this;
+            DontDestroyOnLoad(this);
         }
     }
 
@@ -349,11 +345,11 @@ public class AdManager : MonoBehaviour
         {
             // Nyangs
             case 0:
-                LobbyManager.instance.movieRewardPanel.AddNyang();
+                PanelManager.instance.movieRewardPanel.AddNyang();
                 break;
             // Chips
             case 1:
-                LobbyManager.instance.movieRewardPanel.AddChip();
+                PanelManager.instance.movieRewardPanel.AddChip();
                 break;
         }
     }

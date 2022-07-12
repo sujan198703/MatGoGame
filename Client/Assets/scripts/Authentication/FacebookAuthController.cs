@@ -6,6 +6,22 @@ public class FacebookAuthController : MonoBehaviour
 {
     private string appID = "722713005598752";
 
+    // Static Variables
+    private static GoogleAuthController _instance;
+
+    public static GoogleAuthController instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = FindObjectOfType<GoogleAuthController>();
+                DontDestroyOnLoad(_instance.gameObject);
+            }
+            return _instance;
+        }
+    }
+
     private void Awake()
     {
         if (!FB.IsInitialized)
