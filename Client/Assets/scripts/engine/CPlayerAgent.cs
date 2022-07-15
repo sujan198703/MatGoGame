@@ -336,20 +336,28 @@ public class CPlayerAgent
 		}
 
 		// 홍단, 초단, 청단
+		//KWANG is right
+		//TEE is belt
+		//YEOL is HEAT
+		//PEE is BLOOD
 
 		// Hongdan, Chodan, Cheongdan
 		byte cheongdan_count = get_card_count(PAE_TYPE.TEE, CARD_STATUS.CHEONG_DAN);
 		byte hongdan_count = get_card_count(PAE_TYPE.TEE, CARD_STATUS.HONG_DAN);
 		byte chodan_count = get_card_count(PAE_TYPE.TEE, CARD_STATUS.CHO_DAN);
-		if (cheongdan_count == 3)
+		if (cheongdan_count == 3) //red blt card score 
 		{
 			this.score += 3;
+			PlayerPrefs.SetInt("HongDan", this.score);
+
 			//UnityEngine.Debug.Log("Cheongdan 3 score");
 		}
 
 		if (hongdan_count == 3)
 		{
 			this.score += 3;
+			PlayerPrefs.SetInt("HongDan", this.score);
+
 			//UnityEngine.Debug.Log("Hongdan 3 score");
 		}
 
