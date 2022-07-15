@@ -592,6 +592,18 @@
     <Reference Include="GoogleMobileAds.Editor">
       <HintPath>Library\ScriptAssemblies\GoogleMobileAds.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="MaxSdk.Scripts.IntegrationManager.Editor">
+      <HintPath>Library\ScriptAssemblies\MaxSdk.Scripts.IntegrationManager.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="MaxSdk.Scripts.Editor">
+      <HintPath>Library\ScriptAssemblies\MaxSdk.Scripts.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.Purchasing.SecurityStub">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.SecurityStub.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Purchasing">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook.Unity.Gameroom">
       <HintPath>Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll</HintPath>
     </Reference>
@@ -1022,6 +1034,30 @@
     <ProjectReference Include="MaxSdk.Scripts.Player.csproj">
       <Project>{4F1CE92B-C67B-2976-44F6-40E2E63B945F}</Project>
       <Name>MaxSdk.Scripts.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Purchasing.Common.Player.csproj">
+      <Project>{60B98686-A624-EE0A-C682-888CE1CCD1FD}</Project>
+      <Name>Purchasing.Common.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Player.csproj">
+      <Project>{B3584660-9247-0625-DEA5-B7984AC8201C}</Project>
+      <Name>UnityEngine.Purchasing.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Security.Player.csproj">
+      <Project>{5DA17625-2276-EA96-0847-69924C44AD83}</Project>
+      <Name>UnityEngine.Purchasing.Security.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.SecurityCore.Player.csproj">
+      <Project>{1905E554-919F-C183-6962-C67F6F0F88C1}</Project>
+      <Name>UnityEngine.Purchasing.SecurityCore.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Stores.Player.csproj">
+      <Project>{AA4A3C70-E094-0C90-A927-79342A77840C}</Project>
+      <Name>UnityEngine.Purchasing.Stores.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Codeless.Player.csproj">
+      <Project>{DD14235D-C8D1-4CD2-EDF0-06E25E569C81}</Project>
+      <Name>UnityEngine.Purchasing.Codeless.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
