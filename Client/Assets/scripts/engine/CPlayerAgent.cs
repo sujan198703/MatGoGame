@@ -7,6 +7,8 @@ public class CPlayerAgent
 {
 	byte player_index;
 
+	private int LightCardsScore = 0;
+	private int BeltCardsWithLettersScore = 0; 
     Dictionary<PAE_TYPE, List<CCard>> floor_pae;
     List<CCard> hand_pae;
 
@@ -320,10 +322,13 @@ public class CPlayerAgent
 	public void calculate_score()
 	{
 		this.score = 0;
-		this.score += get_score_by_type(PAE_TYPE.PEE);
-		this.score += get_score_by_type(PAE_TYPE.TEE);
-		this.score += get_score_by_type(PAE_TYPE.YEOL);
-		this.score += get_score_by_type(PAE_TYPE.KWANG);
+		this.score += get_score_by_type(PAE_TYPE.PEE);  //PEE is BLOOD
+		this.score += get_score_by_type(PAE_TYPE.TEE); //TEE is belt
+		this.score += get_score_by_type(PAE_TYPE.YEOL); //heat
+		this.score += get_score_by_type(PAE_TYPE.KWANG); //light cards score addition 
+
+		LightCardsScore+= get_score_by_type(PAE_TYPE.KWANG);  
+		
 
 		// 고도리
 		// Godori
@@ -348,15 +353,25 @@ public class CPlayerAgent
 		if (cheongdan_count == 3) //red blt card score 
 		{
 			this.score += 3;
-			PlayerPrefs.SetInt("HongDan", this.score);
+		
 
-			//UnityEngine.Debug.Log("Cheongdan 3 score");
 		}
 
-		if (hongdan_count == 3)
+		if (hongdan_count == 3)  //Belt cards with letters 
 		{
 			this.score += 3;
-			PlayerPrefs.SetInt("HongDan", this.score);
+			if (this.player_index == 0)
+			{
+				PlayerPrefs.SetInt("HongDanPlayerOne", this.score);
+				UnityEngine.Debug.Log("Hongdan /red belt card with letters score for player ONE : "+ this.score);
+			}
+			if (this.player_index == 1)
+			{
+				PlayerPrefs.SetInt("HongDanPlayerOne", this.score);
+				UnityEngine.Debug.Log("Hongdan /red belt card with letters score for player TWO : " + this.score);
+
+			}
+
 
 			//UnityEngine.Debug.Log("Hongdan 3 score");
 		}
@@ -371,11 +386,18 @@ public class CPlayerAgent
 		if (this.player_index==0)
 		{
 			PlayerPrefs.SetInt("PlayerFirstScore", this.score);
-			//PlayerTurn = false;
+			//PlayerPrefs.SetInt("HongDan", this.score);
+
+			PlayerPrefs.SetInt("GwangPlayerOne", LightCardsScore);    //light cards score for player 
+			UnityEngine.Debug.Log("GwangPlayerOne Light card for Player One is: "+ LightCardsScore);
+
 		}
 		if (this.player_index == 1)
 		{
 			PlayerPrefs.SetInt("PlayerSecondScore", this.score);
+
+			PlayerPrefs.SetInt("GwangPlayerTwo", LightCardsScore);    //light cards score for player 
+			UnityEngine.Debug.Log("GwangPlayerOne Light card for Player Two is: " + LightCardsScore);
 			//PlayerTurn = true;
 		}
 

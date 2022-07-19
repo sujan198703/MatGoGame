@@ -57,9 +57,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityCore\AssemblyInfo.cs" />
-    <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityCore\AppleReceipt.cs" />
-    <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityCore\IAPSecurityException.cs" />
     <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityCore\IPurchaseReceipt.cs" />
+    <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityCore\IAPSecurityException.cs" />
+    <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityCore\AppleReceipt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityCore\UnityEngine.Purchasing.SecurityCore.asmdef" />

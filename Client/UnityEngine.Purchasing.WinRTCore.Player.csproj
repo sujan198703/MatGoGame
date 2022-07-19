@@ -56,8 +56,8 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\WinRTCore\AssemblyInfo.cs.cs" />
     <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\WinRTCore\IWinRT.cs" />
+    <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\WinRTCore\AssemblyInfo.cs.cs" />
     <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\WinRTCore\WinProductDescription.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -334,6 +334,9 @@
     <Reference Include="Facebook.Unity.Gameroom">
       <HintPath>Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll</HintPath>
     </Reference>
+    <Reference Include="Google.VersionHandler">
+      <HintPath>Assets\ExternalDependencyManager\Editor\Google.VersionHandler.dll</HintPath>
+    </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.17\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
     </Reference>
@@ -382,17 +385,14 @@
     <Reference Include="Google.PackageManagerResolver">
       <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.PackageManagerResolver.dll</HintPath>
     </Reference>
-    <Reference Include="FacebookNamedPipeClient">
-      <HintPath>Assets\FacebookSDK\Plugins\Gameroom\FacebookNamedPipeClient.dll</HintPath>
-    </Reference>
     <Reference Include="NugetForUnity">
       <HintPath>Assets\NuGet\Editor\NugetForUnity.dll</HintPath>
     </Reference>
+    <Reference Include="FacebookNamedPipeClient">
+      <HintPath>Assets\FacebookSDK\Plugins\Gameroom\FacebookNamedPipeClient.dll</HintPath>
+    </Reference>
     <Reference Include="Firebase.Editor">
       <HintPath>Assets\Firebase\Editor\Firebase.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.VersionHandler">
-      <HintPath>Assets\ExternalDependencyManager\Editor\Google.VersionHandler.dll</HintPath>
     </Reference>
     <Reference Include="Facebook.Unity.Settings">
       <HintPath>Assets\FacebookSDK\Plugins\Settings\Facebook.Unity.Settings.dll</HintPath>

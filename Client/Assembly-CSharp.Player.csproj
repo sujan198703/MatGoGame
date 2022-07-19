@@ -59,12 +59,15 @@
     <Compile Include="Assets\scripts\network\GameData.cs" />
     <Compile Include="Assets\UIMenu\Prefabs\PlayOnStartVoice.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPSpriteInfo.cs" />
+    <Compile Include="Assets\scripts\Managers\PanelManager.cs" />
     <Compile Include="Assets\GoogleSignIn\GoogleSignInStatusCode.cs" />
+    <Compile Include="Assets\scripts\Popups\FriendDaejonPopup.cs" />
     <Compile Include="Assets\scripts\Panels\Lobby\PigBankPanel.cs" />
     <Compile Include="Assets\scripts\Managers\Storage\PlayerDataFileManager.cs" />
     <Compile Include="Assets\Assets\ScratchCard\Scripts\Tools\MeshGenerator.cs" />
     <Compile Include="Assets\scripts\NetworkTest\DotnetPacket.cs" />
     <Compile Include="Assets\GoogleSignIn\Impl\BaseObject.cs" />
+    <Compile Include="Assets\scripts\Popups\FreeRefillPaymentPopup.cs" />
     <Compile Include="Assets\scripts\client\CPlayerHandCardManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\LogView.cs" />
     <Compile Include="Assets\scripts\Authentication\FacebookAuthController.cs" />
@@ -73,9 +76,11 @@
     <Compile Include="Assets\scripts\CPlayer.cs" />
     <Compile Include="Assets\scripts\ui\CButtonCollision.cs" />
     <Compile Include="Assets\scripts\public\MiniJSON.cs" />
+    <Compile Include="Assets\scripts\Popups\LogoutReconfirmationPopup.cs" />
     <Compile Include="Assets\scripts\Panels\Login\LoginScreenPanel.cs" />
     <Compile Include="Assets\scripts\OnBluebuttonClick.cs" />
     <Compile Include="Assets\scripts\LobbyUi\StartGame.cs" />
+    <Compile Include="Assets\scripts\Popups\LossLimitChangeCompletedPopup.cs" />
     <Compile Include="Assets\scripts\network\Backend.cs" />
     <Compile Include="Assets\scripts\network\NetworkQueue.cs" />
     <Compile Include="Assets\Assets\DailyRewards\Scripts\DailyRewardsCore.cs" />
@@ -86,30 +91,37 @@
     <Compile Include="Assets\scripts\client\CCardManager.cs" />
     <Compile Include="Assets\Assets\DailyRewards\Examples\Scripts\DailyRewardUI.cs" />
     <Compile Include="Assets\scripts\NetworkTest\Client.cs" />
+    <Compile Include="Assets\scripts\Popups\PurchaseConfirmationPopup.cs" />
     <Compile Include="Assets\scripts\Panels\Lobby\FreeChargingStationPanel.cs" />
     <Compile Include="Assets\Assets\ScratchCard\Scripts\EraseProgress.cs" />
     <Compile Include="Assets\scripts\engine\CGostopEngine.cs" />
     <Compile Include="Assets\scripts\Managers\LobbyManager.cs" />
     <Compile Include="Assets\scripts\ui\CGameOption.cs" />
     <Compile Include="Assets\scripts\MenuUI\MenuController.cs" />
+    <Compile Include="Assets\scripts\Managers\PopupManager.cs" />
+    <Compile Include="Assets\scripts\Popups\CouponRegistrationPopup.cs" />
     <Compile Include="Assets\scripts\client\CEffectManager.cs" />
     <Compile Include="Assets\scripts\CLocalServer.cs" />
     <Compile Include="Assets\scripts\public\CGameObjectPool.cs" />
     <Compile Include="Assets\GoogleSignIn\Impl\NativeFuture.cs" />
     <Compile Include="Assets\scripts\AudioPlay.cs" />
     <Compile Include="Assets\scripts\OnclickHide.cs" />
-    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataManager.cs" />
     <Compile Include="Assets\scripts\ui\CMainMenu.cs" />
+    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataManager.cs" />
+    <Compile Include="Assets\scripts\Popups\PurchaseShopCompletedPopup.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppRequests.cs" />
     <Compile Include="Assets\scripts\ui\CPlayRoomUI.cs" />
     <Compile Include="Assets\scripts\client\CDelayedDeactive.cs" />
     <Compile Include="Assets\scripts\network\Encryption.cs" />
     <Compile Include="Assets\scripts\Managers\LoginManager.cs" />
     <Compile Include="Assets\scripts\Managers\Storage\PlayerDataStorageManager.cs" />
+    <Compile Include="Assets\scripts\Popups\LossLimitChangeNoticePopup.cs" />
     <Compile Include="Assets\scripts\PlayerDetails.cs" />
     <Compile Include="Assets\scripts\GameController.cs" />
     <Compile Include="Assets\FreeNet\CFreeNetUnityService.cs" />
     <Compile Include="Assets\scripts\ui\CPopupGameResult.cs" />
+    <Compile Include="Assets\scripts\Managers\SoundManager.cs" />
+    <Compile Include="Assets\scripts\Popups\Friends_GetInvolvedPopup.cs" />
     <Compile Include="Assets\scripts\Panels\Lobby\NyangSafePanel.cs" />
     <Compile Include="Assets\scripts\Panels\Lobby\SettingsPanel.cs" />
     <Compile Include="Assets\scripts\CGameRoom.cs" />
@@ -142,29 +154,36 @@
     <Compile Include="Assets\scripts\public\CHelper.cs" />
     <Compile Include="Assets\scripts\GameSetting.cs" />
     <Compile Include="Assets\scripts\client\CSpriteManager.cs" />
+    <Compile Include="Assets\scripts\Popups\LossLimitCannotBeChangedPopup.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPActionType.cs" />
     <Compile Include="Assets\scripts\table\CTableLevels.cs" />
     <Compile Include="Assets\Assets\DailyRewards\Scripts\IntegrationDailyRewards.cs" />
     <Compile Include="Assets\scripts\ui\CPlayerInfoSlot.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPInstance.cs" />
+    <Compile Include="Assets\scripts\Popups\PurchaseFailurePopup.cs" />
     <Compile Include="Assets\scripts\NetworkTest\Connect.cs" />
+    <Compile Include="Assets\scripts\Popups\LossLimitPopup.cs" />
     <Compile Include="Assets\scripts\LobbyUi\Popup.cs" />
     <Compile Include="Assets\scripts\client\CVisualFloorSlot.cs" />
     <Compile Include="Assets\scripts\client\CScrollingEffect.cs" />
+    <Compile Include="Assets\scripts\Popups\AccountInfoPopup.cs" />
     <Compile Include="Assets\scripts\Panels\Lobby\ProfilePanel.cs" />
     <Compile Include="Assets\scripts\NetworkTest\ClientSend.cs" />
+    <Compile Include="Assets\scripts\Popups\PurchaseIAPCompletedPopup.cs" />
     <Compile Include="Assets\Assets\ScratchCard\Scripts\ScratchCard.cs" />
     <Compile Include="Assets\scripts\Panels\Login\UnderMaintenancePanel.cs" />
     <Compile Include="Assets\Assets\ScratchCard\Scripts\Core\Data\Triangle.cs" />
     <Compile Include="Assets\scripts\Panels\Lobby\ShopPanel.cs" />
     <Compile Include="Assets\GoogleSignIn\Impl\SignInHelperObject.cs" />
     <Compile Include="Assets\scripts\client\CSpriteFadeEffect.cs" />
+    <Compile Include="Assets\scripts\GUI\CarouselView.cs" />
     <Compile Include="Assets\scripts\Panels\Lobby\LuckyTicketPanel.cs" />
     <Compile Include="Assets\scripts\ui\CUIManager.cs" />
     <Compile Include="Assets\scripts\table\CTableDataManager.cs" />
     <Compile Include="Assets\scripts\Authentication\GoogleAuthController.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\ConsoleBase.cs" />
     <Compile Include="Assets\scripts\Managers\Storage\PlayerDataStorageInterface.cs" />
+    <Compile Include="Assets\scripts\Popups\ProfileAvatarChangePopup.cs" />
     <Compile Include="Assets\scripts\ui\CPopupKookjin.cs" />
     <Compile Include="Assets\Assets\ScratchCard\Scripts\Core\ScratchCardRenderer.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\GraphRequest.cs" />
@@ -174,11 +193,14 @@
     <Compile Include="Assets\scripts\CAIPlayer.cs" />
     <Compile Include="Assets\scripts\Managers\SplashManager.cs" />
     <Compile Include="Assets\scripts\Panels\Login\DownloadPatchPanel.cs" />
+    <Compile Include="Assets\scripts\Popups\GameMoneyLimitPopup.cs" />
+    <Compile Include="Assets\scripts\Popups\InventoryMailPopup.cs" />
     <Compile Include="Assets\scripts\client\CSpriteLayerOrderManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AccessTokenMenu.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppLinks.cs" />
     <Compile Include="Assets\scripts\ui\CCardCollision.cs" />
     <Compile Include="Assets\scripts\public\CCameraAspectRatio.cs" />
+    <Compile Include="Assets\scripts\Panels\Lobby\InventoryPanel.cs" />
     <Compile Include="Assets\scripts\engine\CGostopHelper.cs" />
     <Compile Include="Assets\scripts\Popups\ProfileNameChangePopup.cs" />
     <Compile Include="Assets\scripts\ScoreCard.cs" />
@@ -193,13 +215,17 @@
     <Compile Include="Assets\scripts\Panels\Lobby\ChipSafePanel.cs" />
     <Compile Include="Assets\scripts\MenuUI\MenuPanelController.cs" />
     <Compile Include="Assets\scripts\LoginServer.cs" />
+    <Compile Include="Assets\scripts\Ads\InAppPurchasing.cs" />
     <Compile Include="Assets\Assets\ScratchCard\Demo\Scripts\ScratchDemoUI.cs" />
     <Compile Include="Assets\GoogleSignIn\GoogleSignInUser.cs" />
+    <Compile Include="Assets\scripts\Popups\FreeRefillPaymentCompletedPopup.cs" />
     <Compile Include="Assets\Assets\DailyRewards\Scripts\DailyRewards.cs" />
+    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataCloudManager.cs" />
     <Compile Include="Assets\scripts\network\MultiPlay.cs" />
     <Compile Include="Assets\scripts\ui\CUIButton.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\Pay.cs" />
     <Compile Include="Assets\scripts\Panels\Lobby\LobbyPanel.cs" />
+    <Compile Include="Assets\scripts\Popups\IncorrectPasswordPopup.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPAction.cs" />
     <Compile Include="Assets\scripts\ui\CPlayerCardPosition.cs" />
     <Compile Include="Assets\scripts\client\CUIImageFadeEffect.cs" />
@@ -207,39 +233,13 @@
     <Compile Include="Assets\scripts\Helper\Gradient.cs" />
     <Compile Include="Assets\scripts\engine\CCard.cs" />
     <Compile Include="Assets\GoogleSignIn\Impl\GoogleSignInImpl.cs" />
+    <Compile Include="Assets\scripts\Managers\Storage\SerializableDictionary.cs" />
     <Compile Include="Assets\scripts\network\CustomPacket.cs" />
+    <Compile Include="Assets\scripts\Popups\Friends_RoomMakingPopup.cs" />
     <Compile Include="Assets\scripts\network\ServerQueue.cs" />
     <Compile Include="Assets\Assets\ScratchCard\Scripts\ScratchCardManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppEvents.cs" />
     <Compile Include="Assets\scripts\public\CSingleton.cs" />
-    <Compile Include="Assets\scripts\Popups\FreeRefillPaymentPopup.cs" />
-    <Compile Include="Assets\scripts\Managers\SoundManager.cs" />
-    <Compile Include="Assets\scripts\Popups\Friends_GetInvolvedPopup.cs" />
-    <Compile Include="Assets\scripts\Popups\LossLimitCannotBeChangedPopup.cs" />
-    <Compile Include="Assets\scripts\Popups\LossLimitChangeCompletedPopup.cs" />
-    <Compile Include="Assets\scripts\Managers\Storage\SerializableDictionary.cs" />
-    <Compile Include="Assets\scripts\Popups\PurchaseConfirmationPopup.cs" />
-    <Compile Include="Assets\scripts\Managers\PanelManager.cs" />
-    <Compile Include="Assets\scripts\Popups\IncorrectPasswordPopup.cs" />
-    <Compile Include="Assets\scripts\Popups\PurchaseShopCompletedPopup.cs" />
-    <Compile Include="Assets\scripts\Popups\FriendDaejonPopup.cs" />
-    <Compile Include="Assets\scripts\Popups\Friends_RoomMakingPopup.cs" />
-    <Compile Include="Assets\scripts\Popups\AccountInfoPopup.cs" />
-    <Compile Include="Assets\scripts\Popups\PurchaseFailurePopup.cs" />
-    <Compile Include="Assets\scripts\Ads\InAppPurchasing.cs" />
-    <Compile Include="Assets\scripts\Popups\InventoryMailPopup.cs" />
-    <Compile Include="Assets\scripts\Popups\GameMoneyLimitPopup.cs" />
-    <Compile Include="Assets\scripts\Popups\LossLimitChangeNoticePopup.cs" />
-    <Compile Include="Assets\scripts\Popups\PurchaseIAPCompletedPopup.cs" />
-    <Compile Include="Assets\scripts\Popups\FreeRefillPaymentCompletedPopup.cs" />
-    <Compile Include="Assets\scripts\Panels\Lobby\InventoryPanel.cs" />
-    <Compile Include="Assets\scripts\Popups\LogoutReconfirmationPopup.cs" />
-    <Compile Include="Assets\scripts\Managers\PopupManager.cs" />
-    <Compile Include="Assets\scripts\Popups\LossLimitPopup.cs" />
-    <Compile Include="Assets\scripts\GUI\CarouselView.cs" />
-    <Compile Include="Assets\scripts\Managers\Storage\PlayerDataCloudManager.cs" />
-    <Compile Include="Assets\scripts\Popups\ProfileAvatarChangePopup.cs" />
-    <Compile Include="Assets\scripts\Popups\CouponRegistrationPopup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -571,14 +571,11 @@
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    <Reference Include="UnityEngine.Purchasing.SecurityStub">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.SecurityStub.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="spine-unity-editor">
-      <HintPath>Library\ScriptAssemblies\spine-unity-editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
@@ -589,20 +586,23 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="MaxSdk.Scripts.Editor">
+      <HintPath>Library\ScriptAssemblies\MaxSdk.Scripts.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Timeline.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.Purchasing">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
+    <Reference Include="spine-unity-editor">
+      <HintPath>Library\ScriptAssemblies\spine-unity-editor.dll</HintPath>
+    </Reference>
     <Reference Include="GoogleMobileAds.Editor">
       <HintPath>Library\ScriptAssemblies\GoogleMobileAds.Editor.dll</HintPath>
     </Reference>
     <Reference Include="MaxSdk.Scripts.IntegrationManager.Editor">
       <HintPath>Library\ScriptAssemblies\MaxSdk.Scripts.IntegrationManager.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="MaxSdk.Scripts.Editor">
-      <HintPath>Library\ScriptAssemblies\MaxSdk.Scripts.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Purchasing.SecurityStub">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.Purchasing.SecurityStub.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.Purchasing">
-      <HintPath>Library\ScriptAssemblies\UnityEditor.Purchasing.dll</HintPath>
     </Reference>
     <Reference Include="Facebook.Unity.Gameroom">
       <HintPath>Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll</HintPath>
@@ -1011,17 +1011,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Purchasing.Common.Player.csproj">
+      <Project>{60B98686-A624-EE0A-C682-888CE1CCD1FD}</Project>
+      <Name>Purchasing.Common.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Player.csproj">
+      <Project>{B3584660-9247-0625-DEA5-B7984AC8201C}</Project>
+      <Name>UnityEngine.Purchasing.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="spine-unity.Player.csproj">
       <Project>{3CF6028D-B1CA-34BB-D9EB-50232F056D2D}</Project>
       <Name>spine-unity.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="spine-unity-examples.Player.csproj">
-      <Project>{426A13CF-E2FB-A15D-6511-4662ACFB2326}</Project>
-      <Name>spine-unity-examples.Player</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Player.csproj">
       <Project>{FC54E88E-3046-C482-D683-FBB6F183D9F0}</Project>
       <Name>Unity.Timeline.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity-examples.Player.csproj">
+      <Project>{426A13CF-E2FB-A15D-6511-4662ACFB2326}</Project>
+      <Name>spine-unity-examples.Player</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Player.csproj">
       <Project>{1444CCF9-E128-B343-0092-A6FC04027C30}</Project>
@@ -1031,18 +1039,6 @@
       <Project>{2F8C8FE3-BD7C-8CA3-ECA1-DA27684C1C85}</Project>
       <Name>UnityEngine.UI.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="MaxSdk.Scripts.Player.csproj">
-      <Project>{4F1CE92B-C67B-2976-44F6-40E2E63B945F}</Project>
-      <Name>MaxSdk.Scripts.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="Purchasing.Common.Player.csproj">
-      <Project>{60B98686-A624-EE0A-C682-888CE1CCD1FD}</Project>
-      <Name>Purchasing.Common.Player</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.Purchasing.Player.csproj">
-      <Project>{B3584660-9247-0625-DEA5-B7984AC8201C}</Project>
-      <Name>UnityEngine.Purchasing.Player</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEngine.Purchasing.Security.Player.csproj">
       <Project>{5DA17625-2276-EA96-0847-69924C44AD83}</Project>
       <Name>UnityEngine.Purchasing.Security.Player</Name>
@@ -1051,13 +1047,17 @@
       <Project>{1905E554-919F-C183-6962-C67F6F0F88C1}</Project>
       <Name>UnityEngine.Purchasing.SecurityCore.Player</Name>
     </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Codeless.Player.csproj">
+      <Project>{DD14235D-C8D1-4CD2-EDF0-06E25E569C81}</Project>
+      <Name>UnityEngine.Purchasing.Codeless.Player</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEngine.Purchasing.Stores.Player.csproj">
       <Project>{AA4A3C70-E094-0C90-A927-79342A77840C}</Project>
       <Name>UnityEngine.Purchasing.Stores.Player</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEngine.Purchasing.Codeless.Player.csproj">
-      <Project>{DD14235D-C8D1-4CD2-EDF0-06E25E569C81}</Project>
-      <Name>UnityEngine.Purchasing.Codeless.Player</Name>
+    <ProjectReference Include="MaxSdk.Scripts.Player.csproj">
+      <Project>{4F1CE92B-C67B-2976-44F6-40E2E63B945F}</Project>
+      <Name>MaxSdk.Scripts.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

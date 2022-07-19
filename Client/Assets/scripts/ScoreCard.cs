@@ -9,6 +9,15 @@ public class ScoreCard : MonoBehaviour
     public Text PlayerOne;
     public Text PlayerTwo;
     public int PlayerOneScore = 0;
+    public int PlayerOneLightCardsScore = 0;  //light cards score for player 1
+    public int PlayerTwoLightCardsScore = 0;   //light cards score for player 2
+    public int PlayerOneBloodCardsScore = 0;   //Blood cards score for player 2
+    public int PlayerTwoBloodCardsScore = 0;   //Blood cards score for player 2
+
+    public int PlayerOneBeltLetterCardsScore = 0;   //Belt Letter cards score for player 2
+    public int PlayerTwoBeltLetterCardsScore = 0;   //Belt Letter cards score for player 2
+
+
     public int PlayerTwoScore = 0;
     [SerializeField] public int MoneyPackRoomOne = 1000;
     [SerializeField] public int MoneyPackRoomTwo = 10000;
@@ -19,14 +28,19 @@ public class ScoreCard : MonoBehaviour
     //YEOL is HEAT
     //PEE is BLOOD
 
-    string FristPlayer = "PlayerFirstScore";
-    string LightCard = "Gwang";      //light card  
-    string  RedBeltCard= "HongDan";  //red blt card 
-    string BoodCards = "Blood";  // Pee is Blood
+    string FristPlayer = "PlayerFirstScore";         //Calculated Sum of All Cards Score for Player 1
+    string LightCardPlayerOne = "GwangPlayerOne";      //light card  p1
+    string LightCardPlayerTwo = "GwangPlayerTwo";      //light card  p2
+
+    string RedBeltCardPlayerOne = "HongDanPlayerOne";  //red blt card p1
+    string RedBeltCardPlayerTwo = "HongDanPlayerTwo";  //red blt card p2
+
+    string BoodCardsPlayerOne = "BloodPlayerOne";  // Pee is Blood for p1
+    string BoodCardsPlayerTwo = "BloodPlayerTwo";  // Pee is Blood for p2
 
 
 
-    string SecondPlayer = "PlayerSecondScore";
+    string SecondPlayer = "PlayerSecondScore";    //Calculated Sum of All Cards Score for Player 2
     bool firstrun = true;
 
     // Start is called before the first frame update
@@ -42,7 +56,7 @@ public class ScoreCard : MonoBehaviour
     }
 
 
-    void LoobyToMoneyReward(string RoomType)
+    public void LoobyToMoneyReward(string RoomType)
     {
 
         switch (RoomType)
@@ -63,7 +77,7 @@ public class ScoreCard : MonoBehaviour
                 break;
             case "RoomFour":
 
-                Debug.Log("Room 3 Selected");
+                Debug.Log("Room 4 Selected");
                 // 30000 money per point
                 break;
             default:
