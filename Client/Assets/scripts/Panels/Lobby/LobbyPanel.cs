@@ -1,6 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using StorageData;
 
 public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
 {
@@ -26,6 +27,8 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     int unreadNotificationsInventoryPanel;
     int unreadNotificationsDailyQuestPanel;
     int unreadNotificationsShopPanel;
+
+    DataTypes.GameModes gameMode;
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 

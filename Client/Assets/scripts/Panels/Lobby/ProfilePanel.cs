@@ -50,13 +50,6 @@ public class ProfilePanel : MonoBehaviour
     public Text totalHighestWinScore;
     public Text totalBestWinningStreak;
 
-    [Header("Pop-ups")]
-    public GameObject changeNicknamePopup;
-    public GameObject imageSelectedPopup;
-    public GameObject myAccountInformationPopup;
-    public GameObject membershipCodePopup;
-
-
     private void Start()
     {
         LoadGame();

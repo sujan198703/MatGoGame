@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
@@ -7,6 +8,11 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] GameObject giftPanel;
     [SerializeField] GameObject itemPanel;
     [SerializeField] GameObject mailPanel;
+
+    [Header("Instructions Avatars")]
+    [SerializeField] GameObject giftAvatar;
+    [SerializeField] GameObject itemAvatar;
+    [SerializeField] GameObject mailAvatar;
 
     [Header("Contents")]
     [SerializeField] GameObject giftPanelContent;
@@ -29,6 +35,25 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] Text itemTabNotificationBubbleText;
     [SerializeField] Text mailTabNotificationBubbleText;
 
+    [Header("Prefabs")]
+    [Tooltip("Pass in prefab references here, then you can add/remove contents at runtime")]
+    [SerializeField] List<GiftTabContent> giftTabContentPrefab;
+    [SerializeField] List<ItemTabContent> itemTabContentPrefab;
+    [SerializeField] List<MailTabContent> mailTabContentPrefab;
+
+    [Header("Content Objects")]
+    List<GiftTabContent> giftTabContent = new List<GiftTabContent>();
+    List<ItemTabContent> itemTabContent = new List<ItemTabContent>();
+    List<MailTabContent> mailTabContent = new List<MailTabContent>();
+    List<GiftTabContent> giftTabContentClaimed = new List<GiftTabContent>();
+    List<ItemTabContent> itemTabContentClaimed = new List<ItemTabContent>();
+    List<MailTabContent> mailTabContentClaimed = new List<MailTabContent>();
+
+    [Header("GreyScale Material")]
+    public Material greyScaleMaterial;
+
+    Panels currentPanel = Panels.GiftPanel;
+
     int unreadNotificationsGiftTab;
     int unreadNotificationsItemTab;
     int unreadNotificationsMailTab;
@@ -40,6 +65,7 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
     void UpdateValues()
     {
         UpdateTexts();
+        UpdateContents();
     }
 
     // Update texts
@@ -94,24 +120,189 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
 
     }
 
-    public void ClaimGift()
+    // ADD / REMOVE FUNCTIONS 
+    public void AddGift(GiftTabContent giftTabContent)
     {
+        // Add gift
+        if (!this.giftTabContent.Exists(x => x == this)) this.giftTabContent.Add(giftTabContent);
 
+        // Increment notification counter
+        unreadNotificationsGiftTab++;
     }
 
-    public void ClaimItem()
+    public void AddItem(ItemTabContent itemTabContent)
     {
+        // Add item
+        this.itemTabContent.Add(itemTabContent);
 
+        // Increment notification counter
+        unreadNotificationsItemTab++;
+    }
+    
+    public void AddMail(MailTabContent mailTabContent)
+    {
+        // Add mail
+        this.mailTabContent.Add(mailTabContent);
+
+        // Increment notification counter
+        unreadNotificationsMailTab++;
     }
 
-    public void ReadMessage()
+    public void RemoveGift(GiftTabContent giftTabContent)
     {
-        PopupManager.instance.inventoryMailPopup.gameObject.SetActive(true);
-        PopupManager.instance.inventoryMailPopup.UpdateMailPopup("");
+        // Remove gift
+        if (this.giftTabContent.Exists(x => x == this)) this.giftTabContent.Remove(giftTabContent);
+
+        // Remove object
+        Destroy(giftTabContent.gameObject);
+    }
+
+    public void RemoveItem(ItemTabContent itemTabContent)
+    {
+        // Remove item
+        if (this.itemTabContent.Exists(x => x == this)) this.itemTabContent.Remove(itemTabContent);
+
+        // Remove object
+        Destroy(itemTabContent.gameObject);
+    }
+
+    public void RemoveMail(MailTabContent mailTabContent)
+    {
+        // Remove mail
+        if (this.mailTabContent.Exists(x => x == this)) this.mailTabContent.Remove(mailTabContent);
+
+        // Remove object
+        Destroy(mailTabContent.gameObject);
+    }
+
+    // Updates root parent objects for their content objects in hierarchy
+    void UpdateContents()
+    {
+        foreach (GiftTabContent gtc in giftTabContent)
+        {
+            gtc.gameObject.transform.SetParent(giftPanelContent.transform);
+        }
+
+        foreach (ItemTabContent itc in itemTabContent)
+        {
+            itc.gameObject.transform.SetParent(itemPanelContent.transform);
+        }
+
+        foreach (MailTabContent mtc in mailTabContent)
+        {
+            mtc.gameObject.transform.SetParent(mailPanelContent.transform);
+        }
+    }
+
+    // BUTTONS
+    public void GiftTabButton()
+    {
+        // Disable old panel contents 
+        DisablePreviousPanelContents(currentPanel);
+
+        // Update current panel
+        currentPanel = Panels.GiftPanel;
+
+        // Enable current panel contents
+        EnableCurrentPanelContents(currentPanel);
+    }
+
+    public void ItemTabButton()
+    {
+        // Disable old panel contents
+        DisablePreviousPanelContents(currentPanel);
+
+        // Update current panel
+        currentPanel = Panels.ItemPanel;
+
+        // Enable current panel contents
+        EnableCurrentPanelContents(currentPanel);
+    }
+
+    public void MailTabButton()
+    {
+        // Disable old panel contents
+        DisablePreviousPanelContents(currentPanel);
+
+        // Update current panel
+        currentPanel = Panels.MailPanel;
+
+        // Enable current panel contents
+        EnableCurrentPanelContents(currentPanel);
+    }
+
+    public void ClaimAllButton()
+    {
+        switch (currentPanel)
+        {
+            case Panels.GiftPanel:
+                foreach (GiftTabContent gtc in giftPanelContent.GetComponentsInChildren<GiftTabContent>())
+                {
+                    gtc.ClaimGift();
+                }
+                break;
+            case Panels.ItemPanel:
+                foreach (ItemTabContent itc in itemPanelContent.GetComponentsInChildren<ItemTabContent>())
+                {
+                    itc.ClaimItem();
+                }
+                break;
+            case Panels.MailPanel:
+                foreach (MailTabContent mtc in mailPanelContent.GetComponentsInChildren<MailTabContent>())
+                {
+                    mtc.ReadMail();
+                }
+                break;
+        }
+    }
+
+    void DisablePreviousPanelContents(Panels previousPanel)
+    {
+        switch (previousPanel)
+        {
+            case Panels.GiftPanel:
+                giftAvatar.SetActive(false);
+                giftPanel.SetActive(false);
+                break;
+            case Panels.ItemPanel:
+                itemAvatar.SetActive(false);
+                itemPanel.SetActive(false);
+                break;
+            case Panels.MailPanel:
+                mailAvatar.SetActive(false);
+                mailPanel.SetActive(false);
+                break;
+        }
+    }
+
+    void EnableCurrentPanelContents(Panels _currentPanel)
+    {
+        switch (_currentPanel)
+        {
+            case Panels.GiftPanel:
+                giftAvatar.SetActive(true);
+                giftPanel.SetActive(true);
+                break;
+            case Panels.ItemPanel:
+                itemAvatar.SetActive(true);
+                itemPanel.SetActive(true);
+                break;
+            case Panels.MailPanel:
+                mailAvatar.SetActive(true);
+                mailPanel.SetActive(true);
+                break;
+        }
     }
 
     public void LoadData(PlayerDataManager data)
     {
+        giftTabContent = data.giftTabContent;
+        itemTabContent = data.itemTabContent;
+        mailTabContent = data.mailTabContent;
+        giftTabContentClaimed = data.giftTabContentClaimed;
+        itemTabContentClaimed = data.itemTabContentClaimed;
+        mailTabContentClaimed = data.mailTabContentClaimed;
+        
         unreadNotificationsGiftTab = data.unreadNotificationsInventoryPanel_GiftTab;
         unreadNotificationsItemTab = data.unreadNotificationsInventoryPanel_ItemTab;
         unreadNotificationsMailTab = data.unreadNotificationsInventoryPanel_MailTab;
@@ -119,26 +310,17 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
 
     public void SaveData(ref PlayerDataManager data)
     {
+        data.giftTabContent = giftTabContent;
+        data.itemTabContent = itemTabContent;
+        data.mailTabContent = mailTabContent;
+        data.giftTabContentClaimed = giftTabContentClaimed;
+        data.itemTabContentClaimed = itemTabContentClaimed;
+        data.mailTabContentClaimed = mailTabContentClaimed;
+
         data.unreadNotificationsInventoryPanel_GiftTab = unreadNotificationsGiftTab;
         data.unreadNotificationsInventoryPanel_ItemTab = unreadNotificationsItemTab;
         data.unreadNotificationsInventoryPanel_MailTab = unreadNotificationsMailTab;
     }
-}
 
-[System.Serializable]
-public class InventoryGift
-{
-
-}
-
-[System.Serializable]
-public class InventoryItem
-{
-
-}
-
-[System.Serializable]
-public class InventoryMail
-{
-
+    enum Panels { GiftPanel, ItemPanel, MailPanel }
 }
