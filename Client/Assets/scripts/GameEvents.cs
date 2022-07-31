@@ -32,7 +32,7 @@ public class GameEvents : MonoBehaviour
 
     public void SetHandCards(List<CCardPicture> HandCards)
     {
-        handCards = CPlayerHandCardManager.GetHandCards();
+        //handCards = CPlayerHandCardManager.GetHandCards();
     }
 
     public void SetFloorCards(List<CCardPicture> FloorCards)
