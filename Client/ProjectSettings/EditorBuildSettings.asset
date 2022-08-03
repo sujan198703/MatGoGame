@@ -11,9 +11,6 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/scene/play 1.unity
     guid: 37a6e0fdc2a601849b749aeef8c82be0
-  - enabled: 0
-    path: Assets/scene/InGameUI.unity
-    guid: 2e46b48a32a8e1d47bdc8ba973e0cfde
   - enabled: 1
     path: Assets/scene/Splash.unity
     guid: 68502ac1c1f0d0942bed4ba10dc09e4c
@@ -23,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/scene/Lobby.unity
     guid: 81171693388c8874e9d94d3fa642abfc
+  - enabled: 1
+    path: Assets/scene/InGameUI.unity
+    guid: 2e46b48a32a8e1d47bdc8ba973e0cfde
   m_configObjects: {}

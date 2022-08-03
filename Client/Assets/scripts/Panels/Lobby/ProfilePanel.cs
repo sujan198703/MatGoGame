@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProfilePanel : MonoBehaviour
+public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
 {
     //public Texture2D buttonEnabled;
     //public Texture2D buttonDisabled;
@@ -50,6 +50,7 @@ public class ProfilePanel : MonoBehaviour
     public Text totalHighestWinScore;
     public Text totalBestWinningStreak;
 
+<<<<<<< Updated upstream
     [Header("Pop-ups")]
     public GameObject changeNicknamePopup;
     public GameObject imageSelectedPopup;
@@ -61,8 +62,13 @@ public class ProfilePanel : MonoBehaviour
     {
         LoadGame();
     }
+=======
+    void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
-    void LoadGame()
+    private void Start() => UpdateValues();
+>>>>>>> Stashed changes
+
+    void UpdateValues()
     {
         //PlayerDataStorageManager.instance.LoadGame();
         profileName.text = PlayerPrefs.GetString("ProfileName");
@@ -84,5 +90,13 @@ public class ProfilePanel : MonoBehaviour
         clipboard.text = profileMembershipCode.text;
         clipboard.SelectAll();
         clipboard.Copy();
+    }
+
+    public void LoadData(PlayerDataManager data)
+    {
+    }
+
+    public void SaveData(ref PlayerDataManager data)
+    {
     }
 }

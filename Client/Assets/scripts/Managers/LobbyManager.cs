@@ -20,7 +20,7 @@ public class LobbyManager : MonoBehaviour, PlayerDataStorageInterface
         PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
     }
 
-    void Start() => PlayerDataStorageManager.instance.LoadGame();
+    void Start() { PlayerDataStorageManager.instance.LoadGame(); }
     
     public void LoadData(PlayerDataManager data)
     {

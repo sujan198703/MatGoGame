@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class LossLimitPopup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public void ChangeLossLimit()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        PopupManager.instance.lossLimitChangeCompletedPopup.gameObject.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 }

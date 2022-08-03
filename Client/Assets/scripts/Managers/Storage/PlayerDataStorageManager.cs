@@ -23,7 +23,11 @@ public class PlayerDataStorageManager : MonoBehaviour
         }
     }
 
-    void Start() => this.playerDataFileHandler = new PlayerDataFileManager(Application.persistentDataPath, fileName, useEncryption);
+    void Start()
+    {
+        playerDataFileHandler = new PlayerDataFileManager(Application.persistentDataPath, fileName, useEncryption);
+        LoadGame();
+    }
 
     public void LoadGame()
     {
@@ -43,6 +47,8 @@ public class PlayerDataStorageManager : MonoBehaviour
             if (dataStorageObj != null)
             dataStorageObj.LoadData(playerDataManager);
         }
+
+        SaveGame();
     }
 
     void NewGame()

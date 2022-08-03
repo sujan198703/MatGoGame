@@ -1,4 +1,4 @@
-using UnityEngine.Events;
+﻿using UnityEngine.Events;
 using UnityEngine;
 using GoogleMobileAds.Api;
 using GoogleMobileAds.Common;
@@ -350,6 +350,10 @@ public class AdManager : MonoBehaviour
             // Chips
             case 1:
                 PanelManager.instance.movieRewardPanel.AddChip();
+                break;
+            // Free Charging Station 영상보고 50만냥 받기
+            case 2:
+                PopupManager.instance.freeRefillPaymentPopup.Get500000Reward();
                 break;
         }
     }

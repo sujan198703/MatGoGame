@@ -75,6 +75,7 @@
     <Compile Include="Assets\scripts\ui\CPopupShaking.cs" />
     <Compile Include="Assets\scripts\CPlayer.cs" />
     <Compile Include="Assets\scripts\ui\CButtonCollision.cs" />
+    <Compile Include="Assets\scripts\Popups\LevelUpPopup.cs" />
     <Compile Include="Assets\scripts\public\MiniJSON.cs" />
     <Compile Include="Assets\scripts\Popups\LogoutReconfirmationPopup.cs" />
     <Compile Include="Assets\scripts\Panels\Login\LoginScreenPanel.cs" />

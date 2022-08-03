@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641252, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -31341,7 +31341,17 @@ MonoBehaviour:
   PlayerOne: {fileID: 968338983}
   PlayerTwo: {fileID: 968338983}
   PlayerOneScore: 0
+  PlayerOneLightCardsScore: 0
+  PlayerTwoLightCardsScore: 0
+  PlayerOneBloodCardsScore: 0
+  PlayerTwoBloodCardsScore: 0
+  PlayerOneBeltLetterCardsScore: 0
+  PlayerTwoBeltLetterCardsScore: 0
   PlayerTwoScore: 0
+  MoneyPackRoomOne: 1000
+  MoneyPackRoomTwo: 10000
+  MoneyPackRoomThree: 20000
+  MoneyPackRoomFour: 40000
 --- !u!114 &968338983
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38519,7 +38529,17 @@ MonoBehaviour:
   PlayerOne: {fileID: 1579940158}
   PlayerTwo: {fileID: 968338983}
   PlayerOneScore: 0
+  PlayerOneLightCardsScore: 0
+  PlayerTwoLightCardsScore: 0
+  PlayerOneBloodCardsScore: 0
+  PlayerTwoBloodCardsScore: 0
+  PlayerOneBeltLetterCardsScore: 0
+  PlayerTwoBeltLetterCardsScore: 0
   PlayerTwoScore: 0
+  MoneyPackRoomOne: 1000
+  MoneyPackRoomTwo: 10000
+  MoneyPackRoomThree: 20000
+  MoneyPackRoomFour: 40000
 --- !u!1 &1581576852
 GameObject:
   m_ObjectHideFlags: 0
@@ -48446,7 +48466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RetryConnectionPopUp: {fileID: 1811173428104573825}
   LoginFormPopUp: {fileID: 1811173429629052804}
-  serverURL: ws://localhost:8080
+  serverURL: ws://192.169.176.50:8080
   packets: []
   response: 0
   rdata: 

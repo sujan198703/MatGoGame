@@ -12,6 +12,7 @@ public class PopupManager : MonoBehaviour
     public GameMoneyLimitPopup gameMoneyLimitPopup;
     public IncorrectPasswordPopup incorrectPasswordPopup;
     public InventoryMailPopup inventoryMailPopup;
+    public LevelUpPopup levelUpPopup;
     public LogoutReconfirmationPopup logoutReconfirmationPopup;
     public LossLimitCannotBeChangedPopup lossLimitCannotBeChangedPopup;
     public LossLimitChangeCompletedPopup lossLimitChangeCompletedPopup;

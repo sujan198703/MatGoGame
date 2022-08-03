@@ -1,18 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class FreeRefillPaymentCompletedPopup : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] TextMeshProUGUI freeRefillPaymentCompletedText;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public void UpdateText(string text) => freeRefillPaymentCompletedText.text = text;
 }

@@ -13,6 +13,11 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] GameObject itemPanelContent;
     [SerializeField] GameObject mailPanelContent;
 
+    [Header("No Received")]
+    [SerializeField] GameObject noGiftReceived;
+    [SerializeField] GameObject noItemReceived;
+    [SerializeField] GameObject noMessageReceived;
+ 
     [Header("Texts")]
     [SerializeField] Text giftTabDisabledText;
     [SerializeField] Text giftTabEnabledText;
@@ -40,6 +45,11 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
     void UpdateValues()
     {
         UpdateTexts();
+<<<<<<< Updated upstream
+=======
+        CheckIfContentsEmpty();
+        UpdateContents();
+>>>>>>> Stashed changes
     }
 
     // Update texts
@@ -94,7 +104,128 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
 
     }
 
+<<<<<<< Updated upstream
     public void ClaimGift()
+=======
+    // ADD / REMOVE FUNCTIONS 
+    public void AddGift(GiftTabContent giftTabContent)
+    {
+        // Add gift
+        if (!this.giftTabContent.Exists(x => x == this)) this.giftTabContent.Add(giftTabContent);
+
+        // Increment notification counter
+        unreadNotificationsGiftTab++;
+    }
+
+    public void AddItem(ItemTabContent itemTabContent)
+    {
+        // Add item
+        this.itemTabContent.Add(itemTabContent);
+
+        // Increment notification counter
+        unreadNotificationsItemTab++;
+    }
+    
+    public void AddMail(MailTabContent mailTabContent)
+    {
+        // Add mail
+        this.mailTabContent.Add(mailTabContent);
+
+        // Increment notification counter
+        unreadNotificationsMailTab++;
+    }
+
+    public void RemoveGift(GiftTabContent giftTabContent)
+    {
+        // Remove gift
+        if (this.giftTabContent.Exists(x => x == this)) this.giftTabContent.Remove(giftTabContent);
+
+        // Remove object
+        Destroy(giftTabContent.gameObject);
+
+        // Update updates after delay
+        Invoke("CheckIfContentsEmpty", 0.1f);
+    }
+
+    public void RemoveItem(ItemTabContent itemTabContent)
+    {
+        // Remove item
+        if (this.itemTabContent.Exists(x => x == this)) this.itemTabContent.Remove(itemTabContent);
+
+        // Remove object
+        Destroy(itemTabContent.gameObject);
+
+        // Update updates after delay
+        Invoke("CheckIfContentsEmpty", 0.1f);
+    }
+
+    public void RemoveMail(MailTabContent mailTabContent)
+    {
+        // Remove mail
+        if (this.mailTabContent.Exists(x => x == this)) this.mailTabContent.Remove(mailTabContent);
+
+        // Remove object
+        Destroy(mailTabContent.gameObject);
+
+        // Update updates after delay
+        Invoke("CheckIfContentsEmpty", 0.1f);
+    }
+
+    // Updates root parent objects for their content objects in hierarchy
+    void UpdateContents()
+    {
+        foreach (GiftTabContent gtc in giftTabContent)
+        {
+            gtc.gameObject.transform.SetParent(giftPanelContent.transform);
+        }
+
+        foreach (ItemTabContent itc in itemTabContent)
+        {
+            itc.gameObject.transform.SetParent(itemPanelContent.transform);
+        }
+
+        foreach (MailTabContent mtc in mailTabContent)
+        {
+            mtc.gameObject.transform.SetParent(mailPanelContent.transform);
+        }
+    }
+
+    // Checks if any of the contents are empty
+    void CheckIfContentsEmpty()
+    {
+        // Check if contents are empty
+        if (giftPanelContent.transform.childCount == 0) noGiftReceived.SetActive(true);
+        if (itemPanelContent.transform.childCount == 0) noItemReceived.SetActive(true);
+        if (mailPanelContent.transform.childCount == 0) noMessageReceived.SetActive(true);
+    }
+
+    // BUTTONS
+    public void GiftTabButton()
+    {
+        // Disable old panel contents 
+        DisablePreviousPanelContents(currentPanel);
+
+        // Update current panel
+        currentPanel = Panels.GiftPanel;
+
+        // Enable current panel contents
+        EnableCurrentPanelContents(currentPanel);
+    }
+
+    public void ItemTabButton()
+    {
+        // Disable old panel contents
+        DisablePreviousPanelContents(currentPanel);
+
+        // Update current panel
+        currentPanel = Panels.ItemPanel;
+
+        // Enable current panel contents
+        EnableCurrentPanelContents(currentPanel);
+    }
+
+    public void MailTabButton()
+>>>>>>> Stashed changes
     {
 
     }
