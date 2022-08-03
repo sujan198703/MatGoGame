@@ -48466,7 +48466,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RetryConnectionPopUp: {fileID: 1811173428104573825}
   LoginFormPopUp: {fileID: 1811173429629052804}
+<<<<<<< Updated upstream
   serverURL: ws://192.169.176.50:8080
+=======
+  serverURL: 192.169.176.50
+>>>>>>> Stashed changes
   packets: []
   response: 0
   rdata: 

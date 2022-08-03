@@ -46,7 +46,10 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
     {
         UpdateTexts();
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
         CheckIfContentsEmpty();
         UpdateContents();
 >>>>>>> Stashed changes

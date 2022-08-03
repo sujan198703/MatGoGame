@@ -59,6 +59,9 @@ public class PlayerDataManager
         this.playerLevelExperience = 0;
         this.playerLevelExperienceToAdd = 0;
         this.dailyLossLimit = 500000;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
         this.safeTier = 0;
         this.nyangAdsWatched = 0;

@@ -51,6 +51,7 @@ public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
     public Text totalBestWinningStreak;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     [Header("Pop-ups")]
     public GameObject changeNicknamePopup;
     public GameObject imageSelectedPopup;
@@ -62,6 +63,11 @@ public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
     {
         LoadGame();
     }
+=======
+    void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
+
+    private void Start() => UpdateValues();
+>>>>>>> Stashed changes
 =======
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 

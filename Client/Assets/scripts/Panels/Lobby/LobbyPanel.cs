@@ -5,6 +5,9 @@ using UnityEngine.UI;
 =======
 using StorageData;
 using UnityEngine.SceneManagement;
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
@@ -52,6 +55,11 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     int dailyLossLimit;
     int nyangsLostToday;
     int chipsLostToday;
+<<<<<<< Updated upstream
+=======
+
+    DataTypes.GameModes gameMode;
+>>>>>>> Stashed changes
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
@@ -85,6 +93,7 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     }
 
     void UpdatePlayerLevel()
+<<<<<<< Updated upstream
     {
         if (playerLevelExperience < playerLevelExperienceToAdd)
         {
@@ -107,6 +116,30 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
 
     void UpdateAnnouncements()
     {
+=======
+    {
+        if (playerLevelExperience < playerLevelExperienceToAdd)
+        {
+            // Show level up panel
+            PopupManager.instance.levelUpPopup.gameObject.SetActive(true);
+       
+            // Add experience
+            playerLevelExperience += playerLevelExperienceToAdd;
+
+            // Update player level text
+            profileLevelText.text = playerLevel.ToString();
+
+            // Update progress bar
+            profileProgressBar.fillAmount = Mathf.Clamp(playerLevelExperience % 10, 0.0f, 1.0f);
+
+            // Reset experience to add
+            playerLevelExperienceToAdd = 0;
+        }
+    }
+
+    void UpdateAnnouncements()
+    {
+>>>>>>> Stashed changes
         announcementText.text = "알림";
     }
 
