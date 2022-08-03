@@ -1,14 +1,8 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-<<<<<<< Updated upstream
-=======
 using StorageData;
 using UnityEngine.SceneManagement;
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 
 public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
 {
@@ -42,7 +36,7 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     int unreadNotificationsInventoryPanel;
     int unreadNotificationsDailyQuestPanel;
     int unreadNotificationsShopPanel;
-    
+
     int nyangsPocket;
     int nyangsSafe;
     int nyangsTotal;
@@ -55,11 +49,8 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     int dailyLossLimit;
     int nyangsLostToday;
     int chipsLostToday;
-<<<<<<< Updated upstream
-=======
 
     DataTypes.GameModes gameMode;
->>>>>>> Stashed changes
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
@@ -93,13 +84,12 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     }
 
     void UpdatePlayerLevel()
-<<<<<<< Updated upstream
     {
         if (playerLevelExperience < playerLevelExperienceToAdd)
         {
             // Show level up panel
             PopupManager.instance.levelUpPopup.gameObject.SetActive(true);
-       
+
             // Add experience
             playerLevelExperience += playerLevelExperienceToAdd;
 
@@ -116,30 +106,6 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
 
     void UpdateAnnouncements()
     {
-=======
-    {
-        if (playerLevelExperience < playerLevelExperienceToAdd)
-        {
-            // Show level up panel
-            PopupManager.instance.levelUpPopup.gameObject.SetActive(true);
-       
-            // Add experience
-            playerLevelExperience += playerLevelExperienceToAdd;
-
-            // Update player level text
-            profileLevelText.text = playerLevel.ToString();
-
-            // Update progress bar
-            profileProgressBar.fillAmount = Mathf.Clamp(playerLevelExperience % 10, 0.0f, 1.0f);
-
-            // Reset experience to add
-            playerLevelExperienceToAdd = 0;
-        }
-    }
-
-    void UpdateAnnouncements()
-    {
->>>>>>> Stashed changes
         announcementText.text = "알림";
     }
 
@@ -193,56 +159,56 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
             switch (modeIndex)
             {
                 case 0:
-                    //if (nyangsTotal > 5000 && nyangsTotal < 1500000)
+                    if (nyangsTotal > 5000 && nyangsTotal < 1500000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Normal);
                         GoToGameplayScene();
                     }
                     break;
                 case 1:
-                    //if (nyangsTotal > 5000 && nyangsTotal < 1500000)
+                    if (nyangsTotal > 5000 && nyangsTotal < 1500000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Normal);
                         GoToGameplayScene();
                     }
                     break;
                 case 2:
-                    //if (nyangsTotal > 100000 && nyangsTotal < 10000000)
+                    if (nyangsTotal > 100000 && nyangsTotal < 10000000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Normal);
                         GoToGameplayScene();
                     }
                     break;
                 case 3:
-                    //if (nyangsTotal > 2000000 && nyangsTotal < 20000000)
+                    if (nyangsTotal > 2000000 && nyangsTotal < 20000000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Master);
                         GoToGameplayScene();
                     }
                     break;
                 case 4:
-                    //if (nyangsTotal > 10000000 && nyangsTotal < 100000000)
+                    if (nyangsTotal > 10000000 && nyangsTotal < 100000000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Master);
                         GoToGameplayScene();
                     }
                     break;
                 case 5:
-                    //if (nyangsTotal > 50000000 && nyangsTotal < 1000000000)
+                    if (nyangsTotal > 50000000 && nyangsTotal < 1000000000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Sharper);
                         GoToGameplayScene();
                     }
                     break;
                 case 6:
-                    //if (nyangsTotal > 100000000)
+                    if (nyangsTotal > 100000000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Sharper);
                         GoToGameplayScene();
                     }
                     break;
                 case 7:
-                    //if (nyangsTotal > 300000000)
+                    if (nyangsTotal > 300000000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Freedom);
                         GoToGameplayScene();
@@ -266,28 +232,28 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
             switch (modeIndex)
             {
                 case 1:
-                    //if (chipsTotal > 50000)
+                    if (chipsTotal > 50000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Normal);
                         GoToGameplayScene();
                     }
                     break;
                 case 2:
-                    //if (chipsTotal > 100000)
+                    if (chipsTotal > 100000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Normal);
                         GoToGameplayScene();
                     }
                     break;
                 case 3:
-                    //if (chipsTotal > 300000)
+                    if (chipsTotal > 300000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Master);
                         GoToGameplayScene();
                     }
                     break;
                 case 4:
-                    //if (chipsTotal > 500000)
+                    if (chipsTotal > 500000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Sharper);
                         GoToGameplayScene();
@@ -295,7 +261,7 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
                     break;
 
                 case 5:
-                    //if (chipsTotal > 1000000)
+                    if (chipsTotal > 1000000)
                     {
                         UpdateGameMode(DataTypes.GameModes.Freedom);
                         GoToGameplayScene();

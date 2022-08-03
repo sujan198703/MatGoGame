@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -45,7 +46,7 @@ public class PlayerDataStorageManager : MonoBehaviour
         foreach (PlayerDataStorageInterface dataStorageObj in playerDataStorageObjects)
         {
             if (dataStorageObj != null)
-            dataStorageObj.LoadData(playerDataManager);
+                dataStorageObj.LoadData(playerDataManager);
         }
 
         SaveGame();
@@ -70,6 +71,19 @@ public class PlayerDataStorageManager : MonoBehaviour
 
     // Pass all Interface references so when Saving/Loading, call their implicit functions directly using reference
     public void AddToDataStorageObjects(PlayerDataStorageInterface pdsInterfaceObj) => playerDataStorageObjects.Add(pdsInterfaceObj);
+
+    // Helper functions
+    public DateTime StringToDateTime(string DateString)
+    {
+        if (String.IsNullOrEmpty(DateString))
+        {
+            return DateTime.Now;
+        }
+        else
+        {
+            return DateTime.Parse(DateString);
+        }
+    }
 
     void OnApplicationQuit() => SaveGame();
 }
