@@ -56,11 +56,11 @@
     <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityStub\AppleValidator.cs" />
+    <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityStub\GooglePlayReceipt.cs" />
     <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityStub\CrossPlatformValidator.cs" />
     <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityStub\AssemblyInfo.cs" />
     <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityStub\Obfuscator.cs" />
-    <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityStub\AppleValidator.cs" />
-    <Compile Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityStub\GooglePlayReceipt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Library\PackageCache\com.unity.purchasing@4.1.5\Runtime\SecurityStub\UnityEngine.Purchasing.SecurityStub.asmdef" />
@@ -294,6 +294,18 @@
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:\Program Files (x86)\Microsoft Visual Studio Tools for Unity\16.0\Editor\SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Facebook.Unity.Editor">
+      <HintPath>Assets\FacebookSDK\Plugins\Editor\Facebook.Unity.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Unity">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook.Unity.Gameroom">
       <HintPath>Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll</HintPath>
     </Reference>
@@ -306,50 +318,20 @@
     <Reference Include="Google.VersionHandlerImpl">
       <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.VersionHandlerImpl.dll</HintPath>
     </Reference>
+    <Reference Include="FreeNet">
+      <HintPath>Assets\FreeNet\FreeNet.dll</HintPath>
+    </Reference>
     <Reference Include="Firebase.App">
       <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Plastic.Newtonsoft.Json">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Plastic.Antlr3.Runtime">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.TaskExtension">
-      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.IOSResolver">
-      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.IOSResolver.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.JarResolver">
-      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.JarResolver.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Common">
-      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="unityplastic">
-      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-    </Reference>
-    <Reference Include="Facebook.Unity.Editor">
-      <HintPath>Assets\FacebookSDK\Plugins\Editor\Facebook.Unity.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds">
-      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Unity">
-      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Unity.dll</HintPath>
-    </Reference>
-    <Reference Include="FreeNet">
-      <HintPath>Assets\FreeNet\FreeNet.dll</HintPath>
+    <Reference Include="NugetForUnity">
+      <HintPath>Assets\NuGet\Editor\NugetForUnity.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\Plugins\Newtonsoft.Json Editor\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Google.PackageManagerResolver">
-      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.PackageManagerResolver.dll</HintPath>
-    </Reference>
-    <Reference Include="NugetForUnity">
-      <HintPath>Assets\NuGet\Editor\NugetForUnity.dll</HintPath>
+    <Reference Include="Unity.Plastic.Newtonsoft.Json">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="FacebookNamedPipeClient">
       <HintPath>Assets\FacebookSDK\Plugins\Gameroom\FacebookNamedPipeClient.dll</HintPath>
@@ -357,20 +339,38 @@
     <Reference Include="Firebase.Editor">
       <HintPath>Assets\Firebase\Editor\Firebase.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Google.PackageManagerResolver">
+      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.PackageManagerResolver.dll</HintPath>
+    </Reference>
     <Reference Include="Facebook.Unity.Settings">
       <HintPath>Assets\FacebookSDK\Plugins\Settings\Facebook.Unity.Settings.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds.Core">
       <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Plastic.Antlr3.Runtime">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\Unity.Plastic.Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Tasks">
       <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
     </Reference>
     <Reference Include="Google.MiniJson">
       <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
     </Reference>
+    <Reference Include="Google.IOSResolver">
+      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.IOSResolver.dll</HintPath>
+    </Reference>
     <Reference Include="Firebase.Platform">
       <HintPath>Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.JarResolver">
+      <HintPath>Assets\ExternalDependencyManager\Editor\1.2.171\Google.JarResolver.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Common">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Compat">
       <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Compat.dll</HintPath>
@@ -381,8 +381,8 @@
     <Reference Include="Firebase.Auth">
       <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
     </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll</HintPath>
+    <Reference Include="unityplastic">
+      <HintPath>Library\PackageCache\com.unity.collab-proxy@1.15.16\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity 2020.3.34f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>

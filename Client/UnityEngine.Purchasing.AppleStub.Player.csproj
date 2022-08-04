@@ -252,23 +252,11 @@
     <Reference Include="UnityEditor.UI">
       <HintPath>Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
     </Reference>
-    <Reference Include="Facebook.Unity.Gameroom">
-      <HintPath>Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.App">
-      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.TaskExtension">
-      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Android">
-      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Android.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Common">
-      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\Plugins\Newtonsoft.Json AOT\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds">
       <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
@@ -276,8 +264,14 @@
     <Reference Include="Facebook.Unity.Android">
       <HintPath>Assets\FacebookSDK\Plugins\Android\Facebook.Unity.Android.dll</HintPath>
     </Reference>
+    <Reference Include="Facebook.Unity.Gameroom">
+      <HintPath>Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll</HintPath>
+    </Reference>
     <Reference Include="FreeNet">
       <HintPath>Assets\FreeNet\FreeNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
     </Reference>
     <Reference Include="FacebookNamedPipeClient">
       <HintPath>Assets\FacebookSDK\Plugins\Gameroom\FacebookNamedPipeClient.dll</HintPath>
@@ -291,11 +285,20 @@
     <Reference Include="Unity.Tasks">
       <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Tasks.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
+    </Reference>
     <Reference Include="Google.MiniJson">
       <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
     </Reference>
+    <Reference Include="GoogleMobileAds.Android">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Android.dll</HintPath>
+    </Reference>
     <Reference Include="Firebase.Platform">
       <HintPath>Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Common">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Compat">
       <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Compat.dll</HintPath>
@@ -305,9 +308,6 @@
     </Reference>
     <Reference Include="Firebase.Auth">
       <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
-    </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity 2020.3.34f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>
