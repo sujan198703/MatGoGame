@@ -114,6 +114,7 @@
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppRequests.cs" />
     <Compile Include="Assets\scripts\ui\CPlayRoomUI.cs" />
     <Compile Include="Assets\scripts\client\CDelayedDeactive.cs" />
+    <Compile Include="Assets\scripts\Panels\Content\QuestTabContent.cs" />
     <Compile Include="Assets\scripts\network\Encryption.cs" />
     <Compile Include="Assets\scripts\Managers\LoginManager.cs" />
     <Compile Include="Assets\scripts\Managers\Storage\PlayerDataStorageManager.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="Assets\scripts\engine\CFloorCardManager.cs" />
     <Compile Include="Assets\scripts\network\CNetworkManager.cs" />
     <Compile Include="Assets\scripts\public\EasingUtil.cs" />
+    <Compile Include="Assets\scripts\Panels\Content\MailTabContent.cs" />
     <Compile Include="Assets\scripts\Helper\AnchorSetter.cs" />
     <Compile Include="Assets\scripts\NetworkTest\ThreadManager.cs" />
     <Compile Include="Assets\scripts\Panels\Lobby\MovieRewardPanel.cs" />
@@ -188,6 +190,7 @@
     <Compile Include="Assets\scripts\Popups\ProfileAvatarChangePopup.cs" />
     <Compile Include="Assets\scripts\ui\CPopupKookjin.cs" />
     <Compile Include="Assets\Assets\ScratchCard\Scripts\Core\ScratchCardRenderer.cs" />
+    <Compile Include="Assets\scripts\Panels\Content\LobbyPanelContent.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\GraphRequest.cs" />
     <Compile Include="Assets\FreeNet\CRemoteServerPeer.cs" />
     <Compile Include="Assets\scripts\Ads\AdManager.cs" />
@@ -223,6 +226,7 @@
     <Compile Include="Assets\scripts\Popups\FreeRefillPaymentCompletedPopup.cs" />
     <Compile Include="Assets\Assets\DailyRewards\Scripts\DailyRewards.cs" />
     <Compile Include="Assets\scripts\Managers\Storage\PlayerDataCloudManager.cs" />
+    <Compile Include="Assets\scripts\Panels\Content\ItemTabContent.cs" />
     <Compile Include="Assets\scripts\network\MultiPlay.cs" />
     <Compile Include="Assets\scripts\ui\CUIButton.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\Pay.cs" />
@@ -242,9 +246,6 @@
     <Compile Include="Assets\Assets\ScratchCard\Scripts\ScratchCardManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppEvents.cs" />
     <Compile Include="Assets\scripts\public\CSingleton.cs" />
-    <Compile Include="Assets\scripts\Panels\Content\QuestTabContent.cs" />
-    <Compile Include="Assets\scripts\Panels\Content\MailTabContent.cs" />
-    <Compile Include="Assets\scripts\Panels\Content\ItemTabContent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -252,6 +253,7 @@
     <None Include="Assets\Spine\version.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\Animations_New\jjok\jjok.atlas.txt" />
+    <None Include="Assets\Shaders\GreyScale.shader" />
     <None Include="Assets\resources\220224_spine\나가리\Nagari.atlas.txt" />
     <None Include="Assets\UIMenu\Animations\mission\mission_success_seperate\mission_success_spark.atlas.txt" />
     <None Include="Assets\Assets\ScratchCard\Shaders\MaskProgress.shader" />
@@ -591,8 +593,17 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\Unity 2020.3.34f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll</HintPath>
+    <Reference Include="Facebook.Unity.Gameroom">
+      <HintPath>Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="GoogleMobileAds.Common">
+      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
     </Reference>
     <Reference Include="GoogleMobileAds">
       <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.dll</HintPath>
@@ -600,14 +611,8 @@
     <Reference Include="GoogleMobileAds.Unity">
       <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Unity.dll</HintPath>
     </Reference>
-    <Reference Include="Facebook.Unity.Gameroom">
-      <HintPath>Assets\FacebookSDK\Plugins\Gameroom\Facebook.Unity.Gameroom.dll</HintPath>
-    </Reference>
     <Reference Include="FreeNet">
       <HintPath>Assets\FreeNet\FreeNet.dll</HintPath>
-    </Reference>
-    <Reference Include="Firebase.App">
-      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\Plugins\Newtonsoft.Json Editor\Newtonsoft.Json.dll</HintPath>
@@ -624,17 +629,11 @@
     <Reference Include="Unity.Tasks">
       <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Tasks.dll</HintPath>
     </Reference>
-    <Reference Include="Firebase.TaskExtension">
-      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
-    </Reference>
     <Reference Include="Google.MiniJson">
       <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
     </Reference>
     <Reference Include="Firebase.Platform">
       <HintPath>Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
-    </Reference>
-    <Reference Include="GoogleMobileAds.Common">
-      <HintPath>Assets\GoogleMobileAds\GoogleMobileAds.Common.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Compat">
       <HintPath>Assets\Parse\Plugins\dotNet45\Unity.Compat.dll</HintPath>
@@ -644,6 +643,9 @@
     </Reference>
     <Reference Include="Firebase.Auth">
       <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="websocket-sharp">
+      <HintPath>Assets\Packages\WebSocketSharp-netstandard.1.0.1\lib\netstandard2.0\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:\Program Files\Unity 2020.3.34f1\Editor\Data\MonoBleedingEdge\lib\mono\4.7.1-api\mscorlib.dll</HintPath>
@@ -995,6 +997,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Purchasing.Common.csproj">
+      <Project>{356E3852-1E14-23DF-CB74-EF35CE4FBB02}</Project>
+      <Name>Purchasing.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="spine-unity-examples-editor.csproj">
       <Project>{1191741A-1D57-8706-38EF-BFA7B73FCB4B}</Project>
       <Name>spine-unity-examples-editor</Name>
@@ -1003,9 +1009,9 @@
       <Project>{45E74912-FF55-E3A8-0F78-DA587D5DB6FE}</Project>
       <Name>Unity.VSCode.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="MaxSdk.Scripts.Editor.csproj">
-      <Project>{7F22E292-446B-561D-89EB-CC4BBF73DB9D}</Project>
-      <Name>MaxSdk.Scripts.Editor</Name>
+    <ProjectReference Include="UnityEngine.Purchasing.csproj">
+      <Project>{26005988-7C82-60DD-76AD-3E190FF68B62}</Project>
+      <Name>UnityEngine.Purchasing</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{645366FD-63C9-63E1-6596-4C20AD8E4434}</Project>
@@ -1019,29 +1025,21 @@
       <Project>{E8A9D7EA-73F8-B7F5-1B4D-6E7800E3A064}</Project>
       <Name>spine-unity</Name>
     </ProjectReference>
-    <ProjectReference Include="spine-unity-examples.csproj">
-      <Project>{70A4D1A2-A761-4EA2-9D55-48B09E4DC2F8}</Project>
-      <Name>spine-unity-examples</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Timeline.Editor.csproj">
-      <Project>{B45C3D83-07BD-945D-FFA3-9EEDBA5FF57E}</Project>
-      <Name>Unity.Timeline.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.csproj">
       <Project>{5D460F58-CAFD-D707-25EA-19248DE840F7}</Project>
       <Name>Unity.Timeline</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity-examples.csproj">
+      <Project>{70A4D1A2-A761-4EA2-9D55-48B09E4DC2F8}</Project>
+      <Name>spine-unity-examples</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{6BDD718D-DD40-BA42-A075-6F69D1193500}</Project>
       <Name>Unity.TextMeshPro</Name>
     </ProjectReference>
-    <ProjectReference Include="spine-unity-editor.csproj">
-      <Project>{4042B1AA-6C60-BDAD-1EE0-4ECB41011DF5}</Project>
-      <Name>spine-unity-editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="MaxSdk.Scripts.csproj">
-      <Project>{9E22DECE-7904-C9B7-8DFB-2726A9118D3D}</Project>
-      <Name>MaxSdk.Scripts</Name>
+    <ProjectReference Include="UnityEngine.Purchasing.SecurityStub.csproj">
+      <Project>{9276123D-9BFE-090D-8C12-5857ADB07FD5}</Project>
+      <Name>UnityEngine.Purchasing.SecurityStub</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{3AA710AA-B60F-C507-FCCE-BC576A35745B}</Project>
@@ -1055,45 +1053,49 @@
       <Project>{08E1AD25-2D91-8574-4125-AAC4E3673B6A}</Project>
       <Name>Unity.Rider.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="MaxSdk.Scripts.IntegrationManager.Editor.csproj">
-      <Project>{BC78650F-3D22-A7DB-01BF-10A5BBC31CF4}</Project>
-      <Name>MaxSdk.Scripts.IntegrationManager.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEngine.UI.csproj">
       <Project>{C8DA974E-1B47-BC8E-E6A8-7BF55A8B1A61}</Project>
       <Name>UnityEngine.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="GoogleMobileAds.Editor.csproj">
-      <Project>{3D45007E-E207-85CF-0FE7-60952118F595}</Project>
-      <Name>GoogleMobileAds.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Purchasing.Common.csproj">
-      <Project>{356E3852-1E14-23DF-CB74-EF35CE4FBB02}</Project>
-      <Name>Purchasing.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.Purchasing.csproj">
-      <Project>{26005988-7C82-60DD-76AD-3E190FF68B62}</Project>
-      <Name>UnityEngine.Purchasing</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.Purchasing.SecurityStub.csproj">
-      <Project>{9276123D-9BFE-090D-8C12-5857ADB07FD5}</Project>
-      <Name>UnityEngine.Purchasing.SecurityStub</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.Purchasing.SecurityCore.csproj">
       <Project>{3D75AA12-DF78-5FC0-0C74-6B99EA668B15}</Project>
       <Name>UnityEngine.Purchasing.SecurityCore</Name>
     </ProjectReference>
-    <ProjectReference Include="UnityEngine.Purchasing.Stores.csproj">
-      <Project>{A5A0A44B-942C-1D9B-66BD-EEA9914D6EDB}</Project>
-      <Name>UnityEngine.Purchasing.Stores</Name>
+    <ProjectReference Include="MaxSdk.Scripts.Editor.csproj">
+      <Project>{7F22E292-446B-561D-89EB-CC4BBF73DB9D}</Project>
+      <Name>MaxSdk.Scripts.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEngine.Purchasing.Codeless.csproj">
       <Project>{6E5CD8C6-B769-1F30-FBE2-47A887C52284}</Project>
       <Name>UnityEngine.Purchasing.Codeless</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Timeline.Editor.csproj">
+      <Project>{B45C3D83-07BD-945D-FFA3-9EEDBA5FF57E}</Project>
+      <Name>Unity.Timeline.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Stores.csproj">
+      <Project>{A5A0A44B-942C-1D9B-66BD-EEA9914D6EDB}</Project>
+      <Name>UnityEngine.Purchasing.Stores</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEditor.Purchasing.csproj">
       <Project>{60F04612-1E8C-CC92-9613-D4A8BF8025AF}</Project>
       <Name>UnityEditor.Purchasing</Name>
+    </ProjectReference>
+    <ProjectReference Include="spine-unity-editor.csproj">
+      <Project>{4042B1AA-6C60-BDAD-1EE0-4ECB41011DF5}</Project>
+      <Name>spine-unity-editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="MaxSdk.Scripts.csproj">
+      <Project>{9E22DECE-7904-C9B7-8DFB-2726A9118D3D}</Project>
+      <Name>MaxSdk.Scripts</Name>
+    </ProjectReference>
+    <ProjectReference Include="GoogleMobileAds.Editor.csproj">
+      <Project>{3D45007E-E207-85CF-0FE7-60952118F595}</Project>
+      <Name>GoogleMobileAds.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="MaxSdk.Scripts.IntegrationManager.Editor.csproj">
+      <Project>{BC78650F-3D22-A7DB-01BF-10A5BBC31CF4}</Project>
+      <Name>MaxSdk.Scripts.IntegrationManager.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

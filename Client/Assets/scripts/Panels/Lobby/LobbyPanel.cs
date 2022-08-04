@@ -15,6 +15,8 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] Image profileProgressBar;
     [SerializeField] Button luckyTicketTimerButton;
     [SerializeField] Text luckyTicketTimerText;
+    [SerializeField] GameObject nyangModeTab;
+    [SerializeField] GameObject chipModeTab;
 
     [Header("Notification Text Bubbles")]
     [SerializeField] Text eventButtonNotificationText;
@@ -50,14 +52,18 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     int nyangsLostToday;
     int chipsLostToday;
 
+    int[] nyangsRequiredMinimum = new int[] { 5000, 5000, 100000, 2000000, 10000000, 50000000, 100000000, 300000000 };
+    int[] nyangsRequiredMaximum = new int[] { 1500000, 1500000, 10000000, 20000000, 100000000, 0, 0 };
+    int[] chipsRequiredMinimum = new int[] { 50000, 100000, 300000, 500000, 1000000 };
+
     DataTypes.GameModes gameMode;
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
-    void OnEnable() => UpdateValues();
+    void OnEnable() { PlayerDataStorageManager.instance.LoadGame(); }
 
     void Update()
-    {
+    { 
         if (luckyTicketTimerValue > 0)
         {
             luckyTicketTimerValue -= Time.deltaTime;
@@ -77,10 +83,18 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
 
     void UpdateValues()
     {
+        UpdateTotal();
         UpdatePlayerLevel();
         UpdateAnnouncements();
         ResetLuckyTicketTimer();
         UpdateNotificationTexts();
+        CheckGameModes();
+    }
+
+    void UpdateTotal()
+    {
+        nyangsTotal = nyangsPocket + nyangsSafe;
+        chipsTotal = chipsPocket + chipsSafe;
     }
 
     void UpdatePlayerLevel()
@@ -159,56 +173,56 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
             switch (modeIndex)
             {
                 case 0:
-                    if (nyangsTotal > 5000 && nyangsTotal < 1500000)
+                    if (nyangsTotal > nyangsRequiredMinimum[0] && nyangsTotal < nyangsRequiredMaximum[0])
                     {
                         UpdateGameMode(DataTypes.GameModes.Normal);
                         GoToGameplayScene();
                     }
                     break;
                 case 1:
-                    if (nyangsTotal > 5000 && nyangsTotal < 1500000)
+                    if (nyangsTotal > nyangsRequiredMinimum[1] && nyangsTotal < nyangsRequiredMaximum[1])
                     {
                         UpdateGameMode(DataTypes.GameModes.Normal);
                         GoToGameplayScene();
                     }
                     break;
                 case 2:
-                    if (nyangsTotal > 100000 && nyangsTotal < 10000000)
+                    if (nyangsTotal > nyangsRequiredMinimum[2] && nyangsTotal < nyangsRequiredMaximum[2])
                     {
                         UpdateGameMode(DataTypes.GameModes.Normal);
                         GoToGameplayScene();
                     }
                     break;
                 case 3:
-                    if (nyangsTotal > 2000000 && nyangsTotal < 20000000)
+                    if (nyangsTotal > nyangsRequiredMinimum[3] && nyangsTotal < nyangsRequiredMaximum[3])
                     {
                         UpdateGameMode(DataTypes.GameModes.Master);
                         GoToGameplayScene();
                     }
                     break;
                 case 4:
-                    if (nyangsTotal > 10000000 && nyangsTotal < 100000000)
+                    if (nyangsTotal > nyangsRequiredMinimum[4] && nyangsTotal < nyangsRequiredMaximum[4])
                     {
                         UpdateGameMode(DataTypes.GameModes.Master);
                         GoToGameplayScene();
                     }
                     break;
                 case 5:
-                    if (nyangsTotal > 50000000 && nyangsTotal < 1000000000)
+                    if (nyangsTotal > nyangsRequiredMinimum[5] && nyangsTotal < nyangsRequiredMaximum[5])
                     {
                         UpdateGameMode(DataTypes.GameModes.Sharper);
                         GoToGameplayScene();
                     }
                     break;
                 case 6:
-                    if (nyangsTotal > 100000000)
+                    if (nyangsTotal > nyangsRequiredMinimum[6])
                     {
                         UpdateGameMode(DataTypes.GameModes.Sharper);
                         GoToGameplayScene();
                     }
                     break;
                 case 7:
-                    if (nyangsTotal > 300000000)
+                    if (nyangsTotal > nyangsRequiredMinimum[7])
                     {
                         UpdateGameMode(DataTypes.GameModes.Freedom);
                         GoToGameplayScene();
@@ -232,28 +246,28 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
             switch (modeIndex)
             {
                 case 1:
-                    if (chipsTotal > 50000)
+                    if (chipsTotal > chipsRequiredMinimum[0])
                     {
                         UpdateGameMode(DataTypes.GameModes.Normal);
                         GoToGameplayScene();
                     }
                     break;
                 case 2:
-                    if (chipsTotal > 100000)
+                    if (chipsTotal > chipsRequiredMinimum[1])
                     {
                         UpdateGameMode(DataTypes.GameModes.Normal);
                         GoToGameplayScene();
                     }
                     break;
                 case 3:
-                    if (chipsTotal > 300000)
+                    if (chipsTotal > chipsRequiredMinimum[2])
                     {
                         UpdateGameMode(DataTypes.GameModes.Master);
                         GoToGameplayScene();
                     }
                     break;
                 case 4:
-                    if (chipsTotal > 500000)
+                    if (chipsTotal > chipsRequiredMinimum[3])
                     {
                         UpdateGameMode(DataTypes.GameModes.Sharper);
                         GoToGameplayScene();
@@ -261,7 +275,7 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
                     break;
 
                 case 5:
-                    if (chipsTotal > 1000000)
+                    if (chipsTotal > chipsRequiredMinimum[4])
                     {
                         UpdateGameMode(DataTypes.GameModes.Freedom);
                         GoToGameplayScene();
@@ -271,19 +285,61 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
         }
     }
 
-    void Locked()
+    void CheckGameModes()
     {
-
-    }
-
-    void Unlockable()
-    {
-
-    }
-
-    void Unlocked()
-    {
-
+        // Nyang Mode
+        for (int i = 0; i < nyangModeObjects.Length; i++)
+        {
+            if (nyangModeObjects[i].GetComponent<LobbyPanelContent>() != null)
+            {
+                if (nyangsRequiredMaximum[i] == 0)
+                {
+                    if (nyangsTotal > nyangsRequiredMinimum[i] && nyangsPocket < nyangsRequiredMinimum[i])
+                        nyangModeObjects[i].GetComponent<LobbyPanelContent>().Unlockable();
+                    else if (nyangsTotal > nyangsRequiredMinimum[i] && nyangsPocket > nyangsRequiredMinimum[i])
+                        nyangModeObjects[i].GetComponent<LobbyPanelContent>().Unlocked();
+                    else 
+                        nyangModeObjects[i].GetComponent<LobbyPanelContent>().Locked();
+                }
+                else
+                {
+                    // Unlockable
+                    if ((nyangsTotal > nyangsRequiredMinimum[i] && nyangsTotal < nyangsRequiredMaximum[i])
+                        && nyangsPocket > nyangsRequiredMinimum[i])
+                    {
+                        nyangModeObjects[i].GetComponent<LobbyPanelContent>().Unlocked();
+                    }
+                    // Unlocked
+                    else if ((nyangsTotal > nyangsRequiredMinimum[i] && nyangsTotal < nyangsRequiredMaximum[i])
+                        && nyangsPocket < nyangsRequiredMinimum[i])
+                    {
+                        nyangModeObjects[i].GetComponent<LobbyPanelContent>().Unlockable();
+                    }
+                    // Locked
+                    else 
+                    {
+                        nyangModeObjects[i].GetComponent<LobbyPanelContent>().Locked();
+                    }
+                }
+            }
+        }
+        // Chip Mode
+        for (int i = 0; i < chipModeObjects.Length; i++)
+        {
+            if (chipModeObjects[i].GetComponent<LobbyPanelContent>() != null)
+            {
+                // Unlockable
+                if (chipsTotal > chipsRequiredMinimum[i] && chipsPocket > chipsRequiredMinimum[i])
+                    chipModeObjects[i].GetComponent<LobbyPanelContent>().Unlocked();
+                // Unlocked
+                else if (chipsTotal > chipsRequiredMinimum[i]
+                    && chipsPocket < chipsRequiredMinimum[i])
+                    chipModeObjects[i].GetComponent<LobbyPanelContent>().Unlockable();
+                // Locked
+                else
+                    chipModeObjects[i].GetComponent<LobbyPanelContent>().Locked();
+            }
+        }
     }
 
     bool CheckDailyLossLimit(string valueType)
@@ -344,5 +400,7 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
         dailyLossLimit = data.dailyLossLimit;
         nyangsLostToday = data.nyangsLostToday;
         chipsLostToday = data.chipsLostToday;
+
+        UpdateValues();
     }
 }

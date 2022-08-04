@@ -13,12 +13,15 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] public Text withdrawSuccessfulBannerText;
     [SerializeField] public GameObject depositSuccessfulBanner;
     [SerializeField] public GameObject withdrawSuccessfulBanner;
+    [SerializeField] public Button depositChipButton;
+    [SerializeField] public Button withdrawChipButton;
 
     // Private Variables
     private int chipPocket;
     private int chipSafe;
     private int chipTotal;
     private int safeTier;
+    private int unitCounter;
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
@@ -45,6 +48,27 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
         }
         else if (buttonName.Equals("Divide"))
         {
+            // Tens
+            if (unitCounter == 0)
+            {
+                if (userInputDepositChip.text.Length > 2) userInputDepositChip.text = userInputDepositChip.text.Substring(0, 2);
+                else if (userInputDepositChip.text.Length < 2) userInputDepositChip.text += "0";
+            }
+            // Thousands
+            else if (unitCounter == 1)
+            {
+                if (userInputDepositChip.text.Length > 4) userInputDepositChip.text = userInputDepositChip.text.Substring(0, 4);
+                else if (userInputDepositChip.text.Length < 4) while (userInputDepositChip.text.Length < 4) userInputDepositChip.text += "0";
+            }
+            // Millions
+            else if (unitCounter == 2)
+            {
+                if (userInputDepositChip.text.Length > 7) userInputDepositChip.text = userInputDepositChip.text.Substring(0, 7);
+                else if (userInputDepositChip.text.Length < 7) while (userInputDepositChip.text.Length < 7) userInputDepositChip.text += "0";
+            }
+
+            if (unitCounter < 2) unitCounter++;
+            else unitCounter = 0;
 
         }
         else if (buttonName.Equals("Deposit"))
@@ -58,6 +82,18 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
 
             userInputDepositChip.text += buttonName;
         }
+
+        // Cap
+        if (int.Parse(userInputDepositChip.text) > SafeLimitAmount())
+        {
+            userInputDepositChip.text = SafeLimitAmount().ToString();
+        }
+
+        // Disable
+        if (userInputDepositChip.text.Equals("0"))
+            depositChipButton.interactable = false;
+        else
+            depositChipButton.interactable = true;
     }
 
     public void Button_Withdraw(string buttonName)
@@ -68,7 +104,7 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
         }
         else if (buttonName.Equals("MaxAmount"))
         {
-            userInputWithdrawChip.text = chipPocket.ToString();
+            userInputWithdrawChip.text = chipSafe.ToString();
         }
         else if (buttonName.Equals("Delete"))
         {
@@ -81,7 +117,30 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
         }
         else if (buttonName.Equals("Divide"))
         {
+            if (userInputWithdrawChip.text != "0")
+            {
+                // Tens
+                if (unitCounter == 0)
+                {
+                    if (userInputWithdrawChip.text.Length > 2) userInputWithdrawChip.text = userInputWithdrawChip.text.Substring(0, 2);
+                    else if (userInputWithdrawChip.text.Length < 2) userInputWithdrawChip.text += "0";
+                }
+                // Thousands
+                else if (unitCounter == 1)
+                {
+                    if (userInputWithdrawChip.text.Length > 4) userInputWithdrawChip.text = userInputWithdrawChip.text.Substring(0, 4);
+                    else if (userInputWithdrawChip.text.Length < 4) while (userInputWithdrawChip.text.Length < 4) userInputWithdrawChip.text += "0";
+                }
+                // Millions
+                else if (unitCounter == 2)
+                {
+                    if (userInputWithdrawChip.text.Length > 7) userInputWithdrawChip.text = userInputWithdrawChip.text.Substring(0, 7);
+                    else if (userInputWithdrawChip.text.Length < 7) while (userInputWithdrawChip.text.Length < 7) userInputWithdrawChip.text += "0";
+                }
 
+                if (unitCounter < 2) unitCounter++;
+                else unitCounter = 0;
+            }
         }
         else if (buttonName.Equals("Withdraw"))
         {
@@ -94,6 +153,18 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
 
             userInputWithdrawChip.text += buttonName;
         }
+
+        // Cap
+        if (int.Parse(userInputWithdrawChip.text) > SafeLimitAmount())
+        {
+            userInputWithdrawChip.text = SafeLimitAmount().ToString();
+        }
+
+        // Disable
+        if (userInputWithdrawChip.text.Equals("0"))
+            withdrawChipButton.interactable = false;
+        else
+            withdrawChipButton.interactable = true;
     }
 
     public void Deposit()
@@ -104,14 +175,26 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
             // Show banner
             depositSuccessfulBanner.SetActive(true);
 
+            // Subtract from user pocket
+            chipPocket -= int.Parse(userInputDepositChip.text);
+
+            // Add to safe amount
+            chipSafe += int.Parse(userInputDepositChip.text);
+
             // Update banner text
             depositSuccessfulBannerText.text = "<b> <size=24> <color=#FFF77EFF>" + userInputWithdrawChip.text + "만냥</color> </size> </b> <color=white > 금고에서</color> \n <color=#FFF77EFF>예금</color> <color=white>되었습니다</color>";
 
             // Hide banner
             StartCoroutine(HideDepositSuccessfulBanner());
 
+            // Save game
+            PlayerDataStorageManager.instance.SaveGame();
+
             // Update stats
             UpdateStats();
+
+            // Load game
+            PlayerDataStorageManager.instance.LoadGame();
         }
     }
 
@@ -128,14 +211,26 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
             // Show banner
             withdrawSuccessfulBanner.SetActive(true);
 
+            // Subtract from safe amount
+            chipSafe -= int.Parse(userInputWithdrawChip.text);
+
+            // Add to user pocket
+            chipSafe += int.Parse(userInputWithdrawChip.text);
+
             // Update banner text
             withdrawSuccessfulBannerText.text = "<b> <size=24> <color=#FFF77EFF>" + userInputWithdrawChip.text + "만냥</color> </size> </b> <color=white > 금고에서</color> \n <color=#FFF77EFF>출금</color> <color=white>되었습니다</color>";
 
             // Hide banner
             StartCoroutine(HideWithdrawSuccessfulBanner());
 
+            // Save game
+            PlayerDataStorageManager.instance.SaveGame();
+
             // Update stats
             UpdateStats();
+
+            // Load game
+            PlayerDataStorageManager.instance.LoadGame();
         }
     }
 
@@ -145,6 +240,20 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
         withdrawSuccessfulBanner.SetActive(false);
     }
 
+    long SafeLimitAmount()
+    {
+        switch (safeTier)
+        {
+            case 0:
+                return 4500000000;
+            case 1:
+                return 9000000000;
+            case 2:
+                return 15000000000;
+        }
+
+        return 0;
+    }
     void UpdateStats()
     {
         totalChip.text = chipTotal.ToString();

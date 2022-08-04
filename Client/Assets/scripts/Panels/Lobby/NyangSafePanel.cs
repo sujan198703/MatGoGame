@@ -13,6 +13,8 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] public Text withdrawSuccessfulBannerText;
     [SerializeField] public GameObject depositSuccessfulBanner;
     [SerializeField] public GameObject withdrawSuccessfulBanner;
+    [SerializeField] public Button depositNyangButton;
+    [SerializeField] public Button withdrawNyangButton;
 
     // Private Variables
     private int nyangsPocket;
@@ -91,6 +93,18 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
 
             userInputDepositNyangText.text += buttonName;
         }
+
+        // Cap
+        if (int.Parse(userInputDepositNyangText.text) > SafeLimitAmount()) 
+        {
+            userInputDepositNyangText.text = SafeLimitAmount().ToString();
+        }
+
+        // Disable
+        if (userInputDepositNyangText.text.Equals("0"))
+            depositNyangButton.interactable = false;
+        else
+            depositNyangButton.interactable = true;
     }
 
     public void Button_Withdraw(string buttonName)
@@ -101,7 +115,7 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
         }
         else if (buttonName.Equals("MaxAmount"))
         {
-            userInputWithdrawNyangText.text = nyangsPocket.ToString();
+            userInputWithdrawNyangText.text = nyangsSafe.ToString();
         }
         else if (buttonName.Equals("Delete"))
         {
@@ -150,6 +164,18 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
 
             userInputWithdrawNyangText.text += buttonName;
         }
+
+        // Cap
+        if (int.Parse(userInputWithdrawNyangText.text) > SafeLimitAmount())
+        {
+            userInputWithdrawNyangText.text = SafeLimitAmount().ToString();
+        }
+
+        // Disable
+        if (userInputWithdrawNyangText.Equals("0"))
+            withdrawNyangButton.interactable = false;
+        else
+            withdrawNyangButton.interactable = true;
     }
 
     public void Deposit()
@@ -165,6 +191,9 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
 
             // Add to safe amount
             nyangsSafe += int.Parse(userInputDepositNyangText.text);
+
+            // Update total
+            nyangsTotal = nyangsPocket + nyangsSafe;
 
             // Update banner text
             depositSuccessfulBannerText.text = "<b> <size=24> <color=#FFF77EFF>" + userInputDepositNyangText.text + "칩</color> </size> </b> <color=white > 금고에서</color> \n <color=#FFF77EFF>예금</color> <color=white>되었습니다</color>";
@@ -202,14 +231,23 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
             // Add to user pocket
             nyangsPocket += int.Parse(userInputWithdrawNyangText.text);
 
+            // Update total
+            nyangsTotal = nyangsPocket + nyangsSafe;
+
             // Update banner text
             withdrawSuccessfulBannerText.text = "<b> <size=24> <color=#FFF77EFF>" + userInputWithdrawNyangText.text + "칩</color> </size> </b> <color=white > 금고에서</color> \n <color=#FFF77EFF>출금</color> <color=white>되었습니다</color>";
 
             // Hide banner
             StartCoroutine(HideWithdrawSuccessfulBanner());
 
+            // Save game
+            PlayerDataStorageManager.instance.SaveGame();
+
             // Update stats
             UpdateStats();
+
+            // Load game
+            PlayerDataStorageManager.instance.LoadGame();
         }
     }
 
@@ -217,6 +255,21 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
     {
         yield return new WaitForSeconds(1.0f);
         withdrawSuccessfulBanner.SetActive(false);
+    }
+
+    long SafeLimitAmount()
+    {
+        switch (safeTier)
+        {
+            case 0:
+                return 4500000000;
+            case 1:
+                return 9000000000;
+            case 2:
+                return 15000000000;
+        }
+
+        return 0;
     }
 
     public void SafeLimitExtensionButton()
