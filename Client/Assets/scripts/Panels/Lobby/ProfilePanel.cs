@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +15,7 @@ public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
     public Text profileMembershipCode;
     public Text currentLevel;
     public Text experienceLeftToLevelUp;
+
     public Text availableNyangLimit;
     public Text nyangAvailable;
     public Text nyangInSafe;
@@ -52,7 +53,7 @@ public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
-    private void Start() => UpdateValues();
+    private void Start() { PlayerDataStorageManager.instance.LoadGame(); }
 
     void UpdateValues()
     {
@@ -80,6 +81,46 @@ public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
 
     public void LoadData(PlayerDataManager data)
     {
+        currentLevel.text = "Lv." + data.playerLevel.ToString();
+        experienceProgressBar.fillAmount = data.playerLevelExperience;
+        experienceLeftToLevelUp.text = "레벨업까지 " + data.playerLevelExperienceToLevelUp.ToString() + " exp 남음";
+       
+        availableNyangLimit.text = "(한도 : " + data.nyangPocketLimit.ToString() + " 억 냥)";
+        nyangAvailable.text = (data.nyangsPocket + data.nyangsSafe).ToString() + " 냥";
+        nyangInSafe.text = data.nyangsSafe.ToString() + " 냥";
+        limitOfNyangSafe.text = "(한도 : " + data.nyangSafeLimit.ToString() + ")";
+
+        availableChipLimit.text = "(한도: " + data.chipPocketLimit.ToString() + "조 맞고칩)";
+        chipsAvailable.text = (data.chipsPocket + data.chipsSafe).ToString() + " 칩";
+        chipsInSafe.text = data.chipsSafe.ToString() + " 칩";
+        limitOfChipsSafe.text = "(한도 : " + data.chipSafeLimit.ToString() + ")";
+
+        totalRubies.text = data.rubies.ToString() + " 루비";
+
+        totalMoneyLost.text = data.nyangsLostToday.ToString() + " 냥" + '\n' + data.chipsLostToday.ToString() + " 칩";
+        freeMoneyRefills.text = data.refillsLeft.ToString() + " 개 리필 가능";
+
+        if (data.todaysWins == 0 && data.todaysLosses == 0)
+            todaysWinsAndLossesAndWinningRate.text = "오늘의 전적 : <color=#FF213B>총 " + (data.todaysWins + data.todaysLosses).ToString() + "전 " + data.todaysWins.ToString() + "승 " + data.todaysLosses.ToString() + "패 </color>(승률 0%)"; 
+        else
+            todaysWinsAndLossesAndWinningRate.text = "오늘의 전적 : <color=#FF213B>총 " + (data.todaysWins + data.todaysLosses).ToString() + "전 " + data.todaysWins.ToString() + "승 " + data.todaysLosses.ToString() + "패 </color>(승률 " + data.todaysWins / (data.todaysWins + data.totalLosses) + "%)";
+
+        todaysAllInRate.text = "<color=#FF213B> "+ data.todaysAllInRate.ToString() + " </color>  회";
+        todaysHighestWinAmount.text = "<color=#FF213B> " + data.todaysHighestWinAmount.ToString() + " </color>  냥";
+        todaysHighestWinScore.text = "<color=#FF213B> " + data.todaysHighestWinScore.ToString() + " </color>  점";
+        todaysBestWinningStreak.text = "<color=#FF213B> " + data.todaysBestWinningStreak.ToString() + " </color> 연승";
+
+        if (data.totalWins == 0 && data.totalLosses == 0)
+            totalWinsAndLossesAndWinningRate.text = "누적 전적 : <color=#FF213B> 총 " + (data.totalWins + data.totalLosses).ToString() + "전 " + data.totalWins.ToString() + "승 " + data.totalLosses.ToString() + "패  </color>((승률 0%)";
+        else
+            totalWinsAndLossesAndWinningRate.text = "누적 전적 : <color=#FF213B> 총 " + (data.totalWins + data.totalLosses).ToString() + "전 " + data.totalWins.ToString() + "승 " + data.totalLosses.ToString() + "패  </color>((승률 " + data.totalWins / (data.totalWins + data.totalLosses) + "%)";
+        
+        totalAllInRate.text = "<color=#FF213B> " + data.totalAllInRate.ToString() + " </color> 회";
+        totalHighestWinAmount.text = "<color=#FF213B> " + data.totalHighestWinAmount.ToString() + " </color> 냥";
+        totalHighestWinScore.text = "<color=#FF213B> " + data.totalHighestWinScore.ToString() + " </color> 점";
+        totalBestWinningStreak.text = "<color=#FF213B> " + data.totalBestWinningStreak.ToString() + " </color>  연승";
+ 
+        UpdateValues();
     }
 
     public void SaveData(ref PlayerDataManager data)

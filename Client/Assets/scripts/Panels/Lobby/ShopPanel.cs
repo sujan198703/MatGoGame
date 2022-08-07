@@ -27,7 +27,6 @@ public class ShopPanel : MonoBehaviour, PlayerDataStorageInterface
 
     public void MemberButton() => EnablePanel("MemberPanel");
 
-
     void EnablePanel(string panelName)
     {
         switch(panelName)
@@ -192,7 +191,24 @@ public class ShopPanel : MonoBehaviour, PlayerDataStorageInterface
         switch (characterIndex)
         {
             case 0:
-
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+        }
+    }
+    public void PurchaseItem(int itemIndex)
+    {
+        switch (itemIndex)
+        {
+            case 0:
                 break;
             case 1:
                 break;

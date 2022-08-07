@@ -65,7 +65,7 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
-    void Start() => UpdateValues();
+    void Start() => PlayerDataStorageManager.instance.LoadGame();
 
     void UpdateValues()
     {
@@ -114,10 +114,10 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
             mailTabEnabledText.text = "쪽지함";
         }
 
-        // NOTIFICATION BUBBLES
-        giftTabNotificationBubbleText.text = unreadNotificationsGiftTab.ToString();
-        itemTabNotificationBubbleText.text = unreadNotificationsItemTab.ToString();
-        mailTabNotificationBubbleText.text = unreadNotificationsMailTab.ToString();
+        // Notification Bubbles
+        giftTabNotificationBubbleText.text = unreadNotificationsGiftTab == 0 ? "N" : unreadNotificationsGiftTab.ToString();
+        itemTabNotificationBubbleText.text = unreadNotificationsItemTab == 0 ? "N" : unreadNotificationsItemTab.ToString();
+        mailTabNotificationBubbleText.text = unreadNotificationsMailTab == 0 ? "N" : unreadNotificationsMailTab.ToString();
     }
 
     // Quest Reward, Event Reward, Free Charging Station Reward, Ad Reward, Etc
@@ -188,6 +188,12 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
 
         // Update updates after delay
         Invoke("CheckIfContentsEmpty", 0.1f);
+
+        // Save game
+        PlayerDataStorageManager.instance.SaveGame();
+        
+        // Reload
+        PlayerDataStorageManager.instance.LoadGame();
     }
 
     // Updates root parent objects for their content objects in hierarchy
@@ -278,6 +284,8 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
                 }
                 break;
         }
+
+        PlayerDataStorageManager.instance.SaveGame();
     }
 
     void DisablePreviousPanelContents(Panels previousPanel)
@@ -330,6 +338,8 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
         unreadNotificationsGiftTab = data.unreadNotificationsInventoryPanel_GiftTab;
         unreadNotificationsItemTab = data.unreadNotificationsInventoryPanel_ItemTab;
         unreadNotificationsMailTab = data.unreadNotificationsInventoryPanel_MailTab;
+
+        UpdateValues();
     }
 
     public void SaveData(ref PlayerDataManager data)

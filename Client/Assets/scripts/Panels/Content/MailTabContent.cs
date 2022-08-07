@@ -19,6 +19,8 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
     private List<MailTabContent> mailTabContent;
     private List<MailTabContent> mailTabContentClaimed;
 
+    int unreadMailNotifcations;
+
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
     void Start() => UpdateValues();
@@ -45,6 +47,8 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
         mailIconImage.sprite = Sprite.Create
             (mailIconRead, new Rect(0, 0, mailIconRead.width, mailIconRead.height),
           new Vector2(mailIconRead.width / 2, mailIconRead.height / 2));
+
+        unreadMailNotifcations--;
     }
 
     void Unread()
@@ -91,12 +95,14 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
     {
         mailTabContent = data.mailTabContent;
         mailTabContentClaimed = data.mailTabContentClaimed;
+        unreadMailNotifcations = data.unreadNotificationsInventoryPanel_MailTab;
     }
 
     public void SaveData(ref PlayerDataManager data)
     {
         data.mailTabContent = mailTabContent;
         data.mailTabContentClaimed = mailTabContentClaimed;
+        data.unreadNotificationsInventoryPanel_MailTab = unreadMailNotifcations;
     }
 }
  

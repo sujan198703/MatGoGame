@@ -283,7 +283,7 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
         nyangsPocket = data.nyangsPocket;
         nyangsSafe = data.nyangsSafe;
         nyangsTotal = data.nyangsTotal;
-        safeTier = data.safeTier;
+        safeTier = data.nyangSafeTier;
     }
 
     public void SaveData(ref PlayerDataManager data)
@@ -291,6 +291,6 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
         data.nyangsPocket = nyangsPocket;
         data.nyangsSafe = nyangsSafe;
         data.nyangsTotal = nyangsTotal;
-        safeTier = data.safeTier;
+        safeTier = data.nyangSafeTier;
     }
 }

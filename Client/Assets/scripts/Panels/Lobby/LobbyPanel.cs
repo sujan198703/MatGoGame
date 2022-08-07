@@ -48,9 +48,9 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     int playerLevel;
     int playerLevelExperience;
     int playerLevelExperienceToAdd;
-    int dailyLossLimit;
     int nyangsLostToday;
     int chipsLostToday;
+    long dailyLossLimit;
 
     int[] nyangsRequiredMinimum = new int[] { 5000, 5000, 100000, 2000000, 10000000, 50000000, 100000000, 300000000 };
     int[] nyangsRequiredMaximum = new int[] { 1500000, 1500000, 10000000, 20000000, 100000000, 0, 0 };

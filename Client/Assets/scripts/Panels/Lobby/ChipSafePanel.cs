@@ -274,7 +274,7 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
         chipPocket = data.chipsPocket;
         chipSafe = data.chipsSafe;
         chipTotal = data.chipsTotal;
-        safeTier = data.safeTier;
+        safeTier = data.chipSafeTier;
     }
 
     public void SaveData(ref PlayerDataManager data)
@@ -282,6 +282,6 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
         data.nyangsPocket = chipPocket;
         data.nyangsSafe = chipSafe;
         data.nyangsTotal = chipTotal;
-        safeTier = data.safeTier;
+        safeTier = data.chipSafeTier;
     }
 }
