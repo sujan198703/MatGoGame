@@ -1075,6 +1075,34 @@
       <Project>{3D45007E-E207-85CF-0FE7-60952118F595}</Project>
       <Name>GoogleMobileAds.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Purchasing.Common.csproj">
+      <Project>{356E3852-1E14-23DF-CB74-EF35CE4FBB02}</Project>
+      <Name>Purchasing.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.csproj">
+      <Project>{26005988-7C82-60DD-76AD-3E190FF68B62}</Project>
+      <Name>UnityEngine.Purchasing</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.SecurityStub.csproj">
+      <Project>{9276123D-9BFE-090D-8C12-5857ADB07FD5}</Project>
+      <Name>UnityEngine.Purchasing.SecurityStub</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.SecurityCore.csproj">
+      <Project>{3D75AA12-DF78-5FC0-0C74-6B99EA668B15}</Project>
+      <Name>UnityEngine.Purchasing.SecurityCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Stores.csproj">
+      <Project>{A5A0A44B-942C-1D9B-66BD-EEA9914D6EDB}</Project>
+      <Name>UnityEngine.Purchasing.Stores</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Codeless.csproj">
+      <Project>{6E5CD8C6-B769-1F30-FBE2-47A887C52284}</Project>
+      <Name>UnityEngine.Purchasing.Codeless</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEditor.Purchasing.csproj">
+      <Project>{60F04612-1E8C-CC92-9613-D4A8BF8025AF}</Project>
+      <Name>UnityEditor.Purchasing</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

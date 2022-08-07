@@ -611,6 +611,9 @@
     <Reference Include="GoogleMobileAds.Editor">
       <HintPath>Library\ScriptAssemblies\GoogleMobileAds.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Purchasing">
+      <HintPath>Library\ScriptAssemblies\UnityEditor.Purchasing.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Assets\Plugins\Newtonsoft.Json AOT\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -1032,6 +1035,30 @@
     <ProjectReference Include="UnityEngine.UI.Player.csproj">
       <Project>{2F8C8FE3-BD7C-8CA3-ECA1-DA27684C1C85}</Project>
       <Name>UnityEngine.UI.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="Purchasing.Common.Player.csproj">
+      <Project>{60B98686-A624-EE0A-C682-888CE1CCD1FD}</Project>
+      <Name>Purchasing.Common.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Player.csproj">
+      <Project>{B3584660-9247-0625-DEA5-B7984AC8201C}</Project>
+      <Name>UnityEngine.Purchasing.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.SecurityStub.Player.csproj">
+      <Project>{3586937A-7AA5-7753-09EB-C3BB2FB86339}</Project>
+      <Name>UnityEngine.Purchasing.SecurityStub.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.SecurityCore.Player.csproj">
+      <Project>{1905E554-919F-C183-6962-C67F6F0F88C1}</Project>
+      <Name>UnityEngine.Purchasing.SecurityCore.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Stores.Player.csproj">
+      <Project>{AA4A3C70-E094-0C90-A927-79342A77840C}</Project>
+      <Name>UnityEngine.Purchasing.Stores.Player</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.Purchasing.Codeless.Player.csproj">
+      <Project>{DD14235D-C8D1-4CD2-EDF0-06E25E569C81}</Project>
+      <Name>UnityEngine.Purchasing.Codeless.Player</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
