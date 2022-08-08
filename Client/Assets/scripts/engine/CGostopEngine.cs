@@ -45,7 +45,6 @@ public class CGostopEngine
 	public List<CCard> distributed_floor_cards { get; private set; }
 	public List<List<CCard>> distributed_players_cards { get; private set; }
 
-
 	public CGostopEngine()
 	{
 		this.first_player_index = 0;
@@ -625,6 +624,7 @@ public class CGostopEngine
 			this.player_agents[player_index].add_card_to_floor(this.cards_to_give_player[i]);
 
 			this.floor_manager.remove_card(this.cards_to_give_player[i]);
+			GameEvents.instance.SetFloorCards(this.cards_to_give_player[i]);
 		}
 	}
 

@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using FreeNet;
 
 public class CCardPicture : MonoBehaviour {
 
@@ -13,8 +11,6 @@ public class CCardPicture : MonoBehaviour {
 
 	void Awake()
 	{
-
-
 		this.sprite_renderer = gameObject.GetComponentInChildren<SpriteRenderer>();
 		this.box_collider = gameObject.GetComponent<BoxCollider>();
 	}

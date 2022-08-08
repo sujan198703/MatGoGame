@@ -24,6 +24,10 @@ public class CPlayerCardManager
 		Debug.Log(PAE_TYPE.TEE);
 	}
 
+	public Dictionary<PAE_TYPE, List<CCardPicture>> GetCards()
+    {
+		return this.floor_slots;
+    }
 
 	public void reset()
 	{
