@@ -14,7 +14,7 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] Text readButtonText;
     [SerializeField] Text mailTabContentText;
 
-    string mailText = "";
+    string mailText = "이것은 테스트 메일입니다";
 
     private List<MailTabContent> mailTabContent;
     private List<MailTabContent> mailTabContentClaimed;
@@ -38,6 +38,7 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
 
     void Read()
     {
+        // GUI
         readButtonImage.sprite = Sprite.Create
               (readButton, new Rect(0, 0, readButton.width, readButton.height),
               new Vector2(readButton.width / 2, readButton.height / 2));
@@ -48,11 +49,19 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
             (mailIconRead, new Rect(0, 0, mailIconRead.width, mailIconRead.height),
           new Vector2(mailIconRead.width / 2, mailIconRead.height / 2));
 
+        // Remove from unclaimed
+        mailTabContent.Remove(this);
+
+        // Add to claimed 
+        mailTabContentClaimed.Add(this);
+
+        // Decrement
         unreadMailNotifcations--;
     }
 
     void Unread()
     {
+        // GUI
         readButtonImage.sprite = Sprite.Create
                (unreadButton, new Rect(0, 0, unreadButton.width, unreadButton.height),
                new Vector2(unreadButton.width / 2, unreadButton.height / 2));
@@ -63,6 +72,8 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
             (mailIconUnread, new Rect(0, 0, mailIconUnread.width, mailIconUnread.height),
           new Vector2(mailIconUnread.width / 2, mailIconUnread.height / 2));
     }
+
+    public void UpdateMailText(string text) => mailText = text;
 
     public void ReadMail()
     {

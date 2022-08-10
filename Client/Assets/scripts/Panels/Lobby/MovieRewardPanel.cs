@@ -7,9 +7,9 @@ public class MovieRewardPanel : MonoBehaviour, PlayerDataStorageInterface
     public Text chipAdsWatchedText;
     public GameObject movieRewardLotteryTicket;
 
-    private int nyangsPocket;
+    private long nyangsPocket;
     private int nyangAdsWatched;
-    private int chipsPocket;
+    private long chipsPocket;
     private int chipAdsWatched;
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);

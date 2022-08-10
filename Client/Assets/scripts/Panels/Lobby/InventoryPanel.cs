@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -69,9 +70,21 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
 
     void UpdateValues()
     {
+        AddMailOnce();
         UpdateTexts();
         CheckIfContentsEmpty();
         UpdateContents();
+    }
+
+    void AddMailOnce()
+    {
+        if (PlayerPrefs.GetInt("MailAdded") == 0)
+        {
+            // this is just to show everything is working
+            AddMail(mailTabContentPrefab[0]);
+
+            PlayerPrefs.SetInt("MailAdded", 1);
+        }
     }
 
     // Update texts
@@ -147,8 +160,11 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
 
     public void AddMail(MailTabContent mailTabContent)
     {
-        // Add mail
+        // Add mail to list
         this.mailTabContent.Add(mailTabContent);
+
+        // Add to hierarchy
+        GameObject tempMailObject = Instantiate(mailTabContent.gameObject, mailPanelContent.transform) as GameObject;
 
         // Increment notification counter
         unreadNotificationsMailTab++;

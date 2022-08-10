@@ -17,9 +17,9 @@ public class ChipSafePanel : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] public Button withdrawChipButton;
 
     // Private Variables
-    private int chipPocket;
-    private int chipSafe;
-    private int chipTotal;
+    private long chipPocket;
+    private long chipSafe;
+    private long chipTotal;
     private int safeTier;
     private int unitCounter;
 

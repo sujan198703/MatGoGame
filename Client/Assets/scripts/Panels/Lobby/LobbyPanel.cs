@@ -39,12 +39,14 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     int unreadNotificationsDailyQuestPanel;
     int unreadNotificationsShopPanel;
 
-    int nyangsPocket;
-    int nyangsSafe;
-    int nyangsTotal;
-    int chipsPocket;
-    int chipsSafe;
-    int chipsTotal;
+    long nyangsPocket;
+    long nyangsSafe;
+    long nyangsTotal;
+    long chipsPocket;
+    long chipsSafe;
+    long chipsTotal;
+    string playerName;
+    string loginMethod;
     int playerLevel;
     int playerLevelExperience;
     int playerLevelExperienceToAdd;
@@ -63,7 +65,7 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     void OnEnable() { PlayerDataStorageManager.instance.LoadGame(); }
 
     void Update()
-    { 
+    {
         if (luckyTicketTimerValue > 0)
         {
             luckyTicketTimerValue -= Time.deltaTime;
@@ -84,7 +86,7 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     void UpdateValues()
     {
         UpdateTotal();
-        UpdatePlayerLevel();
+        UpdatePlayerProfile();
         UpdateAnnouncements();
         ResetLuckyTicketTimer();
         UpdateNotificationTexts();
@@ -97,8 +99,22 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
         chipsTotal = chipsPocket + chipsSafe;
     }
 
-    void UpdatePlayerLevel()
+    void UpdatePlayerProfile()
     {
+        // NAME
+        if (PlayerPrefs.GetInt("SingedInWithFacebook") == 0 && PlayerPrefs.GetInt("SignedInWithGoogle") == 0)
+        {
+            profileName.text = "미등록";
+        }
+        else
+        {
+            profileName.text = PlayerPrefs.GetString("ProfileName");
+        }
+
+        // LEVEL NUMBER
+        profileLevelText.text = playerLevel.ToString();
+
+        // LEVEL PROGRESS BAR
         if (playerLevelExperience < playerLevelExperienceToAdd)
         {
             // Show level up panel
@@ -123,7 +139,7 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
         announcementText.text = "알림";
     }
 
-    void ResetLuckyTicketTimer() => luckyTicketTimerValue = 1800f;
+    public void ResetLuckyTicketTimer() => luckyTicketTimerValue = 1800f;
 
     void UpdateNotificationTexts()
     {
@@ -373,12 +389,15 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
         data.chipsPocket = chipsPocket;
         data.chipsSafe = chipsSafe;
         data.chipsTotal = chipsTotal;
+        data.playerName = playerName;
         data.playerLevel = playerLevel;
         data.playerLevelExperience = playerLevelExperience;
         data.playerLevelExperienceToAdd = playerLevelExperienceToAdd;
         data.dailyLossLimit = dailyLossLimit;
         data.nyangsLostToday = nyangsLostToday;
         data.chipsLostToday = chipsLostToday;
+
+        data.loginMethod = loginMethod;
     }
 
     public void LoadData(PlayerDataManager data)
@@ -394,12 +413,15 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
         chipsPocket = data.chipsPocket;
         chipsSafe = data.chipsSafe;
         chipsTotal = data.chipsTotal;
+        playerName = data.playerName;
         playerLevel = data.playerLevel;
         playerLevelExperience = data.playerLevelExperience;
         playerLevelExperienceToAdd = data.playerLevelExperienceToAdd;
         dailyLossLimit = data.dailyLossLimit;
         nyangsLostToday = data.nyangsLostToday;
         chipsLostToday = data.chipsLostToday;
+
+        loginMethod = data.loginMethod;
 
         UpdateValues();
     }

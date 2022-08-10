@@ -290,8 +290,8 @@
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.16\Editor\PlasticSCM\UI\EditorProgressControls.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.16\Editor\PlasticSCM\Views\PendingChanges\PendingMergeLinks\MergeLinksListView.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.16\Editor\PlasticSCM\UI\Avatar\GetAvatar.cs" />
-    <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.16\Editor\PlasticSCM\Configuration\TurnOffPlastic\TurnOffPlasticWindow.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.16\Editor\PlasticSCM\Views\PendingChanges\Dialogs\FilterRulesConfirmationDialog.cs" />
+    <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.16\Editor\PlasticSCM\Configuration\TurnOffPlastic\TurnOffPlasticWindow.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.16\Editor\PlasticSCM\UI\Progress\ProgressControlsForDialogs.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.16\Editor\PlasticSCM\Views\IncomingChanges\Developer\IncomingChangesTreeView.cs" />
     <Compile Include="Library\PackageCache\com.unity.collab-proxy@1.15.16\Editor\PlasticSCM\Views\Changesets\ChangesetListViewItem.cs" />

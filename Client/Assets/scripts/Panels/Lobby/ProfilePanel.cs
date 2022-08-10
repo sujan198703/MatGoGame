@@ -55,14 +55,6 @@ public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
 
     private void Start() { PlayerDataStorageManager.instance.LoadGame(); }
 
-    void UpdateValues()
-    {
-        //PlayerDataStorageManager.instance.LoadGame();
-        profileName.text = PlayerPrefs.GetString("ProfileName");
-        profileEmail.text = PlayerPrefs.GetString("ProfileEmail");
-        profileMembershipCode.text = PlayerPrefs.GetString("ProfileMembershipCode");
-    }
-
     public void CopyEmail()
     {
         TextEditor clipboard = new TextEditor();
@@ -81,6 +73,10 @@ public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
 
     public void LoadData(PlayerDataManager data)
     {
+        profileName.text = PlayerPrefs.GetString("ProfileName");
+        profileEmail.text = PlayerPrefs.GetString("ProfileEmail");
+        profileMembershipCode.text = PlayerPrefs.GetString("ProfileMembershipCode");
+
         currentLevel.text = "Lv." + data.playerLevel.ToString();
         experienceProgressBar.fillAmount = data.playerLevelExperience;
         experienceLeftToLevelUp.text = "레벨업까지 " + data.playerLevelExperienceToLevelUp.ToString() + " exp 남음";
@@ -119,8 +115,6 @@ public class ProfilePanel : MonoBehaviour, PlayerDataStorageInterface
         totalHighestWinAmount.text = "<color=#FF213B> " + data.totalHighestWinAmount.ToString() + " </color> 냥";
         totalHighestWinScore.text = "<color=#FF213B> " + data.totalHighestWinScore.ToString() + " </color> 점";
         totalBestWinningStreak.text = "<color=#FF213B> " + data.totalBestWinningStreak.ToString() + " </color>  연승";
- 
-        UpdateValues();
     }
 
     public void SaveData(ref PlayerDataManager data)

@@ -17,9 +17,9 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] public Button withdrawNyangButton;
 
     // Private Variables
-    private int nyangsPocket;
-    private int nyangsSafe;
-    private int nyangsTotal;
+    private long nyangsPocket;
+    private long nyangsSafe;
+    private long nyangsTotal;
     private int safeTier;
     private int unitCounter;
 

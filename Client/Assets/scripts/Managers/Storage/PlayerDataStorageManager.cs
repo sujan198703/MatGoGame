@@ -30,6 +30,18 @@ public class PlayerDataStorageManager : MonoBehaviour
         LoadGame();
     }
 
+    public void SaveThenLoad()
+    {
+        SaveGame();
+        LoadGame();
+    }
+    
+    public void LoadThenSave()
+    {
+        LoadGame();
+        SaveGame();
+    }
+
     public void LoadGame()
     {
         // Load any saved data from a file
