@@ -1573,13 +1573,13 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
     void show_hint_mark(Vector3 position)
     {
-        bool option_hint =
-            CUIManager.Instance.get_uipage(UI_PAGE.GAME_OPTION).GetComponent<CGameOption>().is_hint_on();
-
-        if (!option_hint)
-        {
-            return;
-        }
+      //  bool option_hint =
+      //      CUIManager.Instance.get_uipage(UI_PAGE.GAME_OPTION).GetComponent<CGameOption>().is_hint_on();
+      //
+      //  if (!option_hint)
+      //  {
+      //      return;
+      //  }
 
         GameObject hint = this.hint_arrows.pop();
         hint.SetActive(true);
