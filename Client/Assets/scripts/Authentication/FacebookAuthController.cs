@@ -86,7 +86,6 @@ public class FacebookAuthController : MonoBehaviour
         PlayerPrefs.SetString("ProfileName", result.ResultDictionary["name"].ToString());
         PlayerPrefs.SetString("ProfileEmail", result.ResultDictionary["email"].ToString());
         PlayerPrefs.SetString("ProfileMembershipCode", result.ResultDictionary["id"].ToString());
-
         PlayerPrefs.SetInt("SingedInWithFacebook", 1);
     }
 }

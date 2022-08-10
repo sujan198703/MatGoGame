@@ -16,7 +16,7 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
 
     private List<QuestTabContent> questTabContent;
     private List<QuestTabContent> questTabContentClaimed;
-    private int rewardAmount;
+    private long rewardAmount;
 
     private bool claimed;
     private float fadeProgress = 0.5f;

@@ -59,7 +59,7 @@ public class MenuController : MonoBehaviour
     public void StartGame()
     {
         loadingPanel.SetActive(true);
-        Invoke("LoadGameplayScene", 2);
+        //Invoke("LoadGameplayScene", 2);
     }
 
     public void OpenDailyQuestPanel()

@@ -7,7 +7,7 @@ public class FreeRefillPaymentPopup : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] private TMP_Text freeRefillPaymentGuidanceText;
 
     private int refillsLeft;
-    private int nyangsPocket;
+    private long nyangsPocket;
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 

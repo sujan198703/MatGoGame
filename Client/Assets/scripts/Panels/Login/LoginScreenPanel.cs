@@ -4,13 +4,14 @@ public class LoginScreenPanel : MonoBehaviour
 {
     public bool LoggedIn()
     {
-        if (PlayerPrefs.GetInt("LoggedIn") == 1) return true;
+        if (PlayerPrefs.GetInt("SingedInWithFacebook") == 1 || PlayerPrefs.GetInt("SignedInWithGoogle") == 1) return true;
         else return false;
+
     }
 
-    public void ShowLoginScreenPanel()
+    public void SkipLoginScreen()
     {
-        // Enable panel
-        gameObject.SetActive(true);
+        LoginManager.instance.loginScreenPanel.gameObject.SetActive(false);
+        LoginManager.instance.loadingScreenPanel.gameObject.SetActive(true);
     }
 }

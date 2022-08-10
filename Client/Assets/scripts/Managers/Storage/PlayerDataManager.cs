@@ -7,20 +7,20 @@ using StorageData;
 public class PlayerDataManager
 {
     // Public Variables
-    public int nyangsTotal;
-    public int nyangsPocket;
-    public int nyangsSafe;
-    public int chipsPocket;
-    public int chipsSafe;
-    public int chipsTotal;
+    public long nyangsTotal;
+    public long nyangsPocket;
+    public long nyangsSafe;
+    public long chipsPocket;
+    public long chipsSafe;
+    public long chipsTotal;
     public int refillsLeft;
-    public int rubies;
+    public long rubies;
     public int playerLevel;
     public int playerLevelExperience;
     public int playerLevelExperienceToLevelUp;
     public int playerLevelExperienceToAdd;
-    public int nyangSafeTier;
-    public int chipSafeTier;
+    public int nyangSafeTier; // Basic, Silver, Gold / 0, 1, 2
+    public int chipSafeTier; // Basic, Silver, Gold / 0, 1, 2
     public int nyangAdsWatched;
     public int chipAdsWatched;
     public int characterIndex;
@@ -55,14 +55,16 @@ public class PlayerDataManager
     public long dailyLossLimit;
     public long nyangPocketLimit;
     public long chipPocketLimit;
-    public long nyangSafeLimit;
-    public long chipSafeLimit;
+    public long nyangSafeLimit; // 45,000,000, 30,000,000,000, 100,000,000,000
+    public long chipSafeLimit; // 100,000,000, 100,000,000,000, 300,000,000,000
     public string playerName;
     public string playerEmail;
     public string playerMembershipCode;
+    public string loginMethod;
     public Image playerProfilePicture;
     public DateTime profileNameChangeTime;
     public bool vibrationEnabled;
+    public bool notificationsEnabled;
     public List<QuestTabContent> questTabContent;
     public List<QuestTabContent> questTabContentClaimed;
     public List<GiftTabContent> giftTabContent;
@@ -125,7 +127,7 @@ public class PlayerDataManager
         this.unreadNotificationsShopPanel = 0;
         this.unreadNotificationsInventoryPanel_GiftTab = 0;
         this.unreadNotificationsInventoryPanel_ItemTab = 0;
-        this.unreadNotificationsInventoryPanel_MailTab = 1;
+        this.unreadNotificationsInventoryPanel_MailTab = 0;
         this.dailyLossLimit = 6600000000;
         this.nyangPocketLimit = 1000;
         this.chipPocketLimit = 1;
@@ -133,9 +135,11 @@ public class PlayerDataManager
         this.chipSafeLimit = 4500000000;
         this.playerName = "";
         this.playerEmail = "";
+        this.loginMethod = "";
         this.playerProfilePicture = null;
         this.profileNameChangeTime = DateTime.UtcNow.Add(new TimeSpan(24, 0, 0));
         this.vibrationEnabled = true;
+        this.notificationsEnabled = true;
         this.questTabContent = new List<QuestTabContent>();
         this.questTabContentClaimed = new List<QuestTabContent>();
         this.giftTabContent = new List<GiftTabContent>();

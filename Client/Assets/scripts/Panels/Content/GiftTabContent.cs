@@ -23,8 +23,6 @@ public class GiftTabContent : MonoBehaviour, PlayerDataStorageInterface
     public void ClaimGift()
     {
         Claimed();
-
-
     }
 
     void Claimed()

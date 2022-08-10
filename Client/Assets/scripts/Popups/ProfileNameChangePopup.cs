@@ -68,6 +68,9 @@ public class ProfileNameChangePopup : MonoBehaviour, PlayerDataStorageInterface
     public void ChangeName(TMP_Text nameField)
     {
         playerName = nameField.text;
+        PlayerPrefs.SetString("ProfileName", nameField.text);
+        PlayerDataStorageManager.instance.SaveThenLoad();
+        gameObject.SetActive(false);
     }
 
     // CHECK FUNCTIONS
