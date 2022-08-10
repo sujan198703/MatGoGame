@@ -367,7 +367,7 @@ public class CPlayerAgent
 			}
 			if (this.player_index == 1)
 			{
-				PlayerPrefs.SetInt("HongDanPlayerOne", this.score);
+				PlayerPrefs.SetInt("HongDanPlayerTwo", this.score);
 				UnityEngine.Debug.Log("Hongdan /red belt card with letters score for player TWO : " + this.score);
 
 			}
