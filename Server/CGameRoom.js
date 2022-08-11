@@ -583,6 +583,13 @@ class CGameRoom
 			}
 
 			this.players[i].send_protocol(this.players[i], msg);
+
+			var msgScore = this.CPacket.create(PROTOCOL.GAME_SCORE);
+			msgScore.push(this.players[i].agent.PlayerScore);
+			msgScore.push(this.players[i].agent.HondDanPlayerScore);
+			msgScore.push(this.players[i].agent.GwangPlayerScore);
+			this.players[i].send_protocol(this.players[i], msgScore);
+console.log("-------------------- message sending -----------------" + this.players[i].agent.PlayerScore);
 		}
 	}
 

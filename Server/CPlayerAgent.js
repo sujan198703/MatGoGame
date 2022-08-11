@@ -19,6 +19,10 @@ class CPlayerAgent
 
     remain_bomb_count;
 	is_used_kookjin;
+	LightCardsScore = 0;
+	PlayerScore = [0, 0];
+	HondDanPlayerScore = [0, 0];
+	GwangPlayerScore = [0, 0];
 
     constructor(player_index)
     {
@@ -372,6 +376,8 @@ class CPlayerAgent
 		this.score += this.get_score_by_type(PAE_TYPE.YEOL);
 		this.score += this.get_score_by_type(PAE_TYPE.KWANG);
 
+		this.LightCardsScore += this.get_score_by_type(PAE_TYPE.KWANG);  
+
 		// 고도리
 		var godori_count = this.get_card_count(PAE_TYPE.YEOL, CARD_STATUS.GODORI);
 		if (godori_count == 3)
@@ -387,7 +393,17 @@ class CPlayerAgent
 		if (cheongdan_count == 3)
 		{
 			this.score += 3;
-			//UnityEngine.Debug.Log("Cheongdan 3 score");
+			
+			if (this.player_index == 0)
+			{
+				this.HongDanPlayerScore[this.player_index] = this.score;
+				console.log("================ first player HongDan score :  " + this.HongDanPlayerScore[this.player_index] + "================");
+			}
+			if (this.player_index == 1)
+			{
+				this.HongDanPlayerScore[this.player_index] = this.score;
+				console.log("================ second player HongDan score :  " + this.HongDanPlayerScore[this.player_index] + "================");
+			}
 		}
 
 		if (hongdan_count == 3)
@@ -402,7 +418,22 @@ class CPlayerAgent
 			//UnityEngine.Debug.Log("Chodan 3 score");
 		}
 
-		//UnityEngine.Debug.Log(string.Format("[SCORE] player {0},  score {1}", this.player_index, this.score));
+		if (this.player_index==0)
+		{
+			this.PlayerScore[this.player_index] = this.score;
+			this.GwangPlayerScore[this.player_index] = this.LightCardsScore;		//light cards score for player 
+
+			console.log("================ first player score :  " + this.PlayerScore[this.player_index] + "================");
+			console.log("================ first player Gwang score :  " + this.GwangPlayerScore[this.player_index] + "================");
+		}
+		if (this.player_index == 1)
+		{
+			this.PlayerScore[this.player_index] = this.score;
+			this.GwangPlayerScore[this.player_index] = this.LightCardsScore;    //light cards score for player 
+
+			console.log("================ second player score :  " + this.PlayerScore[this.player_index] + "================");
+			console.log("================ second player Gwang score :  " + this.GwangPlayerScore[this.player_index] + "================");
+		}
 	}
 
 
@@ -499,6 +530,7 @@ class CPlayerAgent
 
 		this.add_card_to_floor(card);
 		this.calculate_score();
+console.log("------------------- move_kookjin_to_pee");
 	}
 
 
