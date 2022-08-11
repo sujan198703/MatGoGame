@@ -44,6 +44,8 @@ exports.GAME_RESULT = 28				// S -> C
 
 exports.PLAYER_ORDER_RESULT = 29	// S -> C
 
+exports.GAME_SCORE = 30 // S-> C
+
 exports.TIME_OUT = 97;
 exports.START_TURN = 98
 exports.START_TURN_OTHER = 99
