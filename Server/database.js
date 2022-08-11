@@ -10,7 +10,7 @@ var email;
 var dbcon = mysql.createConnection( {
     host: "localhost",
     user: "root",
-    password: "",
+    password: "autoset",
     database: "matgo",
 });
 

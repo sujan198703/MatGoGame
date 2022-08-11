@@ -460,7 +460,6 @@ class CGostopEngine
 		this.sort_player_pae();
 		this.calculate_players_score();
 
-
 		// 폭탄으로 뒤집는 경우에는 플레이어가 낸 카드가 없으므로 처리를 건너 뛴다.
 		if (this.card_from_player != undefined)
 		{
