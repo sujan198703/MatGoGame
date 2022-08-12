@@ -70,7 +70,7 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
 
     void UpdateValues()
     {
-        AddMailOnce();
+        //AddMailOnce();
         UpdateTexts();
         CheckIfContentsEmpty();
         UpdateContents();

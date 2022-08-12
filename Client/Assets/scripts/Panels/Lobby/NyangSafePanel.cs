@@ -202,13 +202,7 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
             StartCoroutine(HideDepositSuccessfulBanner());
 
             // Save game
-            PlayerDataStorageManager.instance.SaveGame();
-
-            // Update stats
-            UpdateStats();
-
-            // Load game
-            PlayerDataStorageManager.instance.LoadGame();
+            PlayerDataStorageManager.instance.SaveThenLoad();
         }
     }
 
@@ -240,14 +234,8 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
             // Hide banner
             StartCoroutine(HideWithdrawSuccessfulBanner());
 
-            // Save game
-            PlayerDataStorageManager.instance.SaveGame();
-
-            // Update stats
-            UpdateStats();
-
-            // Load game
-            PlayerDataStorageManager.instance.LoadGame();
+            // Save then load game
+            PlayerDataStorageManager.instance.SaveThenLoad();
         }
     }
 
@@ -284,6 +272,8 @@ public class NyangSafePanel : MonoBehaviour, PlayerDataStorageInterface
         nyangsSafe = data.nyangsSafe;
         nyangsTotal = data.nyangsTotal;
         safeTier = data.nyangSafeTier;
+
+        UpdateStats();
     }
 
     public void SaveData(ref PlayerDataManager data)

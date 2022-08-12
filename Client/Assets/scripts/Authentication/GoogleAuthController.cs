@@ -47,7 +47,7 @@ public class GoogleAuthController : MonoBehaviour
                 else
                     Debug("Could not resolve all Firebase dependencies: " + task.Result.ToString());
 
-                if (PlayerPrefs.GetInt("SignedInWithGoogle") == 1) SignInWithGoogle();
+                //if (PlayerPrefs.GetInt("SignedInWithGoogle") == 1) SignInWithGoogle();
             }
             else
             {

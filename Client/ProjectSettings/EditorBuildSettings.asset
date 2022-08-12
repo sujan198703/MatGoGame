@@ -11,13 +11,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/scene/play 1.unity
     guid: 37a6e0fdc2a601849b749aeef8c82be0
-  - enabled: 0
+  - enabled: 1
     path: Assets/scene/Splash.unity
     guid: 68502ac1c1f0d0942bed4ba10dc09e4c
-  - enabled: 0
+  - enabled: 1
     path: Assets/scene/Login.unity
     guid: 479c53ce22c28ba43b641784ffcc3266
-  - enabled: 0
+  - enabled: 1
     path: Assets/scene/Lobby.unity
     guid: 81171693388c8874e9d94d3fa642abfc
   - enabled: 1
