@@ -40,7 +40,7 @@ public class FacebookAuthController : MonoBehaviour
         {
             FB.ActivateApp();
 
-            if (PlayerPrefs.GetInt("SingedInWithFacebook") == 1) SignInWithFacebook();
+            //if (PlayerPrefs.GetInt("SingedInWithFacebook") == 1) SignInWithFacebook();
         }
     }
 

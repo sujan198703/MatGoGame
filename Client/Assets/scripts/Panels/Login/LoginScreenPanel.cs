@@ -11,6 +11,7 @@ public class LoginScreenPanel : MonoBehaviour
 
     public void SkipLoginScreen()
     {
+        PlayerDataStorageManager.instance.SaveGame();
         LoginManager.instance.loginScreenPanel.gameObject.SetActive(false);
         LoginManager.instance.loadingScreenPanel.gameObject.SetActive(true);
     }

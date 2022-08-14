@@ -64,6 +64,8 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
 
     void OnEnable() { PlayerDataStorageManager.instance.LoadGame(); }
 
+    void Start() { PlayerDataStorageManager.instance.LoadGame(); }
+
     void Update()
     {
         if (luckyTicketTimerValue > 0)
