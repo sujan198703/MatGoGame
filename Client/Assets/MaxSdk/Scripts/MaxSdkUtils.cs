@@ -121,27 +121,6 @@ public class MaxSdkUtils
     }
 
     /// <summary>
-    /// Tries to get a <c>bool</c> value from dictionary for the given key if available, returns the default value if unavailable.
-    /// </summary>
-    /// <param name="dictionary">The dictionary from which to get the <c>bool</c> value.</param>
-    /// <param name="key">The key to be used to retrieve the <c>bool</c> value.</param>
-    /// <param name="defaultValue">The default value to be returned when a <c>bool</c> value for the given key is not found.</param>
-    /// <returns>The <c>bool</c> value from the dictionary if available, the default value otherwise.</returns>
-    public static bool GetBoolFromDictionary(IDictionary<string, object> dictionary, string key, bool defaultValue = false)
-    {
-        if (dictionary == null) return defaultValue;
-
-        object obj;
-        bool value;
-        if (dictionary.TryGetValue(key, out obj) && obj != null && bool.TryParse(obj.ToString(), out value))
-        {
-            return value;
-        }
-
-        return defaultValue;
-    }
-
-    /// <summary>
     /// Tries to get a <c>int</c> value from dictionary for the given key if available, returns the default value if unavailable.
     /// </summary>
     /// <param name="dictionary">The dictionary from which to get the <c>int</c> value.</param>
@@ -302,27 +281,6 @@ public class MaxSdkUtils
         return _MaxIsTablet();
 #elif UNITY_ANDROID
         return MaxUnityPluginClass.CallStatic<bool>("isTablet");
-#else
-        return false;
-#endif
-    }
-    
-#if UNITY_IOS
-    [DllImport("__Internal")]
-    private static extern bool _MaxIsPhysicalDevice();
-#endif
-
-    /// <summary>
-    /// Returns whether or not a physical device is being used, as opposed to an emulator / simulator.
-    /// </summary>
-    public static bool IsPhysicalDevice()
-    {
-#if UNITY_EDITOR
-        return false;
-#elif UNITY_IOS
-        return _MaxIsPhysicalDevice();
-#elif UNITY_ANDROID
-        return MaxUnityPluginClass.CallStatic<bool>("isPhysicalDevice");
 #else
         return false;
 #endif

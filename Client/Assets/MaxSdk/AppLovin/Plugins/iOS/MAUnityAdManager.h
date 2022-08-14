@@ -7,7 +7,6 @@
 #import <AppLovinSDK/AppLovinSDK.h>
 
 NS_ASSUME_NONNULL_BEGIN
-typedef const void *MAUnityRef;
 typedef void (*ALUnityBackgroundCallback)(const char* args);
 
 @interface MAUnityAdManager : NSObject
@@ -18,11 +17,8 @@ typedef void (*ALUnityBackgroundCallback)(const char* args);
 - (void)createBannerWithAdUnitIdentifier:(NSString *)adUnitIdentifier x:(CGFloat)xOffset y:(CGFloat)yOffset;
 - (void)setBannerBackgroundColorForAdUnitIdentifier:(NSString *)adUnitIdentifier hexColorCode:(NSString *)hexColorCode;
 - (void)setBannerPlacement:(nullable NSString *)placement forAdUnitIdentifier:(NSString *)adUnitIdentifier;
-- (void)startBannerAutoRefreshForAdUnitIdentifier:(NSString *)adUnitIdentifier;
-- (void)stopBannerAutoRefreshForAdUnitIdentifier:(NSString *)adUnitIdentifier;
 - (void)setBannerExtraParameterForAdUnitIdentifier:(NSString *)adUnitIdentifier key:(NSString *)key value:(nullable NSString *)value;
-- (void)setBannerLocalExtraParameterForAdUnitIdentifier:(NSString *)adUnitIdentifier key:(NSString *)key value:(nullable id)value;
-- (void)setBannerCustomData:(nullable NSString *)customData forAdUnitIdentifier:(NSString *)adUnitIdentifier;
+- (void)setBannerCustomPostbackData:(nullable NSString *)value forAdUnitIdentifier:(NSString *)adUnitIdentifier;
 - (void)setBannerWidth:(CGFloat)width forAdUnitIdentifier:(NSString *)adUnitIdentifier;
 - (void)updateBannerPosition:(NSString *)bannerPosition forAdUnitIdentifier:(NSString *)adUnitIdentifier;
 - (void)updateBannerPosition:(CGFloat)xOffset y:(CGFloat)yOffset forAdUnitIdentifier:(NSString *)adUnitIdentifier;
@@ -35,11 +31,8 @@ typedef void (*ALUnityBackgroundCallback)(const char* args);
 - (void)createMRecWithAdUnitIdentifier:(NSString *)adUnitIdentifier atPosition:(NSString *)mrecPosition;
 - (void)createMRecWithAdUnitIdentifier:(NSString *)adUnitIdentifier x:(CGFloat)xOffset y:(CGFloat)yOffset;
 - (void)setMRecPlacement:(nullable NSString *)placement forAdUnitIdentifier:(NSString *)adUnitIdentifier;
-- (void)startMRecAutoRefreshForAdUnitIdentifier:(NSString *)adUnitIdentifier;
-- (void)stopMRecAutoRefreshForAdUnitIdentifier:(NSString *)adUnitIdentifer;
 - (void)setMRecExtraParameterForAdUnitIdentifier:(NSString *)adUnitIdentifier key:(NSString *)key value:(nullable NSString *)value;
-- (void)setMRecLocalExtraParameterForAdUnitIdentifier:(NSString *)adUnitIdentifier key:(NSString *)key value:(nullable id)value;
-- (void)setMRecCustomData:(nullable NSString *)customData forAdUnitIdentifier:(NSString *)adUnitIdentifier;
+- (void)setMRecCustomPostbackData:(nullable NSString *)value forAdUnitIdentifier:(NSString *)adUnitIdentifier;
 - (void)showMRecWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
 - (void)destroyMRecWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
 - (void)hideMRecWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
@@ -57,21 +50,21 @@ typedef void (*ALUnityBackgroundCallback)(const char* args);
 
 - (void)loadInterstitialWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
 - (BOOL)isInterstitialReadyWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
-- (void)showInterstitialWithAdUnitIdentifier:(NSString *)adUnitIdentifier placement:(nullable NSString *)placement customData:(nullable NSString *)customData;
+- (void)showInterstitialWithAdUnitIdentifier:(NSString *)adUnitIdentifier placement:(NSString *)placement;
 - (void)setInterstitialExtraParameterForAdUnitIdentifier:(NSString *)adUnitIdentifier key:(NSString *)key value:(nullable NSString *)value;
-- (void)setInterstitialLocalExtraParameterForAdUnitIdentifier:(NSString *)adUnitIdentifier key:(NSString *)key value:(nullable id)value;
+- (void)setInterstitialCustomPostbackData:(nullable NSString *)value forAdUnitIdentifier:(NSString *)adUnitIdentifier;
 
 - (void)loadRewardedAdWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
 - (BOOL)isRewardedAdReadyWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
-- (void)showRewardedAdWithAdUnitIdentifier:(NSString *)adUnitIdentifier placement:(nullable NSString *)placement customData:(nullable NSString *)customData;
+- (void)showRewardedAdWithAdUnitIdentifier:(NSString *)adUnitIdentifier placement:(NSString *)placement;
 - (void)setRewardedAdExtraParameterForAdUnitIdentifier:(NSString *)adUnitIdentifier key:(NSString *)key value:(nullable NSString *)value;
-- (void)setRewardedAdLocalExtraParameterForAdUnitIdentifier:(NSString *)adUnitIdentifier key:(NSString *)key value:(nullable id)value;
+- (void)setRewardedAdCustomPostbackData:(nullable NSString *)value forAdUnitIdentifier:(NSString *)adUnitIdentifier;
 
 - (void)loadRewardedInterstitialAdWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
 - (BOOL)isRewardedInterstitialAdReadyWithAdUnitIdentifier:(NSString *)adUnitIdentifier;
-- (void)showRewardedInterstitialAdWithAdUnitIdentifier:(NSString *)adUnitIdentifier placement:(nullable NSString *)placement customData:(nullable NSString *)customData;
+- (void)showRewardedInterstitialAdWithAdUnitIdentifier:(NSString *)adUnitIdentifier placement:(NSString *)placement;
 - (void)setRewardedInterstitialAdExtraParameterForAdUnitIdentifier:(NSString *)adUnitIdentifier key:(NSString *)key value:(nullable NSString *)value;
-- (void)setRewardedInterstitialAdLocalExtraParameterForAdUnitIdentifier:(NSString *)adUnitIdentifier key:(NSString *)key value:(nullable id)value;
+- (void)setRewardedInterstitialAdCustomPostbackData:(nullable NSString *)value forAdUnitIdentifier:(NSString *)adUnitIdentifier;
 
 // Event Tracking
 - (void)trackEvent:(NSString *)event parameters:(NSString *)parameters;

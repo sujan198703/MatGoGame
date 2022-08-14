@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using FreeNet;
 using UnityEngine.UI;
 
-public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
+
+public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
 {
+
+    //public CGostopEngine score;
 
     // 원본 이미지들.
     Sprite back_image;
@@ -378,7 +381,12 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
         sort_player_hand_slots(this.player_me_index);
 
         CPacket msg = CPacket.create((short)PROTOCOL.DISTRIBUTED_ALL_CARDS);
+        
         CNetworkManager.Instance.send(msg);
+
+         // Debug.Log("Updating SCORE HERE");
+      //  score.calculate_score();
+       // CPlayerAgent.move_kookjin_to_pee();
     }
 
 
@@ -651,8 +659,9 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
                             card_msg.push((byte)card_pic.card.pae_type);
                             card_msg.push(card_pic.card.position);
                             card_msg.push(this.test_auto_slot_index);
+                          //  card_msg.push(CPlayerAgent.cal);
                             ++this.test_auto_slot_index;
-
+                           // score.calculate_players_score();
                             CNetworkManager.Instance.send(card_msg);
                         }
                         else

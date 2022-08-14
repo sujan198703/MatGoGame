@@ -663,6 +663,7 @@ public class CGameRoom
 
 	void send_player_statistics(byte player_index)
 	{
+		UnityEngine.Debug.LogError("player states for score ");
 		CPlayerAgent target_player = this.players[player_index].agent;
 		for (int i = 0; i < this.players.Count; ++i)
 		{

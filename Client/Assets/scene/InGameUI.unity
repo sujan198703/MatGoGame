@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641252, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -48497,7 +48497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RetryConnectionPopUp: {fileID: 1811173428104573825}
   LoginFormPopUp: {fileID: 1811173429629052804}
-  serverURL: ws://localhost:8080
+  serverURL: ws://192.169.176.50:8080
   packets: []
   response: 0
   rdata: 
@@ -52980,7 +52980,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -25.5659}
+  m_AnchoredPosition: {x: 14, y: -27}
   m_SizeDelta: {x: 541.8129, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1811173430030069696

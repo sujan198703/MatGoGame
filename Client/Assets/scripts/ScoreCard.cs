@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class ScoreCard : MonoBehaviour
 {
-
+    public CGostopEngine score;
     public Text PlayerOne;
     public Text PlayerTwo;
     public int PlayerOneScore = 0;
@@ -94,10 +94,12 @@ public class ScoreCard : MonoBehaviour
         PlayerPrefs.SetInt(SecondPlayer, 0);
     }
 
+    
     // Update is called once per frame
     void Update()
     {
-
+                    
+        StartCoroutine(CallCalculateScore());
 
 
         //getting Player One score on runtime 
@@ -121,6 +123,18 @@ public class ScoreCard : MonoBehaviour
 
 
 
+    }
+
+    IEnumerator CallCalculateScore()
+    {
+        Debug.Log("Calculating Score-============");
+        score.calculate_players_score();
+       // score.after_flipped_card(1);
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(3);
+
+    
     }
 
 

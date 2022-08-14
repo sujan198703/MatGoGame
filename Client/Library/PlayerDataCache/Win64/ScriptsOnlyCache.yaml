@@ -218,49 +218,49 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 4652}
     - Class: 114
-      Script: {instanceID: 4990}
+      Script: {instanceID: 4992}
     - Class: 114
-      Script: {instanceID: 5048}
+      Script: {instanceID: 5050}
     - Class: 114
-      Script: {instanceID: 5122}
+      Script: {instanceID: 5124}
     - Class: 114
-      Script: {instanceID: 5294}
+      Script: {instanceID: 5296}
     - Class: 114
-      Script: {instanceID: 5432}
+      Script: {instanceID: 5434}
     - Class: 114
-      Script: {instanceID: 5452}
+      Script: {instanceID: 5454}
     - Class: 114
-      Script: {instanceID: 5494}
+      Script: {instanceID: 5496}
     - Class: 114
-      Script: {instanceID: 5500}
+      Script: {instanceID: 5502}
     - Class: 114
-      Script: {instanceID: 5604}
+      Script: {instanceID: 5606}
     - Class: 114
-      Script: {instanceID: 5686}
+      Script: {instanceID: 5690}
     - Class: 114
-      Script: {instanceID: 5694}
+      Script: {instanceID: 5698}
     - Class: 114
-      Script: {instanceID: 5700}
-    - Class: 114
-      Script: {instanceID: 5768}
+      Script: {instanceID: 5704}
     - Class: 114
       Script: {instanceID: 5772}
     - Class: 114
-      Script: {instanceID: 5896}
+      Script: {instanceID: 5776}
     - Class: 114
-      Script: {instanceID: 6070}
+      Script: {instanceID: 5902}
     - Class: 114
-      Script: {instanceID: 6106}
+      Script: {instanceID: 6076}
     - Class: 114
-      Script: {instanceID: 6126}
+      Script: {instanceID: 6112}
     - Class: 114
-      Script: {instanceID: 6306}
+      Script: {instanceID: 6132}
     - Class: 114
-      Script: {instanceID: 6472}
+      Script: {instanceID: 6312}
     - Class: 114
-      Script: {instanceID: 6520}
+      Script: {instanceID: 6478}
     - Class: 114
-      Script: {instanceID: 27160}
+      Script: {instanceID: 6526}
+    - Class: 114
+      Script: {instanceID: 14970}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -806,7 +806,7 @@ ScriptsOnlyBuild:
     className: QuestTabContent
   - hash:
       serializedVersion: 2
-      Hash: 2c735c2fdecacb0eb8643c019e01c3f9
+      Hash: 91e105ddf0bf220755610679ac63f2d5
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LoginManager
@@ -914,7 +914,7 @@ ScriptsOnlyBuild:
     className: NyangSafePanel
   - hash:
       serializedVersion: 2
-      Hash: 39da162ac6a8149ad455d549cd1b90e2
+      Hash: 41053cc8d901f59b33bd2ad617a478a9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SettingsPanel
@@ -1658,6 +1658,12 @@ ScriptsOnlyBuild:
     className: EventTrigger
   - hash:
       serializedVersion: 2
+      Hash: d4954a8053abd803292b4df03ec42a61
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AutoSettings
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: spine-unity-examples.dll
     namespaceName: Spine.Unity.Examples
@@ -1982,6 +1988,12 @@ ScriptsOnlyBuild:
     className: ProfileNameChangePopup
   - hash:
       serializedVersion: 2
+      Hash: 28cb559682b7eb4399e70d9f302e97bf
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LevelUpRewardsToast
+  - hash:
+      serializedVersion: 2
       Hash: 51ead78810aa29ec8c2c4f7ba902dc8c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -2082,6 +2094,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LoginServer
+  - hash:
+      serializedVersion: 2
+      Hash: bb3f88f43b1187d8b15dd63dca36913a
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: LoadingScreenPanel
   - hash:
       serializedVersion: 2
       Hash: 08410a63f552f8c2b2dd978ea2e944d2
@@ -2313,4 +2331,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/scene/InGameUI.unity
-  playerPath: C:/Users/Dell/Documents/Build/Metgo/Metgo.exe
+  playerPath: E:/Game Development/New folder/Metgo.exe

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CPlayerAgent
+public class CPlayerAgent:CPlayRoomUI
 {
 	byte player_index;
 
@@ -105,6 +105,8 @@ public class CPlayerAgent
 			this.floor_pae.Add(card.pae_type, new List<CCard>());
 		}
 		this.floor_pae[card.pae_type].Add(card);
+		Debug.Log("Score Calculation here");
+		calculate_score();
     }
 
 
@@ -321,7 +323,9 @@ public class CPlayerAgent
 
 	public void calculate_score()
 	{
-		this.score = 0;
+
+		UnityEngine.Debug.Log("CplayerAgentScore calculation");
+		//this.score = 0;
 		this.score += get_score_by_type(PAE_TYPE.PEE);  //PEE is BLOOD
 		this.score += get_score_by_type(PAE_TYPE.TEE); //TEE is belt
 		this.score += get_score_by_type(PAE_TYPE.YEOL); //heat
@@ -519,5 +523,11 @@ public class CPlayerAgent
 	public bool is_empty_on_hand()
 	{
 		return this.hand_pae.Count <= 0;
+	}
+
+    private void LateUpdate()
+    {
+		Debug.Log("Score Calculation here");
+		calculate_score();
 	}
 }

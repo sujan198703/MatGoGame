@@ -17,8 +17,8 @@ public class AESCrypto
         Key = "Full Stack IT Service 198703Game";
         IV = "MatGoGameProject";
 
-        UnityEngine.Debug.Log("1. == Key Length : " + Key.Length);
-        UnityEngine.Debug.Log("1. == Key : " + Key);
+       // UnityEngine.Debug.Log("1. == Key Length : " + Key.Length);
+     //   UnityEngine.Debug.Log("1. == Key : " + Key);
     }
 
     public string Encrypt(string message)

@@ -2,10 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+
 /// <summary>
 /// 맞고의 룰을 구현한 클래스.
 /// </summary>
-public class CGostopEngine
+public class CGostopEngine:ScoreCard
 {
 	// 전체 카드를 보관할 컨테이너.
 	CCardManager card_manager;
@@ -39,6 +40,8 @@ public class CGostopEngine
 	// 틀리다면 오류 또는 어뷰징이다.
 	PLAYER_SELECT_CARD_RESULT expected_result_type;
 
+
+	
 	public byte current_player_index { get; private set; }
 
 	// history.
@@ -81,6 +84,7 @@ public class CGostopEngine
 
 		clear_turn_data();
 	}
+	
 
 
 	/// <summary>
@@ -113,6 +117,7 @@ public class CGostopEngine
 		for (int i = 0; i < players.Count; ++i)
 		{
 			this.player_agents.Add(players[i].agent);
+			UnityEngine.Debug.Log("Reset");
 			this.player_agents[i].reset();
 			this.distributed_players_cards.Add(new List<CCard>());
 		}
@@ -420,7 +425,7 @@ public class CGostopEngine
 	/// 카드를 뒤집은 후 처리해야할 내용들을 진행한다.
 	/// </summary>
 	/// <param name="player_index"></param>
-	void after_flipped_card(byte player_index)
+	public void after_flipped_card(byte player_index)
 	{
 		// 플레이어가 가져갈 카드와 바닥에 내려놓을 카드를 처리한다.
 		give_floor_cards_to_player(player_index);
@@ -634,11 +639,20 @@ public class CGostopEngine
 	}
 
 
-	void calculate_players_score()
+	public  void calculate_players_score()
 	{
-		for (int i = 0; i < this.player_agents.Count; ++i)
+		//this.player_agents[0].calculate_score();
+		//t//his.player_agents[1].calculate_score();
+
+
+		UnityEngine.Debug.Log("CGOSTOP ENGINE score  calculation");
+
+		//This place calculates score sdk
+		for (int i = 0; i < 2; ++i)
 		{
-			this.player_agents[i].calculate_score();
+			UnityEngine.Debug.Log("for loop");
+
+			this.player_agents[0].calculate_score();
 		}
 	}
 
@@ -734,4 +748,7 @@ public class CGostopEngine
 
 		return result;
 	}
+
+
+
 }

@@ -83,7 +83,7 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
     {
         ConnectionStatus();
         CanLogin = false;
-        Debug.Log("start");
+      //  Debug.Log("start");
     }
     void OnDisable()
 	{
@@ -165,7 +165,7 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
         string str = System.Text.Encoding.UTF8.GetString(data);
         if( ParsePacket(str) ){
             received = true;
-            Debug.Log("codeReceive<-" + str);
+          //  Debug.Log("codeReceive<-" + str);
         }
         
 
@@ -275,7 +275,7 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
     {
         if (!w.IsConnectedtoServer()) return;
 
-        Debug.Log("Send-> " + str);
+       // Debug.Log("Send-> " + str);
 
         byte[] data = System.Text.Encoding.UTF8.GetBytes(str);
         w.SendAsync(data);
@@ -442,6 +442,7 @@ public class Backend : CSingletonMonobehaviour<CPlayRoomUI>
         //Send(packetstr);
         StartCoroutine(DoRequest(PACKET_CODE.OPEN, packetstr, true));
     }
+
 
     IEnumerator DoRequest(PACKET_CODE code, string packetstr, bool waitdlg = false)
     {
