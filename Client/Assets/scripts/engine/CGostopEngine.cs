@@ -652,7 +652,7 @@ public class CGostopEngine:ScoreCard
 		{
 			UnityEngine.Debug.Log("for loop");
 
-			this.player_agents[0].calculate_score();
+			this.player_agents[i].calculate_score();
 		}
 	}
 

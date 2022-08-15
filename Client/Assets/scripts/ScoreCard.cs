@@ -128,7 +128,7 @@ public class ScoreCard : MonoBehaviour
     IEnumerator CallCalculateScore()
     {
         Debug.Log("Calculating Score-============");
-        score.calculate_players_score();
+       // score.calculate_players_score();
        // score.after_flipped_card(1);
 
         //yield on a new YieldInstruction that waits for 5 seconds.
