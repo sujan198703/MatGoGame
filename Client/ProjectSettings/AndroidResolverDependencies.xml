@@ -8,12 +8,13 @@
     <package>com.android.support:support-v4:25.3.1</package>
     <package>com.applovin.mediation:google-adapter:[21.0.0.2]</package>
     <package>com.applovin.mediation:unityads-adapter:4.2.1.0</package>
-    <package>com.applovin:applovin-sdk:11.4.4</package>
+    <package>com.applovin:applovin-sdk:11.0.0</package>
     <package>com.facebook.android:facebook-applinks:[11.0, 12)</package>
     <package>com.facebook.android:facebook-core:[11.0, 12)</package>
     <package>com.facebook.android:facebook-gamingservices:[11.0, 12)</package>
     <package>com.facebook.android:facebook-login:[11.0, 12)</package>
     <package>com.facebook.android:facebook-share:[11.0, 12)</package>
+    <package>com.google.android.exoplayer:exoplayer:2.13.3</package>
     <package>com.google.android.gms:play-services-ads:21.0.0</package>
     <package>com.google.android.gms:play-services-auth:16+</package>
     <package>com.google.android.gms:play-services-base:18.0.1</package>

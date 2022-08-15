@@ -37,8 +37,8 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
 
     // 자리별 카드 스케일.
     readonly Vector3 SCALE_TO_FLOOR = new Vector3(0.8f, 0.8f, 0.8f);
-    readonly Vector3 SCALE_TO_OTHER_HAND = new Vector3(0.5f, 0.5f, 0.5f);
-    readonly Vector3 SCALE_TO_MY_HAND = new Vector3(1.0f, 1.0f, 1.0f);
+    readonly Vector3 SCALE_TO_OTHER_HAND = new Vector3(1f, 1f, 1f);
+    readonly Vector3 SCALE_TO_MY_HAND = new Vector3(1.5f, 1.5f, 1.5f);
 
     readonly Vector3 SCALE_TO_OTHER_FLOOR = new Vector3(0.6f, 0.6f, 0.6f);
     readonly Vector3 SCALE_TO_MY_FLOOR = new Vector3(0.6f, 0.6f, 0.6f);
@@ -361,6 +361,7 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
                         move_card(card_picture, card_picture.transform.position,
                         this.player_card_positions[player_index].get_hand_position(ui_slot_index));
 
+
                     }
                     else
                     {
@@ -368,6 +369,7 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
                         card_picture.transform.localScale = SCALE_TO_OTHER_HAND;
                         move_card(card_picture, card_picture.transform.position,
                         this.player_card_positions[player_index].get_hand_position(ui_slot_index));
+                        
                     }
 
                     ++ui_slot_index;
