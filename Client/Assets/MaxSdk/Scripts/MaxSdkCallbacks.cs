@@ -1364,7 +1364,10 @@ public class MaxSdkCallbacks : MonoBehaviour
 #if UNITY_EDITOR
     public static void EmitSdkInitializedEvent()
     {
+        if(_onSdkInitializedEvent == null) return;
+
         var sdkConfiguration = new MaxSdkBase.SdkConfiguration();
+        sdkConfiguration.IsSuccessfullyInitialized = true;
         sdkConfiguration.ConsentDialogState = MaxSdkBase.ConsentDialogState.Unknown;
         sdkConfiguration.AppTrackingStatus = MaxSdkBase.AppTrackingStatus.Authorized;
         var currentRegion = RegionInfo.CurrentRegion;

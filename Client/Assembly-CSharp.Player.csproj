@@ -164,6 +164,7 @@
     <Compile Include="Assets\Assets\DailyRewards\Scripts\IntegrationDailyRewards.cs" />
     <Compile Include="Assets\scripts\ui\CPlayerInfoSlot.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPInstance.cs" />
+    <Compile Include="Assets\scripts\Helper\MultiComponentCopier.cs" />
     <Compile Include="Assets\scripts\Popups\PurchaseFailurePopup.cs" />
     <Compile Include="Assets\scripts\NetworkTest\Connect.cs" />
     <Compile Include="Assets\scripts\Popups\LossLimitPopup.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="Assets\scripts\ui\CCardCollision.cs" />
     <Compile Include="Assets\scripts\public\CCameraAspectRatio.cs" />
     <Compile Include="Assets\scripts\Panels\Lobby\InventoryPanel.cs" />
+    <Compile Include="Assets\scripts\Helper\SpriteStretch.cs" />
     <Compile Include="Assets\scripts\engine\CGostopHelper.cs" />
     <Compile Include="Assets\scripts\Popups\ProfileNameChangePopup.cs" />
     <Compile Include="Assets\scripts\Toasts\LevelUpRewardsToast.cs" />
@@ -250,7 +252,6 @@
     <Compile Include="Assets\Assets\ScratchCard\Scripts\ScratchCardManager.cs" />
     <Compile Include="Assets\FacebookSDK\Examples\Scripts\SubMenus\AppEvents.cs" />
     <Compile Include="Assets\scripts\public\CSingleton.cs" />
-    <Compile Include="Assets\scripts\Helper\MultiComponentCopier.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

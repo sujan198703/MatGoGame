@@ -37,11 +37,11 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
 
     // 자리별 카드 스케일.
     readonly Vector3 SCALE_TO_FLOOR = new Vector3(0.8f, 0.8f, 0.8f);
-    readonly Vector3 SCALE_TO_OTHER_HAND = new Vector3(1f, 1f, 1f);
+    readonly Vector3 SCALE_TO_OTHER_HAND = new Vector3(0.24f, 0.24f, 0.24f);
     readonly Vector3 SCALE_TO_MY_HAND = new Vector3(1.5f, 1.5f, 1.5f);
 
-    readonly Vector3 SCALE_TO_OTHER_FLOOR = new Vector3(0.6f, 0.6f, 0.6f);
-    readonly Vector3 SCALE_TO_MY_FLOOR = new Vector3(0.6f, 0.6f, 0.6f);
+    readonly Vector3 SCALE_TO_OTHER_FLOOR = new Vector3(0.8f, 0.8f, 0.8f);
+    readonly Vector3 SCALE_TO_MY_FLOOR = new Vector3(0.8f, 0.8f, 0.87f);
 
 
     // 게임 플레이에 사용되는 객체들.
@@ -250,8 +250,7 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
             {
                 continue;
             }
-
-            targets.Add(slots[i].position);
+            targets.Add(slots[i].localPosition);
         }
     }
 
@@ -326,7 +325,7 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
                 begin_cards_picture.Add(card_picture);
 
                 card_picture.transform.localScale = SCALE_TO_FLOOR;
-                move_card(card_picture, card_picture.transform.position, this.floor_slot_position[i + looping * 4]);
+                move_card(card_picture, card_picture.transform.localPosition, this.floor_slot_position[i + looping * 4]);
 
                 yield return new WaitForSeconds(0.02f);
             }
@@ -1595,6 +1594,7 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
         GameObject hint = this.hint_arrows.pop();
         hint.SetActive(true);
         hint.transform.position = position;
+        hint.transform.position += new Vector3(-10f, 12f, 0);
 
         this.enabled_hint_arrows.Add(hint);
     }

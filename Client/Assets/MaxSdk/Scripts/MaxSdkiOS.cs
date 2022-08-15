@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using AOT;
 using UnityEngine;
-using AppLovinMax.ThirdParty.MiniJson; 
+using AppLovinMax.ThirdParty.MiniJson;
 
 /// <summary>
 /// iOS AppLovin MAX Unity Plugin implementation
@@ -176,14 +176,14 @@ public class MaxSdkiOS : MaxSdkBase
         var sdkConfigurationDict = Json.Deserialize(sdkConfigurationStr) as Dictionary<string, object>;
         return SdkConfiguration.Create(sdkConfigurationDict);
     }
-    
+
     [DllImport("__Internal")]
     private static extern void _MaxSetHasUserConsent(bool hasUserConsent);
 
     /// <summary>
     /// Set whether or not user has provided consent for information sharing with AppLovin and other providers.
     /// </summary>
-    /// <param name="hasUserConsent">'true' if the user has provided consent for information sharing with AppLovin. 'false' by default.</param>
+    /// <param name="hasUserConsent"><c>true</c> if the user has provided consent for information sharing with AppLovin. <c>false<c> by default.</param>
     public static void SetHasUserConsent(bool hasUserConsent)
     {
         _MaxSetHasUserConsent(hasUserConsent);
@@ -195,9 +195,22 @@ public class MaxSdkiOS : MaxSdkBase
     /// <summary>
     /// Check if user has provided consent for information sharing with AppLovin and other providers.
     /// </summary>
+    /// <returns><c>true</c> if user has provided consent for information sharing. <c>false</c> if the user declined to share information or the consent value has not been set <see cref="IsUserConsentSet">.</returns>
     public static bool HasUserConsent()
     {
         return _MaxHasUserConsent();
+    }
+
+    [DllImport("__Internal")]
+    private static extern bool _MaxIsUserConsentSet();
+
+    /// <summary>
+    /// Check if user has set consent for information sharing.
+    /// </summary>
+    /// <returns><c>true<c> if user has set a value of consent for information sharing.</returns>
+    public static bool IsUserConsentSet()
+    {
+        return _MaxIsUserConsentSet();
     }
 
     [DllImport("__Internal")]
@@ -206,7 +219,7 @@ public class MaxSdkiOS : MaxSdkBase
     /// <summary>
     /// Mark user as age restricted (i.e. under 16).
     /// </summary>
-    /// <param name="isAgeRestrictedUser">'true' if the user is age restricted (i.e. under 16).</param>
+    /// <param name="isAgeRestrictedUser"><c>true<c> if the user is age restricted (i.e. under 16).</param>
     public static void SetIsAgeRestrictedUser(bool isAgeRestrictedUser)
     {
         _MaxSetIsAgeRestrictedUser(isAgeRestrictedUser);
@@ -218,9 +231,22 @@ public class MaxSdkiOS : MaxSdkBase
     /// <summary>
     /// Check if user is age restricted.
     /// </summary>
+    /// <returns><c>true<c> if the user is age-restricted. <c>false<c> if the user is not age-restricted or the age-restriction has not been set<see cref="IsAgeRestrictedUserSet">.</returns>
     public static bool IsAgeRestrictedUser()
     {
         return _MaxIsAgeRestrictedUser();
+    }
+
+    [DllImport("__Internal")]
+    private static extern bool _MaxIsAgeRestrictedUserSet();
+
+    /// <summary>
+    /// Check if user set its age restricted settings.
+    /// </summary>
+    /// <returns><c>true<c> if user has set its age restricted settings.</returns>
+    public static bool IsAgeRestrictedUserSet()
+    {
+        return _MaxIsAgeRestrictedUserSet();
     }
 
     [DllImport("__Internal")]
@@ -229,7 +255,7 @@ public class MaxSdkiOS : MaxSdkBase
     /// <summary>
     /// Set whether or not user has opted out of the sale of their personal information.
     /// </summary>
-    /// <param name="doNotSell">'true' if the user has opted out of the sale of their personal information.</param>
+    /// <param name="doNotSell"><c>true<c> if the user has opted out of the sale of their personal information.</param>
     public static void SetDoNotSell(bool doNotSell)
     {
         _MaxSetDoNotSell(doNotSell);
@@ -241,9 +267,22 @@ public class MaxSdkiOS : MaxSdkBase
     /// <summary>
     /// Check if the user has opted out of the sale of their personal information.
     /// </summary>
+    /// <returns><c>true<c> if the user has opted out of the sale of their personal information. <c>false<c> if the user opted in to the sell of their personal information or the value has not been set <see cref="IsDoNotSellSet">.</returns>
     public static bool IsDoNotSell()
     {
         return _MaxIsDoNotSell();
+    }
+
+    [DllImport("__Internal")]
+    private static extern bool _MaxIsDoNotSellSet();
+
+    /// <summary>
+    /// Check if the user has set the option to sell their personal information
+    /// </summary>
+    /// <returns><c>true</c> if user has chosen an option to sell their personal information.</returns>
+    public static bool IsDoNotSellSet()
+    {
+        return _MaxIsDoNotSellSet();
     }
 
     #endregion
@@ -294,6 +333,32 @@ public class MaxSdkiOS : MaxSdkBase
     {
         ValidateAdUnitIdentifier(adUnitIdentifier, "set banner placement");
         _MaxSetBannerPlacement(adUnitIdentifier, placement);
+    }
+
+    [DllImport("__Internal")]
+    private static extern void _MaxStartBannerAutoRefresh(string adUnitIdentifier);
+
+    /// <summary>
+    /// Starts or resumes auto-refreshing of the banner for the given ad unit identifier.
+    /// </summary>
+    /// <param name="adUnitIdentifier">Ad unit identifier of the banner for which to start auto-refresh</param>
+    public static void StartBannerAutoRefresh(string adUnitIdentifier)
+    {
+        ValidateAdUnitIdentifier(adUnitIdentifier, "start banner auto-refresh");
+        _MaxStartBannerAutoRefresh(adUnitIdentifier);
+    }
+
+    [DllImport("__Internal")]
+    private static extern void _MaxStopBannerAutoRefresh(string adUnitIdentifeir);
+
+    /// <summary>
+    /// Pauses auto-refreshing of the banner for the given ad unit identifier.
+    /// </summary>
+    /// <param name="adUnitIdentifier">Ad unit identifier of the banner for which to stop auto-refresh</param>
+    public static void StopBannerAutoRefresh(string adUnitIdentifier)
+    {
+        ValidateAdUnitIdentifier(adUnitIdentifier, "stop banner auto-refresh");
+        _MaxStopBannerAutoRefresh(adUnitIdentifier);
     }
 
     [DllImport("__Internal")]
@@ -411,17 +476,40 @@ public class MaxSdkiOS : MaxSdkBase
     }
 
     [DllImport("__Internal")]
-    private static extern void _MaxSetBannerCustomPostbackData(string adUnitIdentifier, string value);
+    private static extern void _MaxSetBannerLocalExtraParameter(string adUnitIdentifier, string key, IntPtr value);
 
     /// <summary>
-    /// Set custom data to be set in the ILRD postbacks via the {CUSTOM_DATA}  macro.
+    /// Set a local extra parameter for the banner ad.
     /// </summary>
-    /// <param name="adUnitIdentifier">Ad unit identifier of the banner to set the custom postback data for.</param>
-    /// <param name="value">The value for the custom postback data.</param>
-    public static void SetBannerCustomPostbackData(string adUnitIdentifier, string value)
+    /// <param name="adUnitIdentifier">Ad unit identifier of the banner to set the local extra parameter for.</param>
+    /// <param name="key">The key for the local extra parameter.</param>
+    /// <param name="value">The value for the local extra parameter. Needs to be of type <see cref="IntPtr"/> or <c>null</c></param>
+    public static void SetBannerLocalExtraParameter(string adUnitIdentifier, string key, object value)
     {
-        ValidateAdUnitIdentifier(adUnitIdentifier, "set banner custom postback data");
-        _MaxSetBannerCustomPostbackData(adUnitIdentifier, value);
+        if (value != null && value.GetType() != typeof(IntPtr))
+        {
+            MaxSdkLogger.E("Failed to set local extra parameter. iOS local extra parameters need to be of type IntPtr");
+            return;
+        }
+
+        ValidateAdUnitIdentifier(adUnitIdentifier, "set banner local extra parameter");
+
+        var intPtrValue = value == null ? IntPtr.Zero : (IntPtr) value;
+        _MaxSetBannerLocalExtraParameter(adUnitIdentifier, key, intPtrValue);
+    }
+
+    [DllImport("__Internal")]
+    private static extern void _MaxSetBannerCustomData(string adUnitIdentifier, string customData);
+
+    /// <summary>
+    /// The custom data to tie the showing banner ad to, for ILRD and rewarded postbacks via the <c>{CUSTOM_DATA}</c> macro. Maximum size is 8KB.
+    /// </summary>
+    /// <param name="adUnitIdentifier">Banner ad unit identifier of the banner to set the custom data for.</param>
+    /// <param name="customData">The custom data to be set.</param>
+    public static void SetBannerCustomData(string adUnitIdentifier, string customData)
+    {
+        ValidateAdUnitIdentifier(adUnitIdentifier, "set banner custom data");
+        _MaxSetBannerCustomData(adUnitIdentifier, customData);
     }
 
     [DllImport("__Internal")]
@@ -488,6 +576,32 @@ public class MaxSdkiOS : MaxSdkBase
     {
         ValidateAdUnitIdentifier(adUnitIdentifier, "set MREC placement");
         _MaxSetMRecPlacement(adUnitIdentifier, placement);
+    }
+
+    [DllImport("__Internal")]
+    private static extern void _MaxStartMRecAutoRefresh(string adUnitIdentifier);
+
+    /// <summary>
+    /// Starts or resumes auto-refreshing of the MREC for the given ad unit identifier.
+    /// </summary>
+    /// <param name="adUnitIdentifier">Ad unit identifier of the MREC for which to start auto-refresh</param>
+    public static void StartMRecAutoRefresh(string adUnitIdentifier)
+    {
+        ValidateAdUnitIdentifier(adUnitIdentifier, "start MREC auto-refresh");
+        _MaxStartMRecAutoRefresh(adUnitIdentifier);
+    }
+
+    [DllImport("__Internal")]
+    private static extern void _MaxStopMRecAutoRefresh(string adUnitIdentifeir);
+
+    /// <summary>
+    /// Pauses auto-refreshing of the MREC for the given ad unit identifier.
+    /// </summary>
+    /// <param name="adUnitIdentifier">Ad unit identifier of the MREC for which to stop auto-refresh</param>
+    public static void StopMRecAutoRefresh(string adUnitIdentifier)
+    {
+        ValidateAdUnitIdentifier(adUnitIdentifier, "stop MREC auto-refresh");
+        _MaxStopMRecAutoRefresh(adUnitIdentifier);
     }
 
     [DllImport("__Internal")]
@@ -577,17 +691,40 @@ public class MaxSdkiOS : MaxSdkBase
     }
 
     [DllImport("__Internal")]
-    private static extern void _MaxSetMRecCustomPostbackData(string adUnitIdentifier, string value);
+    private static extern void _MaxSetMRecLocalExtraParameter(string adUnitIdentifier, string key, IntPtr value);
 
     /// <summary>
-    /// Set custom data to be set in the ILRD postbacks via the {CUSTOM_DATA}  macro.
+    /// Set a local extra parameter for the MREC ad.
     /// </summary>
-    /// <param name="adUnitIdentifier">Ad unit identifier of the MREC to set the custom postback data for.</param>
-    /// <param name="value">The value for the custom postback data.</param>
-    public static void SetMRecCustomPostbackData(string adUnitIdentifier, string value)
+    /// <param name="adUnitIdentifier">Ad unit identifier of the MREC to set the local extra parameter for.</param>
+    /// <param name="key">The key for the local extra parameter.</param>
+    /// <param name="value">The value for the local extra parameter. Needs to be of type <see cref="IntPtr"/> or <c>null</c></param>
+    public static void SetMRecLocalExtraParameter(string adUnitIdentifier, string key, object value)
     {
-        ValidateAdUnitIdentifier(adUnitIdentifier, "set MREC custom postback data");
-        _MaxSetMRecCustomPostbackData(adUnitIdentifier, value);
+        if (value != null && value.GetType() != typeof(IntPtr))
+        {
+            MaxSdkLogger.E("Failed to set local extra parameter. iOS local extra parameters need to be of type IntPtr");
+            return;
+        }
+
+        ValidateAdUnitIdentifier(adUnitIdentifier, "set MREC local extra parameter");
+
+        var intPtrValue = value == null ? IntPtr.Zero : (IntPtr) value;
+        _MaxSetMRecLocalExtraParameter(adUnitIdentifier, key, intPtrValue);
+    }
+
+    [DllImport("__Internal")]
+    private static extern void _MaxSetMRecCustomData(string adUnitIdentifier, string value);
+
+    /// <summary>
+    /// The custom data to tie the showing MREC ad to, for ILRD and rewarded postbacks via the <c>{CUSTOM_DATA}</c> macro. Maximum size is 8KB.
+    /// </summary>
+    /// <param name="adUnitIdentifier">MREC Ad unit identifier of the banner to set the custom data for.</param>
+    /// <param name="customData">The custom data to be set.</param>
+    public static void SetMRecCustomData(string adUnitIdentifier, string customData)
+    {
+        ValidateAdUnitIdentifier(adUnitIdentifier, "set MREC custom data");
+        _MaxSetMRecCustomData(adUnitIdentifier, customData);
     }
 
     [DllImport("__Internal")]
@@ -753,29 +890,21 @@ public class MaxSdkiOS : MaxSdkBase
     }
 
     [DllImport("__Internal")]
-    private static extern void _MaxShowInterstitial(string adUnitIdentifier, string placement);
-
-    /// <summary>
-    /// Present loaded interstitial. Note: if the interstitial is not ready to be displayed nothing will happen.
-    /// </summary>
-    /// <param name="adUnitIdentifier">Ad unit identifier of the interstitial to load</param>
-    public static void ShowInterstitial(string adUnitIdentifier)
-    {
-        ShowInterstitial(adUnitIdentifier, null);
-    }
+    private static extern void _MaxShowInterstitial(string adUnitIdentifier, string placement, string customData);
 
     /// <summary>
     /// Present loaded interstitial for a given placement to tie ad events to. Note: if the interstitial is not ready to be displayed nothing will happen.
     /// </summary>
     /// <param name="adUnitIdentifier">Ad unit identifier of the interstitial to load</param>
     /// <param name="placement">The placement to tie the showing ad's events to</param>
-    public static void ShowInterstitial(string adUnitIdentifier, string placement)
+    /// <param name="customData">The custom data to tie the showing ad's events to. Maximum size is 8KB.</param>
+    public static void ShowInterstitial(string adUnitIdentifier, string placement = null, string customData = null)
     {
         ValidateAdUnitIdentifier(adUnitIdentifier, "show interstitial");
 
         if (IsInterstitialReady(adUnitIdentifier))
         {
-            _MaxShowInterstitial(adUnitIdentifier, placement);
+            _MaxShowInterstitial(adUnitIdentifier, placement, customData);
         }
         else
         {
@@ -799,17 +928,26 @@ public class MaxSdkiOS : MaxSdkBase
     }
 
     [DllImport("__Internal")]
-    private static extern void _MaxSetInterstitialCustomPostbackData(string adUnitIdentifier, string value);
+    private static extern void _MaxSetInterstitialLocalExtraParameter(string adUnitIdentifier, string key, IntPtr value);
 
     /// <summary>
-    /// Set custom data to be set in the ILRD postbacks via the {CUSTOM_DATA}  macro.
+    /// Set a local extra parameter for the ad.
     /// </summary>
-    /// <param name="adUnitIdentifier">Ad unit identifier of the interstitial to set the custom postback data for.</param>
-    /// <param name="value">The value for the custom postback data.</param>
-    public static void SetInterstitialCustomPostbackData(string adUnitIdentifier, string value)
+    /// <param name="adUnitIdentifier">Ad unit identifier of the interstitial to set the local extra parameter for.</param>
+    /// <param name="key">The key for the local extra parameter.</param>
+    /// <param name="value">The value for the local extra parameter. Needs to be of type <see cref="IntPtr"/> or <c>null</c></param>
+    public static void SetInterstitialLocalExtraParameter(string adUnitIdentifier, string key, object value)
     {
-        ValidateAdUnitIdentifier(adUnitIdentifier, "set interstitial custom postback data");
-        _MaxSetInterstitialCustomPostbackData(adUnitIdentifier, value);
+        if (value != null && value.GetType() != typeof(IntPtr))
+        {
+            MaxSdkLogger.E("Failed to set local extra parameter. iOS local extra parameters need to be of type IntPtr");
+            return;
+        }
+
+        ValidateAdUnitIdentifier(adUnitIdentifier, "set interstitial local extra parameter");
+
+        var intPtrValue = value == null ? IntPtr.Zero : (IntPtr) value;
+        _MaxSetInterstitialLocalExtraParameter(adUnitIdentifier, key, intPtrValue);
     }
 
     #endregion
@@ -844,30 +982,21 @@ public class MaxSdkiOS : MaxSdkBase
     }
 
     [DllImport("__Internal")]
-    private static extern void _MaxShowRewardedAd(string adUnitIdentifier, string placement);
-
-
-    /// <summary>
-    /// Present loaded rewarded ad. Note: if the rewarded ad is not ready to be displayed nothing will happen.
-    /// </summary>
-    /// <param name="adUnitIdentifier">Ad unit identifier of the rewarded ad to show</param>
-    public static void ShowRewardedAd(string adUnitIdentifier)
-    {
-        ShowRewardedAd(adUnitIdentifier, null);
-    }
+    private static extern void _MaxShowRewardedAd(string adUnitIdentifier, string placement, string customData);
 
     /// <summary>
     /// Present loaded rewarded ad for a given placement to tie ad events to. Note: if the rewarded ad is not ready to be displayed nothing will happen.
     /// </summary>
     /// <param name="adUnitIdentifier">Ad unit identifier of the interstitial to load</param>
     /// <param name="placement">The placement to tie the showing ad's events to</param>
-    public static void ShowRewardedAd(string adUnitIdentifier, string placement)
+    /// <param name="customData">The custom data to tie the showing ad's events to. Maximum size is 8KB.</param>
+    public static void ShowRewardedAd(string adUnitIdentifier, string placement = null, string customData = null)
     {
         ValidateAdUnitIdentifier(adUnitIdentifier, "show rewarded ad");
 
         if (IsRewardedAdReady(adUnitIdentifier))
         {
-            _MaxShowRewardedAd(adUnitIdentifier, placement);
+            _MaxShowRewardedAd(adUnitIdentifier, placement, customData);
         }
         else
         {
@@ -891,17 +1020,26 @@ public class MaxSdkiOS : MaxSdkBase
     }
 
     [DllImport("__Internal")]
-    private static extern void _MaxSetRewardedAdCustomPostbackData(string adUnitIdentifier, string value);
+    private static extern void _MaxSetRewardedAdLocalExtraParameter(string adUnitIdentifier, string key, IntPtr value);
 
     /// <summary>
-    /// Set custom data to be set in the ILRD postbacks via the {CUSTOM_DATA}  macro.
+    /// Set a local extra parameter for the ad.
     /// </summary>
-    /// <param name="adUnitIdentifier">Ad unit identifier of the rewarded ad to set the custom postback data for.</param>
-    /// <param name="value">The value for the custom postback data.</param>
-    public static void SetRewardedAdCustomPostbackData(string adUnitIdentifier, string value)
+    /// <param name="adUnitIdentifier">Ad unit identifier of the rewarded ad to set the local extra parameter for.</param>
+    /// <param name="key">The key for the local extra parameter.</param>
+    /// <param name="value">The value for local the extra parameter. Needs to be of type <see cref="IntPtr"/> or <c>null</c></param>
+    public static void SetRewardedAdLocalExtraParameter(string adUnitIdentifier, string key, object value)
     {
-        ValidateAdUnitIdentifier(adUnitIdentifier, "set rewarded custom postback data");
-        _MaxSetRewardedAdCustomPostbackData(adUnitIdentifier, value);
+        if (value != null && value.GetType() != typeof(IntPtr))
+        {
+            MaxSdkLogger.E("Failed to set local extra parameter. iOS local extra parameters need to be of type IntPtr");
+            return;
+        }
+
+        ValidateAdUnitIdentifier(adUnitIdentifier, "set rewarded local extra parameter");
+
+        var intPtrValue = value == null ? IntPtr.Zero : (IntPtr) value;
+        _MaxSetRewardedAdLocalExtraParameter(adUnitIdentifier, key, intPtrValue);
     }
 
     #endregion
@@ -936,30 +1074,21 @@ public class MaxSdkiOS : MaxSdkBase
     }
 
     [DllImport("__Internal")]
-    private static extern void _MaxShowRewardedInterstitialAd(string adUnitIdentifier, string placement);
-
-
-    /// <summary>
-    /// Present loaded rewarded interstitial ad. Note: if the rewarded interstitial ad is not ready to be displayed nothing will happen.
-    /// </summary>
-    /// <param name="adUnitIdentifier">Ad unit identifier of the rewarded interstitial ad to show</param>
-    public static void ShowRewardedInterstitialAd(string adUnitIdentifier)
-    {
-        ShowRewardedInterstitialAd(adUnitIdentifier, null);
-    }
+    private static extern void _MaxShowRewardedInterstitialAd(string adUnitIdentifier, string placement, string customData);
 
     /// <summary>
     /// Present loaded rewarded interstitial ad for a given placement to tie ad events to. Note: if the rewarded interstitial ad is not ready to be displayed nothing will happen.
     /// </summary>
     /// <param name="adUnitIdentifier">Ad unit identifier of the rewarded interstitial to show</param>
     /// <param name="placement">The placement to tie the showing ad's events to</param>
-    public static void ShowRewardedInterstitialAd(string adUnitIdentifier, string placement)
+    /// <param name="customData">The custom data to tie the showing ad's events to. Maximum size is 8KB.</param>
+    public static void ShowRewardedInterstitialAd(string adUnitIdentifier, string placement = null, string customData = null)
     {
         ValidateAdUnitIdentifier(adUnitIdentifier, "show rewarded interstitial ad");
 
         if (IsRewardedInterstitialAdReady(adUnitIdentifier))
         {
-            _MaxShowRewardedInterstitialAd(adUnitIdentifier, placement);
+            _MaxShowRewardedInterstitialAd(adUnitIdentifier, placement, customData);
         }
         else
         {
@@ -983,17 +1112,26 @@ public class MaxSdkiOS : MaxSdkBase
     }
 
     [DllImport("__Internal")]
-    private static extern void _MaxSetRewardedInterstitialAdCustomPostbackData(string adUnitIdentifier, string value);
+    private static extern void _MaxSetRewardedInterstitialAdLocalExtraParameter(string adUnitIdentifier, string key, IntPtr value);
 
     /// <summary>
-    /// Set custom data to be set in the ILRD postbacks via the {CUSTOM_DATA}  macro.
+    /// Set a local extra parameter for the ad.
     /// </summary>
-    /// <param name="adUnitIdentifier">Ad unit identifier of the rewarded interstitial ad to set the custom postback data for.</param>
-    /// <param name="value">The value for the custom postback data.</param>
-    public static void SetRewardedInterstitialAdCustomPostbackData(string adUnitIdentifier, string value)
+    /// <param name="adUnitIdentifier">Ad unit identifier of the rewarded interstitial ad to set the local extra parameter for.</param>
+    /// <param name="key">The key for the local extra parameter.</param>
+    /// <param name="value">The value for the local extra parameter. Needs to be of type <see cref="IntPtr"/> or <c>null</c></param>
+    public static void SetRewardedInterstitialAdLocalExtraParameter(string adUnitIdentifier, string key, object value)
     {
-        ValidateAdUnitIdentifier(adUnitIdentifier, "set rewarded interstitial custom postback data");
-        _MaxSetRewardedInterstitialAdCustomPostbackData(adUnitIdentifier, value);
+        if (value != null && value.GetType() != typeof(IntPtr))
+        {
+            MaxSdkLogger.E("Failed to set local extra parameter. iOS local extra parameters need to be of type IntPtr");
+            return;
+        }
+
+        ValidateAdUnitIdentifier(adUnitIdentifier, "set rewarded interstitial local extra parameter");
+
+        var intPtrValue = value == null ? IntPtr.Zero : (IntPtr) value;
+        _MaxSetRewardedInterstitialAdLocalExtraParameter(adUnitIdentifier, key, intPtrValue);
     }
 
     #endregion
@@ -1116,6 +1254,19 @@ public class MaxSdkiOS : MaxSdkBase
     public static void SetLocationCollectionEnabled(bool enabled)
     {
         _MaxSetLocationCollectionEnabled(enabled);
+    }
+
+    [DllImport("__Internal")]
+    private static extern void _MaxSetExtraParameter(string key, string value);
+
+    /// <summary>
+    /// Set an extra parameter to pass to the AppLovin server.
+    /// </summary>
+    /// <param name="key">The key for the extra parameter. Must not be null.</param>
+    /// <param name="value">The value for the extra parameter. May be null.</param>
+    public static void SetExtraParameter(string key, string value)
+    {
+        _MaxSetExtraParameter(key, value);
     }
 
     #endregion
