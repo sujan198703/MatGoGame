@@ -20,9 +20,9 @@ class CPlayerAgent
     remain_bomb_count;
 	is_used_kookjin;
 	LightCardsScore = 0;
-	PlayerScore = [0, 0];
-	HondDanPlayerScore = [0, 0];
-	GwangPlayerScore = [0, 0];
+	PlayerScore = 0;
+	HondDanPlayerScore = 0;
+	GwangPlayerScore = 0;
 
     constructor(player_index)
     {
@@ -393,17 +393,7 @@ class CPlayerAgent
 		if (cheongdan_count == 3)
 		{
 			this.score += 3;
-			
-			if (this.player_index == 0)
-			{
-				this.HongDanPlayerScore[this.player_index] = this.score;
-				console.log("================ first player HongDan score :  " + this.HongDanPlayerScore[this.player_index] + "================");
-			}
-			if (this.player_index == 1)
-			{
-				this.HongDanPlayerScore[this.player_index] = this.score;
-				console.log("================ second player HongDan score :  " + this.HongDanPlayerScore[this.player_index] + "================");
-			}
+			this.HongDanPlayerScore = this.score;	
 		}
 
 		if (hongdan_count == 3)
@@ -418,22 +408,11 @@ class CPlayerAgent
 			//UnityEngine.Debug.Log("Chodan 3 score");
 		}
 
-		if (this.player_index==0)
-		{
-			this.PlayerScore[this.player_index] = this.score;
-			this.GwangPlayerScore[this.player_index] = this.LightCardsScore;		//light cards score for player 
+		this.PlayerScore = this.score;
+		this.GwangPlayerScore = this.LightCardsScore;		//light cards score for player 
 
-			console.log("================ first player score :  " + this.PlayerScore[this.player_index] + "================");
-			console.log("================ first player Gwang score :  " + this.GwangPlayerScore[this.player_index] + "================");
-		}
-		if (this.player_index == 1)
-		{
-			this.PlayerScore[this.player_index] = this.score;
-			this.GwangPlayerScore[this.player_index] = this.LightCardsScore;    //light cards score for player 
-
-			console.log("================ second player score :  " + this.PlayerScore[this.player_index] + "================");
-			console.log("================ second player Gwang score :  " + this.GwangPlayerScore[this.player_index] + "================");
-		}
+		console.log("================ Player Score :  " + this.PlayerScore + "================");
+		console.log("================ Player Gwang Score :  " + this.GwangPlayerScore + "================");
 	}
 
 

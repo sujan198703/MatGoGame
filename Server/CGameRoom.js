@@ -583,13 +583,35 @@ class CGameRoom
 			}
 
 			this.players[i].send_protocol(this.players[i], msg);
+		}
 
+		for (let i = 0; i < this.players.length; ++i)
+		{
 			var msgScore = this.CPacket.create(PROTOCOL.GAME_SCORE);
-			msgScore.push(this.players[i].agent.PlayerScore);
-			msgScore.push(this.players[i].agent.HondDanPlayerScore);
-			msgScore.push(this.players[i].agent.GwangPlayerScore);
+
+			if( i == 0 )
+			{
+				msgScore.push(this.players[0].agent.PlayerScore);
+				msgScore.push(this.players[1].agent.PlayerScore);
+				msgScore.push(this.players[0].agent.HondDanPlayerScore);
+				msgScore.push(this.players[1].agent.HondDanPlayerScore);
+				msgScore.push(this.players[0].agent.GwangPlayerScore);
+				msgScore.push(this.players[1].agent.GwangPlayerScore);
+			}
+			else
+			{
+				msgScore.push(this.players[1].agent.PlayerScore);
+				msgScore.push(this.players[0].agent.PlayerScore);
+				msgScore.push(this.players[1].agent.HondDanPlayerScore);
+				msgScore.push(this.players[0].agent.HondDanPlayerScore);
+				msgScore.push(this.players[1].agent.GwangPlayerScore);
+				msgScore.push(this.players[0].agent.GwangPlayerScore);
+			}
+
 			this.players[i].send_protocol(this.players[i], msgScore);
-console.log("-------------------- message sending -----------------" + this.players[i].agent.PlayerScore);
+console.log("-------------------- Player Score sending -----------------" + this.players[i].agent.PlayerScore);
+console.log("-------------------- HongDan Score sending -----------------" + this.players[i].agent.HondDanPlayerScore);
+console.log("-------------------- Gwang Score sending -----------------" + this.players[i].agent.GwangPlayerScore);
 		}
 	}
 
