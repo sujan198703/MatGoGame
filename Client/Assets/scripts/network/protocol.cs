@@ -47,6 +47,8 @@ public enum PROTOCOL : short
 
 	PLAYER_ORDER_RESULT = 29,		// S -> C
 
+	GAME_SCORE = 30,				// S -> C
+
 	START_TURN = 98,
 	START_TURN_OTHER = 99,
 	TURN_END = 100,

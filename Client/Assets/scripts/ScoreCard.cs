@@ -5,10 +5,13 @@ using UnityEngine.UI;
 
 public class ScoreCard : MonoBehaviour
 {
-    public CGostopEngine score;
+
     public Text PlayerOne;
     public Text PlayerTwo;
-    public int PlayerOneScore = 0;
+
+    int PlayerOneScore = 0;
+    int PlayerTwoScore = 0;
+
     public int PlayerOneLightCardsScore = 0;  //light cards score for player 1
     public int PlayerTwoLightCardsScore = 0;   //light cards score for player 2
     public int PlayerOneBloodCardsScore = 0;   //Blood cards score for player 2
@@ -17,8 +20,6 @@ public class ScoreCard : MonoBehaviour
     public int PlayerOneBeltLetterCardsScore = 0;   //Belt Letter cards score for player 2
     public int PlayerTwoBeltLetterCardsScore = 0;   //Belt Letter cards score for player 2
 
-
-    public int PlayerTwoScore = 0;
     [SerializeField] public int MoneyPackRoomOne = 1000;
     [SerializeField] public int MoneyPackRoomTwo = 10000;
     [SerializeField] public int MoneyPackRoomThree = 20000;
@@ -38,8 +39,6 @@ public class ScoreCard : MonoBehaviour
     string BoodCardsPlayerOne = "BloodPlayerOne";  // Pee is Blood for p1
     string BoodCardsPlayerTwo = "BloodPlayerTwo";  // Pee is Blood for p2
 
-
-
     string SecondPlayer = "PlayerSecondScore";    //Calculated Sum of All Cards Score for Player 2
     bool firstrun = true;
 
@@ -50,8 +49,8 @@ public class ScoreCard : MonoBehaviour
         //Debug.Log("First start ");
        // PlayerTwoScore += PlayerPrefs.GetInt(OldScoreKey, PlayerNewScore);
 
-       PlayerTwo.text = PlayerTwoScore.ToString();
-       PlayerOne.text = PlayerOneScore.ToString();
+        PlayerTwo.text = PlayerTwoScore.ToString();
+        PlayerOne.text = PlayerOneScore.ToString();
         onGameStart();
     }
 
@@ -94,24 +93,15 @@ public class ScoreCard : MonoBehaviour
         PlayerPrefs.SetInt(SecondPlayer, 0);
     }
 
-    
     // Update is called once per frame
     void Update()
     {
-                    
-        StartCoroutine(CallCalculateScore());
-
-
         //getting Player One score on runtime 
         PlayerOneScore = PlayerPrefs.GetInt(FristPlayer);
 
 
         //getting Player Two  score on runtime 
         PlayerTwoScore = PlayerPrefs.GetInt(SecondPlayer);
-
-      
-
-
 
         //Showing Player One Text on Screen
         PlayerOne.text = PlayerOneScore.ToString();
@@ -120,23 +110,12 @@ public class ScoreCard : MonoBehaviour
         PlayerTwo.text = PlayerTwoScore.ToString();
 
        // PlayerPrefs.Save();
-
-
-
     }
 
-    IEnumerator CallCalculateScore()
+    public static void UpdateScore( int nScore1, int nScore2 )
     {
-        Debug.Log("Calculating Score-============");
-       // score.calculate_players_score();
-       // score.after_flipped_card(1);
-
-        //yield on a new YieldInstruction that waits for 5 seconds.
-        yield return new WaitForSeconds(3);
-
-    
+        PlayerPrefs.SetInt("PlayerFirstScore", nScore1);
+        PlayerPrefs.SetInt("PlayerSecondScore", nScore2);
     }
-
-
 
 }

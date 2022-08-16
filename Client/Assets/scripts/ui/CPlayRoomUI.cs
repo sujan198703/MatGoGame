@@ -4,11 +4,8 @@ using System.Collections.Generic;
 using FreeNet;
 using UnityEngine.UI;
 
-
-public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
+public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
 {
-
-    //public CGostopEngine score;
 
     // 원본 이미지들.
     Sprite back_image;
@@ -29,7 +26,6 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
     GameObject SendBombing;
     AudioSource playonclick;
 
-
     // 카드 객체.
     List<CCardPicture> total_card_pictures;
 
@@ -37,11 +33,11 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
 
     // 자리별 카드 스케일.
     readonly Vector3 SCALE_TO_FLOOR = new Vector3(0.8f, 0.8f, 0.8f);
-    readonly Vector3 SCALE_TO_OTHER_HAND = new Vector3(0.24f, 0.24f, 0.24f);
-    readonly Vector3 SCALE_TO_MY_HAND = new Vector3(1.5f, 1.5f, 1.5f);
+    readonly Vector3 SCALE_TO_OTHER_HAND = new Vector3(0.5f, 0.5f, 0.5f);
+    readonly Vector3 SCALE_TO_MY_HAND = new Vector3(1.0f, 1.0f, 1.0f);
 
-    readonly Vector3 SCALE_TO_OTHER_FLOOR = new Vector3(0.8f, 0.8f, 0.8f);
-    readonly Vector3 SCALE_TO_MY_FLOOR = new Vector3(0.8f, 0.8f, 0.87f);
+    readonly Vector3 SCALE_TO_OTHER_FLOOR = new Vector3(0.6f, 0.6f, 0.6f);
+    readonly Vector3 SCALE_TO_MY_FLOOR = new Vector3(0.6f, 0.6f, 0.6f);
 
 
     // 게임 플레이에 사용되는 객체들.
@@ -250,7 +246,8 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
             {
                 continue;
             }
-            targets.Add(slots[i].localPosition);
+
+            targets.Add(slots[i].position);
         }
     }
 
@@ -325,7 +322,7 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
                 begin_cards_picture.Add(card_picture);
 
                 card_picture.transform.localScale = SCALE_TO_FLOOR;
-                move_card(card_picture, card_picture.transform.localPosition, this.floor_slot_position[i + looping * 4]);
+                move_card(card_picture, card_picture.transform.position, this.floor_slot_position[i + looping * 4]);
 
                 yield return new WaitForSeconds(0.02f);
             }
@@ -360,7 +357,6 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
                         move_card(card_picture, card_picture.transform.position,
                         this.player_card_positions[player_index].get_hand_position(ui_slot_index));
 
-
                     }
                     else
                     {
@@ -368,7 +364,6 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
                         card_picture.transform.localScale = SCALE_TO_OTHER_HAND;
                         move_card(card_picture, card_picture.transform.position,
                         this.player_card_positions[player_index].get_hand_position(ui_slot_index));
-                        
                     }
 
                     ++ui_slot_index;
@@ -382,12 +377,7 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
         sort_player_hand_slots(this.player_me_index);
 
         CPacket msg = CPacket.create((short)PROTOCOL.DISTRIBUTED_ALL_CARDS);
-        
         CNetworkManager.Instance.send(msg);
-
-         // Debug.Log("Updating SCORE HERE");
-      //  score.calculate_score();
-       // CPlayerAgent.move_kookjin_to_pee();
     }
 
 
@@ -660,9 +650,8 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
                             card_msg.push((byte)card_pic.card.pae_type);
                             card_msg.push(card_pic.card.position);
                             card_msg.push(this.test_auto_slot_index);
-                          //  card_msg.push(CPlayerAgent.cal);
                             ++this.test_auto_slot_index;
-                           // score.calculate_players_score();
+
                             CNetworkManager.Instance.send(card_msg);
                         }
                         else
@@ -690,6 +679,29 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
                     player_info_slots[player_me_index].set_player_turn(false);
                     player_info_slots[(player_me_index + 1) % 2].set_player_turn(false);
                     yield return StartCoroutine(on_select_card_ack(msg));
+                    break;
+
+                case PROTOCOL.GAME_SCORE:
+                    {
+
+                        byte nPlayScore1 = msg.pop_byte();
+                        byte nPlayScore2 = msg.pop_byte();
+                        byte nHongDanScore1 = msg.pop_byte();
+                        byte nHongDanScore2 = msg.pop_byte();
+                        byte nGwangPlayScore1 = msg.pop_byte();
+                        byte nGwangPlayScore2 = msg.pop_byte();
+
+                        ScoreCard.UpdateScore(nPlayScore1, nPlayScore2);
+
+                        Debug.Log("************* PlayScore1 : " + nPlayScore1);
+                        Debug.Log("************* PlayScore2 : " + nPlayScore2);
+                        Debug.Log("************* HongDanScore1 : " + nHongDanScore1);
+                        Debug.Log("************* HongDanScore2 : " + nHongDanScore2);
+                        Debug.Log("************* nGwangPlayScore1 : " + nGwangPlayScore1);
+                        Debug.Log("************* nGwangPlayScore2 : " + nGwangPlayScore2);
+
+                        //                        yield return StartCoroutine(update_score(delay));
+                    }
                     break;
 
                 case PROTOCOL.FLIP_DECK_CARD_ACK:
@@ -1594,7 +1606,6 @@ public class CPlayRoomUI :CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceiver
         GameObject hint = this.hint_arrows.pop();
         hint.SetActive(true);
         hint.transform.position = position;
-        hint.transform.position += new Vector3(-10f, 12f, 0);
 
         this.enabled_hint_arrows.Add(hint);
     }
