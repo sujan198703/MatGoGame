@@ -55,17 +55,17 @@ public class PlayOnStartVoice : MonoBehaviour
 
         if (rand == 1 )
         {
-			beforeplay.GetComponent<AudioSource>().Play();
+			//beforeplay.GetComponent<AudioSource>().Play();
 
 		}else if (rand == 2)
         {
 
-			beforeplay1.GetComponent<AudioSource>().Play();
+			//beforeplay1.GetComponent<AudioSource>().Play();
 
         }
         else
         {
-			beforeplay2.GetComponent<AudioSource>().Play();
+			//beforeplay2.GetComponent<AudioSource>().Play();
 
 		}
 

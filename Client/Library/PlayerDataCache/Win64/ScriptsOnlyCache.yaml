@@ -7,6 +7,7 @@ ScriptsOnlyBuild:
     - CCardCollision
     - CDelayedDeactive
     - CGameOption
+    - CGostopEngine
     - CMainMenu
     - CPlayRoomUI
     - CPlayerCardPosition
@@ -38,6 +39,7 @@ ScriptsOnlyBuild:
     - ScoreCard
     - ServerQueue
     - SimpleSpritePacker.SPInstance
+    - SpriteStretch
     - StartGame
     Facebook.Unity.Settings.dll:
     - Facebook.Unity.Settings.FacebookSettings
@@ -138,129 +140,131 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1718}
     - Class: 114
-      Script: {instanceID: 1770}
+      Script: {instanceID: 1808}
     - Class: 114
-      Script: {instanceID: 1776}
+      Script: {instanceID: 1814}
     - Class: 114
-      Script: {instanceID: 2018}
+      Script: {instanceID: 2056}
     - Class: 114
-      Script: {instanceID: 2036}
+      Script: {instanceID: 2074}
     - Class: 114
-      Script: {instanceID: 2046}
+      Script: {instanceID: 2084}
     - Class: 114
-      Script: {instanceID: 2070}
+      Script: {instanceID: 2108}
     - Class: 114
-      Script: {instanceID: 2120}
-    - Class: 114
-      Script: {instanceID: 2268}
-    - Class: 114
-      Script: {instanceID: 2286}
+      Script: {instanceID: 2158}
     - Class: 114
       Script: {instanceID: 2306}
     - Class: 114
-      Script: {instanceID: 2352}
+      Script: {instanceID: 2324}
     - Class: 114
-      Script: {instanceID: 2376}
+      Script: {instanceID: 2344}
     - Class: 114
-      Script: {instanceID: 2556}
+      Script: {instanceID: 2390}
     - Class: 114
-      Script: {instanceID: 2772}
+      Script: {instanceID: 2414}
     - Class: 114
-      Script: {instanceID: 2986}
+      Script: {instanceID: 2592}
     - Class: 114
-      Script: {instanceID: 3012}
+      Script: {instanceID: 2782}
     - Class: 114
-      Script: {instanceID: 3026}
+      Script: {instanceID: 2808}
     - Class: 114
-      Script: {instanceID: 3058}
+      Script: {instanceID: 3020}
     - Class: 114
-      Script: {instanceID: 3072}
+      Script: {instanceID: 3046}
     - Class: 114
-      Script: {instanceID: 3196}
+      Script: {instanceID: 3060}
     - Class: 114
-      Script: {instanceID: 3200}
+      Script: {instanceID: 3092}
     - Class: 114
-      Script: {instanceID: 3224}
+      Script: {instanceID: 3106}
     - Class: 114
-      Script: {instanceID: 3246}
+      Script: {instanceID: 3230}
     - Class: 114
-      Script: {instanceID: 3282}
+      Script: {instanceID: 3234}
     - Class: 114
-      Script: {instanceID: 3320}
+      Script: {instanceID: 3258}
     - Class: 114
-      Script: {instanceID: 3332}
+      Script: {instanceID: 3280}
     - Class: 114
-      Script: {instanceID: 3518}
+      Script: {instanceID: 3316}
     - Class: 114
-      Script: {instanceID: 3630}
+      Script: {instanceID: 3354}
     - Class: 114
-      Script: {instanceID: 3746}
+      Script: {instanceID: 3366}
     - Class: 114
-      Script: {instanceID: 3834}
+      Script: {instanceID: 3552}
     - Class: 114
-      Script: {instanceID: 3988}
+      Script: {instanceID: 3664}
     - Class: 114
-      Script: {instanceID: 4184}
+      Script: {instanceID: 3780}
     - Class: 114
-      Script: {instanceID: 4266}
+      Script: {instanceID: 3868}
     - Class: 114
-      Script: {instanceID: 4278}
+      Script: {instanceID: 4022}
     - Class: 114
-      Script: {instanceID: 4286}
+      Script: {instanceID: 4218}
     - Class: 114
-      Script: {instanceID: 4344}
+      Script: {instanceID: 4300}
     - Class: 114
-      Script: {instanceID: 4436}
+      Script: {instanceID: 4312}
     - Class: 114
-      Script: {instanceID: 4466}
+      Script: {instanceID: 4320}
     - Class: 114
-      Script: {instanceID: 4512}
+      Script: {instanceID: 4380}
     - Class: 114
-      Script: {instanceID: 4652}
+      Script: {instanceID: 4472}
     - Class: 114
-      Script: {instanceID: 4992}
+      Script: {instanceID: 4502}
     - Class: 114
-      Script: {instanceID: 5050}
+      Script: {instanceID: 4548}
     - Class: 114
-      Script: {instanceID: 5124}
+      Script: {instanceID: 4688}
     - Class: 114
-      Script: {instanceID: 5296}
+      Script: {instanceID: 5028}
     - Class: 114
-      Script: {instanceID: 5434}
+      Script: {instanceID: 5086}
     - Class: 114
-      Script: {instanceID: 5454}
+      Script: {instanceID: 5158}
     - Class: 114
-      Script: {instanceID: 5496}
+      Script: {instanceID: 5330}
     - Class: 114
-      Script: {instanceID: 5502}
+      Script: {instanceID: 5468}
     - Class: 114
-      Script: {instanceID: 5606}
+      Script: {instanceID: 5488}
     - Class: 114
-      Script: {instanceID: 5690}
+      Script: {instanceID: 5530}
     - Class: 114
-      Script: {instanceID: 5698}
+      Script: {instanceID: 5536}
     - Class: 114
-      Script: {instanceID: 5704}
+      Script: {instanceID: 5640}
     - Class: 114
-      Script: {instanceID: 5772}
+      Script: {instanceID: 5724}
     - Class: 114
-      Script: {instanceID: 5776}
+      Script: {instanceID: 5732}
     - Class: 114
-      Script: {instanceID: 5902}
+      Script: {instanceID: 5738}
     - Class: 114
-      Script: {instanceID: 6076}
+      Script: {instanceID: 5806}
     - Class: 114
-      Script: {instanceID: 6112}
+      Script: {instanceID: 5810}
     - Class: 114
-      Script: {instanceID: 6132}
+      Script: {instanceID: 5936}
     - Class: 114
-      Script: {instanceID: 6312}
+      Script: {instanceID: 6110}
     - Class: 114
-      Script: {instanceID: 6478}
+      Script: {instanceID: 6146}
     - Class: 114
-      Script: {instanceID: 6526}
+      Script: {instanceID: 6166}
     - Class: 114
-      Script: {instanceID: 14970}
+      Script: {instanceID: 6346}
+    - Class: 114
+      Script: {instanceID: 6510}
+    - Class: 114
+      Script: {instanceID: 6558}
+    - Class: 114
+      Script: {instanceID: 28712}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -572,6 +576,12 @@ ScriptsOnlyBuild:
     className: SpawnFromSkeletonDataExample
   - hash:
       serializedVersion: 2
+      Hash: dd28dee44d62eaaea97ac93a5f7a34ae
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CPlayerAgent
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -660,6 +670,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: RawImage
+  - hash:
+      serializedVersion: 2
+      Hash: 4443d59749d63f390efd40cd3dfb7275
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CGostopEngine
   - hash:
       serializedVersion: 2
       Hash: 2e193e827f626a035ec8a5484d259d8c
@@ -800,7 +816,7 @@ ScriptsOnlyBuild:
     className: SkeletonUtilityKinematicShadow
   - hash:
       serializedVersion: 2
-      Hash: ba0da8e5c280cd5ee7c456f89c4b71df
+      Hash: 57781b7914ff10ce613f07f923dba889
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: QuestTabContent
@@ -1124,7 +1140,7 @@ ScriptsOnlyBuild:
     className: MockShareDialog
   - hash:
       serializedVersion: 2
-      Hash: 0ca3bfe0cc2aaf19dad846d448ce03b1
+      Hash: 3cbc6fcb3ee73fbacff5a045e608ba90
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DailyQuestPanel
@@ -1422,6 +1438,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: SimpleSpritePacker
     className: SPInstance
+  - hash:
+      serializedVersion: 2
+      Hash: cd0ecdca0166232906c6f2df9dddc3d3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MultiComponentCopier
   - hash:
       serializedVersion: 2
       Hash: 8e968c6b723ee92d162d72a175bf4bed
@@ -1994,7 +2016,7 @@ ScriptsOnlyBuild:
     className: LevelUpRewardsToast
   - hash:
       serializedVersion: 2
-      Hash: 51ead78810aa29ec8c2c4f7ba902dc8c
+      Hash: 4443d59749d63f390efd40cd3dfb7275
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ScoreCard
@@ -2328,7 +2350,13 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: Facebook.Unity.Example
     className: AppEvents
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: SpriteStretch
   platform: 19
   scenePathNames:
   - Assets/scene/InGameUI.unity
-  playerPath: E:/Game Development/New folder/Metgo.exe
+  playerPath: C:/Users/Dell/Documents/Build/Metgo/Metgo.exe
