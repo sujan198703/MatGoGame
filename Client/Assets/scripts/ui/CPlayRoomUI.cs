@@ -32,12 +32,22 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
     CCardCollision card_collision_manager;
 
     // 자리별 카드 스케일.
-    readonly Vector3 SCALE_TO_FLOOR = new Vector3(0.8f, 0.8f, 0.8f);
-    readonly Vector3 SCALE_TO_OTHER_HAND = new Vector3(0.5f, 0.5f, 0.5f);
-    readonly Vector3 SCALE_TO_MY_HAND = new Vector3(1.0f, 1.0f, 1.0f);
 
-    readonly Vector3 SCALE_TO_OTHER_FLOOR = new Vector3(0.6f, 0.6f, 0.6f);
-    readonly Vector3 SCALE_TO_MY_FLOOR = new Vector3(0.6f, 0.6f, 0.6f);
+
+    readonly Vector3 SCALE_TO_FLOOR = new Vector3(0.8f, 0.8f, 0.8f);
+    readonly Vector3 SCALE_TO_OTHER_HAND = new Vector3(0.24f, 0.24f, 0.24f);
+    readonly Vector3 SCALE_TO_MY_HAND = new Vector3(1.5f, 1.5f, 1.5f);
+
+    readonly Vector3 SCALE_TO_OTHER_FLOOR = new Vector3(0.5f, 0.5f, 0.5f);
+    readonly Vector3 SCALE_TO_MY_FLOOR = new Vector3(1.0f, 1.0f, 1.0f);
+
+
+    //readonly Vector3 SCALE_TO_FLOOR = new Vector3(0.8f, 0.8f, 0.8f);
+    //readonly Vector3 SCALE_TO_OTHER_HAND = new Vector3(0.5f, 0.5f, 0.5f);
+    //readonly Vector3 SCALE_TO_MY_HAND = new Vector3(1.0f, 1.0f, 1.0f);
+
+    //readonly Vector3 SCALE_TO_OTHER_FLOOR = new Vector3(0.6f, 0.6f, 0.6f);
+    //readonly Vector3 SCALE_TO_MY_FLOOR = new Vector3(0.6f, 0.6f, 0.6f);
 
 
     // 게임 플레이에 사용되는 객체들.
