@@ -71,19 +71,58 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
     void UpdateValues()
     {
         //AddMailOnce();
+        //LoadObjects();
         UpdateTexts();
         CheckIfContentsEmpty();
         UpdateContents();
     }
 
+    // Separate function to welcome user
     void AddMailOnce()
     {
         if (PlayerPrefs.GetInt("MailAdded") == 0)
         {
             // this is just to show everything is working
-            AddMail(mailTabContentPrefab[0]);
+            AddMailOnce(mailTabContentPrefab[0]);
 
             PlayerPrefs.SetInt("MailAdded", 1);
+        }
+    }
+
+    // Load objects into trees
+    void LoadObjects()
+    {
+        // Gift Tab Content Objects
+        foreach (GiftTabContent gtc in giftTabContent)
+        {
+            AddGift(gtc);
+        }
+
+        foreach (GiftTabContent gtc in giftTabContentClaimed)
+        {
+            AddGift(gtc);
+        }
+
+        // Item Tab Content Objects
+        foreach (ItemTabContent itc in itemTabContent)
+        {
+            AddItem(itc);
+        }
+
+        foreach (ItemTabContent itc in itemTabContentClaimed)
+        {
+            AddItem(itc);
+        }
+
+        // Mail Tab Content Objects
+        foreach (MailTabContent mtc in mailTabContent)
+        {
+            AddMail(mtc);
+        }
+
+        foreach (MailTabContent mtc in mailTabContentClaimed)
+        {
+            AddMail(mtc);
         }
     }
 
@@ -133,38 +172,41 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
         mailTabNotificationBubbleText.text = unreadNotificationsMailTab == 0 ? "N" : unreadNotificationsMailTab.ToString();
     }
 
-    // Quest Reward, Event Reward, Free Charging Station Reward, Ad Reward, Etc
-    void UpdateGiftPanel()
-    {
-
-    }
-
     // ADD / REMOVE FUNCTIONS 
-    public void AddGift(GiftTabContent giftTabContent)
+    public void AddGift(GiftTabContent _giftTabContent)
     {
         // Add gift
-        if (!this.giftTabContent.Exists(x => x == this)) this.giftTabContent.Add(giftTabContent);
+        GameObject tempGiftObject = Instantiate(_giftTabContent.gameObject, giftPanelContent.transform);
 
         // Increment notification counter
         unreadNotificationsGiftTab++;
     }
 
-    public void AddItem(ItemTabContent itemTabContent)
+    public void AddItem(ItemTabContent _itemTabContent)
     {
-        // Add item
-        this.itemTabContent.Add(itemTabContent);
-
+        // Add to hierarchy
+        GameObject tempItemObject = Instantiate(_itemTabContent.gameObject, itemPanelContent.transform);
+        
         // Increment notification counter
         unreadNotificationsItemTab++;
     }
 
-    public void AddMail(MailTabContent mailTabContent)
+    public void AddMailOnce(MailTabContent _mailTabContent)
     {
         // Add mail to list
-        this.mailTabContent.Add(mailTabContent);
+        this.mailTabContent.Add(_mailTabContent);
 
         // Add to hierarchy
-        GameObject tempMailObject = Instantiate(mailTabContent.gameObject, mailPanelContent.transform) as GameObject;
+        GameObject tempMailObject = Instantiate(_mailTabContent.gameObject, mailPanelContent.transform) as GameObject;
+
+        // Increment notification counter
+        unreadNotificationsMailTab++;
+    }
+
+    public void AddMail(MailTabContent _mailTabContent)
+    {
+        // Add to hierarchy
+        GameObject tempMailObject = Instantiate(_mailTabContent.gameObject, mailPanelContent.transform);
 
         // Increment notification counter
         unreadNotificationsMailTab++;

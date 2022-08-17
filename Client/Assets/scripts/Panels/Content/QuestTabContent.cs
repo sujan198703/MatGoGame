@@ -24,14 +24,19 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
 
     private QuestContent questContent;
 
+    long nyangsPocket;
+    long chipsPocket;
+    long rubies;
+
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
-    void Start() => UpdateValues();
+    void OnEnable() => PlayerDataStorageManager.instance.LoadGame();
 
     void UpdateValues()
     {
+        // Update reference from parent
         questContent = PanelManager.instance.dailyQuestPanel.questContent[questTabContentIndex];
-
+       
         // Update values
         // Name
         questContentName.text = questContent.questContentName;
@@ -61,11 +66,11 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
                (questContent.questContentRewardIcon, new Rect(0, 0, questContent.questContentRewardIcon.width, questContent.questContentRewardIcon.height),
                new Vector2(questContent.questContentRewardIcon.width / 2, questContent.questContentRewardIcon.height / 2)); ;
 
-        // Add to list
-        questTabContent.Add(this);
+        // Update claimed
+        if (questTabContent.Exists(x => x.GetInstanceID() == this.GetInstanceID())) Unclaimed();
 
-        // Update unread notifications
-        unreadNotificationsDailyQuestPanel++;
+        // Update unclaimed
+        if (questTabContentClaimed.Exists(x => x.GetInstanceID() == this.GetInstanceID())) Claimed();
 
         // Quest progress
         QuestCompleted();
@@ -85,7 +90,15 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
         }
     }
 
-    public void ClaimReward()
+    public bool IsAvailable()
+    {
+        if (questTabContent.Exists(x => x == this)) return false;
+        if (questTabContentClaimed.Exists(x => x == this)) return true;
+        
+        return false;
+    }
+
+    void Claimed()
     {
         // Grey out
         foreach (Image img in GetComponentsInChildren<Image>())
@@ -98,23 +111,69 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
             txt.material = PanelManager.instance.inventoryPanel.greyScaleMaterial;
         }
 
+        // Disable button
+        receiveButton.GetComponent<Button>().interactable = false;
+    }
+
+    void Unclaimed()
+    {
+        // Add to list
+        if (!questTabContent.Exists(x => x == this)) questTabContent.Add(this);
+    }
+
+    public void ClaimReward()
+    {
+        // Claim reward
+        Claimed();
+
         // Add reward amount
         rewardAmount = PanelManager.instance.dailyQuestPanel.questContent[transform.GetSiblingIndex()].questContentRewardAmount;
 
         // Remove from List
-        questTabContent.Remove(this);
+        if (questTabContent.Exists(x => x == this)) questTabContent.Remove(this);
 
         // Add to claimed list
-        questTabContentClaimed.Add(this);
+        if (!questTabContentClaimed.Exists(x => x == this)) questTabContentClaimed.Add(this);
 
         // Save then load
         PlayerDataStorageManager.instance.SaveThenLoad();
+
+        // Update rewards
+        GetReward();
 
         // Reset reward amount
         rewardAmount = 0;
 
         // Update index of unused object to the end of the list
         this.transform.SetSiblingIndex(transform.parent.childCount - 1);
+    }
+
+    void GetReward()
+    {
+        // Save reward based on type
+        switch (PanelManager.instance.dailyQuestPanel.questContent[questTabContentIndex].rewardType)
+        {
+            // Nyangs
+            case RewardType_QuestContent.Nyangs:
+                {
+                    nyangsPocket += rewardAmount;
+                    break;
+                }
+            // Chips
+            case RewardType_QuestContent.Chips:
+                {
+                    chipsPocket += rewardAmount;
+                    break;
+                }
+            // Rubies
+            case RewardType_QuestContent.Rubies:
+                {
+                    rubies += rewardAmount;
+                    break;
+                }
+        }
+        
+        PlayerDataStorageManager.instance.SaveThenLoad();
     }
 
     public void UpdateIndex(int index) => questTabContentIndex = index;
@@ -124,28 +183,9 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
         questTabContent = data.questTabContent;
         questTabContentClaimed = data.questTabContentClaimed;
 
-        // Load reward reward based on type
-        switch (PanelManager.instance.dailyQuestPanel.questContent[transform.GetSiblingIndex()].rewardType)
-        {
-            // Nyangs
-            case RewardType_QuestContent.Nyangs:
-            {
-                rewardAmount += data.nyangsPocket;
-                break;
-            }
-            // Chips
-            case RewardType_QuestContent.Chips:
-            {
-                rewardAmount += data.chipsPocket;
-                break;
-            }
-            // Rubies
-            case RewardType_QuestContent.Rubies:
-            {
-                rewardAmount += data.rubies;
-                break;
-            }
-        }
+        nyangsPocket = data.nyangsPocket;
+        chipsPocket = data.chipsPocket;
+        rubies = data.rubies;
 
         UpdateValues();
     }
@@ -155,27 +195,8 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
         data.questTabContent = questTabContent;
         data.questTabContentClaimed = questTabContentClaimed;
 
-        // Save reward based on type
-        switch (PanelManager.instance.dailyQuestPanel.questContent[questTabContentIndex].rewardType)
-        {
-            // Nyangs
-            case RewardType_QuestContent.Nyangs:
-            {
-                data.nyangsPocket += rewardAmount;
-                break;
-            }
-            // Chips
-            case RewardType_QuestContent.Chips:
-            {
-                data.chipsPocket += rewardAmount;
-                break;
-            }
-            // Rubies
-            case RewardType_QuestContent.Rubies:
-            {
-                data.rubies += rewardAmount;
-                break;
-            }
-        }
+        data.nyangsPocket = nyangsPocket;
+        data.chipsPocket = chipsPocket;
+        data.rubies = rubies;
     }
 }

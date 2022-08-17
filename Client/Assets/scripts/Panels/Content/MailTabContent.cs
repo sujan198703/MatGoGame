@@ -14,7 +14,7 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] Text readButtonText;
     [SerializeField] Text mailTabContentText;
 
-    string mailText = "이것은 테스트 메일입니다";
+    string mailText = "게임에 오신 것을 환영합니다.\n여기에서 메일을 읽으십시오.";
 
     private List<MailTabContent> mailTabContent;
     private List<MailTabContent> mailTabContentClaimed;

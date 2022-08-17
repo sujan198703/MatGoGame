@@ -1809,7 +1809,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -10175,7 +10175,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 555607425}
   m_HandleRect: {fileID: 555607424}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -13562,7 +13562,7 @@ RectTransform:
   m_Father: {fileID: 1549852229}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.000000059604645, y: 0}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -27108,7 +27108,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 568156443}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 842074364}
+        m_TargetAssemblyTypeName: DailyQuestPanel, Assembly-CSharp
+        m_MethodName: GetAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &568156443
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30762,7 +30774,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 560176974}
   m_HandleRect: {fileID: 560176973}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -40152,6 +40164,7 @@ MonoBehaviour:
   questTabContentParent: {fileID: 1943464146}
   questTabContentPrefab: {fileID: 5140281525353826185, guid: d3db2ae0f9ed0984d9c31d3f5200a529,
     type: 3}
+  questTabContentTransform: {fileID: 1943464147}
   questContent:
   - questContentName: "10,000\uB0E5\uC744 \uBB34\uB8CC\uB85C \uBC1B\uC73C\uC138\uC694"
     questContentProgress: 0
@@ -79580,7 +79593,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 285208978}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

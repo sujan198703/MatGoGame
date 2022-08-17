@@ -36,12 +36,6 @@ public class PlayerDataStorageManager : MonoBehaviour
         LoadGame();
     }
     
-    public void LoadThenSave()
-    {
-        LoadGame();
-        SaveGame();
-    }
-
     public void LoadGame()
     {
         // Load any saved data from a file
@@ -55,10 +49,15 @@ public class PlayerDataStorageManager : MonoBehaviour
         }
 
         // Push the loaded data to all other scripts that need it
-        foreach (PlayerDataStorageInterface dataStorageObj in playerDataStorageObjects)
+        //foreach (PlayerDataStorageInterface dataStorageObj in playerDataStorageObjects)
+        //{
+        //    if (dataStorageObj != null)
+        //        dataStorageObj.LoadData(playerDataManager);
+        //}
+
+        for (int i = 0; i < playerDataStorageObjects.Count; i++)
         {
-            if (dataStorageObj != null)
-                dataStorageObj.LoadData(playerDataManager);
+            if (playerDataStorageObjects[i] != null) playerDataStorageObjects[i].LoadData(playerDataManager);
         }
 
         SaveGame();
@@ -72,9 +71,14 @@ public class PlayerDataStorageManager : MonoBehaviour
     public void SaveGame()
     {
         // Pass the data to other scripts so they can update it
-        foreach (PlayerDataStorageInterface dataStorageObj in playerDataStorageObjects)
+        //foreach (PlayerDataStorageInterface dataStorageObj in playerDataStorageObjects)
+        //{
+        //    if (dataStorageObj != null) dataStorageObj.SaveData(ref playerDataManager);
+        //}
+
+        for (int i = 0; i < playerDataStorageObjects.Count; i++)
         {
-            if (dataStorageObj != null) dataStorageObj.SaveData(ref playerDataManager);
+            if (playerDataStorageObjects[i] != null) playerDataStorageObjects[i].SaveData(ref playerDataManager);
         }
 
         // Save that data to a file using the data handler
