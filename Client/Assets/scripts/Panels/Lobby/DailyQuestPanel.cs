@@ -7,42 +7,44 @@ public class DailyQuestPanel : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] Image progressBar;
     [SerializeField] GameObject questTabContentParent;
     [SerializeField] QuestTabContent questTabContentPrefab;
+    [SerializeField] Transform questTabContentTransform;
     public QuestContent[] questContent;
     GameObject tempDailyQuest;
-
+   
+    List<QuestTabContent> questTabContent;
+    List<QuestTabContent> questTabContentClaimed;
     int unreadNotificationsDailyQuestPanel;
-    List<QuestTabContent> questTabContent = new List<QuestTabContent>();
 
     bool questTabContentObjectsInstantiated;
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
-    void Start() => PlayerDataStorageManager.instance.LoadGame(); 
+    void OnEnable() => PlayerDataStorageManager.instance.LoadGame(); 
 
     void UpdateValues() 
     {
-        if (!questTabContentObjectsInstantiated)
-        {
-            for (int i = 0; i < questContent.Length; i++)
-            {
-                AddDailyQuest(i);
-            }
+        //if (!questTabContentObjectsInstantiated && questTabContentTransform.childCount != questContent.Length)
+        //{
+        //    for (int i = 0; i < questContent.Length; i++)
+        //    {
+        //        AddDailyQuest(i);
+        //    }
 
-            questTabContentObjectsInstantiated = true;
-        }
+        //    questTabContentObjectsInstantiated = true;
+        //}
     }
 
     public void GetAll()
     {
         foreach (QuestTabContent qtc in questTabContentParent.GetComponentsInChildren<QuestTabContent>())
         {
-            qtc.ClaimReward();
+            if (qtc.IsAvailable()) qtc.ClaimReward();
         }
     }
 
     public void AddDailyQuest(int questIndex)
     {
-        // Instantiate FIX!!!
+        // Instantiate
         tempDailyQuest = Instantiate(questTabContentPrefab.gameObject, questTabContentParent.transform) as GameObject;
 
         // Update index
@@ -51,13 +53,20 @@ public class DailyQuestPanel : MonoBehaviour, PlayerDataStorageInterface
 
     public void LoadData(PlayerDataManager data)
     {
+        questTabContent = data.questTabContent;
+        questTabContentClaimed = data.questTabContentClaimed;
+
         unreadNotificationsDailyQuestPanel = data.unreadNotificationsDailyQuestPanel;
         questTabContent = data.questTabContent;
+        
         UpdateValues();
     }
 
     public void SaveData(ref PlayerDataManager data)
     {
+        data.questTabContent = questTabContent;
+        data.questTabContentClaimed = questTabContentClaimed;
+
         data.unreadNotificationsDailyQuestPanel = unreadNotificationsDailyQuestPanel;
         data.questTabContent = questTabContent;
     }
