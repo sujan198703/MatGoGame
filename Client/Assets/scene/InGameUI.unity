@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641252, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -31362,17 +31362,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b3378515c943543bcf3c5da1ad5de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: {fileID: 0}
   PlayerOne: {fileID: 968338983}
   PlayerTwo: {fileID: 968338983}
-  PlayerOneScore: 0
   PlayerOneLightCardsScore: 0
   PlayerTwoLightCardsScore: 0
   PlayerOneBloodCardsScore: 0
   PlayerTwoBloodCardsScore: 0
   PlayerOneBeltLetterCardsScore: 0
   PlayerTwoBeltLetterCardsScore: 0
-  PlayerTwoScore: 0
   MoneyPackRoomOne: 1000
   MoneyPackRoomTwo: 10000
   MoneyPackRoomThree: 20000
@@ -38551,17 +38548,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b3378515c943543bcf3c5da1ad5de6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  score: {fileID: 0}
   PlayerOne: {fileID: 1579940158}
   PlayerTwo: {fileID: 968338983}
-  PlayerOneScore: 0
   PlayerOneLightCardsScore: 0
   PlayerTwoLightCardsScore: 0
   PlayerOneBloodCardsScore: 0
   PlayerTwoBloodCardsScore: 0
   PlayerOneBeltLetterCardsScore: 0
   PlayerTwoBeltLetterCardsScore: 0
-  PlayerTwoScore: 0
   MoneyPackRoomOne: 1000
   MoneyPackRoomTwo: 10000
   MoneyPackRoomThree: 20000

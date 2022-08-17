@@ -39,7 +39,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
     readonly Vector3 SCALE_TO_MY_HAND = new Vector3(1.5f, 1.5f, 1.5f);
 
     readonly Vector3 SCALE_TO_OTHER_FLOOR = new Vector3(0.5f, 0.5f, 0.5f);
-    readonly Vector3 SCALE_TO_MY_FLOOR = new Vector3(1.0f, 1.0f, 1.0f);
+    readonly Vector3 SCALE_TO_MY_FLOOR = new Vector3(0.8f, 0.8f, 0.8f);
 
 
     //readonly Vector3 SCALE_TO_FLOOR = new Vector3(0.8f, 0.8f, 0.8f);
