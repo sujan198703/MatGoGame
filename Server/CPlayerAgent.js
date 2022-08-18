@@ -253,8 +253,11 @@ class CPlayerAgent
 		var targets = this.hand_pae.filter(function(value, index, arr){ 
 			return value.is_same_status(status) == true;
 		});
-		if(targets.length > 0)
-			console.log("sdfsdf");
+		if(targets == undefined)
+		{
+			return 0;
+		}	
+
 		return targets.length;
 	}
 
@@ -349,8 +352,8 @@ class CPlayerAgent
 				{
 					// 비광이 포함되어 있으면 2점. 아니면 3점.
 					//is_exist_beekwang = cards.Exists(obj => obj.is_same_number(CCard.BEE_KWANG));
-					var is_exist_beekwang = this.hand_pae.filter(function(value, index, arr){ 
-						return value.is_same_status() == true;
+					var is_exist_beekwang = cards.filter(function(value, index, arr){ 
+						return value.is_same_number( 11 ) == true;	// BEE_KWANG : 11
 					});
 					if (is_exist_beekwang.length > 0)
 					{
