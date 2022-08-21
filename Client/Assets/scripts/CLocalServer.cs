@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 using FreeNet;
 
 public class CLocalServer
@@ -59,6 +61,7 @@ public class CLocalServer
 
     public void on_receive_from_client(CPacket msg)
     {
+        UnityEngine.Debug.Log("Calculate score here");
         msg.record_size();
 		CPacket clone = CPacket.create(msg.protocol_id);
 		clone.overwrite(msg.buffer, 0);

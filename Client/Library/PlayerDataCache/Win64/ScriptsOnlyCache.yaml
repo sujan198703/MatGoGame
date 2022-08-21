@@ -7,6 +7,7 @@ ScriptsOnlyBuild:
     - CCardCollision
     - CDelayedDeactive
     - CGameOption
+    - CGostopEngine
     - CMainMenu
     - CPlayRoomUI
     - CPlayerCardPosition
@@ -38,6 +39,7 @@ ScriptsOnlyBuild:
     - ScoreCard
     - ServerQueue
     - SimpleSpritePacker.SPInstance
+    - SpriteStretch
     - StartGame
     Facebook.Unity.Settings.dll:
     - Facebook.Unity.Settings.FacebookSettings
@@ -80,6 +82,7 @@ ScriptsOnlyBuild:
     - Spine.Unity.Editor.SpinePreferences
     spine-unity.dll:
     - Spine.Unity.AnimationReferenceAsset
+    - Spine.Unity.SkeletonAnimation
     - Spine.Unity.SkeletonDataAsset
     - Spine.Unity.SkeletonGraphic
     - Spine.Unity.SpineAtlasAsset
@@ -97,9 +100,13 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 28
       Script: {instanceID: 0}
+    - Class: 33
+      Script: {instanceID: 0}
     - Class: 48
       Script: {instanceID: 0}
     - Class: 49
+      Script: {instanceID: 0}
+    - Class: 61
       Script: {instanceID: 0}
     - Class: 65
       Script: {instanceID: 0}
@@ -124,143 +131,147 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1706}
-    - Class: 114
-      Script: {instanceID: 1708}
-    - Class: 114
-      Script: {instanceID: 1710}
-    - Class: 114
-      Script: {instanceID: 1712}
-    - Class: 114
       Script: {instanceID: 1714}
     - Class: 114
       Script: {instanceID: 1716}
     - Class: 114
       Script: {instanceID: 1718}
     - Class: 114
-      Script: {instanceID: 1820}
+      Script: {instanceID: 1720}
     - Class: 114
-      Script: {instanceID: 1826}
+      Script: {instanceID: 1722}
     - Class: 114
-      Script: {instanceID: 2068}
+      Script: {instanceID: 1724}
     - Class: 114
-      Script: {instanceID: 2086}
+      Script: {instanceID: 1726}
     - Class: 114
-      Script: {instanceID: 2096}
+      Script: {instanceID: 2428}
     - Class: 114
-      Script: {instanceID: 2120}
+      Script: {instanceID: 2434}
     - Class: 114
-      Script: {instanceID: 2170}
+      Script: {instanceID: 2676}
     - Class: 114
-      Script: {instanceID: 2318}
+      Script: {instanceID: 2694}
     - Class: 114
-      Script: {instanceID: 2336}
+      Script: {instanceID: 2704}
     - Class: 114
-      Script: {instanceID: 2356}
+      Script: {instanceID: 2728}
     - Class: 114
-      Script: {instanceID: 2402}
+      Script: {instanceID: 2778}
     - Class: 114
-      Script: {instanceID: 2426}
+      Script: {instanceID: 2926}
     - Class: 114
-      Script: {instanceID: 2604}
+      Script: {instanceID: 2942}
     - Class: 114
-      Script: {instanceID: 2820}
+      Script: {instanceID: 2962}
+    - Class: 114
+      Script: {instanceID: 3008}
     - Class: 114
       Script: {instanceID: 3032}
     - Class: 114
-      Script: {instanceID: 3058}
+      Script: {instanceID: 3212}
     - Class: 114
-      Script: {instanceID: 3072}
+      Script: {instanceID: 3314}
     - Class: 114
-      Script: {instanceID: 3104}
+      Script: {instanceID: 3402}
     - Class: 114
-      Script: {instanceID: 3118}
+      Script: {instanceID: 3428}
     - Class: 114
-      Script: {instanceID: 3242}
+      Script: {instanceID: 3642}
     - Class: 114
-      Script: {instanceID: 3246}
+      Script: {instanceID: 3668}
     - Class: 114
-      Script: {instanceID: 3270}
+      Script: {instanceID: 3682}
     - Class: 114
-      Script: {instanceID: 3292}
+      Script: {instanceID: 3714}
     - Class: 114
-      Script: {instanceID: 3328}
+      Script: {instanceID: 3728}
     - Class: 114
-      Script: {instanceID: 3366}
+      Script: {instanceID: 3852}
     - Class: 114
-      Script: {instanceID: 3378}
+      Script: {instanceID: 3856}
     - Class: 114
-      Script: {instanceID: 3564}
+      Script: {instanceID: 3878}
     - Class: 114
-      Script: {instanceID: 3676}
+      Script: {instanceID: 3900}
     - Class: 114
-      Script: {instanceID: 3792}
+      Script: {instanceID: 3936}
     - Class: 114
-      Script: {instanceID: 3880}
+      Script: {instanceID: 3974}
     - Class: 114
-      Script: {instanceID: 4034}
+      Script: {instanceID: 3986}
     - Class: 114
-      Script: {instanceID: 4230}
+      Script: {instanceID: 4170}
     - Class: 114
-      Script: {instanceID: 4312}
+      Script: {instanceID: 4282}
     - Class: 114
-      Script: {instanceID: 4324}
+      Script: {instanceID: 4398}
     - Class: 114
-      Script: {instanceID: 4332}
+      Script: {instanceID: 4480}
     - Class: 114
-      Script: {instanceID: 4392}
+      Script: {instanceID: 4634}
     - Class: 114
-      Script: {instanceID: 4484}
+      Script: {instanceID: 4830}
     - Class: 114
-      Script: {instanceID: 4514}
+      Script: {instanceID: 4912}
     - Class: 114
-      Script: {instanceID: 4560}
+      Script: {instanceID: 4924}
     - Class: 114
-      Script: {instanceID: 4700}
+      Script: {instanceID: 4932}
     - Class: 114
-      Script: {instanceID: 5040}
+      Script: {instanceID: 4992}
     - Class: 114
-      Script: {instanceID: 5098}
+      Script: {instanceID: 5084}
     - Class: 114
-      Script: {instanceID: 5170}
+      Script: {instanceID: 5114}
     - Class: 114
-      Script: {instanceID: 5342}
+      Script: {instanceID: 5160}
     - Class: 114
-      Script: {instanceID: 5480}
+      Script: {instanceID: 5300}
     - Class: 114
-      Script: {instanceID: 5500}
+      Script: {instanceID: 5638}
     - Class: 114
-      Script: {instanceID: 5542}
+      Script: {instanceID: 5696}
     - Class: 114
-      Script: {instanceID: 5548}
+      Script: {instanceID: 5770}
     - Class: 114
-      Script: {instanceID: 5654}
+      Script: {instanceID: 5942}
     - Class: 114
-      Script: {instanceID: 5738}
+      Script: {instanceID: 6080}
     - Class: 114
-      Script: {instanceID: 5746}
+      Script: {instanceID: 6100}
     - Class: 114
-      Script: {instanceID: 5752}
+      Script: {instanceID: 6142}
     - Class: 114
-      Script: {instanceID: 5820}
+      Script: {instanceID: 6148}
     - Class: 114
-      Script: {instanceID: 5824}
+      Script: {instanceID: 6168}
     - Class: 114
-      Script: {instanceID: 5950}
+      Script: {instanceID: 6252}
     - Class: 114
-      Script: {instanceID: 6124}
+      Script: {instanceID: 6336}
     - Class: 114
-      Script: {instanceID: 6160}
+      Script: {instanceID: 6344}
     - Class: 114
-      Script: {instanceID: 6180}
+      Script: {instanceID: 6350}
     - Class: 114
-      Script: {instanceID: 6360}
+      Script: {instanceID: 6418}
     - Class: 114
-      Script: {instanceID: 6524}
+      Script: {instanceID: 6422}
     - Class: 114
-      Script: {instanceID: 6572}
+      Script: {instanceID: 6548}
     - Class: 114
-      Script: {instanceID: 8358}
+      Script: {instanceID: 6722}
+    - Class: 114
+      Script: {instanceID: 6758}
+    - Class: 114
+      Script: {instanceID: 6778}
+    - Class: 114
+      Script: {instanceID: 6958}
+    - Class: 114
+      Script: {instanceID: 7124}
+    - Class: 114
+      Script: {instanceID: 7172}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -572,7 +583,7 @@ ScriptsOnlyBuild:
     className: SpawnFromSkeletonDataExample
   - hash:
       serializedVersion: 2
-      Hash: dd28dee44d62eaaea97ac93a5f7a34ae
+      Hash: 4990d091ca6d6dc6ff2ecfb2c03b5ac9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CPlayerAgent
@@ -794,7 +805,7 @@ ScriptsOnlyBuild:
     className: EquipButtonExample
   - hash:
       serializedVersion: 2
-      Hash: dd28dee44d62eaaea97ac93a5f7a34ae
+      Hash: b7ea9c28792cc5828cb09af333c6b148
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CPlayRoomUI
@@ -1136,7 +1147,7 @@ ScriptsOnlyBuild:
     className: MockShareDialog
   - hash:
       serializedVersion: 2
-      Hash: 3cbc6fcb3ee73fbacff5a045e608ba90
+      Hash: d7cfea5bb732feb6bda4e7b592b995f9
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DailyQuestPanel
@@ -2355,4 +2366,4 @@ ScriptsOnlyBuild:
   platform: 19
   scenePathNames:
   - Assets/scene/InGameUI.unity
-  playerPath: C:/Users/Sajid Khan/Desktop/New folder/Metgo.exe
+  playerPath: C:/Users/Dell/Documents/Build/Metgo/Metgo.exe

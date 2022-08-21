@@ -73,7 +73,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
     bool is_test_mode = false;
     byte test_auto_slot_index;
 
-    GameEvents gameEvents;
+    public GameObject FX_pos;
 
     void Start()
     {
@@ -84,7 +84,6 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
         ShuffleAudio = GameObject.Find("passcards");
         playonclick = GetComponent<AudioSource>();
         audio.GetComponent<AudioSource>();
-        gameEvents = GameEvents.instance;
     }
 
     void Awake()
@@ -1605,13 +1604,13 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
     void show_hint_mark(Vector3 position)
     {
-      //  bool option_hint =
-      //      CUIManager.Instance.get_uipage(UI_PAGE.GAME_OPTION).GetComponent<CGameOption>().is_hint_on();
-      //
-      //  if (!option_hint)
-      //  {
-      //      return;
-      //  }
+        //  bool option_hint =
+        //      CUIManager.Instance.get_uipage(UI_PAGE.GAME_OPTION).GetComponent<CGameOption>().is_hint_on();
+        //
+        //  if (!option_hint)
+        //  {
+        //      return;
+        //  }
 
         GameObject hint = this.hint_arrows.pop();
         hint.SetActive(true);
@@ -1646,4 +1645,6 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
         GameController.instance.GoOut();
     }
     //------------------------------------------------------------------------------
+
+
 }

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CPlayerAgent:CPlayRoomUI
+public class CPlayerAgent:MonoBehaviour
 {
 	byte player_index;
 
@@ -22,6 +22,13 @@ public class CPlayerAgent:CPlayRoomUI
     public byte remain_bomb_count { get; private set; }
 	public bool is_used_kookjin { get; private set; }
 
+	public GameObject Cheongdan;
+	public GameObject Chodan;
+	public GameObject Hongdan;
+
+	public GameObject EffectPosPlayer, EffectPosOpponent;
+
+	public bool isCheongdan, isChodan, isHongdan;
 
     public CPlayerAgent(byte player_index)
     {
@@ -331,8 +338,11 @@ public class CPlayerAgent:CPlayRoomUI
 		this.score += get_score_by_type(PAE_TYPE.YEOL); //heat
 		this.score += get_score_by_type(PAE_TYPE.KWANG); //light cards score addition 
 
-		LightCardsScore+= get_score_by_type(PAE_TYPE.KWANG);  
-		
+		LightCardsScore+= get_score_by_type(PAE_TYPE.KWANG);
+
+		isCheongdan = false;
+		isChodan = false;
+		isHongdan = false;
 
 		// 고도리
 		// Godori
@@ -357,7 +367,8 @@ public class CPlayerAgent:CPlayRoomUI
 		if (cheongdan_count == 3) //red blt card score 
 		{
 			this.score += 3;
-		
+			Cheongdan = Resources.Load("Cheongdan") as GameObject;
+			var go = Instantiate(Cheongdan, EffectPosPlayer.transform);
 
 		}
 
@@ -367,14 +378,17 @@ public class CPlayerAgent:CPlayRoomUI
 			if (this.player_index == 0)
 			{
 				PlayerPrefs.SetInt("HongDanPlayerOne", this.score);
-				UnityEngine.Debug.Log("Hongdan /red belt card with letters score for player ONE : "+ this.score);
-			}
+				Debug.Log("Hongdan /red belt card with letters score for player ONE : "+ this.score);
+                Hongdan = Resources.Load("Hongdan") as GameObject;
+                var go = Instantiate(Hongdan, EffectPosPlayer.transform);
+            }
 			if (this.player_index == 1)
 			{
 				PlayerPrefs.SetInt("HongDanPlayerTwo", this.score);
-				UnityEngine.Debug.Log("Hongdan /red belt card with letters score for player TWO : " + this.score);
-
-			}
+				Debug.Log("Hongdan /red belt card with letters score for player TWO : " + this.score);
+                Hongdan = Resources.Load("Hongdan") as GameObject;
+                var go = Instantiate(Hongdan, EffectPosOpponent.transform);
+            }
 
 
 			//UnityEngine.Debug.Log("Hongdan 3 score");
@@ -383,8 +397,10 @@ public class CPlayerAgent:CPlayRoomUI
 		if (chodan_count == 3)
 		{
 			this.score += 3;
-			//UnityEngine.Debug.Log("Chodan 3 score");
-		}
+            //UnityEngine.Debug.Log("Chodan 3 score");
+            Chodan = Resources.Load("Hongdan") as GameObject;
+            var go = Instantiate(Chodan, EffectPosOpponent.transform);
+        }
 
 
 		if (this.player_index==0)
@@ -395,15 +411,15 @@ public class CPlayerAgent:CPlayRoomUI
 			PlayerPrefs.SetInt("GwangPlayerOne", LightCardsScore);    //light cards score for player 
 			UnityEngine.Debug.Log("GwangPlayerOne Light card for Player One is: "+ LightCardsScore);
 
-		}
+        }
 		if (this.player_index == 1)
 		{
 			PlayerPrefs.SetInt("PlayerSecondScore", this.score);
 
 			PlayerPrefs.SetInt("GwangPlayerTwo", LightCardsScore);    //light cards score for player 
 			UnityEngine.Debug.Log("GwangPlayerOne Light card for Player Two is: " + LightCardsScore);
-			//PlayerTurn = true;
-		}
+            //PlayerTurn = true;
+        }
 
 
 		//UnityEngine.Debug.Log(string.Format("[SCORE] player {0},  score {1}", this.player_index, this.score));
