@@ -1646,5 +1646,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
     }
     //------------------------------------------------------------------------------
 
-
+    public Transform GetFxPos()
+    {
+        return FX_pos.transform;
+    }
 }
