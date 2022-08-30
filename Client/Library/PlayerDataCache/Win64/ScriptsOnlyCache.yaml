@@ -79,6 +79,7 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.Toggle
     - UnityEngine.UI.VerticalLayoutGroup
     spine-unity-editor.dll:
+    - Spine.Unity.Editor.SkeletonAnimationInspector
     - Spine.Unity.Editor.SpinePreferences
     spine-unity.dll:
     - Spine.Unity.AnimationReferenceAsset

@@ -44530,6 +44530,7 @@ MonoBehaviour:
   player_card_positions:
   - {fileID: 1524502093}
   - {fileID: 681591965}
+  FX_pos: {fileID: 0}
 --- !u!114 &1678081386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48548,7 +48549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RetryConnectionPopUp: {fileID: 1811173428104573825}
   LoginFormPopUp: {fileID: 1811173429629052804}
-  serverURL: ws://192.169.176.50:8080
+  serverURL: ws://localhost:8080
   packets: []
   response: 0
   rdata: 

@@ -22,10 +22,6 @@ public class CPlayerAgent : CPlayRoomUI
     public byte remain_bomb_count { get; private set; }
     public bool is_used_kookjin { get; private set; }
 
-    public GameObject Cheongdan;
-    public GameObject Chodan;
-    public GameObject Hongdan;
-
     public GameObject EffectPosPlayer, EffectPosOpponent;
 
     public bool isCheongdan, isChodan, isHongdan;
@@ -352,6 +348,8 @@ public class CPlayerAgent : CPlayRoomUI
         {
             this.score += 5;
             //UnityEngine.Debug.Log("Godori 5 score");
+            base.Godori.SetActive(true);
+            StartCoroutine(CloseAnimation(1.5f, base.Godori));
         }
 
         // 홍단, 초단, 청단
@@ -367,9 +365,9 @@ public class CPlayerAgent : CPlayRoomUI
         if (cheongdan_count == 3) //red blt card score 
         {
             this.score += 3;
-            Cheongdan = Resources.Load("Cheongdan") as GameObject;
-            var go = Instantiate(Cheongdan, base.GetFxPos());
 
+            base.Cheongdan.SetActive(true);
+            StartCoroutine(CloseAnimation(1.5f, base.Cheongdan));
         }
 
         if (hongdan_count == 3)  //Belt cards with letters 
@@ -379,15 +377,15 @@ public class CPlayerAgent : CPlayRoomUI
             {
                 PlayerPrefs.SetInt("HongDanPlayerOne", this.score);
                 Debug.Log("Hongdan /red belt card with letters score for player ONE : " + this.score);
-                Hongdan = Resources.Load("Hongdan") as GameObject;
-                var go = Instantiate(Hongdan, base.GetFxPos());
+                base.Hongdan.SetActive(true);
+                StartCoroutine(CloseAnimation(1.5f, base.Hongdan));
             }
             if (this.player_index == 1)
             {
                 PlayerPrefs.SetInt("HongDanPlayerTwo", this.score);
                 Debug.Log("Hongdan /red belt card with letters score for player TWO : " + this.score);
-                Hongdan = Resources.Load("Hongdan") as GameObject;
-                var go = Instantiate(Hongdan, base.GetFxPos());
+                base.Hongdan.SetActive(true);
+                StartCoroutine(CloseAnimation(1.5f, base.Hongdan));
             }
 
 
@@ -398,8 +396,8 @@ public class CPlayerAgent : CPlayRoomUI
         {
             this.score += 3;
             //UnityEngine.Debug.Log("Chodan 3 score");
-            Chodan = Resources.Load("Hongdan") as GameObject;
-            var go = Instantiate(Chodan, base.GetFxPos());
+            base.Chodan.SetActive(true);
+            StartCoroutine(CloseAnimation(1.5f, base.Chodan));
         }
 
 
@@ -545,5 +543,11 @@ public class CPlayerAgent : CPlayRoomUI
     {
         Debug.Log("Score Calculation here");
         calculate_score();
+    }
+
+    IEnumerator CloseAnimation(float t, GameObject go)
+    {
+        yield return new WaitForSeconds(t);
+        go.SetActive(false);
     }
 }

@@ -75,6 +75,12 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
     public GameObject FX_pos;
 
+    public GameObject Cheongdan;
+    public GameObject Chodan;
+    public GameObject Hongdan;
+    public GameObject Godori;
+
+
     void Start()
     {
         game_count = 0;
@@ -1649,5 +1655,15 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
     public Transform GetFxPos()
     {
         return FX_pos.transform;
+    }
+
+    private void LateUpdate()
+    {
+        if (Input.GetKey(KeyCode.A))
+        {
+            GameObject Chodan = Resources.Load("Godori") as GameObject;
+            var go = Instantiate(Chodan, GetFxPos());
+            Destroy(go, 1.5f);
+        }
     }
 }
