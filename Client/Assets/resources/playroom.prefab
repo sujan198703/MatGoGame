@@ -4891,6 +4891,11 @@ MonoBehaviour:
   player_card_positions:
   - {fileID: 54656956592201375}
   - {fileID: 54656955218711631}
+  fuc: {fileID: 2216726776449913961, guid: fc275d08b2ff083468c44968713f76cb, type: 3}
+  self_fuc: {fileID: 3231795059194788891, guid: ce19c5f70b7084147903453ee0c36c6b,
+    type: 3}
+  jjog: {fileID: 8373034777795496689, guid: 03a3d5a120a9aa140a20e18fb7b4d2e3, type: 3}
+  tadaak: {fileID: 5435180304998434385, guid: 9eacf188346a3ca418130e19ee542950, type: 3}
   FX_pos: {fileID: 3389411603883323388}
 --- !u!114 &54656956504599992
 MonoBehaviour:
@@ -4928,7 +4933,6 @@ MonoBehaviour:
   MoneyPackRoomTwo: 10000
   MoneyPackRoomThree: 20000
   MoneyPackRoomFour: 40000
-  FX_pos: {fileID: 3389411603883323388}
 --- !u!1 &54656956523419459
 GameObject:
   m_ObjectHideFlags: 0

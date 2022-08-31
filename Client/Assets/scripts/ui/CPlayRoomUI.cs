@@ -73,6 +73,14 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
     bool is_test_mode = false;
     byte test_auto_slot_index;
 
+    // Special Effects
+    GameObject jjog;
+    GameObject fuc;
+    GameObject self_fuc;
+    GameObject tadaak;
+    bool selfFuc;
+    bool specialeffect;
+    
     public GameObject FX_pos;
 
     void Start()
@@ -702,12 +710,12 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
                         ScoreCard.UpdateScore(nPlayScore1, nPlayScore2);
 
-                        Debug.Log("************* PlayScore1 : " + nPlayScore1);
-                        Debug.Log("************* PlayScore2 : " + nPlayScore2);
-                        Debug.Log("************* HongDanScore1 : " + nHongDanScore1);
-                        Debug.Log("************* HongDanScore2 : " + nHongDanScore2);
-                        Debug.Log("************* nGwangPlayScore1 : " + nGwangPlayScore1);
-                        Debug.Log("************* nGwangPlayScore2 : " + nGwangPlayScore2);
+                        //Debug.Log("************* PlayScore1 : " + nPlayScore1);
+                        //Debug.Log("************* PlayScore2 : " + nPlayScore2);
+                        //Debug.Log("************* HongDanScore1 : " + nHongDanScore1);
+                        //Debug.Log("************* HongDanScore2 : " + nHongDanScore2);
+                        //Debug.Log("************* nGwangPlayScore1 : " + nGwangPlayScore1);
+                        //Debug.Log("************* nGwangPlayScore2 : " + nGwangPlayScore2);
 
                         //                        yield return StartCoroutine(update_score(delay));
                     }
@@ -1078,11 +1086,51 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
         yield return new WaitForSeconds(0.5f);
     }
 
+    void special_effects(Vector3 card_position, int floor_count)
+    {
+        if (floor_count == 1)
+        {
+            Debug.LogError("JJOG");
+            jjog = Resources.Load("SpecialEffects/Jjog") as GameObject;
+            var jjog_temp = Instantiate(jjog, card_position, Quaternion.identity);
+            selfFuc = false;
+        }
+        if (floor_count == 2)
+        {
+            if (!selfFuc)
+            {
+                Debug.LogError("FUC");
+
+                fuc = Resources.Load("SpecialEffects/Fuc") as GameObject;
+                var fuc_temp = Instantiate(fuc, card_position, Quaternion.identity);
+                selfFuc = true;
+            }
+            else
+            {
+                Debug.LogError("SELF FUC");
+
+                self_fuc = Resources.Load("SpecialEffects/SelfFuc") as GameObject;
+                var self_fuc_temp = Instantiate(self_fuc, card_position, Quaternion.identity);
+                selfFuc = false;
+            }
+        }
+        if (floor_count == 3)
+        {
+            Debug.LogError("TADAAK");
+
+            tadaak = Resources.Load("SpecialEffects/Tadaak") as GameObject;
+            var tadaak_temp = Instantiate(tadaak, card_position, Quaternion.identity);
+            selfFuc = false;
+        }
+        Debug.LogError("FLOOR COUNT " + floor_count);
+    }
 
     IEnumerator on_flip_deck_card_ack(CPacket msg)
     {
         hide_hint_mark();
-
+        
+        specialeffect = true;
+        
         byte player_index = msg.pop_byte();
 
         // 덱에서 뒤집은 카드 정보.
@@ -1090,6 +1138,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
         PAE_TYPE deck_card_pae_type = (PAE_TYPE)msg.pop_byte();
         byte deck_card_position = msg.pop_byte();
         byte same_count_with_deck = msg.pop_byte();
+
+        string.Format("{0} {1} {2} {3}", deck_card_number.ToString(), deck_card_pae_type.ToString(), deck_card_position.ToString(), same_count_with_deck.ToString());
 
         List<Sprite> target_to_choice = new List<Sprite>();
         PLAYER_SELECT_CARD_RESULT result = (PLAYER_SELECT_CARD_RESULT)msg.pop_byte();
@@ -1138,7 +1188,6 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
                     yield return new WaitForSeconds(1.5f);
                 }
             }
-
 
             yield return StartCoroutine(move_after_flip_card(player_index, take_cards_from_others, cards_to_give));
         }
@@ -1213,6 +1262,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
                 card_pic.transform.localScale = SCALE_TO_OTHER_FLOOR;
             }
 
+           
             move_card(card_pic, begin, to);
 
             this.player_card_manager[player_index].add(card_pic);
@@ -1231,6 +1281,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
         CPacket finish = CPacket.create((short)PROTOCOL.TURN_END);
         CNetworkManager.Instance.send(finish);
     }
+
+    bool selfFuced;
 
 
     IEnumerator flip_deck_card(CCardPicture deck_card_picture)
@@ -1369,7 +1421,6 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
     void move_card_to_floor(CCardPicture card_picture, CARD_EVENT_TYPE event_type)
     {
-
         byte slot_index = 0;
         Vector3 begin = card_picture.transform.position;
         Vector3 to = Vector3.zero;
@@ -1405,7 +1456,12 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
             Animator card_ani = card_picture.GetComponentInChildren<Animator>();
             card_ani.enabled = true;
             card_ani.Play("card_hit");
+
+            // Special effects
+            if (specialeffect) special_effects(to, slot.get_cards().Count);
         }
+
+        specialeffect = false;
 
         // 바닥 카드로 등록.
         this.floor_ui_slots[slot_index].add_card(card_picture);
@@ -1493,6 +1549,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
 
         int count = this.player_card_manager[player_index].get_card_count(pae_type);
         return this.player_card_positions[player_index].get_floor_position(count, pae_type);
+
     }
 
 
@@ -1645,6 +1702,13 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
         GameController.instance.GoOut();
     }
     //------------------------------------------------------------------------------
+
+    public void SetFxPos(Transform newTransform)
+    {
+        FX_pos.transform.localPosition = newTransform.localPosition;
+        FX_pos.transform.localEulerAngles = newTransform.localEulerAngles;
+        FX_pos.transform.localScale = newTransform.localScale;
+    }
 
     public Transform GetFxPos()
     {

@@ -327,7 +327,6 @@ public class CPlayerAgent : CPlayRoomUI
         return pae_score;
     }
 
-
     public void calculate_score()
     {
 
@@ -364,6 +363,7 @@ public class CPlayerAgent : CPlayRoomUI
         byte cheongdan_count = get_card_count(PAE_TYPE.TEE, CARD_STATUS.CHEONG_DAN);
         byte hongdan_count = get_card_count(PAE_TYPE.TEE, CARD_STATUS.HONG_DAN);
         byte chodan_count = get_card_count(PAE_TYPE.TEE, CARD_STATUS.CHO_DAN);
+
         if (cheongdan_count == 3) //red blt card score 
         {
             this.score += 3;
@@ -398,7 +398,7 @@ public class CPlayerAgent : CPlayRoomUI
         {
             this.score += 3;
             //UnityEngine.Debug.Log("Chodan 3 score");
-            Chodan = Resources.Load("Hongdan") as GameObject;
+            Chodan = Resources.Load("Chodan") as GameObject;
             var go = Instantiate(Chodan, base.GetFxPos());
         }
 
