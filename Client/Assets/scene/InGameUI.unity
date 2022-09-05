@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4465785, g: 0.49641252, b: 0.574817, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -44531,6 +44531,10 @@ MonoBehaviour:
   - {fileID: 1524502093}
   - {fileID: 681591965}
   FX_pos: {fileID: 0}
+  Cheongdan: {fileID: 0}
+  Chodan: {fileID: 0}
+  Hongdan: {fileID: 0}
+  Godori: {fileID: 0}
 --- !u!114 &1678081386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -48549,7 +48553,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RetryConnectionPopUp: {fileID: 1811173428104573825}
   LoginFormPopUp: {fileID: 1811173429629052804}
-  serverURL: ws://localhost:8080
+  serverURL: ws://194.233.93.232:8080
   packets: []
   response: 0
   rdata: 

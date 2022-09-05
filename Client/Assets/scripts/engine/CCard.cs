@@ -4,12 +4,11 @@ using System.Collections;
 // 카드 타입.
 public enum PAE_TYPE : byte
 {
-    PEE,
-    KWANG,
-    TEE,
-    YEOL
+    PEE, // BLOOD
+    KWANG, // LIGHT
+    TEE, // BELT
+    YEOL // HEAT
 }
-
 
 // 카드 속성.
 public enum CARD_STATUS : byte

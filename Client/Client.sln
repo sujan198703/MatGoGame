@@ -97,9 +97,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngine.Purchasing.Stor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "spine-unity", "spine-unity.Player.csproj", "{3CF6028D-B1CA-34BB-D9EB-50232F056D2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxSdk.Scripts", "MaxSdk.Scripts.Player.csproj", "{4F1CE92B-C67B-2976-44F6-40E2E63B945F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngine.Purchasing.Security", "UnityEngine.Purchasing.Security.Player.csproj", "{5DA17625-2276-EA96-0847-69924C44AD83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnityEngine.Purchasing.SecurityStub", "UnityEngine.Purchasing.SecurityStub.Player.csproj", "{3586937A-7AA5-7753-09EB-C3BB2FB86339}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxSdk.Scripts", "MaxSdk.Scripts.Player.csproj", "{4F1CE92B-C67B-2976-44F6-40E2E63B945F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Common", "Purchasing.Common.Player.csproj", "{60B98686-A624-EE0A-C682-888CE1CCD1FD}"
 EndProject
@@ -309,14 +309,14 @@ Global
 		{3CF6028D-B1CA-34BB-D9EB-50232F056D2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3CF6028D-B1CA-34BB-D9EB-50232F056D2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3CF6028D-B1CA-34BB-D9EB-50232F056D2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DA17625-2276-EA96-0847-69924C44AD83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DA17625-2276-EA96-0847-69924C44AD83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DA17625-2276-EA96-0847-69924C44AD83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DA17625-2276-EA96-0847-69924C44AD83}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4F1CE92B-C67B-2976-44F6-40E2E63B945F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4F1CE92B-C67B-2976-44F6-40E2E63B945F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F1CE92B-C67B-2976-44F6-40E2E63B945F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F1CE92B-C67B-2976-44F6-40E2E63B945F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3586937A-7AA5-7753-09EB-C3BB2FB86339}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3586937A-7AA5-7753-09EB-C3BB2FB86339}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3586937A-7AA5-7753-09EB-C3BB2FB86339}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3586937A-7AA5-7753-09EB-C3BB2FB86339}.Release|Any CPU.Build.0 = Release|Any CPU
 		{60B98686-A624-EE0A-C682-888CE1CCD1FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{60B98686-A624-EE0A-C682-888CE1CCD1FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60B98686-A624-EE0A-C682-888CE1CCD1FD}.Release|Any CPU.ActiveCfg = Release|Any CPU

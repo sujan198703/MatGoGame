@@ -79,8 +79,10 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
     GameObject self_fuc;
     GameObject tadaak;
     bool selfFuc;
-    bool specialeffect;
-    
+    bool specialeffect_condition1; // hand to floor
+    bool specialeffect_condition2; // deck to floor
+    int specialeffect_slot_index = -1;
+
     public GameObject FX_pos;
 
     public GameObject Cheongdan;
@@ -1092,51 +1094,70 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
         yield return new WaitForSeconds(0.5f);
     }
 
+    void check_for_special_effects(int slot_index, int floor_card_pictures_count, Vector3 to)
+    {
+        // Special effects
+        if (!specialeffect_condition1)
+        {
+            specialeffect_condition1 = true;
+            specialeffect_slot_index = slot_index;
+        }
+        else if (specialeffect_condition1)
+        {
+            //Debug.LogError(specialeffect_slot_index + " | " + slot_index);
+
+            if (specialeffect_condition2 && specialeffect_slot_index == slot_index)
+            {
+                //Debug.LogError(floor_card_pictures_count);
+                special_effects(to, floor_card_pictures_count);
+            }
+            else
+            {
+                specialeffect_condition1 = false;
+                specialeffect_slot_index = -1; // unused
+            }
+        }
+
+        specialeffect_condition2 = false;
+    }
+
     void special_effects(Vector3 card_position, int floor_count)
     {
         if (floor_count == 1)
         {
-            Debug.LogError("JJOG");
-            jjog = Resources.Load("SpecialEffects/Jjog") as GameObject;
-            var jjog_temp = Instantiate(jjog, card_position, Quaternion.identity);
+            jjog = Instantiate(Resources.Load("SpecialEffects/Jjog") as GameObject, card_position, Quaternion.identity);
             selfFuc = false;
         }
         if (floor_count == 2)
         {
             if (!selfFuc)
             {
-                Debug.LogError("FUC");
-
-                fuc = Resources.Load("SpecialEffects/Fuc") as GameObject;
-                var fuc_temp = Instantiate(fuc, card_position, Quaternion.identity);
+                fuc = Instantiate(Resources.Load("SpecialEffects/Fuc") as GameObject, card_position, Quaternion.identity);
                 selfFuc = true;
             }
             else
             {
-                Debug.LogError("SELF FUC");
-
-                self_fuc = Resources.Load("SpecialEffects/SelfFuc") as GameObject;
-                var self_fuc_temp = Instantiate(self_fuc, card_position, Quaternion.identity);
+                self_fuc = Instantiate(Resources.Load("SpecialEffects/SelfFuc") as GameObject, card_position, Quaternion.identity);
                 selfFuc = false;
             }
         }
         if (floor_count == 3)
         {
-            Debug.LogError("TADAAK");
-
-            tadaak = Resources.Load("SpecialEffects/Tadaak") as GameObject;
-            var tadaak_temp = Instantiate(tadaak, card_position, Quaternion.identity);
+            tadaak = Instantiate(Resources.Load("SpecialEffects/Tadaak") as GameObject, card_position, Quaternion.identity);
             selfFuc = false;
         }
-        Debug.LogError("FLOOR COUNT " + floor_count);
+
+        // reset variables
+        specialeffect_slot_index = -1;
     }
 
     IEnumerator on_flip_deck_card_ack(CPacket msg)
     {
         hide_hint_mark();
-        
-        specialeffect = true;
-        
+
+        if (specialeffect_condition1)
+            specialeffect_condition2 = true;
+
         byte player_index = msg.pop_byte();
 
         // 덱에서 뒤집은 카드 정보.
@@ -1268,7 +1289,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
                 card_pic.transform.localScale = SCALE_TO_OTHER_FLOOR;
             }
 
-           
+
             move_card(card_pic, begin, to);
 
             this.player_card_manager[player_index].add(card_pic);
@@ -1430,6 +1451,7 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
         byte slot_index = 0;
         Vector3 begin = card_picture.transform.position;
         Vector3 to = Vector3.zero;
+        List<CCardPicture> floor_card_pictures;
 
         CVisualFloorSlot slot =
             this.floor_ui_slots.Find(obj => obj.is_same_card(card_picture.card.number));
@@ -1439,12 +1461,14 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
             //Debug.Log(string.Format("empty slot pos " + empty_slot));
             to = this.floor_slot_position[empty_slot];
             slot_index = empty_slot;
+
+            check_for_special_effects(slot_index, 0, to);
         }
         else
         {
             to = get_ui_slot_position(slot);
 
-            List<CCardPicture> floor_card_pictures = slot.get_cards();
+            floor_card_pictures = slot.get_cards();
             for (int i = 0; i < floor_card_pictures.Count; ++i)
             {
                 Animator ani = floor_card_pictures[i].GetComponentInChildren<Animator>();
@@ -1463,11 +1487,8 @@ public class CPlayRoomUI : CSingletonMonobehaviour<CPlayRoomUI>, IMessageReceive
             card_ani.enabled = true;
             card_ani.Play("card_hit");
 
-            // Special effects
-            if (specialeffect) special_effects(to, slot.get_cards().Count);
+            check_for_special_effects(slot_index, floor_card_pictures.Count, to);
         }
-
-        specialeffect = false;
 
         // 바닥 카드로 등록.
         this.floor_ui_slots[slot_index].add_card(card_picture);
