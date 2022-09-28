@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,12 +15,13 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
     [SerializeField] Text readButtonText;
     [SerializeField] Text mailTabContentText;
 
-    string mailText = "게임에 오신 것을 환영합니다.\n여기에서 메일을 읽으십시오.";
+    private List<MailTabContent> mailTabContent = new List<MailTabContent>();
+    private List<MailTabContent> mailTabContentClaimed = new List<MailTabContent>();
 
-    private List<MailTabContent> mailTabContent;
-    private List<MailTabContent> mailTabContentClaimed;
+    private string mailText = "";
+    private string uniqueID;
 
-    int unreadMailNotifcations;
+    private int unreadMailNotifications;
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
@@ -30,10 +32,29 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
         PlayerDataStorageManager.instance.LoadGame();
 
         // If unopened
-        if (mailTabContent.Exists(x => x == this)) Read();
+        foreach (MailTabContent mtc in mailTabContent)
+        {
+            // Cycle through mail texts to get match with all combinations
+            mailText = mtc.mailText;
+
+            if (mtc.GetUniqueID().Equals(this.GetUniqueID()))
+            {
+                Unread();
+                return;
+            }
+        }
 
         // If opened
-        if (mailTabContentClaimed.Exists(x => x == this)) Unread();
+        foreach (MailTabContent mtc in mailTabContentClaimed)
+        {
+            mailText = mtc.mailText;
+
+            if (mtc.GetUniqueID().Equals(this.GetUniqueID()))
+            {
+                Read();
+                return;
+            }
+        }
     }
 
     void Read()
@@ -49,14 +70,8 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
             (mailIconRead, new Rect(0, 0, mailIconRead.width, mailIconRead.height),
           new Vector2(mailIconRead.width / 2, mailIconRead.height / 2));
 
-        // Remove from unclaimed
-        mailTabContent.Remove(this);
-
-        // Add to claimed 
-        mailTabContentClaimed.Add(this);
-
-        // Decrement
-        unreadMailNotifcations--;
+        // Decrement counter
+        if (unreadMailNotifications > 0) unreadMailNotifications--;
     }
 
     void Unread()
@@ -73,18 +88,36 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
           new Vector2(mailIconUnread.width / 2, mailIconUnread.height / 2));
     }
 
-    public void UpdateMailText(string text) => mailText = text;
+    // Label of the mail
+    public void UpdateMailTabContentText(string text)
+    {
+        string _year = text.Replace("YEAR", DateTime.Now.Year.ToString());
+        string _month = _year.Replace("MONTH", DateTime.Now.Month.ToString());
+        string _day = _month.Replace("DAY", DateTime.Now.Day.ToString());
+
+        mailTabContentText.text = _day;
+    }
+
+    // Mail text upon opening
+    public void UpdateMailText(string text)
+    {
+        mailText = text;
+    }
 
     public void ReadMail()
     {
         // Update mail read button image
         Read();
 
-        // Add to opened list, if doesn't exists
-        if (!mailTabContentClaimed.Exists(x => x == this)) mailTabContentClaimed.Add(this);
+        // Remove from unclaimed
+        if (mailTabContent.Count > 0) mailTabContent.RemoveAt(mailTabContent.Count - 1);
 
-        // Remove from list, if exists
-        if (mailTabContent.Exists(x => x == this)) mailTabContent.Remove(this);
+        // Add to claimed
+        if (!mailTabContentClaimed.Contains(this))
+        {
+            MailTabContent _mtc = Instantiate(this, transform.position, transform.rotation);
+            mailTabContentClaimed.Add(_mtc);
+        }
 
         // Enable popup
         PopupManager.instance.inventoryMailPopup.gameObject.SetActive(true);
@@ -96,24 +129,34 @@ public class MailTabContent : MonoBehaviour, PlayerDataStorageInterface
         PopupManager.instance.inventoryMailPopup.UpdateMailTabContentObject(this);
 
         // Update mail text
-        PopupManager.instance.inventoryMailPopup.UpdateMailPopup(mailText);
+        PopupManager.instance.inventoryMailPopup.UpdateMailPopupContentText(mailText);
 
         // Update mail content index
         PopupManager.instance.inventoryMailPopup.UpdateMailIndex(transform.GetSiblingIndex());
+
+        // Save then load
+        PlayerDataStorageManager.instance.SaveThenLoad();
+
+        // Update mail counter
+        PanelManager.instance.inventoryPanel.UpdateNotificationTexts();
     }
+
+    public void SetUniqueID(string _uniqueID) => uniqueID = _uniqueID;
+
+    public string GetUniqueID() { return mailText.GetHashCode().ToString(); }
 
     public void LoadData(PlayerDataManager data)
     {
         mailTabContent = data.mailTabContent;
         mailTabContentClaimed = data.mailTabContentClaimed;
-        unreadMailNotifcations = data.unreadNotificationsInventoryPanel_MailTab;
+        unreadMailNotifications = data.unreadNotificationsInventoryPanel_MailTab;
     }
 
     public void SaveData(ref PlayerDataManager data)
     {
         data.mailTabContent = mailTabContent;
         data.mailTabContentClaimed = mailTabContentClaimed;
-        data.unreadNotificationsInventoryPanel_MailTab = unreadMailNotifcations;
+        data.unreadNotificationsInventoryPanel_MailTab = unreadMailNotifications;
     }
 }
  

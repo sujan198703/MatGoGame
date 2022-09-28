@@ -63,8 +63,11 @@ public class PlayerDataManager
     public string loginMethod;
     public Image playerProfilePicture;
     public DateTime profileNameChangeTime;
+    public bool variablesInitialized_QuestTab;
     public bool vibrationEnabled;
     public bool notificationsEnabled;
+    public bool welcomeMailEnabled;
+    public bool questTabContentInitialized;
     public List<QuestTabContent> questTabContent;
     public List<QuestTabContent> questTabContentClaimed;
     public List<GiftTabContent> giftTabContent;
@@ -73,6 +76,7 @@ public class PlayerDataManager
     public List<ItemTabContent> itemTabContentClaimed;
     public List<MailTabContent> mailTabContent;
     public List<MailTabContent> mailTabContentClaimed;
+    public List<MailTabContent> mailTabContentDeleted;
     public List<string> remainingTime_giftTabContent;
     public List<string> remainingTime_ItemTabContent;
     public List<string> remainingTime_MailTabContent;
@@ -123,11 +127,11 @@ public class PlayerDataManager
         this.totalBestWinningStreak = 0;
         this.unreadNotificationsEventsPanel = 0;
         this.unreadNotificationsInventoryPanel = 0;
-        this.unreadNotificationsDailyQuestPanel = 0;
+        this.unreadNotificationsDailyQuestPanel = 2;
         this.unreadNotificationsShopPanel = 0;
         this.unreadNotificationsInventoryPanel_GiftTab = 0;
         this.unreadNotificationsInventoryPanel_ItemTab = 0;
-        this.unreadNotificationsInventoryPanel_MailTab = 0;
+        this.unreadNotificationsInventoryPanel_MailTab = 1;
         this.dailyLossLimit = 6600000000;
         this.nyangPocketLimit = 1000;
         this.chipPocketLimit = 1;
@@ -140,6 +144,8 @@ public class PlayerDataManager
         this.profileNameChangeTime = DateTime.UtcNow.Add(new TimeSpan(24, 0, 0));
         this.vibrationEnabled = true;
         this.notificationsEnabled = true;
+        this.welcomeMailEnabled = false;
+        this.questTabContentInitialized = false;
         this.questTabContent = new List<QuestTabContent>();
         this.questTabContentClaimed = new List<QuestTabContent>();
         this.giftTabContent = new List<GiftTabContent>();
@@ -148,6 +154,7 @@ public class PlayerDataManager
         this.itemTabContentClaimed = new List<ItemTabContent>();
         this.mailTabContent = new List<MailTabContent>();
         this.mailTabContentClaimed = new List<MailTabContent>();
+        this.mailTabContentDeleted = new List<MailTabContent>();
         this.remainingTime_giftTabContent = new List<string>() { "" };
         this.remainingTime_ItemTabContent = new List<string>() { "" };
         this.remainingTime_MailTabContent = new List<string>() { "" };

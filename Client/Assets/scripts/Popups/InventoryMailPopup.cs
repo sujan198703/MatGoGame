@@ -8,7 +8,8 @@ public class InventoryMailPopup : MonoBehaviour
 
     private int mailIndex;
     private MailTabContent mailTabContent;
-    public void UpdateMailPopup(string mailText)
+
+    public void UpdateMailPopupContentText(string mailText)
     {
         inventoryMailText.text = mailText;
     }

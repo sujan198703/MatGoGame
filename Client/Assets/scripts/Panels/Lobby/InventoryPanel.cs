@@ -54,6 +54,7 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
     List<GiftTabContent> giftTabContentClaimed = new List<GiftTabContent>();
     List<ItemTabContent> itemTabContentClaimed = new List<ItemTabContent>();
     List<MailTabContent> mailTabContentClaimed = new List<MailTabContent>();
+    List<MailTabContent> mailTabContentDeleted = new List<MailTabContent>();
 
     [Header("GreyScale Material")]
     public Material greyScaleMaterial;
@@ -64,28 +65,44 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
     int unreadNotificationsItemTab;
     int unreadNotificationsMailTab;
 
-    void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
+    bool welcomeMailEnabled;
 
-    void Start() => PlayerDataStorageManager.instance.LoadGame();
+    void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this); 
+
+    void Start() => UpdateValues();
 
     void UpdateValues()
     {
-        //AddMailOnce();
-        //LoadObjects();
-        UpdateTexts();
+        PlayerDataStorageManager.instance.LoadGame();
+
+        AddMailOnce();
+        LoadObjects();
+        UpdateNotificationTexts();
         CheckIfContentsEmpty();
-        UpdateContents();
+        //UpdateContents();
     }
 
     // Separate function to welcome user
+    // Recreate this to add mail, item, gift, quest content objects
     void AddMailOnce()
     {
-        if (PlayerPrefs.GetInt("MailAdded") == 0)
+        // If welcome mail not deleted, instantiate
+        if (!this.welcomeMailEnabled)
         {
-            // this is just to show everything is working
-            AddMailOnce(mailTabContentPrefab[0]);
+            // Add mail, use this date format to auto-set date to whenever the current date is
+            MailTabContent tempMtc = mailTabContentPrefab[0];
+            tempMtc.UpdateMailTabContentText("퀘스트 내용\n<size=11><color=red>(YEAR.MONTH.DAY)</color></size>");
+            tempMtc.UpdateMailText("게임에 오신 것을 환영합니다.\n여기에서 메일을 읽으십시오.");
+            mailTabContent.Add(tempMtc);
+            
+            // Update unique ID
+            tempMtc.SetUniqueID("게임에 오신 것을 환영합니다.\n여기에서 메일을 읽으십시오.".GetHashCode().ToString());
 
-            PlayerPrefs.SetInt("MailAdded", 1);
+            // Update welcome mail status
+            welcomeMailEnabled = true;
+
+            // Reload
+            PlayerDataStorageManager.instance.SaveThenLoad();
         }
     }
 
@@ -120,6 +137,7 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
             AddMail(mtc);
         }
 
+
         foreach (MailTabContent mtc in mailTabContentClaimed)
         {
             AddMail(mtc);
@@ -127,7 +145,7 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
     }
 
     // Update texts
-    void UpdateTexts()
+    public void UpdateNotificationTexts()
     {
         // LABELS
         // Gift tab
@@ -177,69 +195,73 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
     {
         // Add gift
         GameObject tempGiftObject = Instantiate(_giftTabContent.gameObject, giftPanelContent.transform);
-
-        // Increment notification counter
-        unreadNotificationsGiftTab++;
     }
 
     public void AddItem(ItemTabContent _itemTabContent)
     {
         // Add to hierarchy
         GameObject tempItemObject = Instantiate(_itemTabContent.gameObject, itemPanelContent.transform);
-        
-        // Increment notification counter
-        unreadNotificationsItemTab++;
-    }
-
-    public void AddMailOnce(MailTabContent _mailTabContent)
-    {
-        // Add mail to list
-        this.mailTabContent.Add(_mailTabContent);
-
-        // Add to hierarchy
-        GameObject tempMailObject = Instantiate(_mailTabContent.gameObject, mailPanelContent.transform) as GameObject;
-
-        // Increment notification counter
-        unreadNotificationsMailTab++;
     }
 
     public void AddMail(MailTabContent _mailTabContent)
     {
         // Add to hierarchy
         GameObject tempMailObject = Instantiate(_mailTabContent.gameObject, mailPanelContent.transform);
-
-        // Increment notification counter
-        unreadNotificationsMailTab++;
     }
 
     public void RemoveGift(GiftTabContent giftTabContent)
     {
-        // Remove gift
-        if (this.giftTabContent.Exists(x => x == this)) this.giftTabContent.Remove(giftTabContent);
+        // Remove mail from unclaimed
+        if (this.giftTabContent.Contains(giftTabContent))
+            this.giftTabContent.Remove(giftTabContent);
+
+        // Remove mail from claimed
+        if (this.giftTabContentClaimed.Contains(giftTabContent))
+            this.giftTabContentClaimed.Remove(giftTabContent);
 
         // Remove object
         Destroy(giftTabContent.gameObject);
 
         // Update updates after delay
         Invoke("CheckIfContentsEmpty", 0.1f);
+
+        // Save game
+        PlayerDataStorageManager.instance.SaveThenLoad();
     }
 
     public void RemoveItem(ItemTabContent itemTabContent)
     {
-        // Remove item
-        if (this.itemTabContent.Exists(x => x == this)) this.itemTabContent.Remove(itemTabContent);
+        // Remove mail from unclaimed
+        if (this.itemTabContent.Contains(itemTabContent))
+            this.itemTabContent.Remove(itemTabContent);
+
+        // Remove mail from claimed
+        if (this.itemTabContentClaimed.Contains(itemTabContent))
+            this.itemTabContentClaimed.Remove(itemTabContent);
 
         // Remove object
         Destroy(itemTabContent.gameObject);
 
         // Update updates after delay
         Invoke("CheckIfContentsEmpty", 0.1f);
+
+        // Save game
+        PlayerDataStorageManager.instance.SaveThenLoad();
     }
 
     public void RemoveMail(MailTabContent mailTabContent)
     {
-        // Remove mail
-        if (this.mailTabContent.Exists(x => x == this)) this.mailTabContent.Remove(mailTabContent);
+        // Remove mail from unclaimed
+        if (this.mailTabContent.Contains(mailTabContent))
+            this.mailTabContent.Remove(mailTabContent);
+
+        // Remove mail from claimed
+        if (this.mailTabContentClaimed.Contains(mailTabContent))
+            this.mailTabContentClaimed.Remove(mailTabContent);
+
+        // Add to removed list
+        if (!this.mailTabContentDeleted.Contains(mailTabContent))
+            this.mailTabContentDeleted.Add(mailTabContent);
 
         // Remove object
         Destroy(mailTabContent.gameObject);
@@ -248,30 +270,28 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
         Invoke("CheckIfContentsEmpty", 0.1f);
 
         // Save game
-        PlayerDataStorageManager.instance.SaveGame();
-        
-        // Reload
-        PlayerDataStorageManager.instance.LoadGame();
+        PlayerDataStorageManager.instance.SaveThenLoad();
     }
 
     // Updates root parent objects for their content objects in hierarchy
-    void UpdateContents()
-    {
-        foreach (GiftTabContent gtc in giftTabContent)
-        {
-            gtc.gameObject.transform.SetParent(giftPanelContent.transform);
-        }
+    // This isn't needed since we're assigning parents as we instantiate off the list
+    //void UpdateContents()
+    //{
+    //    foreach (GiftTabContent gtc in giftTabContent)
+    //    {
+    //        gtc.gameObject.transform.SetParent(giftPanelContent.transform);
+    //    }
 
-        foreach (ItemTabContent itc in itemTabContent)
-        {
-            itc.gameObject.transform.SetParent(itemPanelContent.transform);
-        }
+    //    foreach (ItemTabContent itc in itemTabContent)
+    //    {
+    //        itc.gameObject.transform.SetParent(itemPanelContent.transform);
+    //    }
 
-        foreach (MailTabContent mtc in mailTabContent)
-        {
-            mtc.gameObject.transform.SetParent(mailPanelContent.transform);
-        }
-    }
+    //    foreach (MailTabContent mtc in mailTabContent)
+    //    {
+    //        mtc.gameObject.transform.SetParent(mailPanelContent.transform);
+    //    }
+    //}
 
     // Checks if any of the contents are empty
     void CheckIfContentsEmpty()
@@ -343,7 +363,7 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
                 break;
         }
 
-        PlayerDataStorageManager.instance.SaveGame();
+        PlayerDataStorageManager.instance.SaveThenLoad();
     }
 
     void DisablePreviousPanelContents(Panels previousPanel)
@@ -392,12 +412,12 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
         giftTabContentClaimed = data.giftTabContentClaimed;
         itemTabContentClaimed = data.itemTabContentClaimed;
         mailTabContentClaimed = data.mailTabContentClaimed;
+        mailTabContentDeleted = data.mailTabContentDeleted;
+        welcomeMailEnabled = data.welcomeMailEnabled;
 
         unreadNotificationsGiftTab = data.unreadNotificationsInventoryPanel_GiftTab;
         unreadNotificationsItemTab = data.unreadNotificationsInventoryPanel_ItemTab;
         unreadNotificationsMailTab = data.unreadNotificationsInventoryPanel_MailTab;
-
-        UpdateValues();
     }
 
     public void SaveData(ref PlayerDataManager data)
@@ -408,6 +428,8 @@ public class InventoryPanel : MonoBehaviour, PlayerDataStorageInterface
         data.giftTabContentClaimed = giftTabContentClaimed;
         data.itemTabContentClaimed = itemTabContentClaimed;
         data.mailTabContentClaimed = mailTabContentClaimed;
+        data.mailTabContentDeleted = mailTabContentDeleted;
+        data.welcomeMailEnabled = welcomeMailEnabled;
 
         data.unreadNotificationsInventoryPanel_GiftTab = unreadNotificationsGiftTab;
         data.unreadNotificationsInventoryPanel_ItemTab = unreadNotificationsItemTab;

@@ -164,7 +164,6 @@
     <Compile Include="Assets\Assets\DailyRewards\Scripts\IntegrationDailyRewards.cs" />
     <Compile Include="Assets\scripts\ui\CPlayerInfoSlot.cs" />
     <Compile Include="Assets\Simple Sprite Packer\Scripts\SPInstance.cs" />
-    <Compile Include="Assets\scripts\Helper\MultiComponentCopier.cs" />
     <Compile Include="Assets\scripts\Popups\PurchaseFailurePopup.cs" />
     <Compile Include="Assets\scripts\NetworkTest\Connect.cs" />
     <Compile Include="Assets\scripts\Popups\LossLimitPopup.cs" />

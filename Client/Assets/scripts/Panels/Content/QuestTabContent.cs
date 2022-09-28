@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static QuestContent;
@@ -14,63 +12,45 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
     public Image questContentRewardIcon;
     public Text questContentName;
     public Text questContentRewardText;
+    public long rewardAmount;
+    public RewardType_QuestContent rewardType;
 
-    private List<QuestTabContent> questTabContent;
-    private List<QuestTabContent> questTabContentClaimed;
+    private List<QuestTabContent> questTabContent = new List<QuestTabContent>();
+    private List<QuestTabContent> questTabContentClaimed = new List<QuestTabContent>();
     
-    private long rewardAmount;
-    private int questTabContentIndex;
     private int unreadNotificationsDailyQuestPanel;
 
-    private QuestContent questContent;
+    private long nyangsPocket;
+    private long chipsPocket;
+    private long rubies;
 
-    long nyangsPocket;
-    long chipsPocket;
-    long rubies;
+    private string uniqueID = "";
 
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
-    void OnEnable() => PlayerDataStorageManager.instance.LoadGame();
+    void Start() => UpdateValues();
 
     void UpdateValues()
     {
-        // Update reference from parent
-        questContent = PanelManager.instance.dailyQuestPanel.questContent[questTabContentIndex];
-       
+        // Load game
+        PlayerDataStorageManager.instance.LoadGame();
+
         // Update values
-        // Name
-        questContentName.text = questContent.questContentName;
+        foreach (QuestTabContent qtc in questTabContent)
+        {
+            if (GetUniqueID().Equals(qtc.GetUniqueID()))
+            {
+                Unclaimed();
+            }
+        }
 
-        // Icon
-        questContentIcon.sprite = Sprite.Create
-               (questContent.questContentIcon, new Rect(0, 0, questContent.questContentIcon.width, questContent.questContentIcon.height),
-               new Vector2(questContent.questContentIcon.width / 2, questContent.questContentIcon.height / 2)); ;
-        
-        // Reward Name
-        questContentRewardText.text = questContent.questContentRewardAmount.ToString();
-
-        // Append reward type
-        string rewardTypeSuffix = "";
-        if (questContent.rewardType == RewardType_QuestContent.Nyangs)
-            rewardTypeSuffix = " 냥";
-        else if (questContent.rewardType == RewardType_QuestContent.Chips)
-            rewardTypeSuffix = " 칩";
-        else if (questContent.rewardType == RewardType_QuestContent.Rubies)
-            rewardTypeSuffix = " 루비";
-
-        // Amount
-        questContentRewardText.text = questContent.questContentRewardAmount + rewardTypeSuffix;
-
-        // Reward Icon
-        questContentRewardIcon.sprite = Sprite.Create
-               (questContent.questContentRewardIcon, new Rect(0, 0, questContent.questContentRewardIcon.width, questContent.questContentRewardIcon.height),
-               new Vector2(questContent.questContentRewardIcon.width / 2, questContent.questContentRewardIcon.height / 2)); ;
-
-        // Update claimed
-        if (questTabContent.Exists(x => x.GetInstanceID() == this.GetInstanceID())) Unclaimed();
-
-        // Update unclaimed
-        if (questTabContentClaimed.Exists(x => x.GetInstanceID() == this.GetInstanceID())) Claimed();
+        foreach (QuestTabContent qtc in questTabContentClaimed)
+        {
+            if (GetUniqueID().Equals(qtc.GetUniqueID()))
+            {
+                Claimed();
+            }
+        }
 
         // Quest progress
         QuestCompleted();
@@ -92,8 +72,8 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
 
     public bool IsAvailable()
     {
-        if (questTabContent.Exists(x => x == this)) return false;
-        if (questTabContentClaimed.Exists(x => x == this)) return true;
+        if (questTabContent.Contains(this)) return false;
+        if (questTabContentClaimed.Contains(this)) return true;
         
         return false;
     }
@@ -117,8 +97,7 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
 
     void Unclaimed()
     {
-        // Add to list
-        if (!questTabContent.Exists(x => x == this)) questTabContent.Add(this);
+        
     }
 
     public void ClaimReward()
@@ -126,32 +105,35 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
         // Claim reward
         Claimed();
 
-        // Add reward amount
-        rewardAmount = PanelManager.instance.dailyQuestPanel.questContent[transform.GetSiblingIndex()].questContentRewardAmount;
+        // Remove from unclaimed
+        if (questTabContent.Count > 0) questTabContent.RemoveAt(questTabContent.Count - 1);
 
-        // Remove from List
-        if (questTabContent.Exists(x => x == this)) questTabContent.Remove(this);
+        // Add to claimed
+        QuestTabContent _qtc = Instantiate(this, transform.position, transform.rotation);
 
-        // Add to claimed list
-        if (!questTabContentClaimed.Exists(x => x == this)) questTabContentClaimed.Add(this);
+        if (!questTabContentClaimed.Contains(_qtc))
+        {
+            questTabContentClaimed.Add(_qtc);
+        }
+
+        // Decrement counter
+        if (unreadNotificationsDailyQuestPanel > 0) unreadNotificationsDailyQuestPanel--;
+
+        // Update rewards
+        AddReward();
+
+        // Update index of unused object to the end of the list
+        this.transform.SetSiblingIndex(transform.parent.childCount - 1);
 
         // Save then load
         PlayerDataStorageManager.instance.SaveThenLoad();
 
-        // Update rewards
-        GetReward();
-
-        // Reset reward amount
-        rewardAmount = 0;
-
-        // Update index of unused object to the end of the list
-        this.transform.SetSiblingIndex(transform.parent.childCount - 1);
     }
 
-    void GetReward()
+    void AddReward()
     {
         // Save reward based on type
-        switch (PanelManager.instance.dailyQuestPanel.questContent[questTabContentIndex].rewardType)
+        switch (rewardType)
         {
             // Nyangs
             case RewardType_QuestContent.Nyangs:
@@ -172,11 +154,14 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
                     break;
                 }
         }
-        
-        PlayerDataStorageManager.instance.SaveThenLoad();
+        //Debug.LogError(nyangsPocket + " | " + chipsPocket + " | " + rubies);
     }
 
-    public void UpdateIndex(int index) => questTabContentIndex = index;
+    public void SetUniqueID() => uniqueID = (questContentRewardIcon.GetHashCode() + rewardAmount.GetHashCode()).GetHashCode().ToString();
+
+    public string GetUniqueID() 
+    { return (questContentRewardIcon.GetHashCode() + rewardAmount.GetHashCode()).GetHashCode().ToString(); }
+
 
     public void LoadData(PlayerDataManager data)
     {
@@ -186,8 +171,6 @@ public class QuestTabContent : MonoBehaviour, PlayerDataStorageInterface
         nyangsPocket = data.nyangsPocket;
         chipsPocket = data.chipsPocket;
         rubies = data.rubies;
-
-        UpdateValues();
     }
 
     public void SaveData(ref PlayerDataManager data)

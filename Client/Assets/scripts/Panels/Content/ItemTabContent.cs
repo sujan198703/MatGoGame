@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Timers;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +15,13 @@ public class ItemTabContent : MonoBehaviour, PlayerDataStorageInterface
     TimeSpan itemTime = new TimeSpan(3, 0, 0, 0); // Days, Hours, Minutes, Seconds for the object
     TimeSpan remainingTime;
 
+    private List<ItemTabContent> itemTabContent = new List<ItemTabContent>();
+    private List<ItemTabContent> itemTabContentClaimed = new List<ItemTabContent>();
+
+    private string uniqueID;
+
+    private int unreadItemNotifications;
+
     void Awake() => PlayerDataStorageManager.instance.AddToDataStorageObjects(this);
 
     void Start() => UpdateValues();
@@ -29,6 +36,46 @@ public class ItemTabContent : MonoBehaviour, PlayerDataStorageInterface
     {
         InitializeTimer();
         UpdateTime();
+
+        // If opened
+        foreach (ItemTabContent itc in itemTabContentClaimed)
+        {
+            if (itc.GetUniqueID().Equals(this.GetUniqueID()))
+            {
+                Claimed();
+            }
+        }
+    }
+
+    void Claimed()
+    {
+        foreach (Image img in GetComponentsInChildren<Image>())
+        {
+            img.material = PanelManager.instance.inventoryPanel.greyScaleMaterial;
+        }
+
+        foreach (Text txt in GetComponentsInChildren<Text>())
+        {
+            txt.color = Color.white;
+        }
+
+        // Replace Red Date with Black
+        itemTabContentText.text = itemTabContentText.text.Replace("red", "black");
+
+        itemClaimButton.interactable = false;
+        itemClaimButtonImage.material = PanelManager.instance.inventoryPanel.greyScaleMaterial;
+
+        // Decrement counter
+        if (unreadItemNotifications > 0) unreadItemNotifications--;
+
+        // Reload game
+        PlayerDataStorageManager.instance.SaveThenLoad();
+    }
+
+    // We don't need this yet, maybe in the future
+    void Unclaimed()
+    {
+
     }
 
     void InitializeTimer()
@@ -90,20 +137,35 @@ public class ItemTabContent : MonoBehaviour, PlayerDataStorageInterface
 
     public void ClaimItem()
     {
-        itemClaimButton.interactable = false;
-        itemClaimButtonImage.material = PanelManager.instance.inventoryPanel.greyScaleMaterial;
-
+        Claimed();
+        
         // Update some item variables here using the data.localVariable call in the SaveData function below
+        // for example
+        // int numberOfHammers = 0;
+        // numberOfHammers++;
+        // data.numberOfHammers = numberOfHammers;
     }
+
+    public void SetUniqueID(string _uniqueID) => uniqueID = _uniqueID;
+
+    public string GetUniqueID() { return (itemTabContentText.text).GetHashCode().ToString(); }
 
     public void LoadData(PlayerDataManager data)
     {
         remainingTime_ItemTabContent = PlayerDataStorageManager.instance.StringToDateTime
             (data.remainingTime_ItemTabContent[transform.GetSiblingIndex()]);
+
+        itemTabContent = data.itemTabContent;
+        itemTabContentClaimed = data.itemTabContentClaimed;
+        unreadItemNotifications = data.unreadNotificationsInventoryPanel_ItemTab;
     }
 
     public void SaveData(ref PlayerDataManager data)
     {
         data.remainingTime_ItemTabContent.Insert(transform.GetSiblingIndex(), remainingTime_ItemTabContent.ToString());
+
+        data.itemTabContent = itemTabContent;
+        data.itemTabContentClaimed = itemTabContentClaimed;
+        data.unreadNotificationsInventoryPanel_ItemTab = unreadItemNotifications;
     }
 }

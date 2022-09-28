@@ -583,7 +583,7 @@ MonoBehaviour:
   itemContentIconImage: {fileID: 7239801512011228925}
   itemClaimButtonImage: {fileID: 7239801510411344561}
   itemTabContentText: {fileID: 7239801510373261082}
-  itemClaimButton: {fileID: 0}
+  itemClaimButton: {fileID: 7239801510411344563}
 --- !u!1 &7239801512011228923
 GameObject:
   m_ObjectHideFlags: 0

@@ -129,7 +129,7 @@ extern "C"
         
         if ( _verboseLoggingToSet )
         {
-            _sdk.settings.isVerboseLogging = _verboseLoggingToSet.boolValue;
+            _sdk.settings.verboseLoggingEnabled = _verboseLoggingToSet.boolValue;
             _verboseLoggingToSet = nil;
         }
 
@@ -649,6 +649,41 @@ extern "C"
         [_adManager showInterstitialWithAdUnitIdentifier: NSSTRING(adUnitIdentifier) placement: NSSTRING(placement) customData: NSSTRING(customData)];
     }
     
+    void _MaxLoadAppOpenAd(const char *adUnitIdentifier)
+    {
+        if (!isPluginInitialized()) return;
+        
+        [_adManager loadAppOpenAdWithAdUnitIdentifier: NSSTRING(adUnitIdentifier)];
+    }
+    
+    void _MaxSetAppOpenAdExtraParameter(const char *adUnitIdentifier, const char *key, const char *value)
+    {
+        [_adManager setAppOpenAdExtraParameterForAdUnitIdentifier: NSSTRING(adUnitIdentifier)
+                                                              key: NSSTRING(key)
+                                                            value: NSSTRING(value)];
+    }
+    
+    void _MaxSetAppOpenAdLocalExtraParameter(const char *adUnitIdentifier, const char *key, MAUnityRef value)
+    {
+        [_adManager setAppOpenAdLocalExtraParameterForAdUnitIdentifier: NSSTRING(adUnitIdentifier)
+                                                                   key: NSSTRING(key)
+                                                                 value: (__bridge id)value];
+    }
+    
+    bool _MaxIsAppOpenAdReady(const char *adUnitIdentifier)
+    {
+        if (!isPluginInitialized()) return false;
+        
+        return [_adManager isAppOpenAdReadyWithAdUnitIdentifier: NSSTRING(adUnitIdentifier)];
+    }
+    
+    void _MaxShowAppOpenAd(const char *adUnitIdentifier, const char *placement, const char *customData)
+    {
+        if (!isPluginInitialized()) return;
+        
+        [_adManager showAppOpenAdWithAdUnitIdentifier: NSSTRING(adUnitIdentifier) placement: NSSTRING(placement) customData: NSSTRING(customData)];
+    }
+    
     void _MaxLoadRewardedAd(const char *adUnitIdentifier)
     {
         if (!isPluginInitialized()) return;
@@ -789,7 +824,7 @@ extern "C"
     {
         if ( _sdk )
         {
-            _sdk.settings.isVerboseLogging = enabled;
+            _sdk.settings.verboseLoggingEnabled = enabled;
             _verboseLoggingToSet = nil;
         }
         else
@@ -802,7 +837,7 @@ extern "C"
     {
         if ( _sdk )
         {
-            return _sdk.settings.isVerboseLogging;
+            return [_sdk.settings isVerboseLoggingEnabled];
         }
         else if ( _verboseLoggingToSet )
         {

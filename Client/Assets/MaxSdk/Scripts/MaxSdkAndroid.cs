@@ -771,6 +771,81 @@ public class MaxSdkAndroid : MaxSdkBase
 
     #endregion
 
+    #region App Open
+
+    /// <summary>
+    /// Start loading an app open ad.
+    /// </summary>
+    /// <param name="adUnitIdentifier">Ad unit identifier of the app open ad to load</param>
+    public static void LoadAppOpenAd(string adUnitIdentifier)
+    {
+        ValidateAdUnitIdentifier(adUnitIdentifier, "load app open ad");
+        MaxUnityPluginClass.CallStatic("loadAppOpenAd", adUnitIdentifier);
+    }
+
+    /// <summary>
+    /// Check if app open ad ad is loaded and ready to be displayed.
+    /// </summary>
+    /// <param name="adUnitIdentifier">Ad unit identifier of the app open ad to load</param>
+    /// <returns>True if the ad is ready to be displayed</returns>
+    public static bool IsAppOpenAdReady(string adUnitIdentifier)
+    {
+        ValidateAdUnitIdentifier(adUnitIdentifier, "check app open ad loaded");
+        return MaxUnityPluginClass.CallStatic<bool>("isAppOpenAdReady", adUnitIdentifier);
+    }
+
+    /// <summary>
+    /// Present loaded app open ad for a given placement to tie ad events to. Note: if the app open ad is not ready to be displayed nothing will happen.
+    /// </summary>
+    /// <param name="adUnitIdentifier">Ad unit identifier of the app open ad to load</param>
+    /// <param name="placement">The placement to tie the showing ad's events to</param>
+    /// <param name="customData">The custom data to tie the showing ad's events to. Maximum size is 8KB.</param>
+    public static void ShowAppOpenAd(string adUnitIdentifier, string placement = null, string customData = null)
+    {
+        ValidateAdUnitIdentifier(adUnitIdentifier, "show app open ad");
+
+        if (IsAppOpenAdReady(adUnitIdentifier))
+        {
+            MaxUnityPluginClass.CallStatic("showAppOpenAd", adUnitIdentifier, placement, customData);
+        }
+        else
+        {
+            MaxSdkLogger.UserWarning("Not showing MAX Ads app open ad: ad not ready");
+        }
+    }
+
+    /// <summary>
+    /// Set an extra parameter for the ad.
+    /// </summary>
+    /// <param name="adUnitIdentifier">Ad unit identifier of the app open ad to set the extra parameter for.</param>
+    /// <param name="key">The key for the extra parameter.</param>
+    /// <param name="value">The value for the extra parameter.</param>
+    public static void SetAppOpenAdExtraParameter(string adUnitIdentifier, string key, string value)
+    {
+        ValidateAdUnitIdentifier(adUnitIdentifier, "set app open ad extra parameter");
+        MaxUnityPluginClass.CallStatic("setAppOpenAdExtraParameter", adUnitIdentifier, key, value);
+    }
+
+    /// <summary>
+    /// Set a local extra parameter for the ad.
+    /// </summary>
+    /// <param name="adUnitIdentifier">Ad unit identifier of the app open ad to set the local extra parameter for.</param>
+    /// <param name="key">The key for the local extra parameter.</param>
+    /// <param name="value">The value for the extra parameter. Needs to be of type <see cref="AndroidJavaObject"/> or <c>null</c></param>
+    public static void SetAppOpenAdLocalExtraParameter(string adUnitIdentifier, string key, object value)
+    {
+        if (value != null && value.GetType() != typeof(AndroidJavaObject))
+        {
+            MaxSdkLogger.E("Failed to set local extra parameter. Android local extra parameters need to be of type AndroidJavaObject");
+            return;
+        }
+
+        ValidateAdUnitIdentifier(adUnitIdentifier, "set app open ad local extra parameter");
+        MaxUnityPluginClass.CallStatic("setAppOpenAdLocalExtraParameter", adUnitIdentifier, key, (AndroidJavaObject) value);
+    }
+
+    #endregion
+
     #region Rewarded
 
     /// <summary>

@@ -188,6 +188,9 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
         // If daily loss limit not exceeded
         else
         {
+            // Deduct dealer fee 10%
+            nyangsPocket =  nyangsPocket - (long) (nyangsRequiredMaximum[0] * 0.1f);
+
             switch (modeIndex)
             {
                 case 0:
@@ -405,7 +408,7 @@ public class LobbyPanel : MonoBehaviour, PlayerDataStorageInterface
     public void LoadData(PlayerDataManager data)
     {
         unreadNotificationsEventPanel = data.unreadNotificationsEventsPanel;
-        unreadNotificationsInventoryPanel = data.unreadNotificationsInventoryPanel;
+        unreadNotificationsInventoryPanel = data.unreadNotificationsInventoryPanel_GiftTab + data.unreadNotificationsInventoryPanel_ItemTab + data.unreadNotificationsInventoryPanel_MailTab;
         unreadNotificationsDailyQuestPanel = data.unreadNotificationsDailyQuestPanel;
         unreadNotificationsShopPanel = data.unreadNotificationsShopPanel;
 

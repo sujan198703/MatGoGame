@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.35872743, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &4
 LightmapSettings:
@@ -359,7 +359,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6486965
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10175,7 +10175,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 555607425}
   m_HandleRect: {fileID: 555607424}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -13562,7 +13562,7 @@ RectTransform:
   m_Father: {fileID: 1549852229}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.000000059604645, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -30774,7 +30774,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 560176974}
   m_HandleRect: {fileID: 560176973}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -35473,7 +35473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &766689806
 RectTransform:
   m_ObjectHideFlags: 0
@@ -40162,24 +40162,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   progressBar: {fileID: 32363891}
   questTabContentParent: {fileID: 1943464146}
-  questTabContentPrefab: {fileID: 5140281525353826185, guid: d3db2ae0f9ed0984d9c31d3f5200a529,
+  questTabContentNyangPrefab: {fileID: 2582168649922942564, guid: a4255f9cb09082c48887f350290cffcc,
     type: 3}
-  questTabContentTransform: {fileID: 1943464147}
-  questContent:
-  - questContentName: "10,000\uB0E5\uC744 \uBB34\uB8CC\uB85C \uBC1B\uC73C\uC138\uC694"
-    questContentProgress: 0
-    questContentIcon: {fileID: 2800000, guid: ecaa339b9b61aa041ac763f044293f6c, type: 3}
-    questContentRewardIcon: {fileID: 2800000, guid: 538505ef7ca60274d97dc59e92fd9cb5,
-      type: 3}
-    questContentRewardAmount: 10000
-    rewardType: 0
-  - questContentName: "\uCE69 10,000\uAC1C\uB97C \uBB34\uB8CC\uB85C \uBC1B\uC73C\uC138\uC694"
-    questContentProgress: 0
-    questContentIcon: {fileID: 2800000, guid: ecaa339b9b61aa041ac763f044293f6c, type: 3}
-    questContentRewardIcon: {fileID: 2800000, guid: 8f3e4c15f66bdeb41a30f76ae3247d13,
-      type: 3}
-    questContentRewardAmount: 10000
-    rewardType: 1
+  questTabContentChipPrefab: {fileID: 3832237055442304408, guid: 5bbf325ae62941642b5ffa0bd7b533ef,
+    type: 3}
 --- !u!114 &842074365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56144,9 +56130,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 956123816}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -60929,9 +60915,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 153995767}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -72060,9 +72046,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 658239351}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 1
+  m_MovementType: 2
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
@@ -78615,8 +78601,8 @@ RectTransform:
   m_Father: {fileID: 842074363}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.17810695, y: 0.76665276}
-  m_AnchorMax: {x: 0.3702268, y: 0.8749482}
+  m_AnchorMin: {x: 0.14034136, y: 0.766375}
+  m_AnchorMax: {x: 0.3702268, y: 0.87467045}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -78642,7 +78628,7 @@ MonoBehaviour:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 0d8eabed94be7ea4cbcd6737de0671b0, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -79593,7 +79579,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 285208978}
   m_Direction: 0
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -96327,7 +96313,7 @@ GameObject:
   - component: {fileID: 1943464149}
   - component: {fileID: 1943464148}
   m_Layer: 5
-  m_Name: QuestTabContent
+  m_Name: QuestTabContentParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
